@@ -7,21 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A1DFEEE72028DBF5CBE8FCF /* Pods_Upool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 053B872C7AFD320DD80E19DC /* Pods_Upool.framework */; };
 		4EEB91DC21F7679F0079209B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91DB21F7679F0079209B /* AppDelegate.swift */; };
-		4EEB91DE21F7679F0079209B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91DD21F7679F0079209B /* ViewController.swift */; };
+		4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91DD21F7679F0079209B /* LoginViewController.swift */; };
 		4EEB91E121F7679F0079209B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EEB91DF21F7679F0079209B /* Main.storyboard */; };
 		4EEB91E321F767A10079209B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EEB91E221F767A10079209B /* Assets.xcassets */; };
 		4EEB91E621F767A10079209B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EEB91E421F767A10079209B /* LaunchScreen.storyboard */; };
+		4EEB91EE21F76CA50079209B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EEB91ED21F76CA50079209B /* GoogleService-Info.plist */; };
+		4EEB91F021F772770079209B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91EF21F772770079209B /* Colors.swift */; };
+		4EEB91F421F773630079209B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91F321F773630079209B /* UIColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		053B872C7AFD320DD80E19DC /* Pods_Upool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Upool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EEB91D821F7679F0079209B /* Upool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Upool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EEB91DB21F7679F0079209B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4EEB91DD21F7679F0079209B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4EEB91DD21F7679F0079209B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4EEB91E021F7679F0079209B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4EEB91E221F767A10079209B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4EEB91E521F767A10079209B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4EEB91E721F767A10079209B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4EEB91ED21F76CA50079209B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4EEB91EF21F772770079209B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		4EEB91F321F773630079209B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		991ABBFE84A7A90833986D7F /* Pods-Upool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Upool.release.xcconfig"; path = "Pods/Target Support Files/Pods-Upool/Pods-Upool.release.xcconfig"; sourceTree = "<group>"; };
+		DA832B2CAE8C7D81DA9D837A /* Pods-Upool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Upool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Upool/Pods-Upool.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A1DFEEE72028DBF5CBE8FCF /* Pods_Upool.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +51,8 @@
 			children = (
 				4EEB91DA21F7679F0079209B /* Upool */,
 				4EEB91D921F7679F0079209B /* Products */,
+				890F360013E6CF1C0CD188D0 /* Pods */,
+				D52091F84ECEA6792578BF09 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +67,50 @@
 		4EEB91DA21F7679F0079209B /* Upool */ = {
 			isa = PBXGroup;
 			children = (
+				4EEB91F221F7734D0079209B /* Extensions */,
+				4EEB91F121F772800079209B /* Constants */,
 				4EEB91DB21F7679F0079209B /* AppDelegate.swift */,
-				4EEB91DD21F7679F0079209B /* ViewController.swift */,
+				4EEB91DD21F7679F0079209B /* LoginViewController.swift */,
 				4EEB91DF21F7679F0079209B /* Main.storyboard */,
 				4EEB91E221F767A10079209B /* Assets.xcassets */,
 				4EEB91E421F767A10079209B /* LaunchScreen.storyboard */,
 				4EEB91E721F767A10079209B /* Info.plist */,
+				4EEB91ED21F76CA50079209B /* GoogleService-Info.plist */,
 			);
 			path = Upool;
+			sourceTree = "<group>";
+		};
+		4EEB91F121F772800079209B /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				4EEB91EF21F772770079209B /* Colors.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		4EEB91F221F7734D0079209B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4EEB91F321F773630079209B /* UIColor.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		890F360013E6CF1C0CD188D0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DA832B2CAE8C7D81DA9D837A /* Pods-Upool.debug.xcconfig */,
+				991ABBFE84A7A90833986D7F /* Pods-Upool.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D52091F84ECEA6792578BF09 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				053B872C7AFD320DD80E19DC /* Pods_Upool.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +120,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4EEB91EA21F767A10079209B /* Build configuration list for PBXNativeTarget "Upool" */;
 			buildPhases = (
+				B5937E6E45A96CFCF10E4F40 /* [CP] Check Pods Manifest.lock */,
 				4EEB91D421F7679F0079209B /* Sources */,
 				4EEB91D521F7679F0079209B /* Frameworks */,
 				4EEB91D621F7679F0079209B /* Resources */,
+				46267DAFFC5DE8DA07700F73 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -123,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EEB91E621F767A10079209B /* LaunchScreen.storyboard in Resources */,
+				4EEB91EE21F76CA50079209B /* GoogleService-Info.plist in Resources */,
 				4EEB91E321F767A10079209B /* Assets.xcassets in Resources */,
 				4EEB91E121F7679F0079209B /* Main.storyboard in Resources */,
 			);
@@ -130,12 +182,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		46267DAFFC5DE8DA07700F73 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Upool/Pods-Upool-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Upool/Pods-Upool-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5937E6E45A96CFCF10E4F40 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Upool-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4EEB91D421F7679F0079209B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EEB91DE21F7679F0079209B /* ViewController.swift in Sources */,
+				4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */,
+				4EEB91F421F773630079209B /* UIColor.swift in Sources */,
+				4EEB91F021F772770079209B /* Colors.swift in Sources */,
 				4EEB91DC21F7679F0079209B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,6 +387,7 @@
 		};
 		4EEB91EB21F767A10079209B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA832B2CAE8C7D81DA9D837A /* Pods-Upool.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -298,6 +406,7 @@
 		};
 		4EEB91EC21F767A10079209B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 991ABBFE84A7A90833986D7F /* Pods-Upool.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
