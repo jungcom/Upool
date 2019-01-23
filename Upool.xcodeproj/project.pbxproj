@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1A1DFEEE72028DBF5CBE8FCF /* Pods_Upool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 053B872C7AFD320DD80E19DC /* Pods_Upool.framework */; };
 		4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */; };
+		4EA3D8A221F90609003D7CE7 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A121F90609003D7CE7 /* UITextField.swift */; };
 		4EEB91DC21F7679F0079209B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91DB21F7679F0079209B /* AppDelegate.swift */; };
 		4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91DD21F7679F0079209B /* LoginViewController.swift */; };
 		4EEB91E121F7679F0079209B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EEB91DF21F7679F0079209B /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		053B872C7AFD320DD80E19DC /* Pods_Upool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Upool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		4EA3D8A121F90609003D7CE7 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		4EEB91D821F7679F0079209B /* Upool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Upool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EEB91DB21F7679F0079209B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EEB91DD21F7679F0079209B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				4EEB91F321F773630079209B /* UIColor.swift */,
+				4EA3D8A121F90609003D7CE7 /* UITextField.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 			files = (
 				4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */,
 				4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */,
+				4EA3D8A221F90609003D7CE7 /* UITextField.swift in Sources */,
 				4EEB91F821F7A6AA0079209B /* Login.swift in Sources */,
 				4EEB91F421F773630079209B /* UIColor.swift in Sources */,
 				4EEB91F021F772770079209B /* Constants.swift in Sources */,

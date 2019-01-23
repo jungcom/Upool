@@ -17,12 +17,20 @@ struct Fonts{
 }
 
 struct Strings{
+    //LoginVC
     static let login = "Log In"
     static let passwordPlaceholder = " Password"
     static let emailPlaceholder = " Email"
     static let forgotPwd = "Forgot Password?"
     static let noAccount = "Don't have an account?"
     static let signUp = "Sign Up"
+    
+    //SignUpVC
+    static let reEnterPasswordPlaceholder = " Re-enter Password"
+    static let namePlaceholder = " Name"
+    static let phoneNumberPlaceholder = " Phone Number"
+    static let acceptTermsAndConditions = "By creating an account, you agree to our "
+    static let termsAndConditions = "Terms & Conditions"
 }
 
 struct Images{

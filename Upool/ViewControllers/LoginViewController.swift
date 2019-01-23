@@ -28,24 +28,8 @@ class LoginViewController: UIViewController {
         return label
     }()
     
-    let emailTextField : UITextField = {
-        let textField = UITextField()
-        textField.placeholder = Strings.emailPlaceholder
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.gray.cgColor
-        textField.backgroundColor = UIColor.white
-        return textField
-    }()
-    
-    let passwordTextField : UITextField = {
-        let textField = UITextField()
-        textField.placeholder = Strings.passwordPlaceholder
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.gray.cgColor
-
-        textField.backgroundColor = UIColor.white
-        return textField
-    }()
+    let emailTextField = UITextField.getTextField(Strings.emailPlaceholder)
+    let passwordTextField = UITextField.getTextField(Strings.passwordPlaceholder)
     
     let loginButton : UIButton = {
         let button = UIButton()
