@@ -11,6 +11,12 @@ import UIKit
 class LoginViewController: UIViewController {
 
     var bottomStackView : UIStackView!
+    let bottomContainer : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        view.alpha = 0.9
+        return view
+    }()
     
     let loginLabel : UILabel = {
         let label = UILabel()
@@ -18,6 +24,7 @@ class LoginViewController: UIViewController {
         label.textAlignment = .center
         label.textColor = Colors.maroon
         label.font = UIFont(name: Fonts.helvetica, size: 32)
+        label.backgroundColor = UIColor.white
         return label
     }()
     
@@ -25,6 +32,8 @@ class LoginViewController: UIViewController {
         let textField = UITextField()
         textField.placeholder = Strings.emailPlaceholder
         textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.gray.cgColor
+        textField.backgroundColor = UIColor.white
         return textField
     }()
     
@@ -32,6 +41,9 @@ class LoginViewController: UIViewController {
         let textField = UITextField()
         textField.placeholder = Strings.passwordPlaceholder
         textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.gray.cgColor
+
+        textField.backgroundColor = UIColor.white
         return textField
     }()
     
@@ -74,61 +86,20 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    let umassBackgroundImageView : UIImageView = {
+        let image = UIImage(named: Images.umassBackgroundImage)
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleToFill
+        imageView.alpha = 0.5
+        return imageView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         setupStackViews()
         setupUI()
         setupConstraints()
-    }
-    
-    func setupStackViews(){
-        //Empty UI View
-        let emptyUIView = UIView()
-        
-        //Label + Signup button
-        let labelAndSignUpStackView = UIStackView(arrangedSubviews: [dontHaveAccLabel, signUpButton])
-        labelAndSignUpStackView.axis = .horizontal
-        labelAndSignUpStackView.spacing = 5
-        labelAndSignUpStackView.alignment = .center
-        
-        // bottom Label StackView
-        let bottomlabelStackView = UIStackView(arrangedSubviews: [forgotPwdButton,labelAndSignUpStackView])
-        bottomlabelStackView.axis = .vertical
-        bottomlabelStackView.alignment = .center
-        
-        //Bottom stack view
-        bottomStackView = UIStackView(arrangedSubviews: [loginLabel, emailTextField, passwordTextField, loginButton, emptyUIView,bottomlabelStackView])
-        bottomStackView.axis = .vertical
-        bottomStackView.distribution = .fillEqually
-        bottomStackView.spacing = 30
-        bottomStackView.alignment = .center
-    }
-    
-    func setupUI(){
-        view.addSubview(bottomStackView)
-    }
-    
-    func setupConstraints(){
-        
-        //Bottom Stack View Constraints
-        bottomStackView.translatesAutoresizingMaskIntoConstraints = false
-        bottomStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        bottomStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        bottomStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        bottomStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55).isActive = true
-        
-        //Email and password field constraints
-        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.widthAnchor.constraint(equalTo: bottomStackView.widthAnchor, multiplier: 0.8).isActive = true
-        
-        emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        emailTextField.widthAnchor.constraint(equalTo: bottomStackView.widthAnchor, multiplier: 0.8).isActive = true
-        
-        //Login Button Constraints
-        loginButton.translatesAutoresizingMaskIntoConstraints = false
-        loginButton.widthAnchor.constraint(equalTo: bottomStackView.widthAnchor, multiplier: 0.4).isActive = true
-        
     }
     
     @objc func handleLogin(){
@@ -141,6 +112,8 @@ class LoginViewController: UIViewController {
     
     @objc func handleSignUp(){
         print("SignUp")
+        let signUpVC = SignUpViewController()
+        present(signUpVC, animated: true, completion: nil)
     }
 
 }

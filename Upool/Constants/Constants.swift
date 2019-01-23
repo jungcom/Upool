@@ -24,3 +24,7 @@ struct Strings{
     static let noAccount = "Don't have an account?"
     static let signUp = "Sign Up"
 }
+
+struct Images{
+    static let umassBackgroundImage = "UmassBackground"
+}
