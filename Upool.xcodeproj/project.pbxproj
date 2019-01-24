@@ -10,6 +10,9 @@
 		1A1DFEEE72028DBF5CBE8FCF /* Pods_Upool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 053B872C7AFD320DD80E19DC /* Pods_Upool.framework */; };
 		4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */; };
 		4EA3D8A221F90609003D7CE7 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A121F90609003D7CE7 /* UITextField.swift */; };
+		4EA3D8A421F9168E003D7CE7 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A321F9168E003D7CE7 /* SignUp.swift */; };
+		4EA3D8A621FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A521FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift */; };
+		4EA3D8A921FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A821FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift */; };
 		4EEB91DC21F7679F0079209B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91DB21F7679F0079209B /* AppDelegate.swift */; };
 		4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91DD21F7679F0079209B /* LoginViewController.swift */; };
 		4EEB91E121F7679F0079209B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EEB91DF21F7679F0079209B /* Main.storyboard */; };
@@ -25,6 +28,9 @@
 		053B872C7AFD320DD80E19DC /* Pods_Upool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Upool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4EA3D8A121F90609003D7CE7 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		4EA3D8A321F9168E003D7CE7 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		4EA3D8A521FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedRidesCollectionViewController.swift; sourceTree = "<group>"; };
+		4EA3D8A821FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedRidesCollectionViewCell.swift; sourceTree = "<group>"; };
 		4EEB91D821F7679F0079209B /* Upool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Upool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EEB91DB21F7679F0079209B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EEB91DD21F7679F0079209B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -52,6 +58,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4EA3D8A721FA0D66003D7CE7 /* CellsAndLayout */ = {
+			isa = PBXGroup;
+			children = (
+				4EA3D8A821FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift */,
+			);
+			path = CellsAndLayout;
+			sourceTree = "<group>";
+		};
 		4EEB91CF21F7679F0079209B = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +123,7 @@
 			children = (
 				4EEB91DD21F7679F0079209B /* LoginViewController.swift */,
 				4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */,
+				4EA3D8A521FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -116,7 +131,9 @@
 		4EEB91F621F7A6880079209B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4EA3D8A721FA0D66003D7CE7 /* CellsAndLayout */,
 				4EEB91F721F7A6AA0079209B /* Login.swift */,
+				4EA3D8A321F9168E003D7CE7 /* SignUp.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -265,11 +282,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EA3D8A921FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift in Sources */,
 				4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */,
 				4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */,
 				4EA3D8A221F90609003D7CE7 /* UITextField.swift in Sources */,
 				4EEB91F821F7A6AA0079209B /* Login.swift in Sources */,
+				4EA3D8A621FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift in Sources */,
 				4EEB91F421F773630079209B /* UIColor.swift in Sources */,
+				4EA3D8A421F9168E003D7CE7 /* SignUp.swift in Sources */,
 				4EEB91F021F772770079209B /* Constants.swift in Sources */,
 				4EEB91DC21F7679F0079209B /* AppDelegate.swift in Sources */,
 			);
