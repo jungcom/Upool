@@ -77,7 +77,7 @@ class SignUpViewController: UIViewController {
     
     @objc func handleSignUp(){
         print("signUp")
-        let ridesVC = OfferedRidesCollectionViewController(collectionViewLayout: UICollectionViewLayout())
+        let ridesVC = OfferedRidesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
         let navigationVC = UINavigationController(rootViewController: ridesVC)
         present(navigationVC, animated: true, completion: nil)
     }

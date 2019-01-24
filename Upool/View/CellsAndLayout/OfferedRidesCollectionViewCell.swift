@@ -9,9 +9,11 @@
 import UIKit
 
 class OfferedRidesCollectionViewCell: UICollectionViewCell {
+    
     override init(frame: CGRect) {
         super.init(frame:frame)
         setupViews()
+        print("Hello")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -19,7 +21,7 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
     }
     
     func setupViews(){
-        backgroundColor? = Colors.darkMaroon
+        backgroundColor? = UIColor.white
     }
     
 }

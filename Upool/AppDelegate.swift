@@ -22,8 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        window = UIWindow(frame: UIScreen.main.bounds)
 //        window?.makeKeyAndVisible()
 //
-//        let vc =
-//        window?.rootViewController =
+//        let ridesVC = OfferedRidesCollectionViewController(collectionViewLayout: UICollectionViewLayout())
+//        let navigationVC = UINavigationController(rootViewController: ridesVC)
+//        window?.rootViewController = navigationVC
+//        UINavigationBar.appearance().barTintColor = Colors.maroon
+//        UINavigationBar.appearance().titleTextAttributes = [
+//            NSAttributedString.Key.foregroundColor : UIColor.white,
+//        ]
+        
         return true
     }
 
