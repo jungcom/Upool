@@ -134,9 +134,9 @@
 		4EEB91F621F7A6880079209B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4EA3D8A721FA0D66003D7CE7 /* CellsAndLayout */,
 				4EEB91F721F7A6AA0079209B /* Login.swift */,
 				4EA3D8A321F9168E003D7CE7 /* SignUp.swift */,
+				4EA3D8A721FA0D66003D7CE7 /* CellsAndLayout */,
 			);
 			path = View;
 			sourceTree = "<group>";

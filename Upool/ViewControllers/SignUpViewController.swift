@@ -84,6 +84,7 @@ class SignUpViewController: UIViewController {
         let ridesVC = OfferedRidesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
         ridesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
         
+        //TO DO : To be Changed
         let downloadsVC = UIViewController()
         downloadsVC.title = "Downloads"
         downloadsVC.view.backgroundColor = UIColor.blue
@@ -95,15 +96,4 @@ class SignUpViewController: UIViewController {
         tabBarController.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}
         present(tabBarController, animated: true, completion: nil)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
