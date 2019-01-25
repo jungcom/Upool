@@ -56,6 +56,16 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "$20"
         label.textColor = Colors.moneyGreen
+        label.textAlignment = .right
+        return label
+    }()
+    
+    let passengerSeatsLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Passengers  1/2"
+        label.textColor = UIColor.gray
+        label.textAlignment = .right
+        label.font = UIFont.systemFont(ofSize: 11)
         return label
     }()
     
@@ -75,6 +85,8 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         
         addSubview(profileImageView)
         addSubview(dateLabel)
+        addSubview(priceLabel)
+        addSubview(passengerSeatsLabel)
     }
     
     func setupStackView(){
@@ -104,9 +116,23 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         //LocationStackView Constraints
         locationStackView.translatesAutoresizingMaskIntoConstraints = false
         locationStackView.leadingAnchor.constraint(equalTo: dateLabel.leadingAnchor).isActive = true
-        locationStackView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8).isActive = true
+        locationStackView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5).isActive = true
         locationStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
         locationStackView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2).isActive = true
+        
+        //PriceLabel Constraints
+        priceLabel.translatesAutoresizingMaskIntoConstraints = false
+        priceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant : -8).isActive = true
+        priceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+        priceLabel.heightAnchor.constraint(equalTo: locationStackView.heightAnchor).isActive = true
+        priceLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        //Passenger Seats Label Constraints
+        passengerSeatsLabel.translatesAutoresizingMaskIntoConstraints = false
+        passengerSeatsLabel.topAnchor.constraint(equalTo: topAnchor, constant: 3).isActive = true
+        passengerSeatsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -3).isActive = true
+        passengerSeatsLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.15).isActive = true
+        passengerSeatsLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3).isActive = true
         
     }
 }
