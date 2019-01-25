@@ -88,9 +88,7 @@ class LoginViewController: UIViewController {
     
     @objc func handleLogin(){
         print("login")
-        let ridesVC = OfferedRidesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        let navigationVC = UINavigationController(rootViewController: ridesVC)
-        present(navigationVC, animated: true, completion: nil)
+        presentMainPage()
     }
 
     @objc func handleForgottenPwd(){
@@ -101,6 +99,23 @@ class LoginViewController: UIViewController {
         print("SignUp")
         let signUpVC = SignUpViewController()
         present(signUpVC, animated: true, completion: nil)
+    }
+    
+    func presentMainPage(){
+        let ridesVC = OfferedRidesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+//        ridesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
+        ridesVC.tabBarItem = UITabBarItem(title: "Rides", image: UIImage(named: "right-arrow"), tag: 0)
+        let downloadsVC = UIViewController()
+        downloadsVC.title = "Downloads"
+        downloadsVC.view.backgroundColor = UIColor.blue
+        downloadsVC.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 1)
+        
+        let tabBarController = UITabBarController()
+        let controllers = [ridesVC, downloadsVC]
+        tabBarController.viewControllers = controllers
+        tabBarController.tabBar.tintColor = Colors.maroon
+        tabBarController.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}
+        present(tabBarController, animated: true, completion: nil)
     }
 
 }

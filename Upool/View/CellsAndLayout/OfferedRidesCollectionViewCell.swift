@@ -111,7 +111,7 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         dateLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         dateLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 15).isActive = true
         dateLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.25).isActive = true
-        dateLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3).isActive = true
+        dateLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5).isActive = true
     
         //LocationStackView Constraints
         locationStackView.translatesAutoresizingMaskIntoConstraints = false
