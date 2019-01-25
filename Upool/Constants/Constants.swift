@@ -10,6 +10,7 @@ import UIKit
 struct Colors{
     static let maroon = UIColor(hex: 0xA23243)
     static let darkMaroon = UIColor(hex: 0x5A0936)
+    static let moneyGreen = UIColor(hex: 0x1DA57B)
 }
 
 struct Fonts{
@@ -35,4 +36,5 @@ struct Strings{
 
 struct Images{
     static let umassBackgroundImage = "UmassBackground"
+    static let rightArrow = "right-arrow"
 }

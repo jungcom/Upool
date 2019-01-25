@@ -21,7 +21,7 @@ class OfferedRidesCollectionViewController: UICollectionViewController, UICollec
         self.collectionView!.register(OfferedRidesCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
-        collectionView.backgroundColor = UIColor.lightGray
+        collectionView.backgroundColor = UIColor.groupTableViewBackground
         collectionView.alwaysBounceVertical = true
         
         navigationItem.title = "UPool"

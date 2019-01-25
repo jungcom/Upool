@@ -88,6 +88,9 @@ class LoginViewController: UIViewController {
     
     @objc func handleLogin(){
         print("login")
+        let ridesVC = OfferedRidesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        let navigationVC = UINavigationController(rootViewController: ridesVC)
+        present(navigationVC, animated: true, completion: nil)
     }
 
     @objc func handleForgottenPwd(){
