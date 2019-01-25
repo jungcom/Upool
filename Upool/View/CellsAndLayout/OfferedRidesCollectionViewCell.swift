@@ -26,14 +26,14 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
     let dateLabel : UILabel = {
         let label = UILabel()
         label.text = "Jan 7th, 3 pm"
-        label.font = UIFont(name: "Futura-Medium", size: 18)
+        label.font = UIFont(name: Fonts.futuraMedium, size: 18)
         return label
     }()
     
     let departureCityLabel : UILabel = {
         let label = UILabel()
         label.text = "Amherst, MA"
-        label.font = UIFont(name: "Futura", size: 15)
+        label.font = UIFont(name: Fonts.futura, size: 15)
         label.textColor = Colors.maroon
         return label
     }()
@@ -47,7 +47,7 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
     let destinationCityLabel : UILabel = {
         let label = UILabel()
         label.text = "Boston, MA"
-        label.font = UIFont(name: "Futura", size: 15)
+        label.font = UIFont(name: Fonts.futura, size: 15)
         label.textColor = Colors.maroon
         return label
     }()

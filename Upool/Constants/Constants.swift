@@ -15,6 +15,8 @@ struct Colors{
 
 struct Fonts{
     static let helvetica = "Helvetica"
+    static let futura = "Futura"
+    static let futuraMedium = "Futura-Medium"
 }
 
 struct Strings{
