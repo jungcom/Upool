@@ -88,11 +88,11 @@ class LoginViewController: UIViewController {
     
     @objc func handleLogin(){
         print("login")
-        presentMainPage()
-    }
+        present(LoginViewController.presentMainPage(), animated: true, completion: nil)    }
 
     @objc func handleForgottenPwd(){
         print("no password")
+        
     }
     
     @objc func handleSignUp(){
@@ -101,9 +101,8 @@ class LoginViewController: UIViewController {
         present(signUpVC, animated: true, completion: nil)
     }
     
-    func presentMainPage(){
+    static func presentMainPage() -> UIViewController{
         let ridesVC = OfferedRidesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
-//        ridesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
         ridesVC.tabBarItem = UITabBarItem(title: "Rides", image: UIImage(named: "right-arrow"), tag: 0)
         let downloadsVC = UIViewController()
         downloadsVC.title = "Downloads"
@@ -115,7 +114,7 @@ class LoginViewController: UIViewController {
         tabBarController.viewControllers = controllers
         tabBarController.tabBar.tintColor = Colors.maroon
         tabBarController.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}
-        present(tabBarController, animated: true, completion: nil)
+        return tabBarController
     }
 
 }

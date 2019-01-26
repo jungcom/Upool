@@ -20,7 +20,6 @@ class OfferedRidesSectionHeaderCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame:frame)
-        print("header initialized")
         setupViews()
         setupConstraints()
     }

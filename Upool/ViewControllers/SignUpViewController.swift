@@ -77,23 +77,7 @@ class SignUpViewController: UIViewController {
     
     @objc func handleSignUp(){
         print("signUp")
-        presentMainPage()
+        present(LoginViewController.presentMainPage(), animated: true, completion: nil)
     }
     
-    func presentMainPage(){
-        let ridesVC = OfferedRidesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        ridesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
-        
-        //TO DO : To be Changed
-        let downloadsVC = UIViewController()
-        downloadsVC.title = "Downloads"
-        downloadsVC.view.backgroundColor = UIColor.blue
-        downloadsVC.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 1)
-        
-        let tabBarController = UITabBarController()
-        let controllers = [ridesVC, downloadsVC]
-        tabBarController.viewControllers = controllers
-        tabBarController.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}
-        present(tabBarController, animated: true, completion: nil)
-    }
 }

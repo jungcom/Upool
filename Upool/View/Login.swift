@@ -78,4 +78,24 @@ extension LoginViewController{
         umassBackgroundImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.55).isActive = true
         
     }
+    
+    //Textfield Delegates
+    func registerNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: .UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func removeNotificationObservers() {
+        NotificationCenter.default.removeObserver(self, name: .UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        print("keyboardWillShow")
+    }
+    
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        print("keyboardWillHide")
+    }
 }
