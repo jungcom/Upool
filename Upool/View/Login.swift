@@ -79,23 +79,24 @@ extension LoginViewController{
         
     }
     
-    //Textfield Delegates
-    func registerNotificationObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: .UIResponder.keyboardWillHideNotification, object: nil)
+    //Textfield Notifications
+    @objc func keyboardWillShow(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            print("notification: Keyboard will show")
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+        
     }
     
-    func removeNotificationObservers() {
-        NotificationCenter.default.removeObserver(self, name: .UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIResponder.keyboardWillHideNotification, object: nil)
+    @objc func keyboardWillHide(notification: Notification) {
+        if let _ = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            self.view.frame.origin.y = 0
+        }
     }
     
-    @objc func keyboardWillShow(_ notification: Notification) {
-        print("keyboardWillShow")
-    }
-    
-    
-    @objc func keyboardWillHide(_ notification: Notification) {
-        print("keyboardWillHide")
+    @objc func handleTapped(){
+        view.endEditing(true)
     }
 }
