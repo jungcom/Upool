@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
 
@@ -78,6 +79,14 @@ class LoginViewController: UIViewController {
         return imageView
     }()
     
+    let errorLabel : UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = UIColor.red
+        label.text = "This is an error message"
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -96,9 +105,42 @@ class LoginViewController: UIViewController {
     }
     
     @objc func handleLogin(){
-        print("login")
-        present(LoginViewController.presentMainPage(), animated: true, completion: nil)    }
+        let email = emailTextField.text
+        let password = passwordTextField.text
+        
+        guard email != "" && password != "" else{
+            self.errorLabel.text = "Empty email/password field"
+            return
+        }
+        
+        Auth.auth().signIn(withEmail: email!, password: password!, completion: { (user, error) in
+            guard let _ = user else {
+                if let error = error {
+                    if let errCode = AuthErrorCode(rawValue: error._code){
+                        switch (errCode){
+                        case .userNotFound:
+                            self.errorLabel.text = "User account not found"
+                        case .wrongPassword:
+                            self.errorLabel.text = "Incorrect password"
+                        case .invalidEmail:
+                            self.errorLabel.text = "Invalid email"
+                        default:
+                            self.errorLabel.text = "An error has occured. Please try again"
+                        }
+                    }
+                    print("Error: \(error.localizedDescription)")
+                }
+                return
+            }
+            self.present(LoginViewController.presentMainPage(), animated: true, completion: nil)
+        })
+        
+        
+//        present(LoginViewController.presentMainPage(), animated: true, completion: nil)
+        
+    }
 
+    
     @objc func handleForgottenPwd(){
         print("no password")
         

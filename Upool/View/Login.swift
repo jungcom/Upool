@@ -27,7 +27,7 @@ extension LoginViewController{
         bottomlabelStackView.alignment = .center
         
         //Bottom stack view
-        bottomStackView = UIStackView(arrangedSubviews: [emptyUIView2,loginLabel, emailTextField, passwordTextField, loginButton, emptyUIView,bottomlabelStackView])
+        bottomStackView = UIStackView(arrangedSubviews: [emptyUIView2,loginLabel, emailTextField, passwordTextField, errorLabel ,loginButton,bottomlabelStackView])
         bottomStackView.axis = .vertical
         bottomStackView.distribution = .fillEqually
         bottomStackView.spacing = 30
