@@ -155,8 +155,7 @@ class SignUpViewController: UIViewController {
                     print("sendEmailVerification Successful!")
                 }
             })
-        }
-        else {
+        } else {
             // Either the user is not available, or the user is already verified.
         }
     }

@@ -44,6 +44,8 @@ class RideDetailViewController: UIViewController {
         return label
     }()
     
+    var locationStackView : UIStackView!
+    
     let passengerSeatsLabel : UILabel = {
         let label = UILabel()
         label.text = "Passengers  1/2"
@@ -70,9 +72,78 @@ class RideDetailViewController: UIViewController {
     let nameLabel : UILabel = {
         let label = UILabel()
         label.text = "Robinson Crusoe"
-        label.font = UIFont(name: Fonts.helvetica, size: 13)
+        label.font = UIFont(name: Fonts.futura, size: 14)
         label.textColor = UIColor.gray
         return label
+    }()
+    
+    let driverInfoLabel : UILabel = {
+        let label = UILabel()
+        label.text = "\u{2022}Major in Computer Science"
+        label.font = UIFont(name: Fonts.futura, size: 12)
+        label.textColor = UIColor.gray
+        return label
+    }()
+    
+    let priceLabel : UILabel = {
+        let label = UILabel()
+        label.text = "$20"
+        label.font = UIFont(name: Fonts.futura, size: 18)
+        label.textColor = Colors.moneyGreen
+        return label
+    }()
+    
+    //Third Top View
+    let thirdTopView = UIView()
+    
+    let pickUpLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Pickup Details"
+        label.font = UIFont(name: Fonts.futura, size: 17)
+        label.textColor = UIColor.gray
+        return label
+    }()
+    
+    let pickupDetailTextView : UITextView = {
+        let label = UITextView()
+        label.text = "I can pick up anywhere between the campus and the main city hall. For other places, please contact me."
+        label.font = UIFont(name: Fonts.futura, size: 14)
+        label.textColor = UIColor.gray
+        label.allowsEditingTextAttributes = false
+        label.isScrollEnabled = false
+        return label
+    }()
+    
+    //Fourth Top view
+    let buttonView = UIView()
+    
+    var buttonStackView : UIStackView!
+    
+    let messageButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("MESSAGE", for: .normal)
+        button.setTitleColor(Colors.maroon, for: .normal)
+        button.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 18)
+        button.backgroundColor = UIColor.clear
+        button.layer.masksToBounds = true
+        button.layer.borderColor = Colors.maroon.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(handleMessage), for: .touchUpInside)
+        return button
+    }()
+    
+    let joinRideButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("JOIN RIDE", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 17)
+        button.backgroundColor = Colors.maroon
+        button.layer.masksToBounds = true
+ 
+        button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(handleJoinRide), for: .touchUpInside)
+        return button
     }()
     
     override func viewDidLoad() {
@@ -82,14 +153,11 @@ class RideDetailViewController: UIViewController {
         setupUI()
     }
     
-
-    func setupUI() {
-        view.backgroundColor = UIColor.white
-        navigationItem.title = "Ride Details"
+    @objc func handleMessage(){
         
-        view.addSubview(firstTopView)
-        view.addSubview(secondTopView)
-        setupFirstTopView()
-        setupSecondTopView()
+    }
+    
+    @objc func handleJoinRide(){
+        
     }
 }

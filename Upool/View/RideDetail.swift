@@ -10,8 +10,22 @@ import UIKit
 
 extension RideDetailViewController{
     
+    func setupUI() {
+        view.backgroundColor = UIColor.white
+        navigationItem.title = "Ride Details"
+        
+        view.addSubview(firstTopView)
+        view.addSubview(secondTopView)
+        view.addSubview(thirdTopView)
+        view.addSubview(buttonView)
+        setupFirstTopView()
+        setupSecondTopView()
+        setupThirdTopView()
+        setupButtonStackView()
+    }
+    
     func setupFirstTopView(){
-        let locationStackView = UIStackView(arrangedSubviews: [departureCityLabel, rightArrowIconImageView, destinationCityLabel])
+        locationStackView = UIStackView(arrangedSubviews: [departureCityLabel, rightArrowIconImageView, destinationCityLabel])
         locationStackView.axis = .horizontal
         locationStackView.distribution = .equalCentering
         locationStackView.alignment = .center
@@ -61,10 +75,10 @@ extension RideDetailViewController{
     }
     
     func setupSecondTopView(){
-//        secondTopView.backgroundColor = UIColor.blue
-        
         secondTopView.addSubview(profileImageView)
         secondTopView.addSubview(nameLabel)
+        secondTopView.addSubview(driverInfoLabel)
+        secondTopView.addSubview(priceLabel)
         
         //MARK : Second Top View Constraints
         secondTopView.translatesAutoresizingMaskIntoConstraints = false
@@ -85,5 +99,78 @@ extension RideDetailViewController{
         nameLabel.topAnchor.constraint(equalTo: profileImageView.topAnchor).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 15).isActive = true
         
+        //Driver Info Label Constraints
+        driverInfoLabel.translatesAutoresizingMaskIntoConstraints = false
+        driverInfoLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant:5).isActive = true
+        driverInfoLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor, constant: 15).isActive = true
+        driverInfoLabel.widthAnchor.constraint(equalTo: secondTopView.widthAnchor, multiplier:  0.5).isActive = true
+        
+        //PricelLabel Constraints
+        priceLabel.translatesAutoresizingMaskIntoConstraints = false
+        priceLabel.centerYAnchor.constraint(equalTo: secondTopView.centerYAnchor, constant:5).isActive = true
+        priceLabel.trailingAnchor.constraint(equalTo: secondTopView.trailingAnchor, constant: -20).isActive = true
+        
+        //BottomBorder Contraints
+        let bottomBorderView = UIView()
+        bottomBorderView.backgroundColor = UIColor.gray
+        firstTopView.addSubview(bottomBorderView)
+        
+        bottomBorderView.translatesAutoresizingMaskIntoConstraints = false
+        bottomBorderView.bottomAnchor.constraint(equalTo: secondTopView.bottomAnchor).isActive = true
+        bottomBorderView.widthAnchor.constraint(equalTo: locationStackView.widthAnchor, multiplier: 1.0).isActive = true
+        bottomBorderView.centerXAnchor.constraint(equalTo: secondTopView.centerXAnchor).isActive = true
+        bottomBorderView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        
+    }
+    
+    func setupThirdTopView(){        
+        thirdTopView.addSubview(pickUpLabel)
+        thirdTopView.addSubview(pickupDetailTextView)
+        
+        //MARK : Thrid Top View Constraints
+        thirdTopView.translatesAutoresizingMaskIntoConstraints = false
+        thirdTopView.topAnchor.constraint(equalTo: secondTopView.bottomAnchor).isActive = true
+        thirdTopView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        thirdTopView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        thirdTopView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15).isActive = true
+        
+        //PickUp Label Constraints
+        pickUpLabel.translatesAutoresizingMaskIntoConstraints = false
+        pickUpLabel.leadingAnchor.constraint(equalTo: locationStackView.leadingAnchor).isActive = true
+        pickUpLabel.topAnchor.constraint(equalTo: thirdTopView.topAnchor, constant: 20).isActive = true
+        
+        //PickUp Detail TextView Constraints
+        pickupDetailTextView.translatesAutoresizingMaskIntoConstraints = false
+//        pickupDetailTextView.leadingAnchor.constraint(equalTo: pickUpLabel.leadingAnchor, constant: 15).isActive = true
+        pickupDetailTextView.topAnchor.constraint(equalTo: pickUpLabel.bottomAnchor, constant: 5).isActive = true
+        pickupDetailTextView.centerXAnchor.constraint(equalTo: thirdTopView.centerXAnchor).isActive = true
+        pickupDetailTextView.widthAnchor.constraint(equalTo: thirdTopView.widthAnchor, multiplier: 0.7).isActive = true
+        
+
+    }
+    
+    func setupButtonStackView(){
+//        buttonView.backgroundColor = UIColor.blue
+        
+        buttonStackView = UIStackView(arrangedSubviews: [messageButton, joinRideButton])
+        buttonStackView.alignment = .center
+        buttonStackView.spacing = 15
+        buttonStackView.distribution = .fillEqually
+        
+        buttonView.addSubview(buttonStackView)
+        
+        //MARK :ButtonView Constraints
+        buttonView.translatesAutoresizingMaskIntoConstraints = false
+        buttonView.topAnchor.constraint(equalTo: thirdTopView.bottomAnchor).isActive = true
+        buttonView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        buttonView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        buttonView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
+        
+        //buttonStackView Constraints
+        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
+        buttonStackView.centerXAnchor.constraint(equalTo: buttonView.centerXAnchor).isActive = true
+        buttonStackView.centerYAnchor.constraint(equalTo: buttonView.centerYAnchor).isActive = true
+        buttonStackView.widthAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 0.6).isActive = true
+        buttonStackView.heightAnchor.constraint(equalTo: buttonView.heightAnchor, multiplier: 0.9).isActive = true
     }
 }
