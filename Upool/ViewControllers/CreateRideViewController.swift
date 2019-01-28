@@ -20,6 +20,7 @@ class CreateRideViewController: UIViewController {
     
     func setupUI() {
         view.backgroundColor = UIColor.white
+        navigationItem.title = "Create Ride"
     }
 
 

@@ -29,8 +29,8 @@ class OfferedRidesCollectionViewController: UICollectionViewController, UICollec
         
         navigationItem.title = "UPool"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(createRide))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.white
         UINavigationBar.appearance().barTintColor = Colors.maroon
+        UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().titleTextAttributes = [
             NSAttributedString.Key.foregroundColor : UIColor.white,
         ]
@@ -64,6 +64,11 @@ class OfferedRidesCollectionViewController: UICollectionViewController, UICollec
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath)
         cell.backgroundColor = UIColor.white
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let rideDetailsVC = RideDetailViewController()
+        navigationController?.pushViewController(rideDetailsVC, animated: true)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
