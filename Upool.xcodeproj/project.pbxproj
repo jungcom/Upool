@@ -17,6 +17,8 @@
 		4EA3D8A421F9168E003D7CE7 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A321F9168E003D7CE7 /* SignUp.swift */; };
 		4EA3D8A621FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A521FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift */; };
 		4EA3D8A921FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A821FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift */; };
+		4EAE28F121FF5455006966E4 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAE28F021FF5455006966E4 /* UIView.swift */; };
+		4EAE28F321FF83D3006966E4 /* CreateRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAE28F221FF83D3006966E4 /* CreateRide.swift */; };
 		4EEB91DC21F7679F0079209B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91DB21F7679F0079209B /* AppDelegate.swift */; };
 		4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91DD21F7679F0079209B /* LoginViewController.swift */; };
 		4EEB91E121F7679F0079209B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EEB91DF21F7679F0079209B /* Main.storyboard */; };
@@ -39,6 +41,8 @@
 		4EA3D8A321F9168E003D7CE7 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		4EA3D8A521FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedRidesCollectionViewController.swift; sourceTree = "<group>"; };
 		4EA3D8A821FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedRidesCollectionViewCell.swift; sourceTree = "<group>"; };
+		4EAE28F021FF5455006966E4 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		4EAE28F221FF83D3006966E4 /* CreateRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRide.swift; sourceTree = "<group>"; };
 		4EEB91D821F7679F0079209B /* Upool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Upool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EEB91DB21F7679F0079209B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EEB91DD21F7679F0079209B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 			children = (
 				4EEB91F321F773630079209B /* UIColor.swift */,
 				4EA3D8A121F90609003D7CE7 /* UITextField.swift */,
+				4EAE28F021FF5455006966E4 /* UIView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 			children = (
 				4EEB91F721F7A6AA0079209B /* Login.swift */,
 				4EA3D8A321F9168E003D7CE7 /* SignUp.swift */,
+				4EAE28F221FF83D3006966E4 /* CreateRide.swift */,
 				4E431FAC21FEA1F80081CA52 /* RideDetail.swift */,
 				4EA3D8A721FA0D66003D7CE7 /* CellsAndLayout */,
 			);
@@ -248,6 +254,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Upool/Pods-Upool-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -257,6 +264,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -297,6 +305,7 @@
 				4E431FA921FE90810081CA52 /* CreateRideViewController.swift in Sources */,
 				4EA3D8A921FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift in Sources */,
 				4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */,
+				4EAE28F321FF83D3006966E4 /* CreateRide.swift in Sources */,
 				4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */,
 				4E431FAD21FEA1F80081CA52 /* RideDetail.swift in Sources */,
 				4EA3D8A221F90609003D7CE7 /* UITextField.swift in Sources */,
@@ -304,6 +313,7 @@
 				4EEB91F821F7A6AA0079209B /* Login.swift in Sources */,
 				4EA3D8A621FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift in Sources */,
 				4E431FAB21FE94AC0081CA52 /* RideDetailViewController.swift in Sources */,
+				4EAE28F121FF5455006966E4 /* UIView.swift in Sources */,
 				4EEB91F421F773630079209B /* UIColor.swift in Sources */,
 				4EA3D8A421F9168E003D7CE7 /* SignUp.swift in Sources */,
 				4EEB91F021F772770079209B /* Constants.swift in Sources */,

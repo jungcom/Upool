@@ -14,14 +14,42 @@ extension RideDetailViewController{
         view.backgroundColor = UIColor.white
         navigationItem.title = "Ride Details"
         
-        view.addSubview(firstTopView)
-        view.addSubview(secondTopView)
-        view.addSubview(thirdTopView)
-        view.addSubview(buttonView)
+        view.addSubview(scrollView)
+        setupScrollView()
+        setupTopContainer()
         setupFirstTopView()
         setupSecondTopView()
         setupThirdTopView()
         setupButtonStackView()
+        
+        //bottom container
+        setupBottomContainer()
+    }
+    
+    func setupScrollView(){
+        scrollView.addSubview(topContainer)
+        scrollView.addSubview(bottomContainer)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: 2000)
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
+    func setupTopContainer(){
+        topContainer.addSubview(firstTopView)
+        topContainer.addSubview(secondTopView)
+        topContainer.addSubview(thirdTopView)
+        topContainer.addSubview(buttonView)
+        
+        topContainer.translatesAutoresizingMaskIntoConstraints = false
+        topContainer.topAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.topAnchor).isActive = true
+        topContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        topContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        topContainer.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
+        
     }
     
     func setupFirstTopView(){
@@ -36,7 +64,7 @@ extension RideDetailViewController{
         
         //MARK : First Top View Constraints
         firstTopView.translatesAutoresizingMaskIntoConstraints = false
-        firstTopView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        firstTopView.topAnchor.constraint(equalTo: topContainer.topAnchor).isActive = true
         firstTopView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         firstTopView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         firstTopView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
@@ -173,4 +201,14 @@ extension RideDetailViewController{
         buttonStackView.widthAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 0.6).isActive = true
         buttonStackView.heightAnchor.constraint(equalTo: buttonView.heightAnchor, multiplier: 0.9).isActive = true
     }
+    
+    func setupBottomContainer(){
+        bottomContainer.backgroundColor = UIColor.groupTableViewBackground
+        bottomContainer.translatesAutoresizingMaskIntoConstraints = false
+        bottomContainer.topAnchor.constraint(equalTo: topContainer.bottomAnchor).isActive = true
+        bottomContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        bottomContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        bottomContainer.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier:1.0).isActive = true
+    }
+    
 }

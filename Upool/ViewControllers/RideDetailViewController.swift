@@ -10,6 +10,8 @@ import UIKit
 
 class RideDetailViewController: UIViewController {
 
+    let scrollView = UIScrollView()
+    
     var topContainer = UIView()
     
     // First Top View
@@ -109,7 +111,7 @@ class RideDetailViewController: UIViewController {
         label.text = "I can pick up anywhere between the campus and the main city hall. For other places, please contact me."
         label.font = UIFont(name: Fonts.futura, size: 14)
         label.textColor = UIColor.gray
-        label.allowsEditingTextAttributes = false
+        label.isEditable = false
         label.isScrollEnabled = false
         return label
     }()
@@ -145,6 +147,10 @@ class RideDetailViewController: UIViewController {
         button.addTarget(self, action: #selector(handleJoinRide), for: .touchUpInside)
         return button
     }()
+    
+    //Bottom Container
+    
+    let bottomContainer = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
