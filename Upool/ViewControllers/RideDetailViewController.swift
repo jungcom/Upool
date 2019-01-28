@@ -56,6 +56,24 @@ class RideDetailViewController: UIViewController {
     //Second Top View
     let secondTopView = UIView()
     
+    let profileImageView : UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = 7
+        imageView.backgroundColor = UIColor.blue
+        imageView.tintColor = UIColor.blue
+        imageView.image = UIImage(named: "MockProfileImage")
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
+    let nameLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Robinson Crusoe"
+        label.font = UIFont(name: Fonts.helvetica, size: 13)
+        label.textColor = UIColor.gray
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +87,8 @@ class RideDetailViewController: UIViewController {
         view.backgroundColor = UIColor.white
         navigationItem.title = "Ride Details"
         
+        view.addSubview(firstTopView)
+        view.addSubview(secondTopView)
         setupFirstTopView()
         setupSecondTopView()
     }

@@ -16,15 +16,11 @@ extension RideDetailViewController{
         locationStackView.distribution = .equalCentering
         locationStackView.alignment = .center
         
-        //        firstTopView.backgroundColor = UIColor.blue
-        
         firstTopView.addSubview(dateLabel)
         firstTopView.addSubview(locationStackView)
         firstTopView.addSubview(passengerSeatsLabel)
         
-        view.addSubview(firstTopView)
-        
-        //Constraints
+        //MARK : First Top View Constraints
         firstTopView.translatesAutoresizingMaskIntoConstraints = false
         firstTopView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         firstTopView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -60,11 +56,34 @@ extension RideDetailViewController{
         bottomBorderView.bottomAnchor.constraint(equalTo: firstTopView.bottomAnchor).isActive = true
         bottomBorderView.widthAnchor.constraint(equalTo: locationStackView.widthAnchor, multiplier: 1.0).isActive = true
         bottomBorderView.centerXAnchor.constraint(equalTo: firstTopView.centerXAnchor).isActive = true
-        bottomBorderView.heightAnchor.constraint(equalToConstant: 0.8).isActive = true
+        bottomBorderView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         
     }
     
     func setupSecondTopView(){
+//        secondTopView.backgroundColor = UIColor.blue
+        
+        secondTopView.addSubview(profileImageView)
+        secondTopView.addSubview(nameLabel)
+        
+        //MARK : Second Top View Constraints
+        secondTopView.translatesAutoresizingMaskIntoConstraints = false
+        secondTopView.topAnchor.constraint(equalTo: firstTopView.bottomAnchor).isActive = true
+        secondTopView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        secondTopView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        secondTopView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15).isActive = true
+        
+        //ProfileImageView
+        profileImageView.translatesAutoresizingMaskIntoConstraints = false
+        profileImageView.leadingAnchor.constraint(equalTo: dateLabel.leadingAnchor, constant: 5).isActive = true
+        profileImageView.centerYAnchor.constraint(equalTo: secondTopView.centerYAnchor).isActive = true
+        profileImageView.heightAnchor.constraint(equalTo: secondTopView.heightAnchor, multiplier: 0.6).isActive = true
+        profileImageView.widthAnchor.constraint(equalTo: profileImageView.heightAnchor, multiplier: 1).isActive = true
+        
+        //Name Label Constraints
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.topAnchor.constraint(equalTo: profileImageView.topAnchor).isActive = true
+        nameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 15).isActive = true
         
     }
 }
