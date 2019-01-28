@@ -11,6 +11,10 @@ import Firebase
 
 class LoginViewController: UIViewController {
 
+    private var authUser : User? {
+        return Auth.auth().currentUser
+    }
+    
     var bottomStackView : UIStackView!
     let bottomContainer : UIView = {
         let view = UIView()
@@ -105,6 +109,7 @@ class LoginViewController: UIViewController {
     }
     
     @objc func handleLogin(){
+        present(LoginViewController.presentMainPage(), animated: true, completion: nil)
 //        let email = emailTextField.text
 //        let password = passwordTextField.text
 //
@@ -113,8 +118,15 @@ class LoginViewController: UIViewController {
 //            return
 //        }
 //
-//        Auth.auth().signIn(withEmail: email!, password: password!, completion: { (user, error) in
-//            guard let _ = user else {
+//        Auth.auth().signIn(withEmail: email!, password: password!, completion: { (authResult, error) in
+//
+//            guard self.authUser?.isEmailVerified == true else {
+//                self.errorLabel.text = "Account not verified. Please check your email for verification"
+//                return
+//            }
+//
+//            guard let _ = authResult else {
+//
 //                if let error = error {
 //                    if let errCode = AuthErrorCode(rawValue: error._code){
 //                        switch (errCode){
@@ -132,11 +144,9 @@ class LoginViewController: UIViewController {
 //                }
 //                return
 //            }
+//
 //            self.present(LoginViewController.presentMainPage(), animated: true, completion: nil)
 //        })
-//
-//
-        present(LoginViewController.presentMainPage(), animated: true, completion: nil)
         
     }
 

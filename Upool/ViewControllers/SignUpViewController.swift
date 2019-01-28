@@ -11,6 +11,10 @@ import Firebase
 
 class SignUpViewController: UIViewController {
 
+    private var authUser : User? {
+        return Auth.auth().currentUser
+    }
+    
     let navBar = UINavigationBar()
     
     var textFieldStackView : UIStackView!
@@ -81,14 +85,6 @@ class SignUpViewController: UIViewController {
         setupKeyboardNotifications()
     }
     
-    func setupKeyboardNotifications(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapped))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
     @objc func cancel(){
         dismiss(animated: true, completion: nil)
     }
@@ -98,12 +94,12 @@ class SignUpViewController: UIViewController {
         let email = emailTextField.text
         let password = passwordTextField.text
         let rePassword = reEnterPasswordTextField.text
-        
+
         guard password == rePassword else {
             self.errorLabel.text = "Passwords do not match"
             return
         }
-        
+
         Auth.auth().createUser(withEmail: email!, password: password!, completion: { (user, error) in
             guard let _ = user else {
                 if let error = error {
@@ -125,9 +121,9 @@ class SignUpViewController: UIViewController {
                 }
                 return
             }
-            
+
             // if successful add user
-            
+
             //Add user to the Firebase database
 //            if let uid = Auth.auth().currentUser?.uid{
 //                let ref = Database.database().reference()
@@ -144,9 +140,25 @@ class SignUpViewController: UIViewController {
 //
 //                self.signInTo()
 //            }
-            
-            self.present(LoginViewController.presentMainPage(), animated: true, completion: nil)
+            self.sendVerificationMail()
+//            self.present(LoginViewController.presentMainPage(), animated: true, completion: nil)
         })
+    }
+    
+    public func sendVerificationMail() {
+        if self.authUser != nil && !self.authUser!.isEmailVerified {
+            self.authUser!.sendEmailVerification(completion: { (error) in
+                // Notify the user that the mail has sent or couldn't because of an error.
+                if let error = error{
+                    print("\(error.localizedDescription)")
+                } else {
+                    print("sendEmailVerification Successful!")
+                }
+            })
+        }
+        else {
+            // Either the user is not available, or the user is already verified.
+        }
     }
     
 }
