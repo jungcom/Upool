@@ -105,38 +105,38 @@ class LoginViewController: UIViewController {
     }
     
     @objc func handleLogin(){
-        let email = emailTextField.text
-        let password = passwordTextField.text
-        
-        guard email != "" && password != "" else{
-            self.errorLabel.text = "Empty email/password field"
-            return
-        }
-        
-        Auth.auth().signIn(withEmail: email!, password: password!, completion: { (user, error) in
-            guard let _ = user else {
-                if let error = error {
-                    if let errCode = AuthErrorCode(rawValue: error._code){
-                        switch (errCode){
-                        case .userNotFound:
-                            self.errorLabel.text = "User account not found"
-                        case .wrongPassword:
-                            self.errorLabel.text = "Incorrect password"
-                        case .invalidEmail:
-                            self.errorLabel.text = "Invalid email"
-                        default:
-                            self.errorLabel.text = "An error has occured. Please try again"
-                        }
-                    }
-                    print("Error: \(error.localizedDescription)")
-                }
-                return
-            }
-            self.present(LoginViewController.presentMainPage(), animated: true, completion: nil)
-        })
-        
-        
-//        present(LoginViewController.presentMainPage(), animated: true, completion: nil)
+//        let email = emailTextField.text
+//        let password = passwordTextField.text
+//
+//        guard email != "" && password != "" else{
+//            self.errorLabel.text = "Empty email/password field"
+//            return
+//        }
+//
+//        Auth.auth().signIn(withEmail: email!, password: password!, completion: { (user, error) in
+//            guard let _ = user else {
+//                if let error = error {
+//                    if let errCode = AuthErrorCode(rawValue: error._code){
+//                        switch (errCode){
+//                        case .userNotFound:
+//                            self.errorLabel.text = "User account not found"
+//                        case .wrongPassword:
+//                            self.errorLabel.text = "Incorrect password"
+//                        case .invalidEmail:
+//                            self.errorLabel.text = "Invalid email"
+//                        default:
+//                            self.errorLabel.text = "An error has occured. Please try again"
+//                        }
+//                    }
+//                    print("Error: \(error.localizedDescription)")
+//                }
+//                return
+//            }
+//            self.present(LoginViewController.presentMainPage(), animated: true, completion: nil)
+//        })
+//
+//
+        present(LoginViewController.presentMainPage(), animated: true, completion: nil)
         
     }
 

@@ -28,6 +28,8 @@ class OfferedRidesCollectionViewController: UICollectionViewController, UICollec
         collectionView.alwaysBounceVertical = true
         
         navigationItem.title = "UPool"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(createRide))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.white
         UINavigationBar.appearance().barTintColor = Colors.maroon
         UINavigationBar.appearance().titleTextAttributes = [
             NSAttributedString.Key.foregroundColor : UIColor.white,
@@ -40,6 +42,11 @@ class OfferedRidesCollectionViewController: UICollectionViewController, UICollec
     }
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return .lightContent
+    }
+    
+    @objc func createRide(){
+        let createRideVC = CreateRideViewController()
+        navigationController?.pushViewController(createRideVC, animated: true)
     }
 
     // MARK: UICollectionViewDataSource

@@ -9,6 +9,7 @@
 import UIKit
 
 extension SignUpViewController{
+    
     func setNavigationBar() {
         let navItem = UINavigationItem(title: "Sign Up")
         let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.cancel, target: nil, action: #selector(cancel))
@@ -21,12 +22,10 @@ extension SignUpViewController{
     }
     
     func setStackViews(){
-        let emptyView = UIView()
-        let emptyView2 = UIView()
-        
+        let emptyView = UIView()        
         let termsStackView = UIStackView(arrangedSubviews: [agreeWithTermsLabel, termsAndConditionsButton])
         
-        textFieldStackView = UIStackView(arrangedSubviews: [emailTextField,passwordTextField,reEnterPasswordTextField,nameTextField,phoneNumberTextField, emptyView2, signUpButton, emptyView, termsStackView])
+        textFieldStackView = UIStackView(arrangedSubviews: [emailTextField,passwordTextField,reEnterPasswordTextField,nameTextField,phoneNumberTextField, errorLabel, signUpButton, emptyView, termsStackView])
         textFieldStackView.axis = .vertical
         textFieldStackView.alignment = .center
         textFieldStackView.spacing = 20

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SignUpViewController: UIViewController {
 
@@ -62,6 +63,14 @@ class SignUpViewController: UIViewController {
         return button
     }()
     
+    let errorLabel : UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = UIColor.red
+        label.text = "This is an error message"
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -86,7 +95,58 @@ class SignUpViewController: UIViewController {
     
     @objc func handleSignUp(){
         print("signUp")
-        present(LoginViewController.presentMainPage(), animated: true, completion: nil)
+        let email = emailTextField.text
+        let password = passwordTextField.text
+        let rePassword = reEnterPasswordTextField.text
+        
+        guard password == rePassword else {
+            self.errorLabel.text = "Passwords do not match"
+            return
+        }
+        
+        Auth.auth().createUser(withEmail: email!, password: password!, completion: { (user, error) in
+            guard let _ = user else {
+                if let error = error {
+                    if let errCode = AuthErrorCode(rawValue: error._code){
+                        switch (errCode){
+                        case .missingEmail:
+                            self.errorLabel.text = "An email address must be provided"
+                        case .invalidEmail:
+                            self.errorLabel.text = "Invalid email"
+                        case .emailAlreadyInUse:
+                            self.errorLabel.text = "Email already in use"
+                        case .weakPassword:
+                            self.errorLabel.text = "Password is weak. Try a longer password"
+                        default:
+                            self.errorLabel.text = "An error has occured. Please try again"
+                        }
+                    }
+                    print("Error: \(error.localizedDescription)")
+                }
+                return
+            }
+            
+            // if successful add user
+            
+            //Add user to the Firebase database
+//            if let uid = Auth.auth().currentUser?.uid{
+//                let ref = Database.database().reference()
+//                let userRef = ref.child("users").child(uid)
+//                var values = ["firstName": self.firstNameTextField.text, "lastName":self.lastNameTextField.text, "email":email]
+//                values["uid"] = uid
+//                userRef.updateChildValues(values, withCompletionBlock: { (err, ref) in
+//                    if err != nil{
+//                        print(err?.localizedDescription)
+//                        return
+//                    }
+//                    print("Saved user data to DB")
+//                })
+//
+//                self.signInTo()
+//            }
+            
+            self.present(LoginViewController.presentMainPage(), animated: true, completion: nil)
+        })
     }
     
 }
