@@ -56,7 +56,6 @@ class SignUpViewController: UIViewController {
     
     let termsAndConditionsButton : UIButton = {
         let button = UIButton()
-        button.setTitle(Strings.termsAndConditions, for: .normal)
         let stringAtt : [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.font : UIFont(name: Fonts.helvetica, size: 12)!,
             NSAttributedString.Key.foregroundColor : UIColor.gray,

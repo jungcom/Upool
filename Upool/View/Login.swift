@@ -13,7 +13,6 @@ extension LoginViewController{
     func setupStackViews(){
         //Empty UI View
         let emptyUIView = UIView()
-        let emptyUIView2 = UIView()
         
         //Label + Signup button
         let labelAndSignUpStackView = UIStackView(arrangedSubviews: [dontHaveAccLabel, signUpButton])
@@ -27,7 +26,7 @@ extension LoginViewController{
         bottomlabelStackView.alignment = .center
         
         //Bottom stack view
-        bottomStackView = UIStackView(arrangedSubviews: [emptyUIView2,loginLabel, emailTextField, passwordTextField, errorLabel ,loginButton,bottomlabelStackView])
+        bottomStackView = UIStackView(arrangedSubviews: [emptyUIView,loginLabel, emailTextField, passwordTextField, errorLabel ,loginButton,bottomlabelStackView])
         bottomStackView.axis = .vertical
         bottomStackView.distribution = .fillEqually
         bottomStackView.spacing = 30

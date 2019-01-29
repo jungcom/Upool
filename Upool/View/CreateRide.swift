@@ -15,20 +15,49 @@ extension CreateRideViewController {
         navigationItem.title = "Create Ride"
         
         setupDateTimeButtons()
+        
     }
     
     func setupDateTimeButtons(){
-        view.addSubview(dateButton)
         
-        dateButton.translatesAutoresizingMaskIntoConstraints = false
-        dateButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        dateButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
-        dateButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.2).isActive = true
-        dateButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
+        dateTimeStack = UIStackView(arrangedSubviews: [dateLabel, timeLabel])
+        dateTimeStack.axis = .horizontal
+        dateTimeStack.alignment = .center
+        dateTimeStack.distribution = .fillEqually
+                
+        view.addSubview(dateTimeStack)
+        
+        dateTimeStack.translatesAutoresizingMaskIntoConstraints = false
+        dateTimeStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        dateTimeStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
+        dateTimeStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true
+        dateTimeStack.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
+        
+        //UnderlineViews and Constraints
+        let bottomBorderViewForDate = UIView()
+        let bottomBorderViewForTime = UIView()
+
+        bottomBorderViewForDate.backgroundColor = UIColor.gray
+        bottomBorderViewForTime.backgroundColor = UIColor.gray
+
+        view.addSubview(bottomBorderViewForDate)
+        view.addSubview(bottomBorderViewForTime)
+        
+        bottomBorderViewForDate.translatesAutoresizingMaskIntoConstraints = false
+        bottomBorderViewForDate.bottomAnchor.constraint(equalTo: dateLabel.bottomAnchor).isActive = true
+        bottomBorderViewForDate.leadingAnchor.constraint(equalTo: dateLabel.leadingAnchor).isActive = true
+        bottomBorderViewForDate.widthAnchor.constraint(equalTo: dateLabel.widthAnchor, multiplier: 0.9).isActive = true
+        bottomBorderViewForDate.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        
+        bottomBorderViewForTime.translatesAutoresizingMaskIntoConstraints = false
+        bottomBorderViewForTime.bottomAnchor.constraint(equalTo: timeLabel.bottomAnchor).isActive = true
+        bottomBorderViewForTime.leadingAnchor.constraint(equalTo: timeLabel.leadingAnchor).isActive = true
+        bottomBorderViewForTime.widthAnchor.constraint(equalTo: timeLabel.widthAnchor, multiplier: 0.9).isActive = true
+        bottomBorderViewForTime.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
     }
     
-    //
+    //CalendarView
     func setupCalendarView() {
         if let window = UIApplication.shared.keyWindow {
             blackView.frame = window.frame
@@ -39,13 +68,20 @@ extension CreateRideViewController {
             //calendar setup
             CalendarView.Style.cellShape                = .square
             CalendarView.Style.cellColorDefault         = UIColor.white
-            CalendarView.Style.cellColorToday           = UIColor(red:1.00, green:0.84, blue:0.64, alpha:1.00)
-            CalendarView.Style.cellSelectedBorderColor  = Colors.maroon
             CalendarView.Style.headerTextColor          = UIColor.black
             CalendarView.Style.cellTextColorDefault     = UIColor.black
-            CalendarView.Style.cellSelectedColor        = Colors.maroon
             CalendarView.Style.cellTextColorToday       = UIColor(red:0.31, green:0.44, blue:0.47, alpha:1.00)
+            CalendarView.Style.cellColorToday           = UIColor(red:1.00, green:0.84, blue:0.64, alpha:1.00)
+            
+            CalendarView.Style.cellSelectedBorderColor  = Colors.maroon
+            CalendarView.Style.cellSelectedColor        = Colors.maroon
+            CalendarView.Style.cellSelectedTextColor    = UIColor.white
+
+            //calendarView setup
+            calendarView.setDisplayDate(Date())
             calendarView.backgroundColor = UIColor.white
+            calendarView.multipleSelectionEnable = false
+            calendarView.marksWeekends = false
             
            //CalendarView Constraints
             calendarView.translatesAutoresizingMaskIntoConstraints = false
@@ -90,7 +126,7 @@ extension CreateRideViewController {
 extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegate{
     func startDate() -> Date {
         var dateComponents = DateComponents()
-        dateComponents.month = -1
+        dateComponents.month = 0
         let today = Date()
         let threeMonthsAgo = self.calendarView.calendar.date(byAdding: dateComponents, to: today)!
         return threeMonthsAgo

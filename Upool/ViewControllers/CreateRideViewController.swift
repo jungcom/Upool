@@ -13,19 +13,34 @@ class CreateRideViewController: UIViewController {
 
     let formatter = DateFormatter()
     
+    var dateTimeStack : UIStackView!
+    
+    lazy var dateLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Date"
+        label.textColor = UIColor.gray
+        label.textAlignment = .left
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleCalendarView)))
+        return label
+    }()
+    
+    lazy var timeLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Time"
+        label.textColor = UIColor.gray
+        label.textAlignment = .left
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleClockView)))
+        return label
+    }()
+    
+    //CalendarView
     let blackView : UIView = {
         let black = UIView()
         black.backgroundColor = UIColor(white: 0, alpha: 0.5)
         black.alpha = 0
         return black
-    }()
-    
-    let dateButton : UIButton = {
-        let button = UIButton()
-        button.setTitle("Date", for: .normal)
-        button.setTitleColor(UIColor.gray, for: .normal)
-        button.addTarget(self, action: #selector(handleCalendarView), for: .touchUpInside)
-        return button
     }()
     
     let leftButton : UIButton = {
@@ -44,7 +59,6 @@ class CreateRideViewController: UIViewController {
     
     let calendarView : CalendarView = {
         let cv = CalendarView()
-        cv.setDisplayDate(Date())
         return cv
     }()
     
@@ -56,12 +70,15 @@ class CreateRideViewController: UIViewController {
         calendarView.delegate = self
         setupUI()
         
-        
     }
     
     //Calendar View
     @objc func handleCalendarView(){
         setupCalendarView()
+    }
+    
+    @objc func handleClockView(){
+        
     }
     
     @objc func handleCalendarRight(){
