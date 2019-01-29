@@ -39,4 +39,5 @@ struct Strings{
 struct Images{
     static let umassBackgroundImage = "UmassBackground"
     static let rightArrow = "right-arrow"
+    static let leftArrow = "left-arrow"
 }

@@ -7,10 +7,12 @@
 //
 
 import UIKit
-import JTAppleCalendar
+import KDCalendar
 
 class CreateRideViewController: UIViewController {
 
+    let formatter = DateFormatter()
+    
     let blackView : UIView = {
         let black = UIView()
         black.backgroundColor = UIColor(white: 0, alpha: 0.5)
@@ -26,8 +28,23 @@ class CreateRideViewController: UIViewController {
         return button
     }()
     
-    let calendarView : JTAppleCalendarView = {
-        let cv = JTAppleCalendarView()
+    let leftButton : UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: Images.leftArrow), for: .normal)
+        button.tintColor = UIColor.black
+        return button
+    }()
+    
+    let rightButton : UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: Images.rightArrow), for: .normal)
+        button.tintColor = UIColor.black
+        return button
+    }()
+    
+    let calendarView : CalendarView = {
+        let cv = CalendarView()
+        cv.setDisplayDate(Date())
         return cv
     }()
     
@@ -35,13 +52,24 @@ class CreateRideViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        calendarView.dataSource = self
+        calendarView.delegate = self
         setupUI()
+        
         
     }
     
     //Calendar View
     @objc func handleCalendarView(){
         setupCalendarView()
-        
     }
+    
+    @objc func handleCalendarRight(){
+        calendarView.goToNextMonth()
+    }
+    
+    @objc func handleCalendarLeft(){
+        calendarView.goToPreviousMonth()
+    }
+    
 }

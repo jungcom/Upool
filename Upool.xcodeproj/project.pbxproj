@@ -12,6 +12,7 @@
 		4E431FA921FE90810081CA52 /* CreateRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FA821FE90810081CA52 /* CreateRideViewController.swift */; };
 		4E431FAB21FE94AC0081CA52 /* RideDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */; };
 		4E431FAD21FEA1F80081CA52 /* RideDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FAC21FEA1F80081CA52 /* RideDetail.swift */; };
+		4E6709CF21FFA4CC007042CC /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6709CE21FFA4CC007042CC /* CalendarCollectionViewCell.swift */; };
 		4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */; };
 		4EA3D8A221F90609003D7CE7 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A121F90609003D7CE7 /* UITextField.swift */; };
 		4EA3D8A421F9168E003D7CE7 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A321F9168E003D7CE7 /* SignUp.swift */; };
@@ -36,6 +37,7 @@
 		4E431FA821FE90810081CA52 /* CreateRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideViewController.swift; sourceTree = "<group>"; };
 		4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetailViewController.swift; sourceTree = "<group>"; };
 		4E431FAC21FEA1F80081CA52 /* RideDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetail.swift; sourceTree = "<group>"; };
+		4E6709CE21FFA4CC007042CC /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4EA3D8A121F90609003D7CE7 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		4EA3D8A321F9168E003D7CE7 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			children = (
 				4EA3D8A821FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift */,
 				4E431FA621FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift */,
+				4E6709CE21FFA4CC007042CC /* CalendarCollectionViewCell.swift */,
 			);
 			path = CellsAndLayout;
 			sourceTree = "<group>";
@@ -254,7 +257,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Upool/Pods-Upool-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/KDCalendar/KDCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -264,7 +267,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KDCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -307,6 +310,7 @@
 				4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */,
 				4EAE28F321FF83D3006966E4 /* CreateRide.swift in Sources */,
 				4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */,
+				4E6709CF21FFA4CC007042CC /* CalendarCollectionViewCell.swift in Sources */,
 				4E431FAD21FEA1F80081CA52 /* RideDetail.swift in Sources */,
 				4EA3D8A221F90609003D7CE7 /* UITextField.swift in Sources */,
 				4E431FA721FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift in Sources */,
