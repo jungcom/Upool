@@ -17,4 +17,14 @@ extension UIView{
         view.layer.shadowRadius = 4.0
         view.layer.cornerRadius = 5.0
     }
+    
+    func addGrayBottomBorder(view: UIView, multiplier: CGFloat){
+        self.backgroundColor = UIColor.gray
+        
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        self.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        self.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: multiplier).isActive = true
+        self.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    }
 }

@@ -14,6 +14,7 @@ class CreateRideViewController: UIViewController {
     let formatter = DateFormatter()
     
     var dateTimeStack : UIStackView!
+    var fromToStack : UIStackView!
     
     lazy var dateLabel : UILabel = {
         let label = UILabel()
@@ -32,6 +33,26 @@ class CreateRideViewController: UIViewController {
         label.textAlignment = .left
         label.isUserInteractionEnabled = true
         label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleClockView)))
+        return label
+    }()
+    
+    lazy var fromLabel : UILabel = {
+        let label = UILabel()
+        label.text = "From"
+        label.textColor = UIColor.gray
+        label.textAlignment = .left
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleFromView)))
+        return label
+    }()
+    
+    lazy var toLabel : UILabel = {
+        let label = UILabel()
+        label.text = "To"
+        label.textColor = UIColor.gray
+        label.textAlignment = .left
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleToView)))
         return label
     }()
     
@@ -81,12 +102,12 @@ class CreateRideViewController: UIViewController {
         
     }
     
-    @objc func handleCalendarRight(){
-        calendarView.goToNextMonth()
+    @objc func handleFromView(){
+        
     }
-    
-    @objc func handleCalendarLeft(){
-        calendarView.goToPreviousMonth()
+
+    @objc func handleToView(){
+        
     }
     
 }

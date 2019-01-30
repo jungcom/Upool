@@ -1,62 +1,15 @@
 //
-//  CreateRide.swift
+//  CreateRideCalendarView.swift
 //  Upool
 //
-//  Created by Anthony Lee on 1/28/19.
+//  Created by Anthony Lee on 1/29/19.
 //  Copyright © 2019 anthonyLee. All rights reserved.
 //
 
 import UIKit
 import KDCalendar
 
-extension CreateRideViewController {
-    func setupUI() {
-        view.backgroundColor = UIColor.white
-        navigationItem.title = "Create Ride"
-        
-        setupDateTimeButtons()
-        
-    }
-    
-    func setupDateTimeButtons(){
-        
-        dateTimeStack = UIStackView(arrangedSubviews: [dateLabel, timeLabel])
-        dateTimeStack.axis = .horizontal
-        dateTimeStack.alignment = .center
-        dateTimeStack.distribution = .fillEqually
-                
-        view.addSubview(dateTimeStack)
-        
-        dateTimeStack.translatesAutoresizingMaskIntoConstraints = false
-        dateTimeStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        dateTimeStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
-        dateTimeStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true
-        dateTimeStack.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
-        
-        //UnderlineViews and Constraints
-        let bottomBorderViewForDate = UIView()
-        let bottomBorderViewForTime = UIView()
-
-        bottomBorderViewForDate.backgroundColor = UIColor.gray
-        bottomBorderViewForTime.backgroundColor = UIColor.gray
-
-        view.addSubview(bottomBorderViewForDate)
-        view.addSubview(bottomBorderViewForTime)
-        
-        bottomBorderViewForDate.translatesAutoresizingMaskIntoConstraints = false
-        bottomBorderViewForDate.bottomAnchor.constraint(equalTo: dateLabel.bottomAnchor).isActive = true
-        bottomBorderViewForDate.leadingAnchor.constraint(equalTo: dateLabel.leadingAnchor).isActive = true
-        bottomBorderViewForDate.widthAnchor.constraint(equalTo: dateLabel.widthAnchor, multiplier: 0.9).isActive = true
-        bottomBorderViewForDate.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        
-        bottomBorderViewForTime.translatesAutoresizingMaskIntoConstraints = false
-        bottomBorderViewForTime.bottomAnchor.constraint(equalTo: timeLabel.bottomAnchor).isActive = true
-        bottomBorderViewForTime.leadingAnchor.constraint(equalTo: timeLabel.leadingAnchor).isActive = true
-        bottomBorderViewForTime.widthAnchor.constraint(equalTo: timeLabel.widthAnchor, multiplier: 0.9).isActive = true
-        bottomBorderViewForTime.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        
-    }
-    
+extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegate{
     //CalendarView
     func setupCalendarView() {
         if let window = UIApplication.shared.keyWindow {
@@ -64,7 +17,7 @@ extension CreateRideViewController {
             blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismissCalendarView)))
             window.addSubview(blackView)
             window.addSubview(calendarView)
-
+            
             //calendar setup
             CalendarView.Style.cellShape                = .square
             CalendarView.Style.cellColorDefault         = UIColor.white
@@ -76,14 +29,14 @@ extension CreateRideViewController {
             CalendarView.Style.cellSelectedBorderColor  = Colors.maroon
             CalendarView.Style.cellSelectedColor        = Colors.maroon
             CalendarView.Style.cellSelectedTextColor    = UIColor.white
-
+            
             //calendarView setup
             calendarView.setDisplayDate(Date())
             calendarView.backgroundColor = UIColor.white
             calendarView.multipleSelectionEnable = false
             calendarView.marksWeekends = false
             
-           //CalendarView Constraints
+            //CalendarView Constraints
             calendarView.translatesAutoresizingMaskIntoConstraints = false
             calendarView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             calendarView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -121,9 +74,15 @@ extension CreateRideViewController {
             self.calendarView.alpha = 0
         }
     }
-}
-
-extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegate{
+    
+    @objc func handleCalendarRight(){
+        calendarView.goToNextMonth()
+    }
+    
+    @objc func handleCalendarLeft(){
+        calendarView.goToPreviousMonth()
+    }
+    
     func startDate() -> Date {
         var dateComponents = DateComponents()
         dateComponents.month = 0

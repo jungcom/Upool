@@ -12,7 +12,7 @@
 		4E431FA921FE90810081CA52 /* CreateRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FA821FE90810081CA52 /* CreateRideViewController.swift */; };
 		4E431FAB21FE94AC0081CA52 /* RideDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */; };
 		4E431FAD21FEA1F80081CA52 /* RideDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FAC21FEA1F80081CA52 /* RideDetail.swift */; };
-		4E6709CF21FFA4CC007042CC /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6709CE21FFA4CC007042CC /* CalendarCollectionViewCell.swift */; };
+		4E8B4C722201219B002EC784 /* CreateRideCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8B4C712201219B002EC784 /* CreateRideCalendarView.swift */; };
 		4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */; };
 		4EA3D8A221F90609003D7CE7 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A121F90609003D7CE7 /* UITextField.swift */; };
 		4EA3D8A421F9168E003D7CE7 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A321F9168E003D7CE7 /* SignUp.swift */; };
@@ -37,7 +37,7 @@
 		4E431FA821FE90810081CA52 /* CreateRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideViewController.swift; sourceTree = "<group>"; };
 		4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetailViewController.swift; sourceTree = "<group>"; };
 		4E431FAC21FEA1F80081CA52 /* RideDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetail.swift; sourceTree = "<group>"; };
-		4E6709CE21FFA4CC007042CC /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
+		4E8B4C712201219B002EC784 /* CreateRideCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideCalendarView.swift; sourceTree = "<group>"; };
 		4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4EA3D8A121F90609003D7CE7 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		4EA3D8A321F9168E003D7CE7 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
@@ -72,12 +72,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E8B4C7022012183002EC784 /* CreateRide */ = {
+			isa = PBXGroup;
+			children = (
+				4EAE28F221FF83D3006966E4 /* CreateRide.swift */,
+				4E8B4C712201219B002EC784 /* CreateRideCalendarView.swift */,
+			);
+			path = CreateRide;
+			sourceTree = "<group>";
+		};
 		4EA3D8A721FA0D66003D7CE7 /* CellsAndLayout */ = {
 			isa = PBXGroup;
 			children = (
 				4EA3D8A821FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift */,
 				4E431FA621FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift */,
-				4E6709CE21FFA4CC007042CC /* CalendarCollectionViewCell.swift */,
 			);
 			path = CellsAndLayout;
 			sourceTree = "<group>";
@@ -150,9 +158,9 @@
 		4EEB91F621F7A6880079209B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4E8B4C7022012183002EC784 /* CreateRide */,
 				4EEB91F721F7A6AA0079209B /* Login.swift */,
 				4EA3D8A321F9168E003D7CE7 /* SignUp.swift */,
-				4EAE28F221FF83D3006966E4 /* CreateRide.swift */,
 				4E431FAC21FEA1F80081CA52 /* RideDetail.swift */,
 				4EA3D8A721FA0D66003D7CE7 /* CellsAndLayout */,
 			);
@@ -310,7 +318,6 @@
 				4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */,
 				4EAE28F321FF83D3006966E4 /* CreateRide.swift in Sources */,
 				4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */,
-				4E6709CF21FFA4CC007042CC /* CalendarCollectionViewCell.swift in Sources */,
 				4E431FAD21FEA1F80081CA52 /* RideDetail.swift in Sources */,
 				4EA3D8A221F90609003D7CE7 /* UITextField.swift in Sources */,
 				4E431FA721FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift in Sources */,
@@ -321,6 +328,7 @@
 				4EEB91F421F773630079209B /* UIColor.swift in Sources */,
 				4EA3D8A421F9168E003D7CE7 /* SignUp.swift in Sources */,
 				4EEB91F021F772770079209B /* Constants.swift in Sources */,
+				4E8B4C722201219B002EC784 /* CreateRideCalendarView.swift in Sources */,
 				4EEB91DC21F7679F0079209B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
