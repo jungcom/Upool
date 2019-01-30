@@ -8,6 +8,7 @@
 
 import UIKit
 import KDCalendar
+import Cosmos
 
 class CreateRideViewController: UIViewController {
 
@@ -15,7 +16,10 @@ class CreateRideViewController: UIViewController {
     
     var dateTimeStack : UIStackView!
     var fromToStack : UIStackView!
+    var priceStack : UIStackView!
+    var passengerStack : UIStackView!
     
+    //Date and Time View
     lazy var dateLabel : UILabel = {
         let label = UILabel()
         label.text = "Date"
@@ -36,6 +40,7 @@ class CreateRideViewController: UIViewController {
         return label
     }()
     
+    //Destination View
     lazy var fromLabel : UILabel = {
         let label = UILabel()
         label.text = "From"
@@ -54,6 +59,58 @@ class CreateRideViewController: UIViewController {
         label.isUserInteractionEnabled = true
         label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleToView)))
         return label
+    }()
+    
+    //Price View
+    lazy var priceLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Price"
+        label.textColor = UIColor.gray
+        label.textAlignment = .left
+        return label
+    }()
+    
+    lazy var priceSlider : UISlider = {
+        let slider = UISlider()
+        slider.maximumValue = 50
+        slider.minimumValue = 0
+        slider.addTarget (self,
+                          action: #selector(sliderValueChanged),
+                          for: UIControl.Event.valueChanged
+        )
+        return slider
+    }()
+    
+    lazy var dollarLabel : UILabel = {
+        let label = UILabel()
+        label.text = "$\(Int(priceSlider.value))"
+        label.textColor = Colors.moneyGreen
+        label.textAlignment = .right
+        return label
+    }()
+    
+    //Passengers View
+    lazy var passengerLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Passengers"
+        label.textColor = UIColor.gray
+        label.textAlignment = .left
+        return label
+    }()
+    
+    lazy var passengerCosmosView : CosmosView = {
+        let cosmos = CosmosView()
+        cosmos.settings.totalStars = 6
+        cosmos.settings.filledColor = Colors.maroon
+        cosmos.settings.filledBorderColor = Colors.maroon
+        cosmos.settings.emptyColor = UIColor.white
+        cosmos.settings.emptyBorderColor = Colors.maroon
+        cosmos.settings.starSize = 25
+        
+        //TODO: Setup image to be round
+//        cosmos.settings.emptyImage
+//        cosmos.settings.filledImage
+        return cosmos
     }()
     
     //CalendarView
@@ -108,6 +165,10 @@ class CreateRideViewController: UIViewController {
 
     @objc func handleToView(){
         
+    }
+    
+    @objc func sliderValueChanged(){
+        dollarLabel.text = "$\(Int(priceSlider.value))"
     }
     
 }

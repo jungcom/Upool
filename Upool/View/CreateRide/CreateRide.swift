@@ -17,6 +17,7 @@ extension CreateRideViewController {
         setupDateTimeButtons()
         setupToFromButtons()
         setupPriceLabelAndSlider()
+        setupPassengerLabelCosmosView()
         
     }
     
@@ -74,7 +75,35 @@ extension CreateRideViewController {
     }
     
     func setupPriceLabelAndSlider(){
+        priceStack = UIStackView(arrangedSubviews: [priceLabel, priceSlider, dollarLabel])
+        priceStack.axis = .horizontal
+        priceStack.distribution = .fill
+        priceStack.alignment = .center
+        priceStack.spacing = 50
+        
+        view.addSubview(priceStack)
+        
+        priceStack.translatesAutoresizingMaskIntoConstraints = false
+        priceStack.topAnchor.constraint(equalTo: fromToStack.bottomAnchor, constant: 10).isActive = true
+        priceStack.leadingAnchor.constraint(equalTo: dateTimeStack.leadingAnchor).isActive = true
+        priceStack.widthAnchor.constraint(equalTo: dateTimeStack.widthAnchor, multiplier: 1).isActive = true
+        priceStack.heightAnchor.constraint(equalTo: dateTimeStack.heightAnchor, multiplier: 1).isActive = true
+    }
     
+    func setupPassengerLabelCosmosView(){
+        passengerStack = UIStackView(arrangedSubviews: [passengerLabel, passengerCosmosView])
+        passengerStack.axis = .horizontal
+        passengerStack.distribution = .fillProportionally
+        passengerStack.alignment = .leading
+        passengerStack.spacing = 50
+        
+        view.addSubview(passengerStack)
+        
+        passengerStack.translatesAutoresizingMaskIntoConstraints = false
+        passengerStack.topAnchor.constraint(equalTo: priceStack.bottomAnchor, constant: 10).isActive = true
+        passengerStack.leadingAnchor.constraint(equalTo: dateTimeStack.leadingAnchor).isActive = true
+        passengerStack.widthAnchor.constraint(equalTo: dateTimeStack.widthAnchor, multiplier: 1).isActive = true
+        passengerStack.heightAnchor.constraint(equalTo: dateTimeStack.heightAnchor, multiplier: 1).isActive = true
     }
 }
 
