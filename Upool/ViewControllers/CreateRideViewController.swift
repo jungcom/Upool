@@ -36,7 +36,7 @@ class CreateRideViewController: UIViewController {
         label.textColor = UIColor.gray
         label.textAlignment = .left
         label.isUserInteractionEnabled = true
-        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleClockView)))
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDatePickerView)))
         return label
     }()
     
@@ -174,6 +174,12 @@ class CreateRideViewController: UIViewController {
         return cv
     }()
     
+    //DatePickerView
+    lazy var timePicker : UIDatePicker = {
+        let picker = UIDatePicker()
+        return picker
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -189,12 +195,13 @@ class CreateRideViewController: UIViewController {
         setupCalendarView()
     }
     
-    @objc func handleClockView(){
-        
+    @objc func handleDatePickerView(){
+        setupTimePicker()
     }
     
     @objc func handleFromView(){
-        
+        let searchLocationVC = SearchLocationViewController()
+        self.present(searchLocationVC, animated: true, completion: nil)
     }
 
     @objc func handleToView(){
