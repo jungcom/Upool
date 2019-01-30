@@ -19,6 +19,7 @@ extension CreateRideViewController {
         setupPriceLabelAndSlider()
         setupPassengerLabelCosmosView()
         setupPickUpDetailsView()
+        setupCreateButton()
         
     }
     
@@ -104,10 +105,34 @@ extension CreateRideViewController {
         passengerStack.topAnchor.constraint(equalTo: priceStack.bottomAnchor, constant: 10).isActive = true
         passengerStack.leadingAnchor.constraint(equalTo: dateTimeStack.leadingAnchor).isActive = true
         passengerStack.widthAnchor.constraint(equalTo: dateTimeStack.widthAnchor, multiplier: 1).isActive = true
-        passengerStack.heightAnchor.constraint(equalTo: dateTimeStack.heightAnchor, multiplier: 1).isActive = true
+        passengerStack.heightAnchor.constraint(equalTo: dateTimeStack.heightAnchor, multiplier: 0.6).isActive = true
     }
     
     func setupPickUpDetailsView(){
+        view.addSubview(pickupDetailsLabel)
+        view.addSubview(pickupDetailsTextView)
+        
+        pickupDetailsLabel.translatesAutoresizingMaskIntoConstraints = false
+        pickupDetailsLabel.topAnchor.constraint(equalTo: passengerStack.bottomAnchor, constant: 10).isActive = true
+        pickupDetailsLabel.leadingAnchor.constraint(equalTo: dateTimeStack.leadingAnchor).isActive = true
+        pickupDetailsLabel.widthAnchor.constraint(equalTo: dateTimeStack.widthAnchor, multiplier: 0.5).isActive = true
+        pickupDetailsLabel.heightAnchor.constraint(equalTo: dateTimeStack.heightAnchor, multiplier: 0.3).isActive = true
+        
+        pickupDetailsTextView.translatesAutoresizingMaskIntoConstraints = false
+        pickupDetailsTextView.topAnchor.constraint(equalTo: pickupDetailsLabel.bottomAnchor, constant: 10).isActive = true
+        pickupDetailsTextView.leadingAnchor.constraint(equalTo: dateTimeStack.leadingAnchor).isActive = true
+        pickupDetailsTextView.widthAnchor.constraint(equalTo: dateTimeStack.widthAnchor, multiplier: 1).isActive = true
+        pickupDetailsTextView.heightAnchor.constraint(equalTo: dateTimeStack.heightAnchor, multiplier: 1.5).isActive = true
+    }
+    
+    func setupCreateButton(){
+        view.addSubview(createRideButton)
+        
+        createRideButton.translatesAutoresizingMaskIntoConstraints = false
+        createRideButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
+        createRideButton.trailingAnchor.constraint(equalTo: dateTimeStack.trailingAnchor).isActive = true
+        createRideButton.widthAnchor.constraint(equalTo: dateTimeStack.widthAnchor, multiplier: 0.4).isActive = true
+        createRideButton.heightAnchor.constraint(equalTo: dateTimeStack.heightAnchor, multiplier: 0.5).isActive = true
     }
 }
 

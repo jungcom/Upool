@@ -127,7 +127,23 @@ class CreateRideViewController: UIViewController {
         textView.layer.borderWidth = 1
         textView.layer.borderColor = UIColor.gray.cgColor
         textView.textColor = UIColor.gray
+        textView.font = UIFont(name: Fonts.helvetica, size: 14)
         return textView
+    }()
+    
+    //Create Button View
+    let createRideButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("CREATE", for: .normal)
+        button.setTitleColor(Colors.maroon, for: .normal)
+        button.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 18)
+        button.backgroundColor = UIColor.clear
+        button.layer.masksToBounds = true
+        button.layer.borderColor = Colors.maroon.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(handleCreateRide), for: .touchUpInside)
+        return button
     }()
     
     
@@ -187,6 +203,10 @@ class CreateRideViewController: UIViewController {
     
     @objc func sliderValueChanged(){
         dollarLabel.text = "$\(Int(priceSlider.value))"
+    }
+    
+    @objc func handleCreateRide(){
+        
     }
     
 }
