@@ -18,6 +18,7 @@ extension CreateRideViewController {
         setupToFromButtons()
         setupPriceLabelAndSlider()
         setupPassengerLabelCosmosView()
+        setupPickUpDetailsView()
         
     }
     
@@ -104,6 +105,9 @@ extension CreateRideViewController {
         passengerStack.leadingAnchor.constraint(equalTo: dateTimeStack.leadingAnchor).isActive = true
         passengerStack.widthAnchor.constraint(equalTo: dateTimeStack.widthAnchor, multiplier: 1).isActive = true
         passengerStack.heightAnchor.constraint(equalTo: dateTimeStack.heightAnchor, multiplier: 1).isActive = true
+    }
+    
+    func setupPickUpDetailsView(){
     }
 }
 

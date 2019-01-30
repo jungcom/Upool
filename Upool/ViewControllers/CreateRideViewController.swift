@@ -113,6 +113,24 @@ class CreateRideViewController: UIViewController {
         return cosmos
     }()
     
+    //PickDetails View
+    lazy var pickupDetailsLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Pickup Details"
+        label.textColor = UIColor.gray
+        label.textAlignment = .left
+        return label
+    }()
+    
+    lazy var pickupDetailsTextView : UITextView = {
+        let textView = UITextView()
+        textView.layer.borderWidth = 1
+        textView.layer.borderColor = UIColor.gray.cgColor
+        textView.textColor = UIColor.gray
+        return textView
+    }()
+    
+    
     //CalendarView
     let blackView : UIView = {
         let black = UIView()
