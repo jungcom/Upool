@@ -165,13 +165,11 @@ class LoginViewController: UIViewController {
     static func presentMainPage() -> UIViewController{
         let ridesVC = OfferedRidesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
         ridesVC.tabBarItem = UITabBarItem(title: "Rides", image: UIImage(named: "right-arrow"), tag: 0)
-        let downloadsVC = UIViewController()
-        downloadsVC.title = "Downloads"
-        downloadsVC.view.backgroundColor = UIColor.blue
-        downloadsVC.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 1)
+        let statusVC = MyStatusViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        statusVC.tabBarItem = UITabBarItem(title: "Status", image: UIImage(named: "left-arrow"), tag: 1)
         
         let tabBarController = UITabBarController()
-        let controllers = [ridesVC, downloadsVC]
+        let controllers = [ridesVC, statusVC]
         tabBarController.viewControllers = controllers
         tabBarController.tabBar.tintColor = Colors.maroon
         tabBarController.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}

@@ -1,8 +1,8 @@
 //
-//  OfferedRidesCollectionViewController.swift
+//  myStatusViewController.swift
 //  Upool
 //
-//  Created by Anthony Lee on 1/24/19.
+//  Created by Anthony Lee on 1/30/19.
 //  Copyright © 2019 anthonyLee. All rights reserved.
 //
 
@@ -11,24 +11,23 @@ import UIKit
 private let offeredRidesCellId = "Cell"
 private let headerCellId = "Header"
 
-class OfferedRidesCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
+class MyStatusViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Register cell classes
         self.collectionView!.register(OfferedRidesCollectionViewCell.self, forCellWithReuseIdentifier: offeredRidesCellId)
         self.collectionView.register(OfferedRidesSectionHeaderCollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerCellId)
-
+        
         // Do any additional setup after loading the view.
         collectionView.backgroundColor = UIColor.groupTableViewBackground
         collectionView.alwaysBounceVertical = true
         
-        navigationItem.title = "UPool"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(createRide))
+        navigationItem.title = "My Status"
         UINavigationBar.appearance().barTintColor = Colors.maroon
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().titleTextAttributes = [
@@ -48,18 +47,18 @@ class OfferedRidesCollectionViewController: UICollectionViewController, UICollec
         let createRideVC = CreateRideViewController()
         navigationController?.pushViewController(createRideVC, animated: true)
     }
-
+    
     // MARK: UICollectionViewDataSource
-
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
-    }
-
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
     }
-
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath)
         cell.backgroundColor = UIColor.white
@@ -70,7 +69,7 @@ class OfferedRidesCollectionViewController: UICollectionViewController, UICollec
         let rideDetailsVC = RideDetailViewController()
         navigationController?.pushViewController(rideDetailsVC, animated: true)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width * 0.9, height: 100)
     }
@@ -84,12 +83,17 @@ class OfferedRidesCollectionViewController: UICollectionViewController, UICollec
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerCellId, for: indexPath) as! OfferedRidesSectionHeaderCollectionViewCell
+        if indexPath.section == 0{
+            header.titleLabel.text = "My Rides"
+        } else {
+            header.titleLabel.text = "Joined Rides"
+        }
         return header
-
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 50)
     }
-
+    
 }

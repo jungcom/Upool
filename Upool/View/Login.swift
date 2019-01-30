@@ -11,6 +11,9 @@ import UIKit
 extension LoginViewController{
     
     func setupStackViews(){
+        //Empty UIVIew
+        let emptyUIView = UIView()
+        
         //Label + Signup button
         let labelAndSignUpStackView = UIStackView(arrangedSubviews: [dontHaveAccLabel, signUpButton])
         labelAndSignUpStackView.axis = .horizontal
@@ -23,10 +26,10 @@ extension LoginViewController{
         bottomlabelStackView.alignment = .center
         
         //Bottom stack view
-        bottomStackView = UIStackView(arrangedSubviews: [loginLabel, emailTextField, passwordTextField, errorLabel ,loginButton,bottomlabelStackView])
+        bottomStackView = UIStackView(arrangedSubviews: [emptyUIView, loginLabel, emailTextField, passwordTextField, errorLabel ,loginButton,bottomlabelStackView])
         bottomStackView.axis = .vertical
         bottomStackView.distribution = .fillEqually
-        bottomStackView.spacing = 30
+        bottomStackView.spacing = 25
         bottomStackView.alignment = .center
         bottomStackView.backgroundColor = UIColor.white
         
@@ -46,7 +49,7 @@ extension LoginViewController{
         bottomContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         bottomContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         bottomContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        bottomContainer.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.55).isActive = true
+        bottomContainer.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.6).isActive = true
         
         //Bottom Stack View Constraints
         bottomStackView.translatesAutoresizingMaskIntoConstraints = false

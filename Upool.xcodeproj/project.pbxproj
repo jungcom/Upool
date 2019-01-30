@@ -13,6 +13,7 @@
 		4E431FAB21FE94AC0081CA52 /* RideDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */; };
 		4E431FAD21FEA1F80081CA52 /* RideDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FAC21FEA1F80081CA52 /* RideDetail.swift */; };
 		4E8B4C722201219B002EC784 /* CreateRideCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8B4C712201219B002EC784 /* CreateRideCalendarView.swift */; };
+		4E8B4C742201F290002EC784 /* MyStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8B4C732201F290002EC784 /* MyStatusViewController.swift */; };
 		4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */; };
 		4EA3D8A221F90609003D7CE7 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A121F90609003D7CE7 /* UITextField.swift */; };
 		4EA3D8A421F9168E003D7CE7 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A321F9168E003D7CE7 /* SignUp.swift */; };
@@ -38,6 +39,7 @@
 		4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetailViewController.swift; sourceTree = "<group>"; };
 		4E431FAC21FEA1F80081CA52 /* RideDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetail.swift; sourceTree = "<group>"; };
 		4E8B4C712201219B002EC784 /* CreateRideCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideCalendarView.swift; sourceTree = "<group>"; };
+		4E8B4C732201F290002EC784 /* MyStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStatusViewController.swift; sourceTree = "<group>"; };
 		4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4EA3D8A121F90609003D7CE7 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		4EA3D8A321F9168E003D7CE7 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				4EA3D8A521FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift */,
 				4E431FA821FE90810081CA52 /* CreateRideViewController.swift */,
 				4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */,
+				4E8B4C732201F290002EC784 /* MyStatusViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				4EAE28F321FF83D3006966E4 /* CreateRide.swift in Sources */,
 				4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */,
 				4E431FAD21FEA1F80081CA52 /* RideDetail.swift in Sources */,
+				4E8B4C742201F290002EC784 /* MyStatusViewController.swift in Sources */,
 				4EA3D8A221F90609003D7CE7 /* UITextField.swift in Sources */,
 				4E431FA721FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift in Sources */,
 				4EEB91F821F7A6AA0079209B /* Login.swift in Sources */,
