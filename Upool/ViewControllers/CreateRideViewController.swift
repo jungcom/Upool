@@ -36,7 +36,7 @@ class CreateRideViewController: UIViewController {
         label.textColor = UIColor.gray
         label.textAlignment = .left
         label.isUserInteractionEnabled = true
-        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDatePickerView)))
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTimePickerView)))
         return label
     }()
     
@@ -148,6 +148,12 @@ class CreateRideViewController: UIViewController {
     
     
     //CalendarView
+    let calendarPopupView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        return view
+    }()
+    
     let blackView : UIView = {
         let black = UIView()
         black.backgroundColor = UIColor(white: 0, alpha: 0.5)
@@ -155,17 +161,19 @@ class CreateRideViewController: UIViewController {
         return black
     }()
     
-    let leftButton : UIButton = {
+    lazy var leftButton : UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: Images.leftArrow), for: .normal)
         button.tintColor = UIColor.black
+        button.addTarget(self, action: #selector(handleCalendarLeft), for: .touchUpInside)
         return button
     }()
     
-    let rightButton : UIButton = {
+    lazy var rightButton : UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: Images.rightArrow), for: .normal)
         button.tintColor = UIColor.black
+        button.addTarget(self, action: #selector(handleCalendarRight), for: .touchUpInside)
         return button
     }()
     
@@ -173,6 +181,23 @@ class CreateRideViewController: UIViewController {
         let cv = CalendarView()
         return cv
     }()
+    
+    lazy var okButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("OK", for: .normal)
+        button.setTitleColor(Colors.maroon, for: .normal)
+        button.addTarget(self, action: #selector(handleOK), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var cancelButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("Cancel", for: .normal)
+        button.setTitleColor(Colors.maroon, for: .normal)
+        button.addTarget(self, action: #selector(handleDismissCalendarView), for: .touchUpInside)
+        return button
+    }()
+    
     
     //DatePickerView
     lazy var timePicker : UIDatePicker = {
@@ -187,15 +212,13 @@ class CreateRideViewController: UIViewController {
         calendarView.dataSource = self
         calendarView.delegate = self
         setupUI()
-        
     }
     
-    //Calendar View
     @objc func handleCalendarView(){
-        setupCalendarView()
+        setupCalenderAndBottomButtonViews()
     }
     
-    @objc func handleDatePickerView(){
+    @objc func handleTimePickerView(){
         setupTimePicker()
     }
     
@@ -205,7 +228,8 @@ class CreateRideViewController: UIViewController {
     }
 
     @objc func handleToView(){
-        
+        let searchLocationVC = SearchLocationViewController()
+        self.present(searchLocationVC, animated: true, completion: nil)
     }
     
     @objc func sliderValueChanged(){

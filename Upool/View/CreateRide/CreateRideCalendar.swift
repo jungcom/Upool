@@ -10,68 +10,100 @@ import UIKit
 import KDCalendar
 
 extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegate{
-    //CalendarView
-    func setupCalendarView() {
+    
+    //Whole View
+    func setupCalenderAndBottomButtonViews(){
         if let window = UIApplication.shared.keyWindow {
             blackView.frame = window.frame
             blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismissCalendarView)))
             window.addSubview(blackView)
-            window.addSubview(calendarView)
-            
-            //calendar setup
-            CalendarView.Style.cellShape                = .square
-            CalendarView.Style.cellColorDefault         = UIColor.white
-            CalendarView.Style.headerTextColor          = UIColor.black
-            CalendarView.Style.cellTextColorDefault     = UIColor.black
-            CalendarView.Style.cellTextColorToday       = UIColor(red:0.31, green:0.44, blue:0.47, alpha:1.00)
-            CalendarView.Style.cellColorToday           = UIColor(red:1.00, green:0.84, blue:0.64, alpha:1.00)
-            
-            CalendarView.Style.cellSelectedBorderColor  = Colors.maroon
-            CalendarView.Style.cellSelectedColor        = Colors.maroon
-            CalendarView.Style.cellSelectedTextColor    = UIColor.white
-            
-            //calendarView setup
-            calendarView.setDisplayDate(Date())
-            calendarView.backgroundColor = UIColor.white
-            calendarView.multipleSelectionEnable = false
-            calendarView.marksWeekends = false
+            window.addSubview(calendarPopupView)
             
             //CalendarView Constraints
-            calendarView.translatesAutoresizingMaskIntoConstraints = false
-            calendarView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            calendarView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-            calendarView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier:0.7).isActive = true
-            calendarView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier:0.4).isActive = true
+            calendarPopupView.translatesAutoresizingMaskIntoConstraints = false
+            calendarPopupView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            calendarPopupView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            calendarPopupView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier:0.7).isActive = true
+            calendarPopupView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier:0.4).isActive = true
             
-            //button Setup
-            setupForwardBackwardButtons()
+            //add CalendarView inside CalendarPopupView
+            setupCalendarView()
+            setupOkAndCancelButtons()
             
             UIView.animate(withDuration: 0.3) {
                 self.blackView.alpha = 1
-                self.calendarView.alpha = 1
+                self.calendarPopupView.alpha = 1
             }
         }
+    }
+    
+    func setupCalendarView() {
+        calendarPopupView.addSubview(calendarView)
+        
+        //calendar style setup
+        setupCalendarStyle()
+        
+        //CalendarView Constraints
+        calendarView.translatesAutoresizingMaskIntoConstraints = false
+        calendarView.topAnchor.constraint(equalTo: calendarPopupView.topAnchor).isActive = true
+        calendarView.trailingAnchor.constraint(equalTo: calendarPopupView.trailingAnchor).isActive = true
+        calendarView.leadingAnchor.constraint(equalTo: calendarPopupView.leadingAnchor).isActive = true
+        calendarView.heightAnchor.constraint(equalTo: calendarPopupView.heightAnchor, multiplier:0.9).isActive = true
+        
+        //button Setup
+        setupForwardBackwardButtons()
+        
+    }
+    
+    fileprivate func setupCalendarStyle() {
+        CalendarView.Style.cellShape                = .square
+        CalendarView.Style.cellColorDefault         = UIColor.white
+        CalendarView.Style.headerTextColor          = UIColor.black
+        CalendarView.Style.cellTextColorDefault     = UIColor.black
+        CalendarView.Style.cellTextColorToday       = UIColor(red:0.31, green:0.44, blue:0.47, alpha:1.00)
+        CalendarView.Style.cellColorToday           = UIColor(red:1.00, green:0.84, blue:0.64, alpha:1.00)
+        
+        CalendarView.Style.cellSelectedBorderColor  = Colors.maroon
+        CalendarView.Style.cellSelectedColor        = Colors.maroon
+        CalendarView.Style.cellSelectedTextColor    = UIColor.white
+        
+        //calendarView setup
+        calendarView.setDisplayDate(Date())
+        calendarView.backgroundColor = UIColor.white
+        calendarView.multipleSelectionEnable = false
+        calendarView.marksWeekends = false
     }
     
     func setupForwardBackwardButtons(){
         calendarView.addSubview(leftButton)
         calendarView.addSubview(rightButton)
         
-        leftButton.addTarget(self, action: #selector(handleCalendarLeft), for: .touchUpInside)
         leftButton.translatesAutoresizingMaskIntoConstraints = false
         leftButton.topAnchor.constraint(equalTo: calendarView.topAnchor, constant:10).isActive = true
         leftButton.leadingAnchor.constraint(equalTo: calendarView.leadingAnchor, constant:10).isActive = true
         
-        rightButton.addTarget(self, action: #selector(handleCalendarRight), for: .touchUpInside)
         rightButton.translatesAutoresizingMaskIntoConstraints = false
         rightButton.topAnchor.constraint(equalTo: calendarView.topAnchor, constant:10).isActive = true
         rightButton.trailingAnchor.constraint(equalTo: calendarView.trailingAnchor, constant:-10).isActive = true
     }
     
+    func setupOkAndCancelButtons(){
+        calendarPopupView.addSubview(okButton)
+        calendarPopupView.addSubview(cancelButton)
+        
+        okButton.translatesAutoresizingMaskIntoConstraints = false
+        okButton.bottomAnchor.constraint(equalTo: calendarPopupView.bottomAnchor, constant:-10).isActive = true
+        okButton.trailingAnchor.constraint(equalTo: calendarPopupView.trailingAnchor, constant:-20).isActive = true
+        
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        cancelButton.bottomAnchor.constraint(equalTo: okButton.bottomAnchor).isActive = true
+        cancelButton.trailingAnchor.constraint(equalTo: okButton.leadingAnchor, constant:-30).isActive = true
+    }
+    
     @objc func handleDismissCalendarView(){
         UIView.animate(withDuration: 0.3) {
             self.blackView.alpha = 0
-            self.calendarView.alpha = 0
+            self.calendarPopupView.alpha = 0
         }
     }
     
@@ -82,6 +114,12 @@ extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegat
     @objc func handleCalendarLeft(){
         calendarView.goToPreviousMonth()
     }
+    
+    @objc func handleOK(){
+        setupCalendarView()
+    }
+    
+    //CalendarView Delegates
     
     func startDate() -> Date {
         var dateComponents = DateComponents()

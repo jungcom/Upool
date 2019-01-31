@@ -44,18 +44,24 @@ class SearchLocationViewController: UIViewController {
         
         setupTopViewAndSearch()
         
+        navigationController?.navigationBar.isTranslucent = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        
+        // This makes the view area include the nav bar even though it is opaque.
+        // Adjust the view placement down.
+        self.extendedLayoutIncludesOpaqueBars = true
+        self.edgesForExtendedLayout = .top
     }
     
     func setupTopViewAndSearch(){
         
-        //searchController.searchBar.sizeToFit()
         searchBar = searchController.searchBar
-        //searchBar.sizeToFit()
+        searchBar.sizeToFit()
         searchController.hidesNavigationBarDuringPresentation = true
         
         topView.addSubview(searchBar)
         view.addSubview(topView)
-        view.addSubview(cancelButton)
+        //view.addSubview(cancelButton)
         
         //topView Constraints
         topView.translatesAutoresizingMaskIntoConstraints = false
@@ -65,18 +71,18 @@ class SearchLocationViewController: UIViewController {
         topView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         //SearchBarConstraints
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.topAnchor.constraint(equalTo: topView.safeAreaLayoutGuide.topAnchor).isActive = true
-        searchBar.leadingAnchor.constraint(equalTo: topView.leadingAnchor).isActive = true
-        searchBar.trailingAnchor.constraint(equalTo: topView.trailingAnchor).isActive = true
-        searchBar.bottomAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
+//        searchBar.translatesAutoresizingMaskIntoConstraints = false
+//        searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+//        searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+//        searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        //searchBar.bottomAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
 
         //buttonConstraints
-        cancelButton.translatesAutoresizingMaskIntoConstraints = false
-        cancelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        cancelButton.leadingAnchor.constraint(equalTo: topView.trailingAnchor).isActive = true
-        cancelButton.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        cancelButton.heightAnchor.constraint(equalTo: topView.heightAnchor, multiplier: 1).isActive = true
+//        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+//        cancelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+//        cancelButton.leadingAnchor.constraint(equalTo: topView.trailingAnchor).isActive = true
+//        cancelButton.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+//        cancelButton.heightAnchor.constraint(equalTo: topView.heightAnchor, multiplier: 1).isActive = true
         
         // When UISearchController presents the results view, present it in
         // this view controller, not one further up the chain.
