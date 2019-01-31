@@ -12,6 +12,7 @@ import Cosmos
 
 class CreateRideViewController: UIViewController {
 
+    //This will be set as a Data Model
     var departureDate : Date?
     var departureTime : Date?
     var departureCity : String?
@@ -22,7 +23,11 @@ class CreateRideViewController: UIViewController {
     var maxPassengers : Int{
         return Int(passengerCosmosView.rating)
     }
+    var pickUpDetails : String{
+        return pickupDetailsTextView.text
+    }
 
+    //Date Formatters
     let dateFormatter : DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd, yyyy"
