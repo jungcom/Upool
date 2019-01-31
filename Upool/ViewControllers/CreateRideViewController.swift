@@ -13,10 +13,17 @@ import Cosmos
 class CreateRideViewController: UIViewController {
 
     var departureDate : Date?
+    var departureTime : Date?
 
-    let formatter : DateFormatter = {
+    let dateFormatter : DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd, yyyy"
+        return formatter
+    }()
+    
+    let timeFormatter : DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "H:MM a"
         return formatter
     }()
     
@@ -193,7 +200,7 @@ class CreateRideViewController: UIViewController {
         let button = UIButton()
         button.setTitle("OK", for: .normal)
         button.setTitleColor(Colors.maroon, for: .normal)
-        button.addTarget(self, action: #selector(handleOK), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleOKForCalendar), for: .touchUpInside)
         return button
     }()
     
@@ -221,7 +228,7 @@ class CreateRideViewController: UIViewController {
         let button = UIButton()
         button.setTitle("OK", for: .normal)
         button.setTitleColor(Colors.maroon, for: .normal)
-        button.addTarget(self, action: #selector(handleOK), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleOKForTimePicker), for: .touchUpInside)
         return button
     }()
     
@@ -229,7 +236,7 @@ class CreateRideViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Cancel", for: .normal)
         button.setTitleColor(Colors.maroon, for: .normal)
-        button.addTarget(self, action: #selector(handleDismissTimePickerView), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleDismissTimePicker), for: .touchUpInside)
         return button
     }()
     
@@ -249,7 +256,7 @@ class CreateRideViewController: UIViewController {
     }
     
     @objc func handleTimePickerView(){
-        setupTimePicker()
+        setupTimePickerWholeView()
     }
     
     @objc func handleFromView(){

@@ -19,7 +19,7 @@ extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegat
             window.addSubview(blackView)
             window.addSubview(calendarPopupView)
             
-            //CalendarView Constraints
+            //CalendarPopUpView Constraints
             calendarPopupView.translatesAutoresizingMaskIntoConstraints = false
             calendarPopupView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             calendarPopupView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -50,7 +50,7 @@ extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegat
         calendarView.leadingAnchor.constraint(equalTo: calendarPopupView.leadingAnchor).isActive = true
         calendarView.heightAnchor.constraint(equalTo: calendarPopupView.heightAnchor, multiplier:0.9).isActive = true
         
-        //button Setup
+        //button Setup withing calendarView
         setupForwardBackwardButtons()
         
     }
@@ -115,9 +115,9 @@ extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegat
         calendarView.goToPreviousMonth()
     }
     
-    @objc func handleOK(){
+    @objc func handleOKForCalendar(){
         if let date = departureDate{
-            dateLabel.text = formatter.string(from: date)
+            dateLabel.text = dateFormatter.string(from: date)
             dateLabel.textColor = Colors.maroon
         } else {
             dateLabel.text = "Date"
