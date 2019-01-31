@@ -14,6 +14,14 @@ class CreateRideViewController: UIViewController {
 
     var departureDate : Date?
     var departureTime : Date?
+    var departureCity : String?
+    var arrivalCity : String?
+    var price : Int {
+        return Int(priceSlider.value)
+    }
+    var maxPassengers : Int{
+        return Int(passengerCosmosView.rating)
+    }
 
     let dateFormatter : DateFormatter = {
         let formatter = DateFormatter()
@@ -115,6 +123,7 @@ class CreateRideViewController: UIViewController {
     
     lazy var passengerCosmosView : CosmosView = {
         let cosmos = CosmosView()
+        cosmos.rating = 3
         cosmos.settings.totalStars = 6
         cosmos.settings.filledColor = Colors.maroon
         cosmos.settings.filledBorderColor = Colors.maroon
@@ -246,6 +255,7 @@ class CreateRideViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        definesPresentationContext = true
         calendarView.dataSource = self
         calendarView.delegate = self
         setupUI()
@@ -261,11 +271,15 @@ class CreateRideViewController: UIViewController {
     
     @objc func handleFromView(){
         let searchLocationVC = SearchLocationViewController()
+        searchLocationVC.delegate = self
+        searchLocationVC.forDeparture = true
         self.present(searchLocationVC, animated: true, completion: nil)
     }
 
     @objc func handleToView(){
         let searchLocationVC = SearchLocationViewController()
+        searchLocationVC.delegate = self
+        searchLocationVC.forDeparture = false
         self.present(searchLocationVC, animated: true, completion: nil)
     }
     
@@ -274,7 +288,12 @@ class CreateRideViewController: UIViewController {
     }
     
     @objc func handleCreateRide(){
-        
+        print(departureDate ,
+         departureTime ,
+         departureCity ,
+         arrivalCity ,
+         price ,
+         maxPassengers)
     }
     
 }

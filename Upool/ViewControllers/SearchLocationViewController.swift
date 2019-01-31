@@ -11,6 +11,9 @@ import GooglePlaces
 
 class SearchLocationViewController: UIViewController {
     
+    var delegate : ModalPassDataDelegate? = nil
+    var forDeparture : Bool? = true
+    
     lazy var resultsViewController: GMSAutocompleteResultsViewController = {
         let resultsViewController = GMSAutocompleteResultsViewController()
         resultsViewController.delegate = self
@@ -86,7 +89,8 @@ class SearchLocationViewController: UIViewController {
         
         // When UISearchController presents the results view, present it in
         // this view controller, not one further up the chain.
-        definesPresentationContext = true
+//        definesPresentationContext = true
+        modalPresentationStyle = .currentContext
     }
     
     @objc func handleCancel(){
@@ -99,11 +103,18 @@ extension SearchLocationViewController: GMSAutocompleteResultsViewControllerDele
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
                            didAutocompleteWith place: GMSPlace) {
         searchController.isActive = false
+        
         // Do something with the selected place.
         print("Place name: \(place.name)")
         print("Place address: \(place.formattedAddress)")
-        print("Place attributions: \(place.attributions)")
+        if forDeparture!{
+            delegate?.sendDepartureData(departureCity: "\(place.formattedAddress!)")
+        } else {
+            delegate?.sendArrivalData(arrivalCity: "\(place.formattedAddress!)")
+        }
         self.dismiss(animated: true, completion: nil)
+        
+        //prevVC.toLabel.text = "\(place.name)"
     }
     
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
