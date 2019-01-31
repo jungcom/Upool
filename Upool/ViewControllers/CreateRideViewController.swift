@@ -12,7 +12,15 @@ import Cosmos
 
 class CreateRideViewController: UIViewController {
 
-    let formatter = DateFormatter()
+    var departureDate : Date?
+
+    let formatter : DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd, yyyy"
+        return formatter
+    }()
+    
+    //UIVIews
     
     var dateTimeStack : UIStackView!
     var fromToStack : UIStackView!
@@ -146,7 +154,6 @@ class CreateRideViewController: UIViewController {
         return button
     }()
     
-    
     //CalendarView
     let calendarPopupView : UIView = {
         let view = UIView()
@@ -182,7 +189,7 @@ class CreateRideViewController: UIViewController {
         return cv
     }()
     
-    lazy var okButton : UIButton = {
+    lazy var okButtonForCalendar : UIButton = {
         let button = UIButton()
         button.setTitle("OK", for: .normal)
         button.setTitleColor(Colors.maroon, for: .normal)
@@ -190,7 +197,7 @@ class CreateRideViewController: UIViewController {
         return button
     }()
     
-    lazy var cancelButton : UIButton = {
+    lazy var cancelButtonForCalendar : UIButton = {
         let button = UIButton()
         button.setTitle("Cancel", for: .normal)
         button.setTitleColor(Colors.maroon, for: .normal)
@@ -198,13 +205,36 @@ class CreateRideViewController: UIViewController {
         return button
     }()
     
-    
     //DatePickerView
+    let timePickerPopupView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        return view
+    }()
+    
     lazy var timePicker : UIDatePicker = {
         let picker = UIDatePicker()
         return picker
     }()
     
+    lazy var okButtonForTimePicker : UIButton = {
+        let button = UIButton()
+        button.setTitle("OK", for: .normal)
+        button.setTitleColor(Colors.maroon, for: .normal)
+        button.addTarget(self, action: #selector(handleOK), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var cancelButtonForTimePicker : UIButton = {
+        let button = UIButton()
+        button.setTitle("Cancel", for: .normal)
+        button.setTitleColor(Colors.maroon, for: .normal)
+        button.addTarget(self, action: #selector(handleDismissTimePickerView), for: .touchUpInside)
+        return button
+    }()
+    
+    
+    //MARK : ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
 

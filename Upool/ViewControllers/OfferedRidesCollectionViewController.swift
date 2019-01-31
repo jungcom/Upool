@@ -13,7 +13,6 @@ private let headerCellId = "Header"
 
 class OfferedRidesCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Uncomment the following line to preserve selection between presentations
@@ -54,7 +53,6 @@ class OfferedRidesCollectionViewController: UICollectionViewController, UICollec
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
     }
-
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2

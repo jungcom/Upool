@@ -88,16 +88,16 @@ extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegat
     }
     
     func setupOkAndCancelButtons(){
-        calendarPopupView.addSubview(okButton)
-        calendarPopupView.addSubview(cancelButton)
+        calendarPopupView.addSubview(okButtonForCalendar)
+        calendarPopupView.addSubview(cancelButtonForCalendar)
         
-        okButton.translatesAutoresizingMaskIntoConstraints = false
-        okButton.bottomAnchor.constraint(equalTo: calendarPopupView.bottomAnchor, constant:-10).isActive = true
-        okButton.trailingAnchor.constraint(equalTo: calendarPopupView.trailingAnchor, constant:-20).isActive = true
+        okButtonForCalendar.translatesAutoresizingMaskIntoConstraints = false
+        okButtonForCalendar.bottomAnchor.constraint(equalTo: calendarPopupView.bottomAnchor, constant:-10).isActive = true
+        okButtonForCalendar.trailingAnchor.constraint(equalTo: calendarPopupView.trailingAnchor, constant:-20).isActive = true
         
-        cancelButton.translatesAutoresizingMaskIntoConstraints = false
-        cancelButton.bottomAnchor.constraint(equalTo: okButton.bottomAnchor).isActive = true
-        cancelButton.trailingAnchor.constraint(equalTo: okButton.leadingAnchor, constant:-30).isActive = true
+        cancelButtonForCalendar.translatesAutoresizingMaskIntoConstraints = false
+        cancelButtonForCalendar.bottomAnchor.constraint(equalTo: okButtonForCalendar.bottomAnchor).isActive = true
+        cancelButtonForCalendar.trailingAnchor.constraint(equalTo: okButtonForCalendar.leadingAnchor, constant:-30).isActive = true
     }
     
     @objc func handleDismissCalendarView(){
@@ -116,7 +116,14 @@ extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegat
     }
     
     @objc func handleOK(){
-        setupCalendarView()
+        if let date = departureDate{
+            dateLabel.text = formatter.string(from: date)
+            dateLabel.textColor = Colors.maroon
+        } else {
+            dateLabel.text = "Date"
+            dateLabel.textColor = UIColor.gray
+        }
+        handleDismissCalendarView()
     }
     
     //CalendarView Delegates
@@ -143,9 +150,7 @@ extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegat
     
     func calendar(_ calendar: CalendarView, didSelectDate date: Date, withEvents events: [CalendarEvent]) {
         print("Did Select: \(date) with \(events.count) events")
-        for event in events {
-            print("\t\"\(event.title)\" - Starting at:\(event.startDate)")
-        }
+        departureDate = date
     }
     
     func calendar(_ calendar: CalendarView, canSelectDate date: Date) -> Bool {
@@ -153,7 +158,7 @@ extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegat
     }
     
     func calendar(_ calendar: CalendarView, didDeselectDate date: Date) {
-        
+        departureDate = nil
     }
     
     func calendar(_ calendar: CalendarView, didLongPressDate date: Date) {

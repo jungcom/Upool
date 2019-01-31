@@ -150,7 +150,6 @@ class LoginViewController: UIViewController {
         
     }
 
-    
     @objc func handleForgottenPwd(){
         print("no password")
         
@@ -175,6 +174,5 @@ class LoginViewController: UIViewController {
         tabBarController.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}
         return tabBarController
     }
-
 }
 
