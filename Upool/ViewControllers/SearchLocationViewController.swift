@@ -11,31 +11,80 @@ import GooglePlaces
 
 class SearchLocationViewController: UIViewController {
     
-    var resultsViewController: GMSAutocompleteResultsViewController?
-    var searchController: UISearchController?
-    var resultView: UITextView?
+    lazy var resultsViewController: GMSAutocompleteResultsViewController = {
+        let resultsViewController = GMSAutocompleteResultsViewController()
+        resultsViewController.delegate = self
+        return resultsViewController
+    }()
+    
+    lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: resultsViewController)
+        searchController.searchResultsUpdater = resultsViewController
+        return searchController
+    }()
+    
+    let cancelButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("Cancel", for: .normal)
+        button.backgroundColor = UIColor.blue
+        button.addTarget(self, action: #selector(handleCancel), for: .touchUpInside)
+        return button
+    }()
+    
+    let topView : UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    var searchBar : UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = UIColor.white
         
-        resultsViewController = GMSAutocompleteResultsViewController()
-        resultsViewController?.delegate = self
+        setupTopViewAndSearch()
         
-        searchController = UISearchController(searchResultsController: resultsViewController)
-        searchController?.searchResultsUpdater = resultsViewController
+    }
+    
+    func setupTopViewAndSearch(){
         
-        let subView = UIView(frame: CGRect(x: 0, y: 65.0, width: 350.0, height: 45.0))
+        //searchController.searchBar.sizeToFit()
+        searchBar = searchController.searchBar
+        //searchBar.sizeToFit()
+        searchController.hidesNavigationBarDuringPresentation = true
         
-        subView.addSubview((searchController?.searchBar)!)
-        view.addSubview(subView)
-        searchController?.searchBar.sizeToFit()
-        searchController?.hidesNavigationBarDuringPresentation = false
+        topView.addSubview(searchBar)
+        view.addSubview(topView)
+        view.addSubview(cancelButton)
+        
+        //topView Constraints
+        topView.translatesAutoresizingMaskIntoConstraints = false
+        topView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        topView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        topView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier:0.8).isActive = true
+        topView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        //SearchBarConstraints
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.topAnchor.constraint(equalTo: topView.safeAreaLayoutGuide.topAnchor).isActive = true
+        searchBar.leadingAnchor.constraint(equalTo: topView.leadingAnchor).isActive = true
+        searchBar.trailingAnchor.constraint(equalTo: topView.trailingAnchor).isActive = true
+        searchBar.bottomAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
+
+        //buttonConstraints
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        cancelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        cancelButton.leadingAnchor.constraint(equalTo: topView.trailingAnchor).isActive = true
+        cancelButton.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        cancelButton.heightAnchor.constraint(equalTo: topView.heightAnchor, multiplier: 1).isActive = true
         
         // When UISearchController presents the results view, present it in
         // this view controller, not one further up the chain.
         definesPresentationContext = true
+    }
+    
+    @objc func handleCancel(){
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -43,11 +92,12 @@ class SearchLocationViewController: UIViewController {
 extension SearchLocationViewController: GMSAutocompleteResultsViewControllerDelegate {
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
                            didAutocompleteWith place: GMSPlace) {
-        searchController?.isActive = false
+        searchController.isActive = false
         // Do something with the selected place.
         print("Place name: \(place.name)")
         print("Place address: \(place.formattedAddress)")
         print("Place attributions: \(place.attributions)")
+        self.dismiss(animated: true, completion: nil)
     }
     
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
