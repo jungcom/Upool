@@ -31,12 +31,13 @@ class CreateRideViewController: UIViewController {
     let dateFormatter : DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd, yyyy"
+        formatter.timeZone = TimeZone(abbreviation: "GMT-0:00")
         return formatter
     }()
     
     let timeFormatter : DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "H:MM a"
+        formatter.dateFormat = "H:mm a"
         return formatter
     }()
     
@@ -259,11 +260,17 @@ class CreateRideViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        definesPresentationContext = true
-        calendarView.dataSource = self
-        calendarView.delegate = self
+        // Do any additional setup after loading the view
         setupUI()
+        setupKeyboardNotifications()
+    }
+    
+    func setupKeyboardNotifications(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapped))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
     
     @objc func handleCalendarView(){

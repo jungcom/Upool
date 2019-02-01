@@ -13,6 +13,8 @@ extension CreateRideViewController {
     func setupUI() {
         view.backgroundColor = UIColor.white
         navigationItem.title = "Create Ride"
+        calendarView.dataSource = self
+        calendarView.delegate = self
         
         setupDateTimeButtons()
         setupToFromButtons()
@@ -136,3 +138,25 @@ extension CreateRideViewController {
     }
 }
 
+//Textfield Notifications
+
+extension CreateRideViewController {
+    @objc func keyboardWillShow(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height/2
+            }
+        }
+        
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        if let _ = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
+    @objc func handleTapped(){
+        view.endEditing(true)
+    }
+}
