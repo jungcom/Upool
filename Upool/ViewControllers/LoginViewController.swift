@@ -5,7 +5,6 @@
 //  Created by Anthony Lee on 1/22/19.
 //  Copyright © 2019 anthonyLee. All rights reserved.
 //
-
 import UIKit
 import Firebase
 
@@ -16,6 +15,7 @@ class LoginViewController: UIViewController {
     }
     
     var bottomStackView : UIStackView!
+    
     let bottomContainer : UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.white

@@ -14,6 +14,15 @@ private let headerCellId = "Header"
 class MyStatusViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     
+    fileprivate func setupNavBar() {
+        navigationItem.title = "My Status"
+        UINavigationBar.appearance().barTintColor = Colors.maroon
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor : UIColor.white,
+        ]
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Uncomment the following line to preserve selection between presentations
@@ -27,12 +36,7 @@ class MyStatusViewController: UICollectionViewController, UICollectionViewDelega
         collectionView.backgroundColor = UIColor.groupTableViewBackground
         collectionView.alwaysBounceVertical = true
         
-        navigationItem.title = "My Status"
-        UINavigationBar.appearance().barTintColor = Colors.maroon
-        UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor : UIColor.white,
-        ]
+        setupNavBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {

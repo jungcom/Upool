@@ -13,6 +13,18 @@ import Cosmos
 class CreateRideViewController: UIViewController {
 
     //This will be set as a Data Model
+    var ridePost : RidePost {
+        let post = RidePost()
+        post.departureDate = departureDate
+        post.departureTime = departureTime
+        post.departureCity = departureCity
+        post.arrivalCity = arrivalCity
+        post.price = price
+        post.maxPassengers = maxPassengers
+        post.pickUpDetails = pickUpDetails
+        return post
+    }
+    
     var departureDate : Date?
     var departureTime : Date?
     var departureCity : String?

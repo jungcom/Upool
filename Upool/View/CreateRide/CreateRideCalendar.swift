@@ -10,7 +10,6 @@ import UIKit
 import KDCalendar
 
 extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegate{
-    
     //Whole View
     func setupCalenderAndBottomButtonViews(){
         if let window = UIApplication.shared.keyWindow {
@@ -164,6 +163,4 @@ extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegat
     func calendar(_ calendar: CalendarView, didLongPressDate date: Date) {
         
     }
-    
-    
 }

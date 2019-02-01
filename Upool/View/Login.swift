@@ -9,7 +9,6 @@
 import UIKit
 
 extension LoginViewController{
-    
     func setupStackViews(){
         //Empty UIVIew
         let emptyUIView = UIView()
