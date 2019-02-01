@@ -15,7 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let googleAPIKey = "AIzaSyARRbjQoojWL5AQwD2NMd03p2dVOX8UEMA"
@@ -27,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Signout Unsuccessful")
         }
         
-//        window = UIWindow(frame: UIScreen.main.bounds)
+        //        window = UIWindow(frame: UIScreen.main.bounds)
 //        window?.makeKeyAndVisible()
 //
 //        let ridesVC = OfferedRidesCollectionViewController(collectionViewLayout: UICollectionViewLayout())

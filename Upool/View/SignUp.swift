@@ -72,6 +72,11 @@ extension SignUpViewController{
         
     }
     
+    //Status Bar Light
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     //Textfield Notifications
     
     func setupKeyboardNotifications(){
