@@ -17,6 +17,7 @@
 		4E8B4C7622023243002EC784 /* CreateRideTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8B4C7522023243002EC784 /* CreateRideTimePicker.swift */; };
 		4E8B4C7822023A43002EC784 /* SearchLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8B4C7722023A43002EC784 /* SearchLocationViewController.swift */; };
 		4E8DD4FC2203B1190077D85C /* CreateRideProtocolsForPassingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8DD4FB2203B1190077D85C /* CreateRideProtocolsForPassingData.swift */; };
+		4E8DD4FF2203FF760077D85C /* OfferedRides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8DD4FE2203FF760077D85C /* OfferedRides.swift */; };
 		4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */; };
 		4EA3D8A221F90609003D7CE7 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A121F90609003D7CE7 /* UITextField.swift */; };
 		4EA3D8A421F9168E003D7CE7 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A321F9168E003D7CE7 /* SignUp.swift */; };
@@ -46,6 +47,7 @@
 		4E8B4C7522023243002EC784 /* CreateRideTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideTimePicker.swift; sourceTree = "<group>"; };
 		4E8B4C7722023A43002EC784 /* SearchLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationViewController.swift; sourceTree = "<group>"; };
 		4E8DD4FB2203B1190077D85C /* CreateRideProtocolsForPassingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideProtocolsForPassingData.swift; sourceTree = "<group>"; };
+		4E8DD4FE2203FF760077D85C /* OfferedRides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedRides.swift; sourceTree = "<group>"; };
 		4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4EA3D8A121F90609003D7CE7 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		4EA3D8A321F9168E003D7CE7 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 			children = (
 				4EEB91F721F7A6AA0079209B /* Login.swift */,
 				4EA3D8A321F9168E003D7CE7 /* SignUp.swift */,
+				4E8DD4FE2203FF760077D85C /* OfferedRides.swift */,
 				4E431FAC21FEA1F80081CA52 /* RideDetail.swift */,
 				4E8B4C7022012183002EC784 /* CreateRide */,
 				4EA3D8A721FA0D66003D7CE7 /* CellsAndLayout */,
@@ -379,6 +382,7 @@
 				4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */,
 				4EAE28F321FF83D3006966E4 /* CreateRide.swift in Sources */,
 				4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */,
+				4E8DD4FF2203FF760077D85C /* OfferedRides.swift in Sources */,
 				4E431FAD21FEA1F80081CA52 /* RideDetail.swift in Sources */,
 				4E8B4C7622023243002EC784 /* CreateRideTimePicker.swift in Sources */,
 				4E8B4C7822023A43002EC784 /* SearchLocationViewController.swift in Sources */,
