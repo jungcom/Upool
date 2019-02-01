@@ -12,7 +12,7 @@ private let offeredRidesCellId = "Cell"
 private let headerCellId = "Header"
 
 class OfferedRidesCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Uncomment the following line to preserve selection between presentations
@@ -26,13 +26,7 @@ class OfferedRidesCollectionViewController: UICollectionViewController, UICollec
         collectionView.backgroundColor = UIColor.groupTableViewBackground
         collectionView.alwaysBounceVertical = true
         
-        navigationItem.title = "UPool"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(createRide))
-        UINavigationBar.appearance().barTintColor = Colors.maroon
-        UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor : UIColor.white,
-        ]
+        setupNavBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +35,22 @@ class OfferedRidesCollectionViewController: UICollectionViewController, UICollec
     }
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return .lightContent
+    }
+    
+    fileprivate func setupNavBar() {
+        //TitleLogo
+        let image: UIImage = UIImage(named: "UPoolLogo")!
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = image
+        
+        navigationItem.titleView = imageView
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(createRide))
+        UINavigationBar.appearance().barTintColor = Colors.maroon
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor : UIColor.white,
+        ]
     }
     
     @objc func createRide(){
