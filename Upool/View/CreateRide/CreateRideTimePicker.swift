@@ -9,7 +9,6 @@
 import UIKit
 
 extension CreateRideViewController {
-    
     //Whole View
     func setupTimePickerWholeView(){
         if let window = UIApplication.shared.keyWindow {

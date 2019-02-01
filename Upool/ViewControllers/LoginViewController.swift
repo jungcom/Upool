@@ -164,7 +164,7 @@ class LoginViewController: UIViewController {
     
     static func presentMainPage() -> UIViewController{
         let ridesVC = OfferedRidesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        ridesVC.tabBarItem = UITabBarItem(title: "Rides", image: UIImage(named: "right-arrow"), tag: 0)
+        ridesVC.tabBarItem = UITabBarItem(title: "Rides", image: UIImage(named: "RideIcon"), tag: 0)
         let statusVC = MyStatusViewController(collectionViewLayout: UICollectionViewFlowLayout())
         statusVC.tabBarItem = UITabBarItem(title: "Status", image: UIImage(named: "left-arrow"), tag: 1)
         

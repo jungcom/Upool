@@ -91,6 +91,13 @@
 			path = CreateRide;
 			sourceTree = "<group>";
 		};
+		4E8DD4FD2203F6F90077D85C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		4EA3D8A721FA0D66003D7CE7 /* CellsAndLayout */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				4EEB91DB21F7679F0079209B /* AppDelegate.swift */,
+				4E8DD4FD2203F6F90077D85C /* Model */,
 				4EEB91F621F7A6880079209B /* View */,
 				4EEB91F521F775B50079209B /* ViewControllers */,
 				4EEB91F221F7734D0079209B /* Extensions */,
