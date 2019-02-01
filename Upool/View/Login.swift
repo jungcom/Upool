@@ -71,7 +71,7 @@ extension LoginViewController{
         
         //Umass Image constraints
         umassBackgroundImageView.translatesAutoresizingMaskIntoConstraints = false
-        umassBackgroundImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        umassBackgroundImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         umassBackgroundImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor)
         umassBackgroundImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         umassBackgroundImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.55).isActive = true

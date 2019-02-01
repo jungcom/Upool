@@ -158,7 +158,8 @@ class LoginViewController: UIViewController {
     @objc func handleSignUp(){
         print("SignUp")
         let signUpVC = SignUpViewController()
-        present(signUpVC, animated: true, completion: nil)
+        let navVC = UINavigationController(rootViewController: signUpVC)
+        present(navVC, animated: true, completion: nil)
     }
     
     static func presentMainPage() -> UIViewController{

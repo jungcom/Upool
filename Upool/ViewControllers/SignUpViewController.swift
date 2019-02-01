@@ -15,8 +15,6 @@ class SignUpViewController: UIViewController {
         return Auth.auth().currentUser
     }
     
-    let navBar = UINavigationBar()
-    
     var textFieldStackView : UIStackView!
     
     let profileImageButton : UIButton = {
@@ -84,8 +82,9 @@ class SignUpViewController: UIViewController {
         setupKeyboardNotifications()
     }
     
-    @objc func cancel(){
-        dismiss(animated: true, completion: nil)
+    @objc func handleCancel(){
+        self.navigationController?.dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
     }
     
     @objc func handleSignUp(){

@@ -11,14 +11,15 @@ import UIKit
 extension SignUpViewController{
     
     func setNavigationBar() {
-        let navItem = UINavigationItem(title: "Sign Up")
-        let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.cancel, target: nil, action: #selector(cancel))
-        navItem.leftBarButtonItem = doneItem
-        navBar.barTintColor = Colors.maroon
-        navBar.tintColor = UIColor.white
-        navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
-        navBar.setItems([navItem], animated: false)
-        self.view.addSubview(navBar)
+        let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.cancel, target: self, action: #selector(handleCancel))
+        self.navigationItem.title = "Sign Up"
+        navigationItem.setLeftBarButton(doneItem, animated: true)
+        if let navBar = self.navigationController?.navigationBar{
+            navBar.barTintColor = Colors.maroon
+            navBar.tintColor = UIColor.white
+            navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+            //self.view.addSubview(navBar)
+        }
     }
     
     func setStackViews(){
@@ -37,10 +38,10 @@ extension SignUpViewController{
     
     func setConstraints(){
         //NavBar Constraints
-        navBar.translatesAutoresizingMaskIntoConstraints = false
-        navBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        navBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        navBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+//        navBar.translatesAutoresizingMaskIntoConstraints = false
+//        navBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+//        navBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+//        navBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         
         //BottomStackView Constraints
         textFieldStackView.translatesAutoresizingMaskIntoConstraints = false
