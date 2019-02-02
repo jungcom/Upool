@@ -9,6 +9,38 @@
 import UIKit
 
 class OfferedRidesCollectionViewCell: UICollectionViewCell {
+    let dateFormatter : DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd, "
+        formatter.timeZone = TimeZone(abbreviation: "GMT-0:00")
+        return formatter
+    }()
+    
+    let timeFormatter : DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        return formatter
+    }()
+    
+    var post : RidePost!{
+        didSet{
+            if let arrCity = post.arrivalCity {
+                destinationCityLabel.text = arrCity
+            }
+            if let departureCity = post.departureCity {
+                departureCityLabel.text = departureCity
+            }
+            if let time = post.departureTime, let date = post.departureDate {
+                dateLabel.text = dateFormatter.string(from: date) + timeFormatter.string(from: time)
+            }
+            if let price = post.price {
+                priceLabel.text = "$\(price)"
+            }
+            if let maxPassenger = post.maxPassengers {
+                passengerSeatsLabel.text = "Passengers 0/\(maxPassenger)"
+            }
+        }
+    }
     
     var locationStackView : UIStackView!
     

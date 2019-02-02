@@ -322,11 +322,12 @@ class CreateRideViewController: UIViewController {
          maxPassengers)
         print("RidePostObject = \(ridePost)")
         print("RidePostObject full? \(ridePost.allFieldsFull)")
-        db.collection("ridePosts").document("user1").setData(ridePost.dictionary){ err in
+        var ref : DocumentReference?
+        ref = db.collection("ridePosts").addDocument(data: ridePost.dictionary) { err in
             if let err = err {
-                print("Error writing document: \(err)")
+                print("Error adding document: \(err)")
             } else {
-                print("Document successfully written!")
+                print("Document added with ID: \(ref!.documentID)")
             }
         }
     }

@@ -35,20 +35,31 @@ class OfferedRidesCollectionViewController: UICollectionViewController {
     }
     
     func retrieveRidePosts(){
-        let docRef = db.collection("ridePosts").document("user1")
+        let docRef = db.collection("ridePosts")
         
-        docRef.getDocument { (document, error) in
-            if let ridePost = document.flatMap({
-                $0.data().flatMap({ (data) in
-                    return RidePost(dictionary: data)
-                })
-            }) {
-                self.ridePosts.append(ridePost)
-                print("City: \(ridePost.departureCity)")
-                print("time: \(ridePost.departureTime)")
+        docRef.getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
             } else {
-                print("Document does not exist")
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                    if let post = RidePost(dictionary: document.data()){
+                        self.ridePosts.append(post)
+                    }
+                    self.collectionView.reloadData()
+                }
             }
+//            if let ridePost = document.flatMap({
+//                $0.data().flatMap({ (data) in
+//                    return RidePost(dictionary: data)
+//                })
+//            }) {
+//                self.ridePosts.append(ridePost)
+//                print("City: \(ridePost.departureCity)")
+//                print("time: \(ridePost.departureTime)")
+//            } else {
+//                print("Document does not exist")
+//            }
 
         }
     }
@@ -68,12 +79,13 @@ extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLay
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return ridePosts.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath) as! OfferedRidesCollectionViewCell
         cell.backgroundColor = UIColor.white
+        cell.post = ridePosts[indexPath.row]
         return cell
     }
     
