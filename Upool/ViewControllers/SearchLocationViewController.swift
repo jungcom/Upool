@@ -105,8 +105,11 @@ extension SearchLocationViewController: GMSAutocompleteResultsViewControllerDele
         searchController.isActive = false
         
         // Do something with the selected place.
-        print("Place name: \(place.name)")
-        print("Place address: \(place.formattedAddress)")
+//        let gms = component?[0]
+//        let gms2 = component?[1]
+//
+//        print("Place addressComponents: \(gms?.type)")
+//        print("Place address: \(gms2?.name)")
         if forDeparture!{
             delegate?.sendDepartureData(departureCity: "\(place.formattedAddress!)")
         } else {
@@ -114,7 +117,6 @@ extension SearchLocationViewController: GMSAutocompleteResultsViewControllerDele
         }
         self.dismiss(animated: true, completion: nil)
         
-        //prevVC.toLabel.text = "\(place.name)"
     }
     
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,

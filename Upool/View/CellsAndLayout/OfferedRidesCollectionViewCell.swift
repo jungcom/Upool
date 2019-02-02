@@ -67,12 +67,14 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         label.text = "Amherst, MA"
         label.font = UIFont(name: Fonts.futura, size: 15)
         label.textColor = Colors.maroon
+        label.textAlignment = .center
         return label
     }()
     
     let rightArrowIconImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: Images.rightArrow)
+        imageView.tintColor = Colors.maroon
         return imageView
     }()
     
@@ -81,6 +83,7 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         label.text = "Boston, MA"
         label.font = UIFont(name: Fonts.futura, size: 15)
         label.textColor = Colors.maroon
+        label.textAlignment = .center
         return label
     }()
     
