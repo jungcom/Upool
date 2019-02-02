@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import Firebase
 
 private let offeredRidesCellId = "Cell"
 private let headerCellId = "Header"
 
 class OfferedRidesCollectionViewController: UICollectionViewController {
+    
+    let db = Firestore.firestore()
+    var ridePosts = [RidePost]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,14 +31,26 @@ class OfferedRidesCollectionViewController: UICollectionViewController {
         collectionView.alwaysBounceVertical = true
         
         setupNavBar()
+        retrieveRidePosts()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.setNeedsStatusBarAppearanceUpdate()
-    }
-    override var preferredStatusBarStyle : UIStatusBarStyle {
-        return .lightContent
+    func retrieveRidePosts(){
+        let docRef = db.collection("ridePosts").document("user1")
+        
+        docRef.getDocument { (document, error) in
+            if let ridePost = document.flatMap({
+                $0.data().flatMap({ (data) in
+                    return RidePost(dictionary: data)
+                })
+            }) {
+                self.ridePosts.append(ridePost)
+                print("City: \(ridePost.departureCity)")
+                print("time: \(ridePost.departureTime)")
+            } else {
+                print("Document does not exist")
+            }
+
+        }
     }
     
     @objc func createRide(){
@@ -42,6 +58,7 @@ class OfferedRidesCollectionViewController: UICollectionViewController {
         navigationController?.pushViewController(createRideVC, animated: true)
     }
 }
+
 
     // MARK: UICollectionViewDataSource
 extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLayout{
