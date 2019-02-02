@@ -26,6 +26,7 @@
 		4EAE28F121FF5455006966E4 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAE28F021FF5455006966E4 /* UIView.swift */; };
 		4EAE28F321FF83D3006966E4 /* CreateRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAE28F221FF83D3006966E4 /* CreateRide.swift */; };
 		4EE58FA62204DB0900918778 /* RidePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA52204DB0900918778 /* RidePost.swift */; };
+		4EE58FA822052F6900918778 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA722052F6900918778 /* Encodable.swift */; };
 		4EEB91DC21F7679F0079209B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91DB21F7679F0079209B /* AppDelegate.swift */; };
 		4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91DD21F7679F0079209B /* LoginViewController.swift */; };
 		4EEB91E121F7679F0079209B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EEB91DF21F7679F0079209B /* Main.storyboard */; };
@@ -57,6 +58,7 @@
 		4EAE28F021FF5455006966E4 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		4EAE28F221FF83D3006966E4 /* CreateRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRide.swift; sourceTree = "<group>"; };
 		4EE58FA52204DB0900918778 /* RidePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidePost.swift; sourceTree = "<group>"; };
+		4EE58FA722052F6900918778 /* Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encodable.swift; sourceTree = "<group>"; };
 		4EEB91D821F7679F0079209B /* Upool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Upool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EEB91DB21F7679F0079209B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EEB91DD21F7679F0079209B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				4EEB91F321F773630079209B /* UIColor.swift */,
 				4EA3D8A121F90609003D7CE7 /* UITextField.swift */,
 				4EAE28F021FF5455006966E4 /* UIView.swift */,
+				4EE58FA722052F6900918778 /* Encodable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */,
 				4E8DD4FF2203FF760077D85C /* OfferedRides.swift in Sources */,
 				4E431FAD21FEA1F80081CA52 /* RideDetail.swift in Sources */,
+				4EE58FA822052F6900918778 /* Encodable.swift in Sources */,
 				4E8B4C7622023243002EC784 /* CreateRideTimePicker.swift in Sources */,
 				4E8B4C7822023A43002EC784 /* SearchLocationViewController.swift in Sources */,
 				4E8B4C742201F290002EC784 /* MyStatusViewController.swift in Sources */,

@@ -14,12 +14,17 @@ import GooglePlaces
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let googleAPIKey = "AIzaSyARRbjQoojWL5AQwD2NMd03p2dVOX8UEMA"
         GMSPlacesClient.provideAPIKey(googleAPIKey)
         FirebaseApp.configure()
+        let db = Firestore.firestore()
+        let settings = db.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        db.settings = settings
+
         do {
             try Auth.auth().signOut()
         } catch {

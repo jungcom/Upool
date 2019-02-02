@@ -8,7 +8,7 @@
 import UIKit
 
 @objcMembers
-class RidePost : NSObject{
+class RidePost : NSObject, Encodable{
     //Ride Fields
     var departureDate : Date? = nil
     var departureTime : Date? = nil

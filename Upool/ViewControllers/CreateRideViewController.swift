@@ -9,9 +9,11 @@
 import UIKit
 import KDCalendar
 import Cosmos
+import Firebase
 
 class CreateRideViewController: UIViewController {
 
+    let db = Firestore.firestore()
     //This will be set as a Data Model
     var ridePost : RidePost {
         let post = RidePost()
@@ -318,6 +320,15 @@ class CreateRideViewController: UIViewController {
          arrivalCity ,
          price ,
          maxPassengers)
+        print("RidePostObject = \(ridePost)")
+        print("RidePostObject full? \(ridePost.allFieldsFull)")
+        db.collection("ridePosts").document("user1").setData(ridePost.dictionary){ err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
     }
     
 }
