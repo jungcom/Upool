@@ -8,8 +8,9 @@
 import UIKit
 
 @objcMembers
-class RidePost : NSObject, Encodable,Decodable{
-    //Ride Fields
+class RidePost : NSObject, Encodable,Decodable, NSCopying{
+    
+    //Ride Fields when posted
     var departureDate : Date? = nil
     var departureTime : Date? = nil
     var departureCity : String? = nil
@@ -17,6 +18,22 @@ class RidePost : NSObject, Encodable,Decodable{
     var price : Int? = nil
     var maxPassengers : Int? = nil
     var pickUpDetails : String? = nil
+    
+    //Ride
+    var currentPassengers : Int? = 0
+    var ridePostUid : String? = nil
+    
+    //see if ride is full
+    var rideIsFull : Bool{
+        if let max = maxPassengers, let current = currentPassengers{
+            if max == current{
+                return true
+            } else {
+                return false
+            }
+        }
+        return false
+    }
     
     //Flag to see if all ride fields are complete
     var allFieldsFull : Bool{
@@ -26,4 +43,12 @@ class RidePost : NSObject, Encodable,Decodable{
             return false
         }
     }
+    
+    //Make a deep copy
+    func copy(with zone: NSZone? = nil) -> Any
+    {
+        let address = RidePost(dictionary: self.dictionary) as Any
+        return address
+    }
+    
 }

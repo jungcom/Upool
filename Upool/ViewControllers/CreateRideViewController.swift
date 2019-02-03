@@ -314,20 +314,17 @@ class CreateRideViewController: UIViewController {
     }
     
     @objc func handleCreateRide(){
-        print(departureDate ,
-         departureTime ,
-         departureCity ,
-         arrivalCity ,
-         price ,
-         maxPassengers)
         print("RidePostObject = \(ridePost)")
         print("RidePostObject full? \(ridePost.allFieldsFull)")
-        var ref : DocumentReference?
-        ref = db.collection("ridePosts").addDocument(data: ridePost.dictionary) { err in
+        
+        let ref = db.collection("ridePosts").document()
+        let newRidePost = ridePost.copy() as! RidePost
+        newRidePost.ridePostUid = ref.documentID
+        ref.setData(newRidePost.dictionary) { err in
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
-                print("Document added with ID: \(ref!.documentID)")
+                print("Document added with ID: \(ref.documentID)")
             }
         }
     }
