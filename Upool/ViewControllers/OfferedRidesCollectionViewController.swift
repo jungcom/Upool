@@ -15,7 +15,9 @@ private let headerCellId = "Header"
 class OfferedRidesCollectionViewController: UICollectionViewController {
     
     let db = Firestore.firestore()
-    var ridePosts = [RidePost]()
+    var todayRidePosts = [RidePost]()
+    var tomorrowRidePosts = [RidePost]()
+    var laterRidePosts = [RidePost]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,17 +39,29 @@ class OfferedRidesCollectionViewController: UICollectionViewController {
     func retrieveRidePosts(){
         let docRef = db.collection("ridePosts")
         
-        docRef.getDocuments { (querySnapshot, err) in
+        docRef.order(by: "departureDate", descending: false).getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
                     if let post = RidePost(dictionary: document.data()){
-                        self.ridePosts.append(post)
+                        self.addToCorrectSection(post)
                     }
                     self.collectionView.reloadData()
                 }
+            }
+        }
+    }
+    
+    func addToCorrectSection(_ post : RidePost){
+        if let date = post.departureDate{
+            if Calendar.current.isDateInToday(date){
+                todayRidePosts.append(post)
+            } else if Calendar.current.isDateInTomorrow(date){
+                tomorrowRidePosts.append(post)
+            } else {
+                laterRidePosts.append(post)
             }
         }
     }
@@ -67,13 +81,27 @@ extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLay
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return ridePosts.count
+        if section == 0{
+            return todayRidePosts.count
+        } else if section == 1{
+            return tomorrowRidePosts.count
+        } else {
+            return laterRidePosts.count
+        }
+
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath) as! OfferedRidesCollectionViewCell
         cell.backgroundColor = UIColor.white
-        cell.post = ridePosts[indexPath.row]
+        //
+        if indexPath.section == 0{
+            cell.post = todayRidePosts[indexPath.row]
+        } else if indexPath.section == 1{
+            cell.post = tomorrowRidePosts[indexPath.row]
+        } else {
+            cell.post = laterRidePosts[indexPath.row]
+        }
         return cell
     }
     

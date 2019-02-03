@@ -10,7 +10,7 @@ import UIKit
 @objcMembers
 class RidePost : NSObject, Encodable,Decodable, NSCopying{
     
-    //Ride Fields when posted
+    //Ride Fields NEEDED when posted
     var departureDate : Date? = nil
     var departureTime : Date? = nil
     var departureCity : String? = nil
@@ -18,6 +18,9 @@ class RidePost : NSObject, Encodable,Decodable, NSCopying{
     var price : Int? = nil
     var maxPassengers : Int? = nil
     var pickUpDetails : String? = nil
+    
+    //TODO: add driver uid when posting a ride
+    var driverUid : String? = nil
     
     //Ride
     var currentPassengers : Int? = 0
