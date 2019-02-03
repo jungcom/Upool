@@ -95,6 +95,13 @@ extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLay
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerCellId, for: indexPath) as! OfferedRidesSectionHeaderCollectionViewCell
+        if indexPath.section == 0 {
+            header.titleLabel.text = headerType.today
+        } else if indexPath.section == 1{
+            header.titleLabel.text = headerType.tomorrow
+        } else {
+            header.titleLabel.text = headerType.laterRides
+        }
         return header
 
     }

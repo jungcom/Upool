@@ -138,7 +138,7 @@ class SignUpViewController: UIViewController {
         })
     }
     
-    public func sendVerificationMail() {
+    private func sendVerificationMail() {
         if self.authUser != nil && !self.authUser!.isEmailVerified {
             self.authUser!.sendEmailVerification(completion: { (error) in
                 // Notify the user that the mail has sent or couldn't because of an error.
@@ -153,7 +153,7 @@ class SignUpViewController: UIViewController {
         }
     }
     
-    public func allFieldsFull() -> Bool{
+    private func allFieldsFull() -> Bool{
         if emailTextField.text == ""{
             return false
         } else if passwordTextField.text == ""{

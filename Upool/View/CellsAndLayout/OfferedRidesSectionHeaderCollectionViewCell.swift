@@ -8,10 +8,16 @@
 
 import UIKit
 
+struct headerType {
+    static let today = "Today"
+    static let tomorrow = "Tomorrow"
+    static let laterRides = "Later Rides"
+}
+
 class OfferedRidesSectionHeaderCollectionViewCell: UICollectionViewCell {
     let titleLabel : UILabel = {
         let label = UILabel()
-        label.text = "Today"
+        label.text = headerType.today
         label.font = UIFont(name: Fonts.futura, size: 20)
         label.textColor = UIColor.gray
         label.textAlignment = .left
