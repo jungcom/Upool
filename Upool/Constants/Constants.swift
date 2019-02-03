@@ -30,8 +30,8 @@ struct Strings{
     
     //SignUpVC
     static let reEnterPasswordPlaceholder = " Re-enter Password"
-    static let namePlaceholder = " Name"
-    static let phoneNumberPlaceholder = " Phone Number"
+    static let firstNamePlaceholder = " First Name"
+    static let lastNamePlaceholder = " Last Name"
     static let acceptTermsAndConditions = "By creating an account, you agree to our "
     static let termsAndConditions = "Terms & Conditions"
 }

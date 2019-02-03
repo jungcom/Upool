@@ -49,18 +49,6 @@ class OfferedRidesCollectionViewController: UICollectionViewController {
                     self.collectionView.reloadData()
                 }
             }
-//            if let ridePost = document.flatMap({
-//                $0.data().flatMap({ (data) in
-//                    return RidePost(dictionary: data)
-//                })
-//            }) {
-//                self.ridePosts.append(ridePost)
-//                print("City: \(ridePost.departureCity)")
-//                print("time: \(ridePost.departureTime)")
-//            } else {
-//                print("Document does not exist")
-//            }
-
         }
     }
     

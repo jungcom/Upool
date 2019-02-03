@@ -166,7 +166,7 @@ class LoginViewController: UIViewController {
         let ridesVC = OfferedRidesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
         ridesVC.tabBarItem = UITabBarItem(title: "Rides", image: UIImage(named: "RideIcon"), tag: 0)
         let statusVC = MyStatusViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        statusVC.tabBarItem = UITabBarItem(title: "Status", image: UIImage(named: "left-arrow"), tag: 1)
+        statusVC.tabBarItem = UITabBarItem(title: "Status", image: UIImage(named: "StatusLogo"), tag: 1)
         
         let tabBarController = UITabBarController()
         let controllers = [ridesVC, statusVC]

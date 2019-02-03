@@ -11,6 +11,8 @@ import Firebase
 
 class SignUpViewController: UIViewController {
 
+    let db = Firestore.firestore()
+    
     private var authUser : User? {
         return Auth.auth().currentUser
     }
@@ -29,8 +31,8 @@ class SignUpViewController: UIViewController {
     let emailTextField = UITextField.getTextField(Strings.emailPlaceholder)
     let passwordTextField = UITextField.getTextField(Strings.passwordPlaceholder)
     let reEnterPasswordTextField = UITextField.getTextField(Strings.reEnterPasswordPlaceholder)
-    let nameTextField = UITextField.getTextField(Strings.namePlaceholder)
-    let phoneNumberTextField = UITextField.getTextField(Strings.phoneNumberPlaceholder)
+    let firstNameTextField = UITextField.getTextField(Strings.firstNamePlaceholder)
+    let lastNameTextField = UITextField.getTextField(Strings.lastNamePlaceholder)
     
     let signUpButton : UIButton = {
         let button = UIButton()
@@ -84,22 +86,22 @@ class SignUpViewController: UIViewController {
     
     @objc func handleCancel(){
         self.navigationController?.dismiss(animated: true, completion: nil)
-        //dismiss(animated: true, completion: nil)
     }
     
     @objc func handleSignUp(){
         print("signUp")
-        let email = emailTextField.text
-        let password = passwordTextField.text
-        let rePassword = reEnterPasswordTextField.text
+        guard let email = emailTextField.text ,let password = passwordTextField.text ,let rePassword = reEnterPasswordTextField.text,let firstName = firstNameTextField.text,let lastName = lastNameTextField.text, allFieldsFull() else {
+            self.errorLabel.text = "All fields must be full"
+            return
+        }
 
         guard password == rePassword else {
             self.errorLabel.text = "Passwords do not match"
             return
         }
 
-        Auth.auth().createUser(withEmail: email!, password: password!, completion: { (user, error) in
-            guard let _ = user else {
+        Auth.auth().createUser(withEmail: email, password: password, completion: { (authDataResult, error) in
+            guard let authDataResult = authDataResult else {
                 if let error = error {
                     if let errCode = AuthErrorCode(rawValue: error._code){
                         switch (errCode){
@@ -121,24 +123,17 @@ class SignUpViewController: UIViewController {
             }
 
             // if successful add user
-
+            let newUser = UPoolUser(email: email, fn: firstName, ln: lastName, uid: authDataResult.user.uid)
+            print(newUser)
             //Add user to the Firebase database
-//            if let uid = Auth.auth().currentUser?.uid{
-//                let ref = Database.database().reference()
-//                let userRef = ref.child("users").child(uid)
-//                var values = ["firstName": self.firstNameTextField.text, "lastName":self.lastNameTextField.text, "email":email]
-//                values["uid"] = uid
-//                userRef.updateChildValues(values, withCompletionBlock: { (err, ref) in
-//                    if err != nil{
-//                        print(err?.localizedDescription)
-//                        return
-//                    }
-//                    print("Saved user data to DB")
-//                })
-//
-//                self.signInTo()
-//            }
-            self.sendVerificationMail()
+            self.db.collection("users").addDocument(data: newUser.dictionary, completion: { (err) in
+                if let _ = err{
+                    print("User was not added successfully to the database")
+                } else {
+                    print("User was added successfully to the database!")
+                }
+            })
+            //self.sendVerificationMail()
 //            self.present(LoginViewController.presentMainPage(), animated: true, completion: nil)
         })
     }
@@ -158,4 +153,19 @@ class SignUpViewController: UIViewController {
         }
     }
     
+    public func allFieldsFull() -> Bool{
+        if emailTextField.text == ""{
+            return false
+        } else if passwordTextField.text == ""{
+            return false
+        } else if reEnterPasswordTextField.text == ""{
+            return false
+        } else if firstNameTextField.text == ""{
+            return false
+        } else if lastNameTextField.text == ""{
+            return false
+        } else {
+            return true
+        }
+    }
 }

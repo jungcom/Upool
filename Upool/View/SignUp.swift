@@ -18,7 +18,6 @@ extension SignUpViewController{
             navBar.barTintColor = Colors.maroon
             navBar.tintColor = UIColor.white
             navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
-            //self.view.addSubview(navBar)
         }
     }
     
@@ -26,7 +25,7 @@ extension SignUpViewController{
         let emptyView = UIView()        
         let termsStackView = UIStackView(arrangedSubviews: [agreeWithTermsLabel, termsAndConditionsButton])
         
-        textFieldStackView = UIStackView(arrangedSubviews: [emailTextField,passwordTextField,reEnterPasswordTextField,nameTextField,phoneNumberTextField, errorLabel, signUpButton, emptyView, termsStackView])
+        textFieldStackView = UIStackView(arrangedSubviews: [emailTextField,passwordTextField,reEnterPasswordTextField,firstNameTextField,lastNameTextField, errorLabel, signUpButton, emptyView, termsStackView])
         textFieldStackView.axis = .vertical
         textFieldStackView.alignment = .center
         textFieldStackView.spacing = 20
@@ -37,11 +36,6 @@ extension SignUpViewController{
     }
     
     func setConstraints(){
-        //NavBar Constraints
-//        navBar.translatesAutoresizingMaskIntoConstraints = false
-//        navBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-//        navBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-//        navBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         
         //BottomStackView Constraints
         textFieldStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -60,11 +54,11 @@ extension SignUpViewController{
         reEnterPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
         reEnterPasswordTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         
-        nameTextField.translatesAutoresizingMaskIntoConstraints = false
-        nameTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
+        firstNameTextField.translatesAutoresizingMaskIntoConstraints = false
+        firstNameTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         
-        phoneNumberTextField.translatesAutoresizingMaskIntoConstraints = false
-        phoneNumberTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
+        lastNameTextField.translatesAutoresizingMaskIntoConstraints = false
+        lastNameTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         
         //Signup Constraints
         signUpButton.translatesAutoresizingMaskIntoConstraints = false

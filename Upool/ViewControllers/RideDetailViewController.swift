@@ -35,6 +35,7 @@ class RideDetailViewController: UIViewController {
     let rightArrowIconImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: Images.rightArrow)
+        imageView.tintColor = Colors.maroon
         return imageView
     }()
     
