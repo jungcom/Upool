@@ -195,4 +195,8 @@ class RideDetailViewController: UIViewController {
             }
         }
     }
+    
+    func sendRequestToDriver(){
+        
+    }
 }

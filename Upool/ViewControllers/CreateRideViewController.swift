@@ -320,11 +320,19 @@ class CreateRideViewController: UIViewController {
     
     @objc func handleCreateRide(){
         guard let user = authUser else {
+            print("No Current User Found")
             return
         }
-        print("RidePostObject = \(ridePost)")
-        print("RidePostObject full? \(ridePost.allFieldsFull)")
         
+        guard ridePost.allFieldsFull else {
+            let alert = UIAlertController(title: "All fields must be filled", message: nil, preferredStyle: .alert)
+            let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel)
+            alert.addAction(dismissAction)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        //Create a new ridePost and add it to the server database
         let ref = db.collection("ridePosts").document()
         let newRidePost = ridePost.copy() as! RidePost
         newRidePost.ridePostUid = ref.documentID

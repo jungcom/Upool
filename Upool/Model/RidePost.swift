@@ -66,7 +66,7 @@ class RidePost : NSObject, Encodable,Decodable, NSCopying{
     
     func timeString() -> String{
         let formatter = DateFormatter()
-        formatter.dateFormat = "H:mm a"
+        formatter.dateFormat = "h:mm a"
         if let departureTime = departureTime{
             return formatter.string(from: departureTime)
         } else {
