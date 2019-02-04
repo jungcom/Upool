@@ -73,6 +73,8 @@ class OfferedRidesCollectionViewController: UICollectionViewController {
 }
 
 
+
+
     // MARK: UICollectionViewDataSource
 extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLayout{
     
@@ -94,7 +96,6 @@ extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLay
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath) as! OfferedRidesCollectionViewCell
         cell.backgroundColor = UIColor.white
-        //
         if indexPath.section == 0{
             cell.post = todayRidePosts[indexPath.row]
         } else if indexPath.section == 1{
@@ -107,6 +108,13 @@ extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLay
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let rideDetailsVC = RideDetailViewController()
+        if indexPath.section == 0{
+            rideDetailsVC.ridePost = todayRidePosts[indexPath.row]
+        } else if indexPath.section == 1{
+            rideDetailsVC.ridePost = tomorrowRidePosts[indexPath.row]
+        } else {
+            rideDetailsVC.ridePost = laterRidePosts[indexPath.row]
+        }
         navigationController?.pushViewController(rideDetailsVC, animated: true)
     }
 
@@ -131,10 +139,20 @@ extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLay
             header.titleLabel.text = headerType.laterRides
         }
         return header
-
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if section == 0 {
+            if todayRidePosts.count == 0{
+                return CGSize(width: 0, height: 0)
+            }
+        } else if section == 1{
+            if tomorrowRidePosts.count == 0{
+                return CGSize(width: 0, height: 0)
+            }
+        } else {
+            return CGSize(width: view.frame.width, height: 50)
+        }
         return CGSize(width: view.frame.width, height: 50)
     }
 

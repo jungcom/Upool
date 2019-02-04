@@ -10,6 +10,9 @@ import UIKit
 
 class RideDetailViewController: UIViewController {
 
+    var ridePost : RidePost!
+    var driver : UPoolUser!
+    
     let scrollView = UIScrollView()
     
     var topContainer = UIView()
@@ -17,16 +20,16 @@ class RideDetailViewController: UIViewController {
     // First Top View
     let firstTopView = UIView()
     
-    let dateLabel : UILabel = {
+    lazy var dateLabel : UILabel = {
         let label = UILabel()
-        label.text = "Jan 7th, 3 pm"
+        label.text = ridePost.dateString() + " " + ridePost.timeString()
         label.font = UIFont(name: Fonts.futuraMedium, size: 18)
         return label
     }()
     
-    let departureCityLabel : UILabel = {
+    lazy var departureCityLabel : UILabel = {
         let label = UILabel()
-        label.text = "Amherst, MA"
+        label.text = ridePost.departureCity!
         label.font = UIFont(name: Fonts.futura, size: 18)
         label.textColor = Colors.maroon
         return label
@@ -39,9 +42,9 @@ class RideDetailViewController: UIViewController {
         return imageView
     }()
     
-    let destinationCityLabel : UILabel = {
+    lazy var destinationCityLabel : UILabel = {
         let label = UILabel()
-        label.text = "Boston, MA"
+        label.text = ridePost.arrivalCity!
         label.font = UIFont(name: Fonts.futura, size: 18)
         label.textColor = Colors.maroon
         return label
@@ -49,9 +52,9 @@ class RideDetailViewController: UIViewController {
     
     var locationStackView : UIStackView!
     
-    let passengerSeatsLabel : UILabel = {
+    lazy var passengerSeatsLabel : UILabel = {
         let label = UILabel()
-        label.text = "Passengers  1/2"
+        label.text = "Passengers  \(ridePost.currentPassengers!)/\(ridePost.maxPassengers!)"
         label.textColor = UIColor.gray
         label.textAlignment = .right
         label.font = UIFont.systemFont(ofSize: 11)
@@ -61,7 +64,7 @@ class RideDetailViewController: UIViewController {
     //Second Top View
     let secondTopView = UIView()
     
-    let profileImageView : UIImageView = {
+    lazy var profileImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 7
@@ -72,7 +75,7 @@ class RideDetailViewController: UIViewController {
         return imageView
     }()
     
-    let nameLabel : UILabel = {
+    lazy var nameLabel : UILabel = {
         let label = UILabel()
         label.text = "Robinson Crusoe"
         label.font = UIFont(name: Fonts.futura, size: 14)
@@ -88,7 +91,7 @@ class RideDetailViewController: UIViewController {
         return label
     }()
     
-    let priceLabel : UILabel = {
+    lazy var priceLabel : UILabel = {
         let label = UILabel()
         label.text = "$20"
         label.font = UIFont(name: Fonts.futura, size: 18)
@@ -107,7 +110,7 @@ class RideDetailViewController: UIViewController {
         return label
     }()
     
-    let pickupDetailTextView : UITextView = {
+    lazy var pickupDetailTextView : UITextView = {
         let label = UITextView()
         label.text = "I can pick up anywhere between the campus and the main city hall. For other places, please contact me."
         label.font = UIFont(name: Fonts.futura, size: 14)
@@ -143,7 +146,6 @@ class RideDetailViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 17)
         button.backgroundColor = Colors.maroon
         button.layer.masksToBounds = true
- 
         button.layer.cornerRadius = 5
         button.addTarget(self, action: #selector(handleJoinRide), for: .touchUpInside)
         return button
@@ -165,6 +167,17 @@ class RideDetailViewController: UIViewController {
     }
     
     @objc func handleJoinRide(){
+        let alert = UIAlertController(title: "Join Ride?", message: "Are you sure you want to join this ride?", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            self.joinRideButton.requestedOrJoined(joined: true)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func retrieveDriver(){
         
     }
 }

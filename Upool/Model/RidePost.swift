@@ -54,4 +54,23 @@ class RidePost : NSObject, Encodable,Decodable, NSCopying{
         return address
     }
     
+    func dateString() -> String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd, yyyy"
+        if let departureDate = departureDate{
+            return formatter.string(from: departureDate)
+        } else {
+            return ""
+        }
+    }
+    
+    func timeString() -> String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "H:mm a"
+        if let departureTime = departureTime{
+            return formatter.string(from: departureTime)
+        } else {
+            return ""
+        }
+    }
 }

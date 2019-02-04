@@ -28,3 +28,19 @@ extension UIView{
         self.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
 }
+
+extension UIButton{
+    func requestedOrJoined(joined : Bool){
+        if joined{
+            self.setTitle("Requested ", for: .normal)
+        } else {
+            self.setTitle("Ride Joined ", for: .normal)
+        }
+        self.setImage(UIImage(named: "CheckMark"), for: .normal)
+        self.setTitleColor(Colors.maroon, for: .normal)
+        self.semanticContentAttribute = .forceRightToLeft
+        self.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 17)
+        self.backgroundColor = UIColor.white
+        self.isEnabled = false
+    }
+}
