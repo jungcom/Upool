@@ -70,7 +70,6 @@ class SignUpViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor.red
-        label.text = "This is an error message"
         return label
     }()
     
@@ -90,52 +89,53 @@ class SignUpViewController: UIViewController {
     
     @objc func handleSignUp(){
         print("signUp")
-        guard let email = emailTextField.text ,let password = passwordTextField.text ,let rePassword = reEnterPasswordTextField.text,let firstName = firstNameTextField.text,let lastName = lastNameTextField.text, allFieldsFull() else {
-            self.errorLabel.text = "All fields must be full"
-            return
-        }
-
-        guard password == rePassword else {
-            self.errorLabel.text = "Passwords do not match"
-            return
-        }
-
-        Auth.auth().createUser(withEmail: email, password: password, completion: { (authDataResult, error) in
-            guard let authDataResult = authDataResult else {
-                if let error = error {
-                    if let errCode = AuthErrorCode(rawValue: error._code){
-                        switch (errCode){
-                        case .missingEmail:
-                            self.errorLabel.text = "An email address must be provided"
-                        case .invalidEmail:
-                            self.errorLabel.text = "Invalid email"
-                        case .emailAlreadyInUse:
-                            self.errorLabel.text = "Email already in use"
-                        case .weakPassword:
-                            self.errorLabel.text = "Password is weak. Try a longer password"
-                        default:
-                            self.errorLabel.text = "An error has occured. Please try again"
-                        }
-                    }
-                    print("Error: \(error.localizedDescription)")
-                }
-                return
-            }
-
-            // if successful add user
-            let newUser = UPoolUser(email: email, fn: firstName, ln: lastName, uid: authDataResult.user.uid)
-            print(newUser)
-            //Add user to the Firebase database
-            self.db.collection("users").document(authDataResult.user.uid).setData(newUser.dictionary, completion: { (err) in
-                if let _ = err{
-                    print("User was not added successfully to the database")
-                } else {
-                    print("User was added successfully to the database!")
-                }
-            })
-            self.sendVerificationMail()
-//            self.present(LoginViewController.presentMainPage(), animated: true, completion: nil)
-        })
+        pushEmailSentVC()
+//        guard let email = emailTextField.text ,let password = passwordTextField.text ,let rePassword = reEnterPasswordTextField.text,let firstName = firstNameTextField.text,let lastName = lastNameTextField.text, allFieldsFull() else {
+//            self.errorLabel.text = "All fields must be full"
+//            return
+//        }
+//
+//        guard password == rePassword else {
+//            self.errorLabel.text = "Passwords do not match"
+//            return
+//        }
+//
+//        Auth.auth().createUser(withEmail: email, password: password, completion: { (authDataResult, error) in
+//            guard let authDataResult = authDataResult else {
+//                if let error = error {
+//                    if let errCode = AuthErrorCode(rawValue: error._code){
+//                        switch (errCode){
+//                        case .missingEmail:
+//                            self.errorLabel.text = "An email address must be provided"
+//                        case .invalidEmail:
+//                            self.errorLabel.text = "Invalid email"
+//                        case .emailAlreadyInUse:
+//                            self.errorLabel.text = "Email already in use"
+//                        case .weakPassword:
+//                            self.errorLabel.text = "Password is weak. Try a longer password"
+//                        default:
+//                            self.errorLabel.text = "An error has occured. Please try again"
+//                        }
+//                    }
+//                    print("Error: \(error.localizedDescription)")
+//                }
+//                return
+//            }
+//
+//            // if successful add user
+//            let newUser = UPoolUser(email: email, fn: firstName, ln: lastName, uid: authDataResult.user.uid)
+//            print(newUser)
+//            //Add user to the Firebase database
+//            self.db.collection("users").document(authDataResult.user.uid).setData(newUser.dictionary, completion: { (err) in
+//                if let _ = err{
+//                    print("User was not added successfully to the database")
+//                } else {
+//                    print("User was added successfully to the database!")
+//                }
+//            })
+//            self.sendVerificationMail()
+//            self.pushEmailSentVC()
+//        })
     }
     
     private func sendVerificationMail() {
@@ -151,6 +151,11 @@ class SignUpViewController: UIViewController {
         } else {
             // Either the user is not available, or the user is already verified.
         }
+    }
+    
+    private func pushEmailSentVC(){
+        let emailVC = EmailSentViewController()
+        self.navigationController?.pushViewController(emailVC, animated: true)
     }
     
     private func allFieldsFull() -> Bool{

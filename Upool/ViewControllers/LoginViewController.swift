@@ -87,7 +87,6 @@ class LoginViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor.red
-        label.text = "This is an error message"
         return label
     }()
     
