@@ -13,6 +13,11 @@ import Firebase
 
 class CreateRideViewController: UIViewController {
 
+    //Current User
+    private var authUser : User? {
+        return Auth.auth().currentUser
+    }
+    
     let db = Firestore.firestore()
     //This will be set as a Data Model
     var ridePost : RidePost {
@@ -314,12 +319,16 @@ class CreateRideViewController: UIViewController {
     }
     
     @objc func handleCreateRide(){
+        guard let user = authUser else {
+            return
+        }
         print("RidePostObject = \(ridePost)")
         print("RidePostObject full? \(ridePost.allFieldsFull)")
         
         let ref = db.collection("ridePosts").document()
         let newRidePost = ridePost.copy() as! RidePost
         newRidePost.ridePostUid = ref.documentID
+        newRidePost.driverUid = user.uid
         ref.setData(newRidePost.dictionary) { err in
             if let err = err {
                 print("Error adding document: \(err)")

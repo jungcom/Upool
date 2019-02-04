@@ -56,9 +56,9 @@ class OfferedRidesCollectionViewController: UICollectionViewController {
     
     func addToCorrectSection(_ post : RidePost){
         if let date = post.departureDate{
-            if Calendar.current.isDateInToday(date){
+            if Calendar.current.isDateInYesterday(date){
                 todayRidePosts.append(post)
-            } else if Calendar.current.isDateInTomorrow(date){
+            } else if Calendar.current.isDateInToday(date){
                 tomorrowRidePosts.append(post)
             } else {
                 laterRidePosts.append(post)

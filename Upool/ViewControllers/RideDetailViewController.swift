@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class RideDetailViewController: UIViewController {
 
+    let db = Firestore.firestore()
     var ridePost : RidePost!
-    var driver : UPoolUser!
+    var driver : UPoolUser?
     
     let scrollView = UIScrollView()
     
@@ -75,7 +77,7 @@ class RideDetailViewController: UIViewController {
         return imageView
     }()
     
-    lazy var nameLabel : UILabel = {
+    let nameLabel : UILabel = {
         let label = UILabel()
         label.text = "Robinson Crusoe"
         label.font = UIFont(name: Fonts.futura, size: 14)
@@ -160,6 +162,7 @@ class RideDetailViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setupUI()
+        retrieveDriver()
     }
     
     @objc func handleMessage(){
@@ -178,6 +181,18 @@ class RideDetailViewController: UIViewController {
     }
     
     func retrieveDriver(){
-        
+        db.collection("users").document(ridePost.driverUid!).getDocument { (snapShot, err) in
+            if let err = err{
+                print(err.localizedDescription)
+            } else {
+                if let dictionary = snapShot?.data(){
+                    self.driver = UPoolUser(dictionary: dictionary)
+                    self.nameLabel.text = "\(self.driver?.firstName ?? "") \(self.driver?.lastName ?? "")"
+                    //TODO : Set User Profile Image
+                } else {
+                    print("driver not found")
+                }
+            }
+        }
     }
 }
