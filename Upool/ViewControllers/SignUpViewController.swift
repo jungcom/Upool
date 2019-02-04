@@ -133,7 +133,7 @@ class SignUpViewController: UIViewController {
                     print("User was added successfully to the database!")
                 }
             })
-            //self.sendVerificationMail()
+            self.sendVerificationMail()
 //            self.present(LoginViewController.presentMainPage(), animated: true, completion: nil)
         })
     }

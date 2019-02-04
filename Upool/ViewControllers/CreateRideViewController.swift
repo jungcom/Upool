@@ -342,6 +342,7 @@ class CreateRideViewController: UIViewController {
                 print("Error adding document: \(err)")
             } else {
                 print("Document added with ID: \(ref.documentID)")
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }

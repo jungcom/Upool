@@ -59,7 +59,7 @@ class RideDetailViewController: UIViewController {
         label.text = "Passengers  \(ridePost.currentPassengers!)/\(ridePost.maxPassengers!)"
         label.textColor = UIColor.gray
         label.textAlignment = .right
-        label.font = UIFont.systemFont(ofSize: 11)
+        label.font = UIFont.systemFont(ofSize: 13)
         return label
     }()
     
@@ -95,7 +95,7 @@ class RideDetailViewController: UIViewController {
     
     lazy var priceLabel : UILabel = {
         let label = UILabel()
-        label.text = "$20"
+        label.text = "$\(ridePost.price!)"
         label.font = UIFont(name: Fonts.futura, size: 18)
         label.textColor = Colors.moneyGreen
         return label
@@ -114,7 +114,7 @@ class RideDetailViewController: UIViewController {
     
     lazy var pickupDetailTextView : UITextView = {
         let label = UITextView()
-        label.text = "I can pick up anywhere between the campus and the main city hall. For other places, please contact me."
+        label.text = (ridePost.pickUpDetails == "") ? ridePost.pickUpDetails : "None"
         label.font = UIFont(name: Fonts.futura, size: 14)
         label.textColor = UIColor.gray
         label.isEditable = false

@@ -15,6 +15,9 @@ private let headerCellId = "Header"
 class OfferedRidesCollectionViewController: UICollectionViewController {
     
     let db = Firestore.firestore()
+    
+    var refresher : UIRefreshControl!
+    
     var todayRidePosts = [RidePost]()
     var tomorrowRidePosts = [RidePost]()
     var laterRidePosts = [RidePost]()
@@ -32,11 +35,18 @@ class OfferedRidesCollectionViewController: UICollectionViewController {
         collectionView.backgroundColor = UIColor.groupTableViewBackground
         collectionView.alwaysBounceVertical = true
         
+        addRefresher()
         setupNavBar()
         retrieveRidePosts()
     }
     
-    func retrieveRidePosts(){
+    @objc func retrieveRidePosts(){
+        //Remove all Ride Posts
+        todayRidePosts.removeAll()
+        tomorrowRidePosts.removeAll()
+        laterRidePosts.removeAll()
+        
+        //Retrieve Data
         let docRef = db.collection("ridePosts")
         
         docRef.order(by: "departureDate", descending: false).getDocuments { (querySnapshot, err) in
@@ -49,6 +59,7 @@ class OfferedRidesCollectionViewController: UICollectionViewController {
                         self.addToCorrectSection(post)
                     }
                     self.collectionView.reloadData()
+                    self.refresher.endRefreshing()
                 }
             }
         }
@@ -69,6 +80,14 @@ class OfferedRidesCollectionViewController: UICollectionViewController {
     @objc func createRide(){
         let createRideVC = CreateRideViewController()
         navigationController?.pushViewController(createRideVC, animated: true)
+    }
+    
+    func addRefresher(){
+        self.refresher = UIRefreshControl()
+        self.collectionView!.alwaysBounceVertical = true
+        self.refresher.tintColor = UIColor.gray
+        self.refresher.addTarget(self, action: #selector(retrieveRidePosts), for: .valueChanged)
+        self.collectionView!.addSubview(refresher)
     }
 }
 
