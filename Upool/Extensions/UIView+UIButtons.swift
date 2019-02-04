@@ -32,9 +32,9 @@ extension UIView{
 extension UIButton{
     func requestedOrJoined(joined : Bool){
         if joined{
-            self.setTitle("Requested ", for: .normal)
-        } else {
             self.setTitle("Ride Joined ", for: .normal)
+        } else {
+            self.setTitle("Requested ", for: .normal)
         }
         self.setImage(UIImage(named: "CheckMark"), for: .normal)
         self.setTitleColor(Colors.maroon, for: .normal)

@@ -58,9 +58,9 @@ class OfferedRidesCollectionViewController: UICollectionViewController {
                     if let post = RidePost(dictionary: document.data()){
                         self.addToCorrectSection(post)
                     }
-                    self.collectionView.reloadData()
-                    self.refresher.endRefreshing()
                 }
+                self.collectionView.reloadData()
+                self.refresher.endRefreshing()
             }
         }
     }

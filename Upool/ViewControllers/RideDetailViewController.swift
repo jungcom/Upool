@@ -11,6 +11,10 @@ import Firebase
 
 class RideDetailViewController: UIViewController {
 
+    private var authUser : User? {
+        return Auth.auth().currentUser
+    }
+    
     let db = Firestore.firestore()
     var ridePost : RidePost!
     var driver : UPoolUser?
@@ -172,12 +176,25 @@ class RideDetailViewController: UIViewController {
     @objc func handleJoinRide(){
         let alert = UIAlertController(title: "Join Ride?", message: "Are you sure you want to join this ride?", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
-            self.joinRideButton.requestedOrJoined(joined: true)
+            self.joinRideButton.requestedOrJoined(joined: false)
+            self.sendRequestToDriver()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(okAction)
         alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
+    }
+    
+    func sendRequestToDriver(){
+        let rideRequest = RideRequest()
+        if let user = authUser{
+            rideRequest.fromId = user.uid
+        }
+        rideRequest.toDriverId = driver?.uid
+        rideRequest.timeStamp = Date()
+        rideRequest.requestStatus = 0
+        rideRequest.ridePostId = ridePost.ridePostUid
+        db.collection("rideRequests").addDocument(data: rideRequest.dictionary)
     }
     
     func retrieveDriver(){
@@ -189,6 +206,9 @@ class RideDetailViewController: UIViewController {
                     self.driver = UPoolUser(dictionary: dictionary)
                     self.nameLabel.text = "\(self.driver?.firstName ?? "") \(self.driver?.lastName ?? "")"
                     //TODO : Set User Profile Image
+                    
+                    //Check to see if a request exist for this ridePost and user
+                    self.checkIfRequestExists()
                 } else {
                     print("driver not found")
                 }
@@ -196,7 +216,26 @@ class RideDetailViewController: UIViewController {
         }
     }
     
-    func sendRequestToDriver(){
-        
+    func checkIfRequestExists(){
+        let query = db.collection("rideRequests")
+        query.whereField("fromId", isEqualTo: authUser?.uid ?? "")
+             .whereField("ridePostId", isEqualTo: ridePost.ridePostUid ?? "")
+             .getDocuments { (snapshot, error) in
+            if let error = error{
+                print(error.localizedDescription)
+            } else {
+                if let document = snapshot?.documents.first{
+                    print("\(document.documentID) => \(document.data())")
+                    if let request = RideRequest(dictionary: document.data()){
+                        //Set the request button depending on the status
+                        if request.requestStatus == 0{
+                            self.joinRideButton.requestedOrJoined(joined: false)
+                        } else if request.requestStatus == 1{
+                            self.joinRideButton.requestedOrJoined(joined: true)
+                        }
+                    }
+                }
+            }
+        }
     }
 }
