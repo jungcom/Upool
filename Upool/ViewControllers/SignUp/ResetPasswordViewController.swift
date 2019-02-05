@@ -66,7 +66,7 @@ class ResetPasswordViewController: UIViewController {
         emailSentlabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
         emailSentlabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         emailSentlabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85).isActive = true
-        emailSentlabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
+        emailSentlabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.12).isActive = true
         
         //textfield Constraints
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -97,13 +97,21 @@ class ResetPasswordViewController: UIViewController {
             print("Email domain is wrong")
             return
         }
-        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
-            if let error = error{
-                print(error.localizedDescription)
-            } else {
-                
-            }
-        }
+        
+        let resetEmailSentVC = EmailSentViewController()
+        resetEmailSentVC.emailSentlabel.text = "We have sent you information to reset your password to your email. Please follow the instructions in the email. "
+        self.navigationController?.pushViewController(resetEmailSentVC, animated: true)
+        
+//        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+//            if let error = error{
+//                print(error.localizedDescription)
+//            } else {
+//                print("Password Change Email Sent")
+//                let resetEmailSentVC = EmailSentViewController()
+//                resetEmailSentVC.emailSentlabel.text = "We have sent you information to reset your password to your email. Please follow the instructions in the email. "
+//                self.navigationController?.pushViewController(resetEmailSentVC, animated: true)
+//            }
+//        }
     }
 
     func tapToDismissKeyboard(){
