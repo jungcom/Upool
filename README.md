@@ -24,7 +24,7 @@ The following functionalities should be implemented:
 
 Here's a ScreenShot of the app:
 
-<img src='https://i.imgur.com/Rd8bzVw.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://i.imgur.com/4ewUkOU.png' title='ScreenShots' width='' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
