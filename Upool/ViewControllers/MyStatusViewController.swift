@@ -22,7 +22,9 @@ class MyStatusViewController: UICollectionViewController {
     
     var refresher : UIRefreshControl!
     
+    
     var myRidePosts = [RidePost]()
+    var myRequests = [RideRequest]()
     var joinedRidePosts = [RidePost]()
     var pendingRidePosts = [RidePost]()
     
@@ -38,6 +40,7 @@ class MyStatusViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
         setupNavBar()
         retrieveMyRidePosts()
+        retrieveMyRequestedRidePosts()
         addRefresher()
     }
     
@@ -64,6 +67,52 @@ class MyStatusViewController: UICollectionViewController {
         }
     }
     
+    @objc func retrieveMyRequestedRidePosts(){
+        //Reset Posts
+        self.joinedRidePosts.removeAll()
+        self.pendingRidePosts.removeAll()
+        self.myRequests.removeAll()
+        
+        //Retrieve Request Data
+        let docRef = db.collection("rideRequests")
+        
+        docRef.order(by: "timeStamp", descending: false).whereField("fromId", isEqualTo: authUser.uid).getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                    if let request = RideRequest(dictionary: document.data()){
+                        self.myRequests.append(request)
+                    }
+                }
+                self.retrieveJoinedAndPendingRidePosts()
+            }
+        }
+    }
+    
+    @objc func retrieveJoinedAndPendingRidePosts(){
+        
+        //Retrieve Ride Data for each request
+        for request in myRequests{
+            db.collection("ridePosts").document(request.ridePostId).getDocument(completion: { (snapshot, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    if let post = RidePost(dictionary: (snapshot?.data())!){
+                        if request.requestStatus == 0{
+                            self.pendingRidePosts.append(post)
+                        } else if request.requestStatus == 1{
+                            self.joinedRidePosts.append(post)
+                        }
+                    }
+                    self.collectionView.reloadData()
+                    self.endRefresher()
+                }
+            })
+        }
+    }
+    
     func addRefresher(){
         self.refresher = UIRefreshControl()
         self.refresher.tintColor = UIColor.red
@@ -86,7 +135,7 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return myRidePosts.count
+        return myRequests.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -94,14 +143,20 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
         cell.backgroundColor = UIColor.white
         cell.post = myRidePosts[indexPath.row]
         return cell
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.performBatchUpdates(nil, completion: nil)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width * 0.9, height: 100)
+        switch collectionView.indexPathsForSelectedItems?.first {
+        case .some(indexPath):
+            return CGSize(width: view.frame.width * 0.9, height: 200)
+        default:
+            return CGSize(width: view.frame.width * 0.9, height: 100)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

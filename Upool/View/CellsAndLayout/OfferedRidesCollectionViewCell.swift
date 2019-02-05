@@ -117,7 +117,6 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     func setupViews(){
         backgroundColor? = UIColor.white
         
