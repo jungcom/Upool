@@ -38,20 +38,24 @@ class MyStatusViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
         setupNavBar()
         retrieveMyRidePosts()
+        addRefresher()
     }
     
     @objc func retrieveMyRidePosts(){
+        //Reset Posts
+        self.myRidePosts.removeAll()
+        
         //Retrieve Data
         let docRef = db.collection("ridePosts")
         
-        docRef.whereField("driverUid", isEqualTo: authUser.uid).order(by: "departureDate", descending: false).getDocuments { (querySnapshot, err) in
+        docRef.order(by: "departureDate", descending: false).whereField("driverUid", isEqualTo: authUser.uid).getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
                     if let post = RidePost(dictionary: document.data()){
-                        self.addToCorrectSection(post)
+                        self.myRidePosts.append(post)
                     }
                 }
                 self.collectionView.reloadData()
@@ -60,20 +64,17 @@ class MyStatusViewController: UICollectionViewController {
         }
     }
     
-    func addToCorrectSection(_ post : RidePost){
-        
-    }
-    
     func addRefresher(){
         self.refresher = UIRefreshControl()
-        self.collectionView!.alwaysBounceVertical = true
-        self.refresher.tintColor = UIColor.gray
+        self.refresher.tintColor = UIColor.red
         self.refresher.addTarget(self, action: #selector(retrieveMyRidePosts), for: .valueChanged)
         self.collectionView!.addSubview(refresher)
     }
     
     func endRefresher(){
-        self.refresher.endRefreshing()
+        if let refresher = self.refresher{
+            refresher.endRefreshing()
+        }
     }
 }
 
@@ -81,16 +82,17 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     // MARK: UICollectionViewDataSource
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
     
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return myRidePosts.count
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath) as! OfferedRidesCollectionViewCell
         cell.backgroundColor = UIColor.white
+        cell.post = myRidePosts[indexPath.row]
         return cell
     }
     
@@ -116,6 +118,6 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 50)
+        return CGSize(width: view.frame.width, height: 70)
     }
 }

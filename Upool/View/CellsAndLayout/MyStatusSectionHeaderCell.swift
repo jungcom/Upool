@@ -10,6 +10,18 @@ import UIKit
 
 class MyStatusSectionHeaderCell : UICollectionViewCell {
     
+    let segmentControl : UISegmentedControl = {
+        let titles = ["My Rides","Joined Rides"]
+        let segment = UISegmentedControl(items: titles)
+        segment.selectedSegmentIndex = 0
+        segment.backgroundColor = UIColor.white
+        segment.tintColor = Colors.maroon
+        
+        let stringAtt : [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.font : UIFont(name: Fonts.helvetica, size: 16)!]
+        segment.setTitleTextAttributes(stringAtt, for: .normal)
+        return segment
+    }()
     
     override init(frame: CGRect) {
         super.init(frame:frame)
@@ -22,12 +34,14 @@ class MyStatusSectionHeaderCell : UICollectionViewCell {
     }
     
     func setupViews(){
-
+        addSubview(segmentControl)
     }
     
     func setupConstraints(){
-//        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-//        titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant:20).isActive = true
-//        titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+        segmentControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentControl.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        segmentControl.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        segmentControl.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6).isActive = true
+        segmentControl.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5).isActive = true
     }
 }

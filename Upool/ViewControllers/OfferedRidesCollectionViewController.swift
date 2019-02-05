@@ -86,7 +86,7 @@ class OfferedRidesCollectionViewController: UICollectionViewController {
         self.refresher = UIRefreshControl()
         self.collectionView!.alwaysBounceVertical = true
         self.refresher.tintColor = UIColor.gray
-        self.refresher.addTarget(self, action: #selector(retrieveMyRidePosts), for: .valueChanged)
+        self.refresher.addTarget(self, action: #selector(retrieveRidePosts), for: .valueChanged)
         self.collectionView!.addSubview(refresher)
     }
     
