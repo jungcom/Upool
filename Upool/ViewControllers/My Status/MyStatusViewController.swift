@@ -128,8 +128,9 @@ class MyStatusViewController: UICollectionViewController {
     }
 }
 
+
+// MARK: UICollectionViewDataSource
 extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
-    // MARK: UICollectionViewDataSource
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1

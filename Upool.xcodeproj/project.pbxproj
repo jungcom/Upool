@@ -23,6 +23,8 @@
 		4E8B4C7822023A43002EC784 /* SearchLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8B4C7722023A43002EC784 /* SearchLocationViewController.swift */; };
 		4E8DD4FC2203B1190077D85C /* CreateRideProtocolsForPassingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8DD4FB2203B1190077D85C /* CreateRideProtocolsForPassingData.swift */; };
 		4E8DD4FF2203FF760077D85C /* OfferedRides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8DD4FE2203FF760077D85C /* OfferedRides.swift */; };
+		4E9AA4E72209F67E00609E39 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AA4E62209F67E00609E39 /* ChatViewController.swift */; };
+		4E9AA4E92209F7BC00609E39 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AA4E82209F7BC00609E39 /* Chat.swift */; };
 		4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */; };
 		4EA3D8A221F90609003D7CE7 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A121F90609003D7CE7 /* UITextField.swift */; };
 		4EA3D8A421F9168E003D7CE7 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A321F9168E003D7CE7 /* SignUp.swift */; };
@@ -41,6 +43,7 @@
 		4EEB91F021F772770079209B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91EF21F772770079209B /* Constants.swift */; };
 		4EEB91F421F773630079209B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91F321F773630079209B /* UIColor.swift */; };
 		4EEB91F821F7A6AA0079209B /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91F721F7A6AA0079209B /* Login.swift */; };
+		FCD509AA7C5BACDF9B722203 /* Pods_Upool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F908952193F9A94F806566E5 /* Pods_Upool.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +63,8 @@
 		4E8B4C7722023A43002EC784 /* SearchLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationViewController.swift; sourceTree = "<group>"; };
 		4E8DD4FB2203B1190077D85C /* CreateRideProtocolsForPassingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideProtocolsForPassingData.swift; sourceTree = "<group>"; };
 		4E8DD4FE2203FF760077D85C /* OfferedRides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedRides.swift; sourceTree = "<group>"; };
+		4E9AA4E62209F67E00609E39 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		4E9AA4E82209F7BC00609E39 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4EA3D8A121F90609003D7CE7 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		4EA3D8A321F9168E003D7CE7 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
@@ -82,6 +87,7 @@
 		4EEB91F721F7A6AA0079209B /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		991ABBFE84A7A90833986D7F /* Pods-Upool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Upool.release.xcconfig"; path = "Pods/Target Support Files/Pods-Upool/Pods-Upool.release.xcconfig"; sourceTree = "<group>"; };
 		DA832B2CAE8C7D81DA9D837A /* Pods-Upool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Upool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Upool/Pods-Upool.debug.xcconfig"; sourceTree = "<group>"; };
+		F908952193F9A94F806566E5 /* Pods_Upool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Upool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCD509AA7C5BACDF9B722203 /* Pods_Upool.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +133,41 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		4E9AA4E22209F5B700609E39 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				4EEB91DD21F7679F0079209B /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		4E9AA4E32209F5C600609E39 /* OfferedRides */ = {
+			isa = PBXGroup;
+			children = (
+				4EA3D8A521FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift */,
+				4E431FA821FE90810081CA52 /* CreateRideViewController.swift */,
+				4E8B4C7722023A43002EC784 /* SearchLocationViewController.swift */,
+				4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */,
+			);
+			path = OfferedRides;
+			sourceTree = "<group>";
+		};
+		4E9AA4E42209F5DE00609E39 /* My Status */ = {
+			isa = PBXGroup;
+			children = (
+				4E8B4C732201F290002EC784 /* MyStatusViewController.swift */,
+			);
+			path = "My Status";
+			sourceTree = "<group>";
+		};
+		4E9AA4E52209F66500609E39 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				4E9AA4E62209F67E00609E39 /* ChatViewController.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		4EA3D8A721FA0D66003D7CE7 /* CellsAndLayout */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +184,7 @@
 				4EEB91DA21F7679F0079209B /* Upool */,
 				4EEB91D921F7679F0079209B /* Products */,
 				890F360013E6CF1C0CD188D0 /* Pods */,
+				C6DF5E9472BC576474C9F3A7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -193,13 +236,11 @@
 		4EEB91F521F775B50079209B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				4EEB91DD21F7679F0079209B /* LoginViewController.swift */,
+				4E9AA4E22209F5B700609E39 /* Login */,
 				4E49BFD72208C115002FB09A /* SignUp */,
-				4EA3D8A521FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift */,
-				4E431FA821FE90810081CA52 /* CreateRideViewController.swift */,
-				4E8B4C7722023A43002EC784 /* SearchLocationViewController.swift */,
-				4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */,
-				4E8B4C732201F290002EC784 /* MyStatusViewController.swift */,
+				4E9AA4E32209F5C600609E39 /* OfferedRides */,
+				4E9AA4E42209F5DE00609E39 /* My Status */,
+				4E9AA4E52209F66500609E39 /* Chat */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -212,6 +253,7 @@
 				4E8DD4FE2203FF760077D85C /* OfferedRides.swift */,
 				4E431FAC21FEA1F80081CA52 /* RideDetail.swift */,
 				4E49BFE42209455F002FB09A /* MyStatus.swift */,
+				4E9AA4E82209F7BC00609E39 /* Chat.swift */,
 				4E8B4C7022012183002EC784 /* CreateRide */,
 				4EA3D8A721FA0D66003D7CE7 /* CellsAndLayout */,
 			);
@@ -225,6 +267,14 @@
 				991ABBFE84A7A90833986D7F /* Pods-Upool.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		C6DF5E9472BC576474C9F3A7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F908952193F9A94F806566E5 /* Pods_Upool.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -402,6 +452,7 @@
 				4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */,
 				4E49BFE52209455F002FB09A /* MyStatus.swift in Sources */,
 				4EE58FAA220674DE00918778 /* UPoolUser.swift in Sources */,
+				4E9AA4E92209F7BC00609E39 /* Chat.swift in Sources */,
 				4EAE28F321FF83D3006966E4 /* CreateRide.swift in Sources */,
 				4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */,
 				4E8DD4FF2203FF760077D85C /* OfferedRides.swift in Sources */,
@@ -427,6 +478,7 @@
 				4EEB91DC21F7679F0079209B /* AppDelegate.swift in Sources */,
 				4E49BFD92208C140002FB09A /* EmailSentViewController.swift in Sources */,
 				4E49BFDF220928F2002FB09A /* ResetPasswordViewController.swift in Sources */,
+				4E9AA4E72209F67E00609E39 /* ChatViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

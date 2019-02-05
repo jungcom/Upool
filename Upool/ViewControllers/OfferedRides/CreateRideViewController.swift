@@ -157,8 +157,8 @@ class CreateRideViewController: UIViewController {
         cosmos.settings.starSize = 25
         
         //TODO: Setup image to be round
-//        cosmos.settings.emptyImage
-//        cosmos.settings.filledImage
+        cosmos.settings.emptyImage = UIImage(named: "UnfilledPassengers1")
+        cosmos.settings.filledImage = UIImage(named: "FilledPassengers1")
         return cosmos
     }()
     

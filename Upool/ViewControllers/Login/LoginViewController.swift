@@ -174,9 +174,12 @@ class LoginViewController: UIViewController {
         ridesVC.tabBarItem = UITabBarItem(title: "Rides", image: UIImage(named: "RideIcon"), tag: 0)
         let statusVC = MyStatusViewController(collectionViewLayout: UICollectionViewFlowLayout())
         statusVC.tabBarItem = UITabBarItem(title: "Status", image: UIImage(named: "StatusLogo"), tag: 1)
+        let chatVC = ChatViewController()
+        chatVC.tabBarItem = UITabBarItem(title: "Chat", image: UIImage(named: "ChatIcon"), tag: 2)
+
         
         let tabBarController = UITabBarController()
-        let controllers = [ridesVC, statusVC]
+        let controllers = [ridesVC, statusVC, chatVC]
         tabBarController.viewControllers = controllers
         tabBarController.tabBar.tintColor = Colors.maroon
         tabBarController.viewControllers = controllers.map { UINavigationController(rootViewController: $0)}
