@@ -10,7 +10,9 @@ import UIKit
 
 class MyStatusSectionHeaderCell : UICollectionViewCell {
     
-    let segmentControl : UISegmentedControl = {
+    var segmentTapped : ((Int) -> ())?
+    
+    lazy var segmentControl : UISegmentedControl = {
         let titles = ["My Rides","Joined Rides"]
         let segment = UISegmentedControl(items: titles)
         segment.selectedSegmentIndex = 0
@@ -20,6 +22,7 @@ class MyStatusSectionHeaderCell : UICollectionViewCell {
         let stringAtt : [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.font : UIFont(name: Fonts.helvetica, size: 16)!]
         segment.setTitleTextAttributes(stringAtt, for: .normal)
+        segment.addTarget(self, action: #selector(tapped), for: .valueChanged)
         return segment
     }()
     
@@ -43,5 +46,9 @@ class MyStatusSectionHeaderCell : UICollectionViewCell {
         segmentControl.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         segmentControl.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6).isActive = true
         segmentControl.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5).isActive = true
+    }
+    
+    @objc func tapped(){
+        segmentTapped?(segmentControl.selectedSegmentIndex)
     }
 }

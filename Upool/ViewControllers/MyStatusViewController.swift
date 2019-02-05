@@ -22,6 +22,7 @@ class MyStatusViewController: UICollectionViewController {
     
     var refresher : UIRefreshControl!
     
+    var isMyRides : Bool = true
     
     var myRidePosts = [RidePost]()
     var myRequests = [RideRequest]()
@@ -135,15 +136,29 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return myRequests.count
+        if isMyRides{
+            return myRidePosts.count
+        } else {
+            return joinedRidePosts.count + pendingRidePosts.count
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath) as! OfferedRidesCollectionViewCell
-        cell.backgroundColor = UIColor.white
-        cell.post = myRidePosts[indexPath.row]
-        return cell
-        
+        if isMyRides{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath) as! OfferedRidesCollectionViewCell
+            cell.backgroundColor = UIColor.white
+            cell.post = myRidePosts[indexPath.row]
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath) as! OfferedRidesCollectionViewCell
+            cell.backgroundColor = UIColor.white
+            if indexPath.row >= joinedRidePosts.count{
+                cell.post = pendingRidePosts[indexPath.row - joinedRidePosts.count]
+            } else {
+                cell.post = joinedRidePosts[indexPath.row]
+            }
+            return cell
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -168,6 +183,17 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerCellId, for: indexPath) as! MyStatusSectionHeaderCell
+        header.segmentTapped = { (index) in
+            if index == 0{
+                print("My Rides")
+                self.isMyRides = true
+                collectionView.reloadData()
+            } else {
+                print("Pending Rides")
+                self.isMyRides = false
+                collectionView.reloadData()
+            }
+        }
         return header
         
     }
