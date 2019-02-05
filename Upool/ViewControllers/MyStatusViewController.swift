@@ -13,7 +13,6 @@ private let headerCellId = "Header"
 
 class MyStatusViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    
     fileprivate func setupNavBar() {
         navigationItem.title = "My Status"
         UINavigationBar.appearance().barTintColor = Colors.maroon
@@ -57,7 +56,6 @@ class MyStatusViewController: UICollectionViewController, UICollectionViewDelega
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
-    
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1

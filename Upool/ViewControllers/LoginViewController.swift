@@ -157,7 +157,9 @@ class LoginViewController: UIViewController {
 
     @objc func handleForgottenPwd(){
         print("no password")
-        
+        let passwordResetVC = ResetPasswordViewController()
+        let navVC = UINavigationController(rootViewController: passwordResetVC)
+        present(navVC, animated: true, completion: nil)
     }
     
     @objc func handleSignUp(){

@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A1DFEEE72028DBF5CBE8FCF /* Pods_Upool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 053B872C7AFD320DD80E19DC /* Pods_Upool.framework */; };
 		4E431FA721FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FA621FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift */; };
 		4E431FA921FE90810081CA52 /* CreateRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FA821FE90810081CA52 /* CreateRideViewController.swift */; };
 		4E431FAB21FE94AC0081CA52 /* RideDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */; };
 		4E431FAD21FEA1F80081CA52 /* RideDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FAC21FEA1F80081CA52 /* RideDetail.swift */; };
 		4E49BFD92208C140002FB09A /* EmailSentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E49BFD82208C140002FB09A /* EmailSentViewController.swift */; };
 		4E49BFDB2208C9F8002FB09A /* RideRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E49BFDA2208C9F8002FB09A /* RideRequest.swift */; };
+		4E49BFDD2208E363002FB09A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E49BFDC2208E363002FB09A /* LaunchScreen.storyboard */; };
+		4E49BFDF220928F2002FB09A /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E49BFDE220928F2002FB09A /* ResetPasswordViewController.swift */; };
 		4E8B4C722201219B002EC784 /* CreateRideCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8B4C712201219B002EC784 /* CreateRideCalendar.swift */; };
 		4E8B4C742201F290002EC784 /* MyStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8B4C732201F290002EC784 /* MyStatusViewController.swift */; };
 		4E8B4C7622023243002EC784 /* CreateRideTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8B4C7522023243002EC784 /* CreateRideTimePicker.swift */; };
@@ -34,7 +35,6 @@
 		4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91DD21F7679F0079209B /* LoginViewController.swift */; };
 		4EEB91E121F7679F0079209B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EEB91DF21F7679F0079209B /* Main.storyboard */; };
 		4EEB91E321F767A10079209B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EEB91E221F767A10079209B /* Assets.xcassets */; };
-		4EEB91E621F767A10079209B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EEB91E421F767A10079209B /* LaunchScreen.storyboard */; };
 		4EEB91EE21F76CA50079209B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EEB91ED21F76CA50079209B /* GoogleService-Info.plist */; };
 		4EEB91F021F772770079209B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91EF21F772770079209B /* Constants.swift */; };
 		4EEB91F421F773630079209B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91F321F773630079209B /* UIColor.swift */; };
@@ -42,13 +42,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		053B872C7AFD320DD80E19DC /* Pods_Upool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Upool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E431FA621FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedRidesSectionHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		4E431FA821FE90810081CA52 /* CreateRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideViewController.swift; sourceTree = "<group>"; };
 		4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetailViewController.swift; sourceTree = "<group>"; };
 		4E431FAC21FEA1F80081CA52 /* RideDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetail.swift; sourceTree = "<group>"; };
 		4E49BFD82208C140002FB09A /* EmailSentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSentViewController.swift; sourceTree = "<group>"; };
 		4E49BFDA2208C9F8002FB09A /* RideRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideRequest.swift; sourceTree = "<group>"; };
+		4E49BFDC2208E363002FB09A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4E49BFDE220928F2002FB09A /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		4E8B4C712201219B002EC784 /* CreateRideCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideCalendar.swift; sourceTree = "<group>"; };
 		4E8B4C732201F290002EC784 /* MyStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStatusViewController.swift; sourceTree = "<group>"; };
 		4E8B4C7522023243002EC784 /* CreateRideTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideTimePicker.swift; sourceTree = "<group>"; };
@@ -70,7 +71,6 @@
 		4EEB91DD21F7679F0079209B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4EEB91E021F7679F0079209B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4EEB91E221F767A10079209B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4EEB91E521F767A10079209B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4EEB91E721F767A10079209B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EEB91ED21F76CA50079209B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4EEB91EF21F772770079209B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -85,7 +85,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A1DFEEE72028DBF5CBE8FCF /* Pods_Upool.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +96,7 @@
 			children = (
 				4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */,
 				4E49BFD82208C140002FB09A /* EmailSentViewController.swift */,
+				4E49BFDE220928F2002FB09A /* ResetPasswordViewController.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -137,7 +137,6 @@
 				4EEB91DA21F7679F0079209B /* Upool */,
 				4EEB91D921F7679F0079209B /* Products */,
 				890F360013E6CF1C0CD188D0 /* Pods */,
-				D52091F84ECEA6792578BF09 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -159,8 +158,8 @@
 				4EEB91F221F7734D0079209B /* Extensions */,
 				4EEB91F121F772800079209B /* Constants */,
 				4EEB91DF21F7679F0079209B /* Main.storyboard */,
+				4E49BFDC2208E363002FB09A /* LaunchScreen.storyboard */,
 				4EEB91E221F767A10079209B /* Assets.xcassets */,
-				4EEB91E421F767A10079209B /* LaunchScreen.storyboard */,
 				4EEB91E721F767A10079209B /* Info.plist */,
 				4EEB91ED21F76CA50079209B /* GoogleService-Info.plist */,
 			);
@@ -220,14 +219,6 @@
 				991ABBFE84A7A90833986D7F /* Pods-Upool.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		D52091F84ECEA6792578BF09 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				053B872C7AFD320DD80E19DC /* Pods_Upool.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,8 +282,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EEB91E621F767A10079209B /* LaunchScreen.storyboard in Resources */,
 				4EEB91EE21F76CA50079209B /* GoogleService-Info.plist in Resources */,
+				4E49BFDD2208E363002FB09A /* LaunchScreen.storyboard in Resources */,
 				4EEB91E321F767A10079209B /* Assets.xcassets in Resources */,
 				4EEB91E121F7679F0079209B /* Main.storyboard in Resources */,
 			);
@@ -427,6 +418,7 @@
 				4E8B4C722201219B002EC784 /* CreateRideCalendar.swift in Sources */,
 				4EEB91DC21F7679F0079209B /* AppDelegate.swift in Sources */,
 				4E49BFD92208C140002FB09A /* EmailSentViewController.swift in Sources */,
+				4E49BFDF220928F2002FB09A /* ResetPasswordViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,14 +431,6 @@
 				4EEB91E021F7679F0079209B /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		4EEB91E421F767A10079209B /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4EEB91E521F767A10079209B /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
