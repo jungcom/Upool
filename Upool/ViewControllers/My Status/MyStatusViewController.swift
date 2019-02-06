@@ -151,6 +151,10 @@ class MyStatusViewController: UICollectionViewController {
             refresher.endRefreshing()
         }
     }
+    
+    func passengerImageTapped(){
+        print("passenger popup view")
+    }
 }
 
 
@@ -239,5 +243,16 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 70)
+    }
+}
+
+//When Receive passenger request from tapping image
+extension MyStatusViewController : PassengersRequestData{
+    func rideRequestFromTappedPassenger(rideRequest: RideRequest) {
+        setupPopUpView()
+    }
+    
+    func setupPopUpView(){
+        
     }
 }

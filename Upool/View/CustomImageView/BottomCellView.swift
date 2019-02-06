@@ -81,7 +81,6 @@ class BottomCellView: UIView {
                 index += 1
             }
         }
-
     }
     
     private func setupView() {

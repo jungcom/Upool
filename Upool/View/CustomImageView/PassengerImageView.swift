@@ -66,6 +66,7 @@ class PassengerImageView: UIView {
     }
     
     private func setupView() {
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapped)))
         addSubview(passengerLabel)
         addSubview(profileImageView)
         addSubview(statusLabel)
@@ -113,4 +114,19 @@ class PassengerImageView: UIView {
         let myString = NSMutableAttributedString(string: "Pending...", attributes: stringAtt)
         statusLabel.attributedText = myString
     }
+    
+    //closure for tapping the image
+    var delegate : PassengersRequestData?
+    
+    @objc func handleTapped(){
+        print("image tapped")
+        if let rideRequest = self.rideRequest{
+            delegate?.rideRequestFromTappedPassenger(rideRequest: rideRequest)
+        }
+    }
+}
+
+//Protocol to send data back to My Status VC
+protocol PassengersRequestData {
+    func rideRequestFromTappedPassenger(rideRequest: RideRequest)
 }
