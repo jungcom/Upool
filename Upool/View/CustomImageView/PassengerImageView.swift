@@ -120,6 +120,7 @@ class PassengerImageView: UIView {
     
     @objc func handleTapped(){
         print("image tapped")
+        
         if let rideRequest = self.rideRequest{
             delegate?.rideRequestFromTappedPassenger(rideRequest: rideRequest)
         }

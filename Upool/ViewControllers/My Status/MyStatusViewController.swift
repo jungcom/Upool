@@ -197,6 +197,8 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
         let cell = collectionView.cellForItem(at: indexPath) as! OfferedRidesCollectionViewCell
         cell.requests = self.myPassengerRequests[indexPath.row]
         cell.changeView()
+        // MARK : delegate
+        setCellsDelegates(cell:cell)
         print(myPassengerRequests[indexPath.row])
         collectionView.performBatchUpdates(nil, completion: nil)
     }
@@ -246,13 +248,41 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     }
 }
 
-//When Receive passenger request from tapping image
+
+//When receive passenger request from tapping image
 extension MyStatusViewController : PassengersRequestData{
+    
+    func setCellsDelegates(cell:OfferedRidesCollectionViewCell){
+        cell.bottomUIView?.passengerOne.delegate = self
+        cell.bottomUIView?.passengerTwo.delegate = self
+        cell.bottomUIView?.passengerThree.delegate = self
+        cell.bottomUIView?.passengerFour.delegate = self
+    }
+    
     func rideRequestFromTappedPassenger(rideRequest: RideRequest) {
         setupPopUpView()
     }
     
     func setupPopUpView(){
+        let black = UIView()
+        black.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        black.alpha = 0
+        
+        if let window = UIApplication.shared.keyWindow {
+            black.frame = window.frame
+            black.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismissPopUpView)))
+            window.addSubview(black)
+            
+            UIView.animate(withDuration: 0.3) {
+                black.alpha = 1
+            }
+            UIView.animate(withDuration: 0.3) {
+                black.alpha = 0
+            }
+        }
+    }
+    
+    @objc func handleDismissPopUpView(){
         
     }
 }
