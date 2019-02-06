@@ -14,8 +14,11 @@ class PassengerImageView: UIView {
         didSet{
             if rideRequest?.requestStatus == 1{
                 changeToJoined()
+            } else if rideRequest?.requestStatus == 0{
+                changeToPending()
             }
             passengerLabel.text = rideRequest?.fromIdFirstName
+            profileImageView.image = UIImage(named: "MockProfileImage")
         }
     }
     /*
@@ -29,7 +32,6 @@ class PassengerImageView: UIView {
     //we use lazy properties for each view
     lazy var passengerLabel : UILabel = {
         let label = UILabel()
-        label.text = "None"
         label.textColor = UIColor.gray
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 10)
@@ -38,20 +40,16 @@ class PassengerImageView: UIView {
     
     lazy var profileImageView: UIImageView = {
         let contentView = UIImageView()
-        contentView.image = UIImage(named: "MockProfileImage")
         contentView.contentMode = .scaleAspectFill
         contentView.layer.masksToBounds = true
-        contentView.layer.cornerRadius = 5
+        contentView.layer.cornerRadius = 8
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.lightGray.cgColor
         return contentView
     }()
     
     lazy var statusLabel : UILabel = {
         let label = UILabel()
-        let stringAtt : [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.font : UIFont(name: Fonts.helvetica, size: 11)!,
-            NSAttributedString.Key.foregroundColor : Colors.maroon]
-        let myString = NSMutableAttributedString(string: "Pending...", attributes: stringAtt)
-        label.attributedText = myString
         return label
     }()
     
@@ -108,4 +106,11 @@ class PassengerImageView: UIView {
         statusLabel.attributedText = myString
     }
 
+    func changeToPending(){
+        let stringAtt : [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.font : UIFont(name: Fonts.helvetica, size: 11)!,
+            NSAttributedString.Key.foregroundColor : Colors.maroon]
+        let myString = NSMutableAttributedString(string: "Pending...", attributes: stringAtt)
+        statusLabel.attributedText = myString
+    }
 }

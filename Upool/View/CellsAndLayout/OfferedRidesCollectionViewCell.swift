@@ -214,6 +214,9 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
     var bottomUIView : BottomCellView?
     
     func setupBottomViews(){
+        if let bottomUIView = bottomUIView{
+            bottomUIView.removeFromSuperview()
+        }
         if let requests = requests{
             bottomUIView = BottomCellView(requests: requests)
         } else {
