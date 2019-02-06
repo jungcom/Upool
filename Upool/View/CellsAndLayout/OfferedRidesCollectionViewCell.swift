@@ -42,6 +42,14 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    let topUIView : UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    var topViewHeightConstraintWhenNotTapped : NSLayoutConstraint!
+    var topViewHeightConstraintWhenTapped : NSLayoutConstraint!
+    
     var locationStackView : UIStackView!
     
     let profileImageView : UIImageView = {
@@ -112,6 +120,15 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         UIView.dropShadow(view: self)
     }
     
+    func changeView(){
+        topViewHeightConstraintWhenTapped.isActive = true
+        topViewHeightConstraintWhenNotTapped.isActive = false
+    }
+    
+    func returnToOriginalView(){
+        topViewHeightConstraintWhenTapped.isActive = false
+        topViewHeightConstraintWhenNotTapped.isActive = true
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -120,10 +137,12 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
     func setupViews(){
         backgroundColor? = UIColor.white
         
-        addSubview(profileImageView)
-        addSubview(dateLabel)
-        addSubview(priceLabel)
-        addSubview(passengerSeatsLabel)
+        topUIView.addSubview(profileImageView)
+        topUIView.addSubview(dateLabel)
+        topUIView.addSubview(priceLabel)
+        topUIView.addSubview(passengerSeatsLabel)
+        
+        addSubview(topUIView)
     }
     
     func setupStackView(){
@@ -136,40 +155,50 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
     
     func setupConstraints(){
         
+        //TopViewConstraints
+        topUIView.translatesAutoresizingMaskIntoConstraints = false
+        topUIView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        topUIView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        //save the constraint to change later
+        topViewHeightConstraintWhenNotTapped = topUIView.heightAnchor.constraint(equalTo: heightAnchor)
+        topViewHeightConstraintWhenTapped = topUIView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5)
+        topViewHeightConstraintWhenNotTapped.isActive = true
+        topUIView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        
         //ProfileImageView constraints
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        profileImageView.topAnchor.constraint(equalTo: topAnchor, constant: 12).isActive = true
-        profileImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12).isActive = true
-        profileImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12).isActive = true
-        profileImageView.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 0.75).isActive = true
+        profileImageView.topAnchor.constraint(equalTo: topUIView.topAnchor, constant: 12).isActive = true
+        profileImageView.leadingAnchor.constraint(equalTo: topUIView.leadingAnchor, constant: 12).isActive = true
+        profileImageView.bottomAnchor.constraint(equalTo: topUIView.bottomAnchor, constant: -12).isActive = true
+        profileImageView.widthAnchor.constraint(equalTo: topUIView.heightAnchor, multiplier: 0.75).isActive = true
         
         //DateLabel Constraints
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        dateLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        dateLabel.topAnchor.constraint(equalTo: topUIView.topAnchor, constant: 10).isActive = true
         dateLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 15).isActive = true
-        dateLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.25).isActive = true
-        dateLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5).isActive = true
+        dateLabel.heightAnchor.constraint(equalTo: topUIView.heightAnchor, multiplier: 0.25).isActive = true
+        dateLabel.widthAnchor.constraint(equalTo: topUIView.widthAnchor, multiplier: 0.5).isActive = true
     
         //LocationStackView Constraints
         locationStackView.translatesAutoresizingMaskIntoConstraints = false
         locationStackView.leadingAnchor.constraint(equalTo: dateLabel.leadingAnchor).isActive = true
         locationStackView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5).isActive = true
-        locationStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
-        locationStackView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2).isActive = true
+        locationStackView.trailingAnchor.constraint(equalTo: topUIView.trailingAnchor, constant: -18).isActive = true
+        locationStackView.heightAnchor.constraint(equalTo: topUIView.heightAnchor, multiplier: 0.2).isActive = true
         
         //PriceLabel Constraints
         priceLabel.translatesAutoresizingMaskIntoConstraints = false
-        priceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant : -8).isActive = true
-        priceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+        priceLabel.trailingAnchor.constraint(equalTo: topUIView.trailingAnchor, constant : -8).isActive = true
+        priceLabel.bottomAnchor.constraint(equalTo: topUIView.bottomAnchor, constant: -8).isActive = true
         priceLabel.heightAnchor.constraint(equalTo: locationStackView.heightAnchor).isActive = true
         priceLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
         
         //Passenger Seats Label Constraints
         passengerSeatsLabel.translatesAutoresizingMaskIntoConstraints = false
-        passengerSeatsLabel.topAnchor.constraint(equalTo: topAnchor, constant: 3).isActive = true
-        passengerSeatsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -3).isActive = true
-        passengerSeatsLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.15).isActive = true
-        passengerSeatsLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3).isActive = true
+        passengerSeatsLabel.topAnchor.constraint(equalTo: topUIView.topAnchor, constant: 3).isActive = true
+        passengerSeatsLabel.trailingAnchor.constraint(equalTo: topUIView.trailingAnchor, constant: -3).isActive = true
+        passengerSeatsLabel.heightAnchor.constraint(equalTo: topUIView.heightAnchor, multiplier: 0.15).isActive = true
+        passengerSeatsLabel.widthAnchor.constraint(equalTo: topUIView.widthAnchor, multiplier: 0.3).isActive = true
         
     }
 }

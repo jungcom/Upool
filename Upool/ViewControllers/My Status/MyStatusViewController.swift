@@ -118,6 +118,7 @@ class MyStatusViewController: UICollectionViewController {
         self.refresher = UIRefreshControl()
         self.refresher.tintColor = UIColor.red
         self.refresher.addTarget(self, action: #selector(retrieveMyRidePosts), for: .valueChanged)
+        self.refresher.addTarget(self, action: #selector(retrieveMyRequestedRidePosts), for: .valueChanged)
         self.collectionView!.addSubview(refresher)
     }
     
@@ -149,6 +150,7 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath) as! OfferedRidesCollectionViewCell
             cell.backgroundColor = UIColor.white
             cell.post = myRidePosts[indexPath.row]
+            cell.returnToOriginalView()
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath) as! OfferedRidesCollectionViewCell
@@ -158,11 +160,20 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
             } else {
                 cell.post = joinedRidePosts[indexPath.row]
             }
+            cell.returnToOriginalView()
             return cell
         }
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! OfferedRidesCollectionViewCell
+        cell.changeView()
+        collectionView.performBatchUpdates(nil, completion: nil)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! OfferedRidesCollectionViewCell
+        cell.returnToOriginalView()
         collectionView.performBatchUpdates(nil, completion: nil)
     }
     
@@ -189,14 +200,17 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
                 print("My Rides")
                 self.isMyRides = true
                 collectionView.reloadData()
+                collectionView.performBatchUpdates(nil, completion: nil)
+                collectionView.reloadInputViews()
             } else {
                 print("Pending Rides")
                 self.isMyRides = false
                 collectionView.reloadData()
+                collectionView.performBatchUpdates(nil, completion: nil)
+                collectionView.reloadInputViews()
             }
         }
         return header
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
