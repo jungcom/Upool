@@ -48,8 +48,8 @@ extension CreateRideViewController {
         view.addSubview(bottomBorderViewForDate)
         view.addSubview(bottomBorderViewForTime)
         
-        bottomBorderViewForDate.addGrayBottomBorder(view: dateLabel, multiplier: 1)
-        bottomBorderViewForTime.addGrayBottomBorder(view: timeLabel, multiplier: 1)
+        bottomBorderViewForDate.addGrayBottomBorderTo(view: dateLabel, multiplier: 1, bottom: true, centered: false, color: UIColor.gray)
+        bottomBorderViewForTime.addGrayBottomBorderTo(view: timeLabel, multiplier: 1, bottom: true, centered: false, color: UIColor.gray)
         
     }
     
@@ -74,8 +74,8 @@ extension CreateRideViewController {
         view.addSubview(bottomBorderViewFrom)
         view.addSubview(bottomBorderViewTo)
         
-        bottomBorderViewFrom.addGrayBottomBorder(view: fromLabel, multiplier: 1)
-        bottomBorderViewTo.addGrayBottomBorder(view: toLabel, multiplier: 1)
+        bottomBorderViewFrom.addGrayBottomBorderTo(view: fromLabel, multiplier: 1, bottom: true, centered: false, color: UIColor.gray)
+        bottomBorderViewTo.addGrayBottomBorderTo(view: toLabel, multiplier: 1, bottom: true, centered: false, color: UIColor.gray)
     }
     
     func setupPriceLabelAndSlider(){

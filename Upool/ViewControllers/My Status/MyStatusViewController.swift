@@ -180,7 +180,7 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView.indexPathsForSelectedItems?.first {
         case .some(indexPath):
-            return CGSize(width: view.frame.width * 0.9, height: 200)
+            return CGSize(width: view.frame.width * 0.9, height: 250)
         default:
             return CGSize(width: view.frame.width * 0.9, height: 100)
         }

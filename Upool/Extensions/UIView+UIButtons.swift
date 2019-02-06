@@ -18,12 +18,20 @@ extension UIView{
         view.layer.cornerRadius = 5.0
     }
     
-    func addGrayBottomBorder(view: UIView, multiplier: CGFloat){
-        self.backgroundColor = UIColor.gray
+    func addGrayBottomBorderTo(view: UIView, multiplier: CGFloat, bottom:Bool, centered: Bool, color: UIColor){
+        self.backgroundColor = color
         
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        self.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        if bottom{
+            self.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        } else {
+            self.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        }
+        if centered {
+            self.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        } else {
+            self.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        }
         self.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: multiplier).isActive = true
         self.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }

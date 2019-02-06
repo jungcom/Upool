@@ -42,6 +42,8 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    //Top UI View
+    
     let topUIView : UIView = {
         let view = UIView()
         return view
@@ -114,27 +116,32 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame:frame)
-        setupViews()
+        setupTopViews()
         setupStackView()
-        setupConstraints()
+        setupTopConstraints()
         UIView.dropShadow(view: self)
     }
     
+    //Cell changes
     func changeView(){
         topViewHeightConstraintWhenTapped.isActive = true
         topViewHeightConstraintWhenNotTapped.isActive = false
+        setupBottomViews()
+        setupBottomConstraints()
+        addDividingBorder()
     }
     
     func returnToOriginalView(){
         topViewHeightConstraintWhenTapped.isActive = false
         topViewHeightConstraintWhenNotTapped.isActive = true
+        deleteBottomSubview()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupViews(){
+    func setupTopViews(){
         backgroundColor? = UIColor.white
         
         topUIView.addSubview(profileImageView)
@@ -153,7 +160,7 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         addSubview(locationStackView)
     }
     
-    func setupConstraints(){
+    func setupTopConstraints(){
         
         //TopViewConstraints
         topUIView.translatesAutoresizingMaskIntoConstraints = false
@@ -161,7 +168,7 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         topUIView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         //save the constraint to change later
         topViewHeightConstraintWhenNotTapped = topUIView.heightAnchor.constraint(equalTo: heightAnchor)
-        topViewHeightConstraintWhenTapped = topUIView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5)
+        topViewHeightConstraintWhenTapped = topUIView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4)
         topViewHeightConstraintWhenNotTapped.isActive = true
         topUIView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         
@@ -201,4 +208,39 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         passengerSeatsLabel.widthAnchor.constraint(equalTo: topUIView.widthAnchor, multiplier: 0.3).isActive = true
         
     }
+    
+    //MARK: Bottom View
+    
+    let bottomUIView : UIView = {
+        let bottom = UIView()
+        return bottom
+    }()
+    
+    
+    
+    //inside function
+    
+    func setupBottomViews(){
+        addSubview(bottomUIView)
+
+    }
+    
+    func setupBottomConstraints(){
+        bottomUIView.translatesAutoresizingMaskIntoConstraints = false
+        bottomUIView.topAnchor.constraint(equalTo: topUIView.bottomAnchor).isActive = true
+        bottomUIView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        bottomUIView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        bottomUIView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+    }
+    
+    func addDividingBorder(){
+        let line = UIView()
+        bottomUIView.addSubview(line)
+        line.addGrayBottomBorderTo(view: bottomUIView, multiplier: 0.8, bottom: false, centered: true, color: UIColor.lightGray)
+    }
+    
+    func deleteBottomSubview(){
+        bottomUIView.removeFromSuperview()
+    }
+    
 }
