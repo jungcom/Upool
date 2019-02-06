@@ -10,7 +10,14 @@ import UIKit
 
 class PassengerImageView: UIView {
 
-    //let rideRequest : RideRequest?
+    var rideRequest : RideRequest? {
+        didSet{
+            if rideRequest?.requestStatus == 1{
+                changeToJoined()
+            }
+            passengerLabel.text = rideRequest?.fromIdFirstName
+        }
+    }
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -22,7 +29,7 @@ class PassengerImageView: UIView {
     //we use lazy properties for each view
     lazy var passengerLabel : UILabel = {
         let label = UILabel()
-        label.text = "Anthony"
+        label.text = "None"
         label.textColor = UIColor.gray
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 10)
@@ -98,7 +105,7 @@ class PassengerImageView: UIView {
             NSAttributedString.Key.foregroundColor : Colors.maroon]
         let myString = NSMutableAttributedString(string: "Joined", attributes: stringAtt)
         myString.append(attachmentString)
-        passengerLabel.attributedText = myString
+        statusLabel.attributedText = myString
     }
 
 }

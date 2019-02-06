@@ -50,6 +50,7 @@ class MyStatusViewController: UICollectionViewController {
     @objc func retrieveMyRidePosts(){
         //Reset Posts
         self.myRidePosts.removeAll()
+        self.myPassengerRequests.removeAll()
         
         //Retrieve Data
         let docRef = db.collection("ridePosts")
@@ -190,7 +191,9 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! OfferedRidesCollectionViewCell
+        cell.requests = self.myPassengerRequests[indexPath.row]
         cell.changeView()
+        print(myPassengerRequests[indexPath.row])
         collectionView.performBatchUpdates(nil, completion: nil)
     }
     

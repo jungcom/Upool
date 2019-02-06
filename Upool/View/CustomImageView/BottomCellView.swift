@@ -10,7 +10,7 @@ import UIKit
 
 class BottomCellView: UIView {
     
-    //let rideRequests : [RideRequest]?
+    var rideRequests : [RideRequest]?
     
     lazy var passengerLabel : UILabel = {
         let label = UILabel()
@@ -43,19 +43,45 @@ class BottomCellView: UIView {
         return view
     }()
     
+    var passengerViewArray : [PassengerImageView] {
+        return [passengerOne,passengerTwo,passengerThree,passengerFour]
+    }
+    
     //we use lazy properties for each view
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        print("BottomViewSetup")
         setupView()
         setupPassengerStackView()
         setupConstraints()
         addDividingBorder()
     }
     
+    init(requests:[RideRequest]){
+        self.init()
+        print("BottomViewSetup with request")
+        self.rideRequests = requests
+        setRequestData()
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupView()
+        setupPassengerStackView()
+        setupConstraints()
+        addDividingBorder()
+    }
+    
+    func setRequestData(){
+        if let rideRequests = rideRequests{
+            var index = 0
+            for request in rideRequests{
+                passengerViewArray[index].rideRequest = request
+                index += 1
+            }
+        }
+
     }
     
     private func setupView() {

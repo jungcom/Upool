@@ -18,6 +18,7 @@ class RideDetailViewController: UIViewController {
     let db = Firestore.firestore()
     var ridePost : RidePost!
     var driver : UPoolUser?
+    var currentUser : UPoolUser!
     
     let scrollView = UIScrollView()
     
@@ -166,7 +167,20 @@ class RideDetailViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setupUI()
+        retrieveCurrentUser()
         retrieveDriver()
+    }
+    
+    func retrieveCurrentUser(){
+        db.collection("users").document(authUser!.uid).getDocument { (snapShot, err) in
+            if let err = err{
+                print(err.localizedDescription)
+            } else {
+                if let dictionary = snapShot?.data(){
+                    self.currentUser = UPoolUser(dictionary: dictionary)
+                }
+            }
+        }
     }
     
     @objc func handleMessage(){
@@ -187,13 +201,12 @@ class RideDetailViewController: UIViewController {
     
     func sendRequestToDriver(){
         let rideRequest = RideRequest()
-        if let user = authUser{
-            rideRequest.fromId = user.uid
-        }
+        rideRequest.fromId = currentUser.uid
         rideRequest.toDriverId = driver?.uid
         rideRequest.timeStamp = Date()
         rideRequest.requestStatus = 0
         rideRequest.ridePostId = ridePost.ridePostUid
+        rideRequest.fromIdFirstName = currentUser.firstName
         db.collection("rideRequests").addDocument(data: rideRequest.dictionary)
     }
     

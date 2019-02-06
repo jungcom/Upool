@@ -122,20 +122,6 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         UIView.dropShadow(view: self)
     }
     
-    //Cell changes
-    func changeView(){
-        topViewHeightConstraintWhenTapped.isActive = true
-        topViewHeightConstraintWhenNotTapped.isActive = false
-        setupBottomViews()
-
-    }
-    
-    func returnToOriginalView(){
-        topViewHeightConstraintWhenTapped.isActive = false
-        topViewHeightConstraintWhenNotTapped.isActive = true
-        deleteBottomSubview()
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -210,22 +196,40 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
     
     //MARK: Bottom View
     
-    lazy var bottomUIView : BottomCellView = {
-        let bottom = BottomCellView()
-        return bottom
-    }()
+    //Cell changes
+    func changeView(){
+        topViewHeightConstraintWhenTapped.isActive = true
+        topViewHeightConstraintWhenNotTapped.isActive = false
+        setupBottomViews()
+    }
+    
+    func returnToOriginalView(){
+        topViewHeightConstraintWhenTapped.isActive = false
+        topViewHeightConstraintWhenNotTapped.isActive = true
+        deleteBottomSubview()
+    }
+    
+    var requests : [RideRequest]?
+    
+    var bottomUIView : BottomCellView?
     
     func setupBottomViews(){
-        addSubview(bottomUIView)
+        if let requests = requests{
+            bottomUIView = BottomCellView(requests: requests)
+        } else {
+            bottomUIView = BottomCellView()
+        }
+        addSubview(bottomUIView!)
         //Bottom View Constraints
-        bottomUIView.translatesAutoresizingMaskIntoConstraints = false
-        bottomUIView.topAnchor.constraint(equalTo: topUIView.bottomAnchor).isActive = true
-        bottomUIView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        bottomUIView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        bottomUIView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        bottomUIView!.translatesAutoresizingMaskIntoConstraints = false
+        bottomUIView!.topAnchor.constraint(equalTo: topUIView.bottomAnchor).isActive = true
+        bottomUIView!.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        bottomUIView!.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        bottomUIView!.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     }
     
     func deleteBottomSubview(){
+        guard let bottomUIView = bottomUIView else {return}
         bottomUIView.removeFromSuperview()
     }
     
