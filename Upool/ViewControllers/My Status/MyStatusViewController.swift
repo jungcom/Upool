@@ -25,6 +25,8 @@ class MyStatusViewController: UICollectionViewController {
     var isMyRides : Bool = true
     
     var myRidePosts = [RidePost]()
+    var myPassengerRequests = [[RideRequest]]()
+    
     var myRequests = [RideRequest]()
     var joinedRidePosts = [RidePost]()
     var pendingRidePosts = [RidePost]()
@@ -57,13 +59,12 @@ class MyStatusViewController: UICollectionViewController {
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
+                    print("My Ride Posts : \(document.documentID) => \(document.data())")
                     if let post = RidePost(dictionary: document.data()){
                         self.myRidePosts.append(post)
                     }
                 }
-                self.collectionView.reloadData()
-                self.endRefresher()
+                self.retrieveMyPassengers()
             }
         }
     }
@@ -107,6 +108,28 @@ class MyStatusViewController: UICollectionViewController {
                             self.joinedRidePosts.append(post)
                         }
                     }
+                    self.collectionView.reloadData()
+                    self.endRefresher()
+                }
+            })
+        }
+    }
+    
+    func retrieveMyPassengers(){
+        var index = 0
+        for ridePost in myRidePosts{
+            myPassengerRequests.append([])
+            db.collection("rideRequests").whereField("ridePostId", isEqualTo: ridePost.ridePostUid!).getDocuments(completion: { (snapshot, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    for document in snapshot!.documents {
+                        print("My Passenger Requests : \(document.documentID) => \(document.data())")
+                        if let request = RideRequest(dictionary: document.data()){
+                            self.myPassengerRequests[index].append(request)
+                        }
+                    }
+                    index += 1
                     self.collectionView.reloadData()
                     self.endRefresher()
                 }
@@ -180,7 +203,7 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionView.indexPathsForSelectedItems?.first {
         case .some(indexPath):
-            return CGSize(width: view.frame.width * 0.9, height: 250)
+            return CGSize(width: view.frame.width * 0.9, height: 300)
         default:
             return CGSize(width: view.frame.width * 0.9, height: 100)
         }
@@ -200,14 +223,12 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
                 print("My Rides")
                 self.isMyRides = true
                 collectionView.reloadData()
-                collectionView.performBatchUpdates(nil, completion: nil)
-                collectionView.reloadInputViews()
+                
             } else {
                 print("Pending Rides")
                 self.isMyRides = false
                 collectionView.reloadData()
-                collectionView.performBatchUpdates(nil, completion: nil)
-                collectionView.reloadInputViews()
+                
             }
         }
         return header

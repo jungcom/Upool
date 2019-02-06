@@ -10,6 +10,8 @@ import UIKit
 
 class BottomCellView: UIView {
     
+    //let rideRequests : [RideRequest]?
+    
     lazy var passengerLabel : UILabel = {
         let label = UILabel()
         label.text = "Passengers"
@@ -57,7 +59,6 @@ class BottomCellView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = .white
         addSubview(passengerLabel)
     }
     
@@ -66,7 +67,7 @@ class BottomCellView: UIView {
         passengerStackView.axis = .horizontal
         passengerStackView.alignment = .center
         passengerStackView.distribution = .fillEqually
-        passengerStackView.spacing = 25
+        passengerStackView.spacing = 15
         
         addSubview(passengerStackView)
     }
@@ -81,9 +82,9 @@ class BottomCellView: UIView {
         
         //PassengerLabel Constraints
         passengerStackView.translatesAutoresizingMaskIntoConstraints = false
-        passengerStackView.topAnchor.constraint(equalTo: passengerLabel.bottomAnchor, constant:10).isActive = true
+        passengerStackView.centerYAnchor.constraint(equalTo: centerYAnchor, constant : 8).isActive = true
         passengerStackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        passengerStackView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.6).isActive = true
+        passengerStackView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5).isActive = true
         passengerStackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9).isActive = true
                 
     }

@@ -167,7 +167,7 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         topUIView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         //save the constraint to change later
         topViewHeightConstraintWhenNotTapped = topUIView.heightAnchor.constraint(equalTo: heightAnchor)
-        topViewHeightConstraintWhenTapped = topUIView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4)
+        topViewHeightConstraintWhenTapped = topUIView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: (1.0/3.0))
         topViewHeightConstraintWhenNotTapped.isActive = true
         topUIView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         
