@@ -117,7 +117,7 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame:frame)
         setupTopViews()
-        setupStackView()
+        setupLocationStackView()
         setupTopConstraints()
         UIView.dropShadow(view: self)
     }
@@ -127,8 +127,7 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         topViewHeightConstraintWhenTapped.isActive = true
         topViewHeightConstraintWhenNotTapped.isActive = false
         setupBottomViews()
-        setupBottomConstraints()
-        addDividingBorder()
+
     }
     
     func returnToOriginalView(){
@@ -152,7 +151,7 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         addSubview(topUIView)
     }
     
-    func setupStackView(){
+    func setupLocationStackView(){
         locationStackView = UIStackView(arrangedSubviews: [departureCityLabel, rightArrowIconImageView, destinationCityLabel])
         locationStackView.axis = .horizontal
         locationStackView.distribution = .equalCentering
@@ -211,21 +210,14 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
     
     //MARK: Bottom View
     
-    let bottomUIView : UIView = {
-        let bottom = UIView()
+    lazy var bottomUIView : BottomCellView = {
+        let bottom = BottomCellView()
         return bottom
     }()
     
-    
-    
-    //inside function
-    
     func setupBottomViews(){
         addSubview(bottomUIView)
-
-    }
-    
-    func setupBottomConstraints(){
+        //Bottom View Constraints
         bottomUIView.translatesAutoresizingMaskIntoConstraints = false
         bottomUIView.topAnchor.constraint(equalTo: topUIView.bottomAnchor).isActive = true
         bottomUIView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
@@ -233,14 +225,10 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         bottomUIView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     }
     
-    func addDividingBorder(){
-        let line = UIView()
-        bottomUIView.addSubview(line)
-        line.addGrayBottomBorderTo(view: bottomUIView, multiplier: 0.8, bottom: false, centered: true, color: UIColor.lightGray)
-    }
-    
     func deleteBottomSubview(){
         bottomUIView.removeFromSuperview()
     }
+    
+    
     
 }

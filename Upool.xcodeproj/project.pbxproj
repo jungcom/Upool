@@ -17,6 +17,8 @@
 		4E49BFDF220928F2002FB09A /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E49BFDE220928F2002FB09A /* ResetPasswordViewController.swift */; };
 		4E49BFE3220940FC002FB09A /* MyStatusSectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E49BFE2220940FC002FB09A /* MyStatusSectionHeaderCell.swift */; };
 		4E49BFE52209455F002FB09A /* MyStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E49BFE42209455F002FB09A /* MyStatus.swift */; };
+		4E5F9E17220A943F0037A10C /* PassengerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F9E16220A943F0037A10C /* PassengerImageView.swift */; };
+		4E5F9E19220A98F30037A10C /* BottomCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F9E18220A98F30037A10C /* BottomCellView.swift */; };
 		4E8B4C722201219B002EC784 /* CreateRideCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8B4C712201219B002EC784 /* CreateRideCalendar.swift */; };
 		4E8B4C742201F290002EC784 /* MyStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8B4C732201F290002EC784 /* MyStatusViewController.swift */; };
 		4E8B4C7622023243002EC784 /* CreateRideTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8B4C7522023243002EC784 /* CreateRideTimePicker.swift */; };
@@ -57,6 +59,8 @@
 		4E49BFDE220928F2002FB09A /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		4E49BFE2220940FC002FB09A /* MyStatusSectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStatusSectionHeaderCell.swift; sourceTree = "<group>"; };
 		4E49BFE42209455F002FB09A /* MyStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStatus.swift; sourceTree = "<group>"; };
+		4E5F9E16220A943F0037A10C /* PassengerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerImageView.swift; sourceTree = "<group>"; };
+		4E5F9E18220A98F30037A10C /* BottomCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCellView.swift; sourceTree = "<group>"; };
 		4E8B4C712201219B002EC784 /* CreateRideCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideCalendar.swift; sourceTree = "<group>"; };
 		4E8B4C732201F290002EC784 /* MyStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStatusViewController.swift; sourceTree = "<group>"; };
 		4E8B4C7522023243002EC784 /* CreateRideTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideTimePicker.swift; sourceTree = "<group>"; };
@@ -110,6 +114,15 @@
 				4E49BFDE220928F2002FB09A /* ResetPasswordViewController.swift */,
 			);
 			path = SignUp;
+			sourceTree = "<group>";
+		};
+		4E5F9E15220A928E0037A10C /* CustomImageView */ = {
+			isa = PBXGroup;
+			children = (
+				4E5F9E18220A98F30037A10C /* BottomCellView.swift */,
+				4E5F9E16220A943F0037A10C /* PassengerImageView.swift */,
+			);
+			path = CustomImageView;
 			sourceTree = "<group>";
 		};
 		4E8B4C7022012183002EC784 /* CreateRide */ = {
@@ -256,6 +269,7 @@
 				4E9AA4E82209F7BC00609E39 /* Chat.swift */,
 				4E8B4C7022012183002EC784 /* CreateRide */,
 				4EA3D8A721FA0D66003D7CE7 /* CellsAndLayout */,
+				4E5F9E15220A928E0037A10C /* CustomImageView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -448,6 +462,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E431FA921FE90810081CA52 /* CreateRideViewController.swift in Sources */,
+				4E5F9E19220A98F30037A10C /* BottomCellView.swift in Sources */,
 				4EA3D8A921FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift in Sources */,
 				4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */,
 				4E49BFE52209455F002FB09A /* MyStatus.swift in Sources */,
@@ -458,6 +473,7 @@
 				4E8DD4FF2203FF760077D85C /* OfferedRides.swift in Sources */,
 				4E431FAD21FEA1F80081CA52 /* RideDetail.swift in Sources */,
 				4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */,
+				4E5F9E17220A943F0037A10C /* PassengerImageView.swift in Sources */,
 				4E8B4C7622023243002EC784 /* CreateRideTimePicker.swift in Sources */,
 				4E8B4C7822023A43002EC784 /* SearchLocationViewController.swift in Sources */,
 				4E8B4C742201F290002EC784 /* MyStatusViewController.swift in Sources */,
