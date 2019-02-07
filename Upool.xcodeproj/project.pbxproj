@@ -22,6 +22,7 @@
 		4E5F9E1C220B85120037A10C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F9E1B220B85120037A10C /* ProfileViewController.swift */; };
 		4E5F9E1E220B882A0037A10C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F9E1D220B882A0037A10C /* Profile.swift */; };
 		4E5F9E20220BCB960037A10C /* UIDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F9E1F220BCB960037A10C /* UIDate.swift */; };
+		4E5F9E22220BF8060037A10C /* ChatLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F9E21220BF8060037A10C /* ChatLogViewController.swift */; };
 		4E8B4C722201219B002EC784 /* CreateRideCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8B4C712201219B002EC784 /* CreateRideCalendar.swift */; };
 		4E8B4C742201F290002EC784 /* MyStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8B4C732201F290002EC784 /* MyStatusViewController.swift */; };
 		4E8B4C7622023243002EC784 /* CreateRideTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8B4C7522023243002EC784 /* CreateRideTimePicker.swift */; };
@@ -67,6 +68,7 @@
 		4E5F9E1B220B85120037A10C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4E5F9E1D220B882A0037A10C /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		4E5F9E1F220BCB960037A10C /* UIDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDate.swift; sourceTree = "<group>"; };
+		4E5F9E21220BF8060037A10C /* ChatLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogViewController.swift; sourceTree = "<group>"; };
 		4E8B4C712201219B002EC784 /* CreateRideCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideCalendar.swift; sourceTree = "<group>"; };
 		4E8B4C732201F290002EC784 /* MyStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStatusViewController.swift; sourceTree = "<group>"; };
 		4E8B4C7522023243002EC784 /* CreateRideTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideTimePicker.swift; sourceTree = "<group>"; };
@@ -139,6 +141,60 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		4E5F9E23220C00D90037A10C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				4EEB91F721F7A6AA0079209B /* Login.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		4E5F9E24220C00E10037A10C /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				4EA3D8A321F9168E003D7CE7 /* SignUp.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		4E5F9E25220C00F00037A10C /* OfferedRides */ = {
+			isa = PBXGroup;
+			children = (
+				4E8DD4FE2203FF760077D85C /* OfferedRides.swift */,
+				4EA3D8A821FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift */,
+				4E431FA621FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift */,
+				4E431FAC21FEA1F80081CA52 /* RideDetail.swift */,
+				4E8B4C7022012183002EC784 /* CreateRide */,
+			);
+			path = OfferedRides;
+			sourceTree = "<group>";
+		};
+		4E5F9E26220C01200037A10C /* MyStatus */ = {
+			isa = PBXGroup;
+			children = (
+				4E49BFE42209455F002FB09A /* MyStatus.swift */,
+				4E49BFE2220940FC002FB09A /* MyStatusSectionHeaderCell.swift */,
+				4E5F9E15220A928E0037A10C /* CustomImageView */,
+			);
+			path = MyStatus;
+			sourceTree = "<group>";
+		};
+		4E5F9E27220C01530037A10C /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				4E9AA4E82209F7BC00609E39 /* Chat.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		4E5F9E28220C01610037A10C /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				4E5F9E1D220B882A0037A10C /* Profile.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		4E8B4C7022012183002EC784 /* CreateRide */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,18 +247,9 @@
 			isa = PBXGroup;
 			children = (
 				4E9AA4E62209F67E00609E39 /* ChatViewController.swift */,
+				4E5F9E21220BF8060037A10C /* ChatLogViewController.swift */,
 			);
 			path = Chat;
-			sourceTree = "<group>";
-		};
-		4EA3D8A721FA0D66003D7CE7 /* CellsAndLayout */ = {
-			isa = PBXGroup;
-			children = (
-				4EA3D8A821FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift */,
-				4E431FA621FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift */,
-				4E49BFE2220940FC002FB09A /* MyStatusSectionHeaderCell.swift */,
-			);
-			path = CellsAndLayout;
 			sourceTree = "<group>";
 		};
 		4EEB91CF21F7679F0079209B = {
@@ -277,16 +324,12 @@
 		4EEB91F621F7A6880079209B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4EEB91F721F7A6AA0079209B /* Login.swift */,
-				4EA3D8A321F9168E003D7CE7 /* SignUp.swift */,
-				4E8DD4FE2203FF760077D85C /* OfferedRides.swift */,
-				4E431FAC21FEA1F80081CA52 /* RideDetail.swift */,
-				4E49BFE42209455F002FB09A /* MyStatus.swift */,
-				4E9AA4E82209F7BC00609E39 /* Chat.swift */,
-				4E5F9E1D220B882A0037A10C /* Profile.swift */,
-				4E8B4C7022012183002EC784 /* CreateRide */,
-				4EA3D8A721FA0D66003D7CE7 /* CellsAndLayout */,
-				4E5F9E15220A928E0037A10C /* CustomImageView */,
+				4E5F9E23220C00D90037A10C /* Login */,
+				4E5F9E24220C00E10037A10C /* SignUp */,
+				4E5F9E25220C00F00037A10C /* OfferedRides */,
+				4E5F9E26220C01200037A10C /* MyStatus */,
+				4E5F9E27220C01530037A10C /* Chat */,
+				4E5F9E28220C01610037A10C /* Profile */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -491,6 +534,7 @@
 				4E431FAD21FEA1F80081CA52 /* RideDetail.swift in Sources */,
 				4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */,
 				4E5F9E17220A943F0037A10C /* PassengerImageView.swift in Sources */,
+				4E5F9E22220BF8060037A10C /* ChatLogViewController.swift in Sources */,
 				4E8B4C7622023243002EC784 /* CreateRideTimePicker.swift in Sources */,
 				4E8B4C7822023A43002EC784 /* SearchLocationViewController.swift in Sources */,
 				4E8B4C742201F290002EC784 /* MyStatusViewController.swift in Sources */,

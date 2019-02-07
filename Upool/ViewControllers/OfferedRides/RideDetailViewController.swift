@@ -184,7 +184,8 @@ class RideDetailViewController: UIViewController {
     }
     
     @objc func handleMessage(){
-        
+        let chatlogVC = ChatLogViewController(collectionViewLayout:UICollectionViewFlowLayout())
+        navigationController?.pushViewController(chatlogVC, animated: true)
     }
     
     @objc func handleJoinRide(){
