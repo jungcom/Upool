@@ -17,10 +17,5 @@ extension ChatViewController{
         imageView.image = image
         
         navigationItem.titleView = imageView
-        UINavigationBar.appearance().barTintColor = Colors.maroon
-        UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor : UIColor.white,
-        ]
     }
 }

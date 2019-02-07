@@ -17,10 +17,6 @@ extension ProfileViewController{
         
         navigationItem.titleView = imageView
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(handleLogout))
-        UINavigationBar.appearance().barTintColor = Colors.maroon
-        UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor : UIColor.white,
-        ]
+
     }
 }

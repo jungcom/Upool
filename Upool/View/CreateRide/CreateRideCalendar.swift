@@ -59,8 +59,8 @@ extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegat
         CalendarView.Style.cellColorDefault         = UIColor.white
         CalendarView.Style.headerTextColor          = UIColor.black
         CalendarView.Style.cellTextColorDefault     = UIColor.black
-        CalendarView.Style.cellTextColorToday       = UIColor(red:0.31, green:0.44, blue:0.47, alpha:1.00)
-        CalendarView.Style.cellColorToday           = UIColor(red:1.00, green:0.84, blue:0.64, alpha:1.00)
+        CalendarView.Style.cellTextColorToday       = UIColor.black
+        CalendarView.Style.cellColorToday           = UIColor.white
         
         CalendarView.Style.cellSelectedBorderColor  = Colors.maroon
         CalendarView.Style.cellSelectedColor        = Colors.maroon
@@ -149,7 +149,8 @@ extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegat
     
     func calendar(_ calendar: CalendarView, didSelectDate date: Date, withEvents events: [CalendarEvent]) {
         print("Did Select: \(date) with \(events.count) events")
-        departureDate = date
+        
+        departureDate = date.toGlobalTime()
     }
     
     func calendar(_ calendar: CalendarView, canSelectDate date: Date) -> Bool {

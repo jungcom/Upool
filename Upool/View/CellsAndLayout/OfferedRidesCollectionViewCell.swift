@@ -12,7 +12,6 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
     let dateFormatter : DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd, "
-        formatter.timeZone = TimeZone(abbreviation: "GMT-0:00")
         return formatter
     }()
     

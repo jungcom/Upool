@@ -21,6 +21,7 @@
 		4E5F9E19220A98F30037A10C /* BottomCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F9E18220A98F30037A10C /* BottomCellView.swift */; };
 		4E5F9E1C220B85120037A10C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F9E1B220B85120037A10C /* ProfileViewController.swift */; };
 		4E5F9E1E220B882A0037A10C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F9E1D220B882A0037A10C /* Profile.swift */; };
+		4E5F9E20220BCB960037A10C /* UIDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F9E1F220BCB960037A10C /* UIDate.swift */; };
 		4E8B4C722201219B002EC784 /* CreateRideCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8B4C712201219B002EC784 /* CreateRideCalendar.swift */; };
 		4E8B4C742201F290002EC784 /* MyStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8B4C732201F290002EC784 /* MyStatusViewController.swift */; };
 		4E8B4C7622023243002EC784 /* CreateRideTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8B4C7522023243002EC784 /* CreateRideTimePicker.swift */; };
@@ -65,6 +66,7 @@
 		4E5F9E18220A98F30037A10C /* BottomCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCellView.swift; sourceTree = "<group>"; };
 		4E5F9E1B220B85120037A10C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4E5F9E1D220B882A0037A10C /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		4E5F9E1F220BCB960037A10C /* UIDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDate.swift; sourceTree = "<group>"; };
 		4E8B4C712201219B002EC784 /* CreateRideCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideCalendar.swift; sourceTree = "<group>"; };
 		4E8B4C732201F290002EC784 /* MyStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStatusViewController.swift; sourceTree = "<group>"; };
 		4E8B4C7522023243002EC784 /* CreateRideTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideTimePicker.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				4EA3D8A121F90609003D7CE7 /* UITextField.swift */,
 				4EAE28F021FF5455006966E4 /* UIView+UIButtons.swift */,
 				4EE58FA722052F6900918778 /* Encodable+Decodable.swift */,
+				4E5F9E1F220BCB960037A10C /* UIDate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				4E49BFD92208C140002FB09A /* EmailSentViewController.swift in Sources */,
 				4E5F9E1C220B85120037A10C /* ProfileViewController.swift in Sources */,
 				4E49BFDF220928F2002FB09A /* ResetPasswordViewController.swift in Sources */,
+				4E5F9E20220BCB960037A10C /* UIDate.swift in Sources */,
 				4E9AA4E72209F67E00609E39 /* ChatViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
