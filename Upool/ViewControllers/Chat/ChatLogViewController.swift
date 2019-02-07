@@ -72,6 +72,6 @@ class ChatLogViewController : UICollectionViewController{
         }
         
         let userMessageRef = db.collection("user-Messages").document(message.fromId)
-        userMessageRef.setData([sentMessageId.documentID : 1], merge:true)        
+        userMessageRef.setData([sentMessageId.documentID : 1])
     }
 }

@@ -34,23 +34,30 @@ class ChatViewController: UITableViewController {
     }
     
     func observeUserMessages(){
-        db.collection("messages").addSnapshotListener { (snapshot, error) in
+        db.collection("user-Messages").document((currentUser?.uid)!).addSnapshotListener { (snapshot, error) in
             guard let snapshot = snapshot else {
                 print("Error fetching document: \(error!)")
                 return
             }
             
-            for document in snapshot.documents {
-                print("\(document.documentID) => \(document.data())")
-                if let message = Message(dictionary: document.data()){
-                    self.messages.append(message)
-                    self.messagesDictionary[message.toId] = message
-                    self.messages = Array(self.messagesDictionary.values)
-                    self.messages.sort(by: { (m1, m2) -> Bool in
-                        return m1.timeStamp > m2.timeStamp
-                    })
-                }
+            print(Array((snapshot.data()?.keys)!))
+            let messageIds = Array((snapshot.data()?.keys)!)
+            for messageId in messageIds{
+                self.db.collection("messages").document(messageId).getDocument(completion: { (docSnapshot, error) in
+                    guard let docSnapshot = docSnapshot else {return}
+                    print("\(docSnapshot.documentID) => \(docSnapshot.data())")
+                    if let message = Message(dictionary: docSnapshot.data()!){
+                        self.messages.append(message)
+                        self.messagesDictionary[message.toId] = message
+                    }
+                })
             }
+            
+            //Group by user
+            self.messages = Array(self.messagesDictionary.values)
+            self.messages.sort(by: { (m1, m2) -> Bool in
+                return m1.timeStamp > m2.timeStamp
+            })
             self.tableView.reloadData()
                 
         }
