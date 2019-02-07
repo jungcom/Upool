@@ -64,13 +64,14 @@ class ChatLogViewController : UICollectionViewController{
         message.fromId = fromUser?.uid
         message.toId = toUser?.uid
         message.timeStamp = Date()
-        db.collection("messages").addDocument(data: message.dictionary) { (error) in
+        
+        let sentMessageId = db.collection("messages").addDocument(data: message.dictionary) { (error) in
             if let error = error{
                 print(error.localizedDescription)
-            } else {
-                
             }
         }
         
+        let userMessageRef = db.collection("user-Messages").document(message.fromId)
+        userMessageRef.setData([sentMessageId.documentID : 1], merge:true)        
     }
 }

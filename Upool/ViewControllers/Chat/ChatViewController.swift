@@ -81,6 +81,19 @@ extension ChatViewController{
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let chatlogVC = ChatLogViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        db.collection("users").document(messages[indexPath.row].toId).getDocument { (snapshot, error) in
+            if let error = error{
+                print(error.localizedDescription)
+            } else {
+                let toUser = UPoolUser(dictionary: (snapshot?.data())!)
+                chatlogVC.toUser = toUser
+            }
+            self.navigationController?.pushViewController(chatlogVC, animated: true)
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80.0
     }
