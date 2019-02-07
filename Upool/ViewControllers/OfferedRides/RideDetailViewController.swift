@@ -184,7 +184,8 @@ class RideDetailViewController: UIViewController {
     }
     
     @objc func handleMessage(){
-        let chatlogVC = ChatLogViewController(collectionViewLayout:UICollectionViewFlowLayout())
+        let chatlogVC = ChatLogViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        chatlogVC.toUser = driver
         navigationController?.pushViewController(chatlogVC, animated: true)
     }
     

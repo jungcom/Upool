@@ -7,8 +7,24 @@
 //
 
 import UIKit
+import Firebase
 
 class ChatLogViewController : UICollectionViewController{
+    let db = Firestore.firestore()
+    
+    private var messages : [Message] = []
+    
+    private var fromUser : User?{
+        return Auth.auth().currentUser
+    }
+    
+    var toUser : UPoolUser?{
+        didSet{
+            navigationItem.title = toUser?.firstName
+        }
+    }
+    
+    //MARK : Input Text Views
     lazy var containerView : UIView = {
         let container = UIView()
         container.backgroundColor = UIColor.white
@@ -19,7 +35,7 @@ class ChatLogViewController : UICollectionViewController{
         let button = UIButton()
         button.setTitle("Send", for: .normal)
         button.setTitleColor(Colors.maroon, for: .normal)
-        button.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleSendMessage), for: .touchUpInside)
         return button
     }()
     
@@ -28,50 +44,27 @@ class ChatLogViewController : UICollectionViewController{
         textField.placeholder = "Enter message..."
         return textField
     }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.backgroundColor = UIColor.groupTableViewBackground
-        navigationItem.title = "HELLO"
+        setupInitialUI()
         setupInputView()
-        
-        self.tabBarController?.tabBar.barTintColor = .white
-        self.tabBarController?.tabBar.backgroundColor = .white
-        self.tabBarController?.tabBar.isHidden = true
-        self.tabBarController?.tabBar.isTranslucent = true
     }
     
-    func setupInputView(){
-        
-        view.addSubview(containerView)
-        containerView.addSubview(sendButton)
-        containerView.addSubview(inputTextField)
-        
-        //Constraints
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        containerView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        //Button Contraints
-        sendButton.translatesAutoresizingMaskIntoConstraints = false
-        sendButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        sendButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        sendButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier:0.2).isActive = true
-        sendButton.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
-        
-        //Button Contraints
-        inputTextField.translatesAutoresizingMaskIntoConstraints = false
-        inputTextField.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        inputTextField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8).isActive = true
-        inputTextField.trailingAnchor.constraint(equalTo: sendButton.leadingAnchor).isActive = true
-        inputTextField.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
-        
-        //separator line
-        let topLine = UIView()
-        containerView.addSubview(topLine)
-        topLine.addGrayBottomBorderTo(view: containerView, multiplier: 1.0, bottom: false, centered: true, color: Colors.maroon)
+    @objc func handleSendMessage(){
+        let message = Message()
+        message.text = inputTextField.text
+        message.fromId = fromUser?.uid
+        message.toId = toUser?.uid
+        message.timeStamp = Date()
+        db.collection("messages").addDocument(data: message.dictionary) { (error) in
+            if let error = error{
+                print(error.localizedDescription)
+            } else {
+                
+            }
+        }
         
     }
 }
