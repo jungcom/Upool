@@ -52,6 +52,12 @@ class ChatLogViewController : UICollectionViewController{
         setupInputView()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.isTranslucent = false
+    }
+    
     @objc func handleSendMessage(){
         let message = Message()
         message.text = inputTextField.text

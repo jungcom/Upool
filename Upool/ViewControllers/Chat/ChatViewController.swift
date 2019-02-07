@@ -68,18 +68,9 @@ extension ChatViewController{
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ChatUserCell
         let message = messages[indexPath.row]
-        cell.detailTextLabel?.text = message.text
-        db.collection("users").document(message.toId).getDocument { (snapshot, error) in
-            guard let snapshot = snapshot else {
-                print("Error fetching document: \(error!)")
-                return
-            }
-            if let toUser = UPoolUser(dictionary: snapshot.data()!){
-                cell.textLabel?.text = toUser.firstName
-            }
-        }
+        cell.message = message
         
         return cell
     }

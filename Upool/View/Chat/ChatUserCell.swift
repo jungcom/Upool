@@ -11,6 +11,8 @@ import Firebase
 
 class ChatUserCell: UITableViewCell {
     
+    let db = Firestore.firestore()
+    
     fileprivate func setupName() {
         let chatPartnerId: String?
         
@@ -34,18 +36,30 @@ class ChatUserCell: UITableViewCell {
     
     var message: Message?{
         didSet{
-            setupName()
+            //setupName()
+            
+            db.collection("users").document((message?.toId)!).getDocument { (snapshot, error) in
+                guard let snapshot = snapshot else {
+                    print("Error fetching document: \(error!)")
+                    return
+                }
+                if let toUser = UPoolUser(dictionary: snapshot.data()!){
+                    self.textLabel?.text = toUser.firstName
+                    if let profileImageUrl = toUser.profileImageUrl{
+                        self.profileImageView.loadImageUsingCacheWithUrlString(profileImageUrl)
+                    }
+                }
+            }
             
             //set text
             detailTextLabel?.text = message?.text
             
             //set timestamp
-//            if let seconds = message?.timeStamp?.doubleValue{
-//                let timeStampDate = NSDate(timeIntervalSince1970: seconds)
-//                let dateformatter = DateFormatter()
-//                dateformatter.dateFormat = "hh:mm a"
-//                timeLabel.text = dateformatter.string(from: timeStampDate as Date)
-//            }
+            if let time = message?.timeStamp{
+                let dateformatter = DateFormatter()
+                dateformatter.dateFormat = "h:mm a"
+                timeLabel.text = dateformatter.string(from: time)
+            }
         }
     }
     
