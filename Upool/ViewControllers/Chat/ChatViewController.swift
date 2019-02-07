@@ -15,6 +15,7 @@ class ChatViewController: UITableViewController {
     let db = Firestore.firestore()
     
     var messages = [Message]()
+    var messagesDictionary = [String:Message]()
     
     private var currentUser : User? {
         return Auth.auth().currentUser
@@ -43,6 +44,11 @@ class ChatViewController: UITableViewController {
                 print("\(document.documentID) => \(document.data())")
                 if let message = Message(dictionary: document.data()){
                     self.messages.append(message)
+                    self.messagesDictionary[message.toId] = message
+                    self.messages = Array(self.messagesDictionary.values)
+                    self.messages.sort(by: { (m1, m2) -> Bool in
+                        return m1.timeStamp > m2.timeStamp
+                    })
                 }
             }
             self.tableView.reloadData()
