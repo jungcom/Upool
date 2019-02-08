@@ -13,6 +13,8 @@ extension ChatLogViewController{
     func setupInitialUI(){
         collectionView.backgroundColor = UIColor.groupTableViewBackground
         collectionView.alwaysBounceVertical = true
+        collectionView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 80, right: 0)
+        collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
         self.tabBarController?.tabBar.isHidden = true
         self.tabBarController?.tabBar.isTranslucent = true
     }
@@ -20,8 +22,16 @@ extension ChatLogViewController{
     func setupInputView(){
         
         view.addSubview(containerView)
+        view.addSubview(bottomSafeArea)
         containerView.addSubview(sendButton)
         containerView.addSubview(inputTextField)
+        
+        //SafeArea View
+        bottomSafeArea.translatesAutoresizingMaskIntoConstraints = false
+        bottomSafeArea.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        bottomSafeArea.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        bottomSafeArea.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        bottomSafeArea.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         //Constraints
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -35,19 +45,20 @@ extension ChatLogViewController{
         sendButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         sendButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         sendButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier:0.2).isActive = true
-        sendButton.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
+        sendButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         
         //Button Contraints
         inputTextField.translatesAutoresizingMaskIntoConstraints = false
         inputTextField.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         inputTextField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8).isActive = true
         inputTextField.trailingAnchor.constraint(equalTo: sendButton.leadingAnchor).isActive = true
-        inputTextField.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
+        inputTextField.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         
         //separator line
         let topLine = UIView()
         containerView.addSubview(topLine)
         topLine.addGrayBottomBorderTo(view: containerView, multiplier: 1.0, bottom: false, centered: true, color: Colors.maroon)
         
+        scrollToBottom()
     }
 }
