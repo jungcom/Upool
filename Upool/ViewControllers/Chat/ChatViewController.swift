@@ -34,32 +34,67 @@ class ChatViewController: UITableViewController {
     }
     
     func observeUserMessages(){
-        db.collection("user-Messages").document((currentUser?.uid)!).addSnapshotListener { (snapshot, error) in
+         let listener = db.collection("user-Messages").document((currentUser?.uid)!).collection("userMessageIds").addSnapshotListener { (snapshot, error) in
             guard let snapshot = snapshot else {
-                print("Error fetching document: \(error!)")
+                print("Error fetching snapshots: \(error!)")
                 return
             }
-            
-            print(Array((snapshot.data()?.keys)!))
-            let messageIds = Array((snapshot.data()?.keys)!)
-            for messageId in messageIds{
-                self.db.collection("messages").document(messageId).getDocument(completion: { (docSnapshot, error) in
-                    guard let docSnapshot = docSnapshot else {return}
-                    print("\(docSnapshot.documentID) => \(docSnapshot.data())")
-                    if let message = Message(dictionary: docSnapshot.data()!){
-                        self.messages.append(message)
-                        self.messagesDictionary[message.toId] = message
-                    }
-                })
+
+            //listen for changes
+            snapshot.documentChanges.forEach { diff in
+                if (diff.type == .added) {
+                    print("New message: \(diff.document.data())")
+                    let messageID = diff.document.documentID
+                    self.db.collection("messages").document(messageID).getDocument(completion: { (messageSnapShot, error) in
+                        guard let messageSnapShot = messageSnapShot, let data = messageSnapShot.data() else {
+                            print("Error fetching snapshots: \(error!)")
+                            return
+                        }
+                        print("These are the ADDED observed messages :\(data)")
+                        if let message = Message(dictionary: data){
+                            self.messages.append(message)
+                            self.messagesDictionary[message.toId] = message
+                            
+                            //Group by user and update tableview at the last iteration
+                            self.messages = Array(self.messagesDictionary.values)
+                            self.messages.sort(by: { (m1, m2) -> Bool in
+                                return m1.timeStamp > m2.timeStamp
+                            })
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                            
+                        }
+                    })
+                } else if (diff.type == .modified) {
+                    print("Modified message: \(diff.document.data())")
+                } else if (diff.type == .removed) {
+                    print("Removed message: \(diff.document.data())")
+                } else {
+                    //If the data is already there, Don't retrieve it again
+                    let messageID = diff.document.documentID
+                    self.db.collection("messages").document(messageID).getDocument(completion: { (messageSnapShot, error) in
+                        guard let messageSnapShot = messageSnapShot, let data = messageSnapShot.data() else {
+                            print("Error fetching snapshots: \(error!)")
+                            return
+                        }
+                        print("These are the observed messages :\(data)")
+                        if let message = Message(dictionary: data){
+                            self.messages.append(message)
+                            self.messagesDictionary[message.toId] = message
+                            
+                            //Group by user and update tableview
+                            self.messages = Array(self.messagesDictionary.values)
+                            self.messages.sort(by: { (m1, m2) -> Bool in
+                                return m1.timeStamp > m2.timeStamp
+                            })
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                        }
+                    })
+                }
             }
-            
-            //Group by user
-            self.messages = Array(self.messagesDictionary.values)
-            self.messages.sort(by: { (m1, m2) -> Bool in
-                return m1.timeStamp > m2.timeStamp
-            })
-            self.tableView.reloadData()
-                
         }
     }
     
