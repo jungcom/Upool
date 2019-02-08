@@ -27,8 +27,10 @@ class ChatViewController: UITableViewController {
         // Do any additional setup after loading the view.
         
         //register cell
+        print("Chat did load")
+        messages.removeAll()
+        messagesDictionary.removeAll()
         tableView.register(ChatUserCell.self, forCellReuseIdentifier: cellId)
-        
         setupNavBar()
         observeUserMessages()
     }
@@ -53,8 +55,9 @@ class ChatViewController: UITableViewController {
                         print("These are the ADDED observed messages :\(data)")
                         if let message = Message(dictionary: data){
                             self.messages.append(message)
-                            self.messagesDictionary[message.toId] = message
-                            
+                            if let chatpartnerID = message.chatPartnerId(){
+                                self.messagesDictionary[chatpartnerID] = message
+                            }
                             //Group by user and update tableview at the last iteration
                             self.messages = Array(self.messagesDictionary.values)
                             self.messages.sort(by: { (m1, m2) -> Bool in
@@ -81,8 +84,9 @@ class ChatViewController: UITableViewController {
                         print("These are the observed messages :\(data)")
                         if let message = Message(dictionary: data){
                             self.messages.append(message)
-                            self.messagesDictionary[message.toId] = message
-                            
+                            if let chatpartnerID = message.chatPartnerId(){
+                                self.messagesDictionary[chatpartnerID] = message
+                            }
                             //Group by user and update tableview
                             self.messages = Array(self.messagesDictionary.values)
                             self.messages.sort(by: { (m1, m2) -> Bool in
@@ -125,7 +129,10 @@ extension ChatViewController{
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let chatlogVC = ChatLogViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        db.collection("users").document(messages[indexPath.row].toId).getDocument { (snapshot, error) in
+        let message = messages[indexPath.row]
+        guard let chatPartnerId = message.chatPartnerId() else {return}
+        
+        db.collection("users").document(chatPartnerId).getDocument { (snapshot, error) in
             if let error = error{
                 print(error.localizedDescription)
             } else {

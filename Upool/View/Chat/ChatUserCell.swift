@@ -13,34 +13,12 @@ class ChatUserCell: UITableViewCell {
     
     let db = Firestore.firestore()
     
-    fileprivate func setupName() {
-        let chatPartnerId: String?
+    fileprivate func setupNameAndProfileImage() {
         
-        if message?.fromId == Auth.auth().currentUser?.uid{
-            chatPartnerId = message?.toId
-        } else{
-            chatPartnerId = message?.fromId
-        }
-        
-        //Get User Info
-//        if let chatPartnerId = message?.chatPartnerId() {
-//            let ref = Database.database().reference(fromURL: Constants.databaseURL).child("users").child(chatPartnerId)
-//            ref.observeSingleEvent(of: .value, with: { (snapshot) in
-//                if let dictionary = snapshot.value as? [String:AnyObject]{
-//                    self.textLabel?.text = dictionary["firstName"] as? String
-//                }
-//            }, withCancel: nil)
-//
-//        }
-    }
-    
-    var message: Message?{
-        didSet{
-            //setupName()
-            
-            db.collection("users").document((message?.toId)!).getDocument { (snapshot, error) in
+        if let chatPartnerId = message?.chatPartnerId(){
+            db.collection("users").document(chatPartnerId).getDocument { (snapshot, error) in
                 guard let snapshot = snapshot else {
-                    print("Error fetching document: \(error!)")
+                    print("Error fetching document in Chat User Cell: \(error!)")
                     return
                 }
                 if let toUser = UPoolUser(dictionary: snapshot.data()!){
@@ -50,6 +28,12 @@ class ChatUserCell: UITableViewCell {
                     }
                 }
             }
+        }
+    }
+    
+    var message: Message?{
+        didSet{
+            setupNameAndProfileImage()
             
             //set text
             detailTextLabel?.text = message?.text

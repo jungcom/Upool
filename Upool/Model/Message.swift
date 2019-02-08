@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 @objcMembers
 class Message : NSObject ,Encodable,Decodable{
@@ -15,4 +16,12 @@ class Message : NSObject ,Encodable,Decodable{
     var toId: String!
     var text: String!
     var timeStamp : Date!
+    
+    func chatPartnerId() -> String?{
+        if fromId == Auth.auth().currentUser?.uid{
+            return toId
+        } else{
+            return fromId
+        }
+    }
 }
