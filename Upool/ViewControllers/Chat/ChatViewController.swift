@@ -44,32 +44,7 @@ class ChatViewController: UITableViewController {
 
             //listen for changes
             snapshot.documentChanges.forEach { diff in
-                if (diff.type == .added) {
-                    print("New message: \(diff.document.data())")
-                    let messageID = diff.document.documentID
-                    self.db.collection("messages").document(messageID).getDocument(completion: { (messageSnapShot, error) in
-                        guard let messageSnapShot = messageSnapShot, let data = messageSnapShot.data() else {
-                            print("Error fetching snapshots: \(error!)")
-                            return
-                        }
-                        print("These are the ADDED observed messages :\(data)")
-                        if let message = Message(dictionary: data){
-                            self.messages.append(message)
-                            if let chatpartnerID = message.chatPartnerId(){
-                                self.messagesDictionary[chatpartnerID] = message
-                            }
-                            //Group by user and update tableview at the last iteration
-                            self.messages = Array(self.messagesDictionary.values)
-                            self.messages.sort(by: { (m1, m2) -> Bool in
-                                return m1.timeStamp > m2.timeStamp
-                            })
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
-                            }
-                            
-                        }
-                    })
-                } else if (diff.type == .modified) {
+                if (diff.type == .modified) {
                     print("Modified message: \(diff.document.data())")
                 } else if (diff.type == .removed) {
                     print("Removed message: \(diff.document.data())")

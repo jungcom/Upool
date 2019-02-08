@@ -112,16 +112,16 @@ class LoginViewController: UIViewController {
 //        present(LoginViewController.presentMainPage(), animated: true, completion: nil)
         
         
-        let email = emailTextField.text
-        let password = passwordTextField.text
+//        let email = emailTextField.text
+//        let password = passwordTextField.text
+//
+//        guard email != "" && password != "" else{
+//            self.errorLabel.text = "Empty email/password field"
+//            return
+//        }
 
-        guard email != "" && password != "" else{
-            self.errorLabel.text = "Empty email/password field"
-            return
-        }
-
-//        let email : String? = "anthonylee@umass.edu"
-//        let password : String? = "123123"
+        let email : String? = "anthonylee@umass.edu"
+        let password : String? = "123123"
         
         Auth.auth().signIn(withEmail: email!, password: password!, completion: { (authResult, error) in
 

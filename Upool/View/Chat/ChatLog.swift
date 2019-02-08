@@ -12,6 +12,7 @@ extension ChatLogViewController{
     
     func setupInitialUI(){
         collectionView.backgroundColor = UIColor.groupTableViewBackground
+        collectionView.alwaysBounceVertical = true
         self.tabBarController?.tabBar.isHidden = true
         self.tabBarController?.tabBar.isTranslucent = true
     }
