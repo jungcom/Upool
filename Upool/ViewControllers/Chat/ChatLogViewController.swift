@@ -60,6 +60,7 @@ class ChatLogViewController : UICollectionViewController{
         collectionView.register(ChatMessageCell.self, forCellWithReuseIdentifier: chatCellId)
         
         setupInitialUI()
+        setupKeyboardNotifications()
         setupInputView()
         retrieveUserMessages()
     }
@@ -87,9 +88,12 @@ class ChatLogViewController : UICollectionViewController{
                         if let message = Message(dictionary: data){
                             if message.fromId == self.fromUser?.uid{
                                 self.messages.append(message)
-                                print("My Message : \(message)")
+                                print("My Message : \(message.text)")
                             }
                         }
+                        self.messages.sort(by: { (m1, m2) -> Bool in
+                            return m1.timeStamp < m2.timeStamp
+                        })
                         DispatchQueue.main.async {
                             self.collectionView.reloadData()
                         }
@@ -105,8 +109,10 @@ class ChatLogViewController : UICollectionViewController{
     }
     
     @objc func handleSendMessage(){
+        guard let text = inputTextField.text, text != "" else {return}
+        
         let message = Message()
-        message.text = inputTextField.text
+        message.text = text
         message.fromId = fromUser?.uid
         message.toId = toUser?.uid
         message.timeStamp = Date()
@@ -161,5 +167,34 @@ extension ChatLogViewController : UICollectionViewDelegateFlowLayout{
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         collectionView.collectionViewLayout.invalidateLayout()
+    }
+}
+
+extension ChatLogViewController {
+    //Textfield Notifications
+    func setupKeyboardNotifications(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapped))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            print("notification: Keyboard will show")
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= (keyboardSize.height - bottomSafeArea.frame.height)
+            }
+        }
+        
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        if let _ = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            self.view.frame.origin.y = 0
+        }
+    }
+    @objc func handleTapped(){
+        view.endEditing(true)
     }
 }
