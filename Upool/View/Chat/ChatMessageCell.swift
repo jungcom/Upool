@@ -7,14 +7,40 @@
 //
 
 import UIKit
+import Firebase
 
 class ChatMessageCell: UICollectionViewCell{
     
     var bubbleWidthAnchor: NSLayoutConstraint?
+    var bubbleTrailingAnchor: NSLayoutConstraint?
+    var bubbleLeadingAnchor: NSLayoutConstraint?
     
     var message : Message? {
         didSet{
             textView.text = message?.text
+            //if message is my message
+            if message!.fromId == Auth.auth().currentUser?.uid{
+                bubbleView.backgroundColor = Colors.maroon
+                textView.textColor = UIColor.white
+                bubbleLeadingAnchor?.isActive = false
+                bubbleTrailingAnchor?.isActive = true
+                profileImageView.isHidden = true
+            //else if message is other person's message
+            } else {
+                bubbleView.backgroundColor = UIColor.white
+                textView.textColor = UIColor.black
+                bubbleTrailingAnchor?.isActive = false
+                bubbleLeadingAnchor?.isActive = true
+                profileImageView.isHidden = false
+            }
+        }
+    }
+    
+    var toUser : UPoolUser?{
+        didSet{
+            if let url = toUser?.profileImageUrl{
+                profileImageView.loadImageUsingCacheWithUrlString(url)
+            }
         }
     }
     
@@ -34,6 +60,16 @@ class ChatMessageCell: UICollectionViewCell{
         return view
     }()
     
+    let profileImageView : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "ProfileIcon")
+        imageView.tintColor = UIColor.gray
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 3
+        imageView.layer.masksToBounds = true
+        return imageView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -43,12 +79,19 @@ class ChatMessageCell: UICollectionViewCell{
     func setupViews(){
         addSubview(bubbleView)
         addSubview(textView)
+        addSubview(profileImageView)
     }
     
     func setupConstraints(){
         //Bubble Constraints
         bubbleView.translatesAutoresizingMaskIntoConstraints = false
-        bubbleView.trailingAnchor.constraint(equalTo: trailingAnchor, constant:-8).isActive = true
+        //If the message is the user's
+        bubbleTrailingAnchor = bubbleView.trailingAnchor.constraint(equalTo: trailingAnchor, constant:-8)
+        bubbleTrailingAnchor?.isActive = true
+        //Else if it is the other
+        bubbleLeadingAnchor = bubbleView.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant:8)
+        bubbleTrailingAnchor?.isActive = false
+        
         bubbleView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         bubbleWidthAnchor = bubbleView.widthAnchor.constraint(equalToConstant: 200)
         bubbleWidthAnchor?.isActive = true
@@ -60,6 +103,13 @@ class ChatMessageCell: UICollectionViewCell{
         textView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         textView.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor).isActive = true
         textView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+        
+        //ImageView Constraints
+        profileImageView.translatesAutoresizingMaskIntoConstraints = false
+        profileImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
+        profileImageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        profileImageView.widthAnchor.constraint(equalToConstant: 32).isActive = true
+        profileImageView.heightAnchor.constraint(equalToConstant: 32).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

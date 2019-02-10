@@ -86,10 +86,8 @@ class ChatLogViewController : UICollectionViewController{
                     self.db.collection("messages").document(diff.document.documentID).getDocument(completion: { (docSnapshot, error) in
                         guard let docSnapshot = docSnapshot, let data = docSnapshot.data() else {return}
                         if let message = Message(dictionary: data){
-                            if message.fromId == self.fromUser?.uid{
-                                self.messages.append(message)
-                                print("My Message : \(message.text)")
-                            }
+                            self.messages.append(message)
+                            print("My Message : \(message.text)")
                         }
                         self.messages.sort(by: { (m1, m2) -> Bool in
                             return m1.timeStamp < m2.timeStamp
@@ -144,6 +142,7 @@ extension ChatLogViewController : UICollectionViewDelegateFlowLayout{
         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: chatCellId, for: indexPath) as! ChatMessageCell
         let message = messages[indexPath.row]
         cell.message = message
+        cell.toUser = toUser
         cell.bubbleWidthAnchor?.constant = estimateFrameForText(text: message.text).width + 32
         return cell
     }
@@ -194,6 +193,7 @@ extension ChatLogViewController {
             self.view.frame.origin.y = 0
         }
     }
+    
     @objc func handleTapped(){
         view.endEditing(true)
     }
