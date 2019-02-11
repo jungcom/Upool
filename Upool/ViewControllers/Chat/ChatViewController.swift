@@ -36,11 +36,6 @@ class ChatViewController: UITableViewController {
         observeUserMessages()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        print("ChatViewDidDisappear")
-    }
-    
     func observeUserMessages(){
         guard let id = currentUser?.uid else {return}
         
@@ -80,14 +75,14 @@ class ChatViewController: UITableViewController {
                                     return
                                 }
                                 print("These are the observed messages :\(data)")
-                                if let message = Message(dictionary: data){
+                                if let message = Message(dictionary: data), let id = message.chatPartnerId(){
                                     self.messages.append(message)
-                                    if let mostRecentMsgTimestamp = self.messagesDictionary[message.toId]?.timeStamp{
+                                    if let mostRecentMsgTimestamp = self.messagesDictionary[id]?.timeStamp{
                                         if message.timeStamp > mostRecentMsgTimestamp{
-                                            self.messagesDictionary[message.toId] = message
+                                            self.messagesDictionary[id] = message
                                         }
                                     } else {
-                                        self.messagesDictionary[message.toId] = message
+                                        self.messagesDictionary[id] = message
                                     }
                                     
                                     //leave Thread

@@ -27,9 +27,13 @@ class ChatLogViewController : UICollectionViewController{
         }
     }
     
+    //keyboard height
+    var keyboardSize : CGRect?
+    
     //to remove listeners
     var listener : ListenerRegistration?
     
+    //move input Bottom view
     var inputBottomAnchor : NSLayoutConstraint?
     
     //MARK : Input Text Views
@@ -87,12 +91,15 @@ class ChatLogViewController : UICollectionViewController{
         listener = db.collection("user-Messages").document(id).collection("toUserId").document(toUser.uid).collection("messageIds").addSnapshotListener{ (snapshot, error) in
             guard let snapshot = snapshot else {return}
             
+            //Threading handled
+            let group = DispatchGroup()
             snapshot.documentChanges.forEach { diff in
                 if (diff.type == .modified) {
                     print("Modified message: \(diff.document.data())")
                 } else if (diff.type == .removed) {
                     print("Removed message: \(diff.document.data())")
                 } else {
+                    group.enter()
                     //If the data is already there, Don't retrieve it again
                     self.db.collection("messages").document(diff.document.documentID).getDocument(completion: { (docSnapshot, error) in
                         guard let docSnapshot = docSnapshot, let data = docSnapshot.data() else {return}
@@ -100,21 +107,24 @@ class ChatLogViewController : UICollectionViewController{
                             self.messages.append(message)
                             print("My Message : \(message.text)")
                         }
-                        self.messages.sort(by: { (m1, m2) -> Bool in
-                            return m1.timeStamp < m2.timeStamp
-                        })
-                        DispatchQueue.main.async {
-                            self.collectionView.reloadData()
-                        }
+                        group.leave()
                     })
                 }
             }
+            
+            group.notify(queue: .main, execute: {
+                self.messages.sort(by: { (m1, m2) -> Bool in
+                    return m1.timeStamp < m2.timeStamp
+                })
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+                if let keyboardSize = self.keyboardSize{
+                    self.scrollToBottom(keyboardSize.height + self.containerView.bounds.height)
+                    print("scroolllll \(keyboardSize.height)")
+                }
+            })
         }
-    }
-    
-    func scrollToBottom() {
-        let bottomOffset = CGPoint(x: 0, y: collectionView.contentSize.height - collectionView.bounds.size.height + collectionView.contentInset.bottom + containerView.frame.height + bottomSafeArea.frame.height)
-        collectionView.setContentOffset(bottomOffset, animated: true)
     }
     
     @objc func handleSendMessage(){
@@ -144,7 +154,6 @@ class ChatLogViewController : UICollectionViewController{
         
         //Clear Input + Scroll To Bottom
         inputTextField.text = nil
-        scrollToBottom()
     }
 }
 
@@ -191,16 +200,21 @@ extension ChatLogViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    fileprivate func scrollToBottom(_ keyboardHeight: CGFloat) {
+        //Scroll to bottom of message
+        let bottomOffset = CGPoint(x: 0, y: collectionView.contentSize.height - collectionView.bounds.size.height + collectionView.contentInset.bottom + keyboardHeight)
+        collectionView.setContentOffset(bottomOffset, animated: true)
+    }
+    
     @objc func keyboardWillShow(notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue, let keyboardDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double {
             print("notification: Chat Keyboard will show")
+            self.keyboardSize = keyboardSize
             self.inputBottomAnchor?.constant = -keyboardSize.height
             UIView.animate(withDuration: keyboardDuration) {
                 self.view.layoutIfNeeded()
             }
-            //Scroll to bottom of message
-            let bottomOffset = CGPoint(x: 0, y: collectionView.contentSize.height - collectionView.bounds.size.height + collectionView.contentInset.bottom + keyboardSize.height)
-            collectionView.setContentOffset(bottomOffset, animated: true)
+            scrollToBottom(keyboardSize.height)
         }
     }
     

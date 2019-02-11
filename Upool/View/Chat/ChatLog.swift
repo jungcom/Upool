@@ -64,7 +64,5 @@ extension ChatLogViewController{
         let topLine = UIView()
         containerView.addSubview(topLine)
         topLine.addGrayBottomBorderTo(view: containerView, multiplier: 1.0, bottom: false, centered: true, color: Colors.maroon)
-        
-        scrollToBottom()
     }
 }
