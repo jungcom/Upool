@@ -51,9 +51,10 @@ class ChatUserCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        textLabel?.frame = CGRect(x: 64, y: textLabel!.frame.origin.y - 2, width: textLabel!.frame.width, height: textLabel!.frame.height)
+        textLabel?.frame = CGRect(x: 70, y: textLabel!.frame.origin.y - 2, width: textLabel!.frame.width, height: textLabel!.frame.height)
         
-        detailTextLabel?.frame = CGRect(x: 64, y: detailTextLabel!.frame.origin.y + 2, width: detailTextLabel!.frame.width, height: detailTextLabel!.frame.height)
+        detailTextLabel?.frame = CGRect(x: 70, y: detailTextLabel!.frame.origin.y + 2, width: detailTextLabel!.frame.width - 100, height: detailTextLabel!.frame.height)
+        detailTextLabel?.textColor = UIColor.gray
     }
     
     let timeLabel: UILabel = {
@@ -68,9 +69,10 @@ class ChatUserCell: UITableViewCell {
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = 24
+        imageView.layer.cornerRadius = 5
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "ProfileImagePlaceholder")
         return imageView
     }()
     

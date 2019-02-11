@@ -71,7 +71,6 @@ class ChatViewController: UITableViewController {
                             let messageID = diff.document.documentID
                             self.db.collection("messages").document(messageID).getDocument(completion: { (messageSnapShot, error) in
                                 guard let messageSnapShot = messageSnapShot, let data = messageSnapShot.data() else {
-                                    print("Error fetching snapshots: \(error!)")
                                     return
                                 }
                                 print("These are the observed messages :\(data)")

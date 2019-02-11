@@ -88,7 +88,7 @@ class ChatMessageCell: UICollectionViewCell{
     
     let profileImageView : UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "ProfileIcon")
+        imageView.image = UIImage(named: "ProfileImagePlaceholder")
         imageView.tintColor = UIColor.gray
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 3
