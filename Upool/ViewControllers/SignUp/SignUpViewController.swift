@@ -80,7 +80,16 @@ class SignUpViewController: UIViewController {
         setNavigationBar()
         setStackViews()
         setConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupKeyboardNotifications()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     @objc func handleCancel(){

@@ -27,6 +27,8 @@ class ChatLogViewController : UICollectionViewController{
         }
     }
     
+    var inputBottomAnchor : NSLayoutConstraint?
+    
     //MARK : Input Text Views
     lazy var containerView : UIView = {
         let container = UIView()
@@ -54,21 +56,23 @@ class ChatLogViewController : UICollectionViewController{
         return view
     }()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(ChatMessageCell.self, forCellWithReuseIdentifier: chatCellId)
         
         setupInitialUI()
-        setupKeyboardNotifications()
         setupInputView()
         retrieveUserMessages()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupKeyboardNotifications()
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
         self.tabBarController?.tabBar.isTranslucent = false
+        NotificationCenter.default.removeObserver(self)
     }
     
     func retrieveUserMessages(){
@@ -174,23 +178,24 @@ extension ChatLogViewController {
     func setupKeyboardNotifications(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapped))
-        view.addGestureRecognizer(tap)
     }
     
     @objc func keyboardWillShow(notification: Notification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            print("notification: Keyboard will show")
-            if self.view.frame.origin.y == 0{
-                self.view.frame.origin.y -= (keyboardSize.height - bottomSafeArea.frame.height)
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue, let keyboardDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double {
+            print("notification: Chat Keyboard will show")
+            self.inputBottomAnchor?.constant = -keyboardSize.height
+            UIView.animate(withDuration: keyboardDuration) {
+                self.view.layoutIfNeeded()
             }
         }
-        
     }
     
     @objc func keyboardWillHide(notification: Notification) {
-        if let _ = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            self.view.frame.origin.y = 0
+        if let _ = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue, let keyboardDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double {
+            self.inputBottomAnchor?.constant = 0
+            UIView.animate(withDuration: keyboardDuration) {
+                self.view.layoutIfNeeded()
+            }
         }
     }
     

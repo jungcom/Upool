@@ -16,6 +16,11 @@ extension CreateRideViewController {
         calendarView.dataSource = self
         calendarView.delegate = self
         
+        //keyboard setup
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapped))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
         setupDateTimeButtons()
         setupToFromButtons()
         setupPriceLabelAndSlider()
@@ -23,6 +28,11 @@ extension CreateRideViewController {
         setupPickUpDetailsView()
         setupCreateButton()
         
+    }
+    
+    func setupKeyboardNotifications(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func setupDateTimeButtons(){

@@ -11,6 +11,10 @@ import UIKit
 extension SignUpViewController{
     
     func setNavigationBar() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapped))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
         let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.cancel, target: self, action: #selector(handleCancel))
         self.navigationItem.title = "Sign Up"
         navigationItem.setLeftBarButton(doneItem, animated: true)
@@ -75,9 +79,6 @@ extension SignUpViewController{
     func setupKeyboardNotifications(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapped))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
     }
     
     @objc func keyboardWillShow(notification: Notification) {

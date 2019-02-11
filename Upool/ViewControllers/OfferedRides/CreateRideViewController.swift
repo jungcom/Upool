@@ -278,18 +278,18 @@ class CreateRideViewController: UIViewController {
     //MARK : ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupKeyboardNotifications()
     }
     
-    func setupKeyboardNotifications(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapped))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     @objc func handleCalendarView(){

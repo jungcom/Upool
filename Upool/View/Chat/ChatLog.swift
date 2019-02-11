@@ -11,6 +11,10 @@ import UIKit
 extension ChatLogViewController{
     
     func setupInitialUI(){
+        //keyboard setup
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapped))
+        view.addGestureRecognizer(tap)
+        
         collectionView.backgroundColor = UIColor.groupTableViewBackground
         collectionView.alwaysBounceVertical = true
         collectionView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 80, right: 0)
@@ -31,13 +35,15 @@ extension ChatLogViewController{
         bottomSafeArea.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         bottomSafeArea.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         bottomSafeArea.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        bottomSafeArea.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        //variable for bottom anchor of bottomSafeAreaView
+        inputBottomAnchor = bottomSafeArea.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        inputBottomAnchor!.isActive = true
         
         //Constraints
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: bottomSafeArea.topAnchor).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
         //Button Contraints

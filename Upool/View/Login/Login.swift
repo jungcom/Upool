@@ -39,6 +39,10 @@ extension LoginViewController{
         view.addSubview(bottomContainer)
         view.addSubview(umassBackgroundImageView)
         view.bringSubviewToFront(bottomContainer)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapped))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
     
     func setupConstraints(){
@@ -80,7 +84,7 @@ extension LoginViewController{
     //Textfield Notifications
     @objc func keyboardWillShow(notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            print("notification: Keyboard will show")
+            print("notification: Login Keyboard will show")
             if self.view.frame.origin.y == 0{
                 self.view.frame.origin.y -= keyboardSize.height
             }

@@ -96,15 +96,18 @@ class LoginViewController: UIViewController {
         setupStackViews()
         setupUI()
         setupConstraints()
-        setupKeyboardNotifications()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        setupKeyboardNotifications()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     func setupKeyboardNotifications(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapped))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
     }
     
     @objc func handleLogin(){
