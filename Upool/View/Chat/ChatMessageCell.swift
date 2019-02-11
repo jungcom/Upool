@@ -9,15 +9,20 @@
 import UIKit
 import Firebase
 
+var prevTimeStampString = ""
 class ChatMessageCell: UICollectionViewCell{
     
     var bubbleWidthAnchor: NSLayoutConstraint?
     var bubbleTrailingAnchor: NSLayoutConstraint?
     var bubbleLeadingAnchor: NSLayoutConstraint?
     
+    var timeTrailingAnchor : NSLayoutConstraint?
+    var timeLeadingAnchor : NSLayoutConstraint?
+    
     var message : Message? {
         didSet{
             textView.text = message?.text
+            setupTime()
             //if message is my message
             if message!.fromId == Auth.auth().currentUser?.uid{
                 bubbleView.backgroundColor = Colors.maroon
@@ -25,6 +30,9 @@ class ChatMessageCell: UICollectionViewCell{
                 bubbleLeadingAnchor?.isActive = false
                 bubbleTrailingAnchor?.isActive = true
                 profileImageView.isHidden = true
+                
+                timeLeadingAnchor?.isActive = false
+                timeTrailingAnchor?.isActive = true
             //else if message is other person's message
             } else {
                 bubbleView.backgroundColor = UIColor.white
@@ -32,6 +40,23 @@ class ChatMessageCell: UICollectionViewCell{
                 bubbleTrailingAnchor?.isActive = false
                 bubbleLeadingAnchor?.isActive = true
                 profileImageView.isHidden = false
+                
+                timeTrailingAnchor?.isActive = false
+                timeLeadingAnchor?.isActive = true
+            }
+        }
+    }
+    
+    func setupTime(){
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        if let message = self.message{
+            let msgTimeStamp = formatter.string(from: message.timeStamp)
+            if prevTimeStampString != msgTimeStamp{
+                self.timeLabel.text = msgTimeStamp
+                prevTimeStampString = msgTimeStamp
+            } else {
+                self.timeLabel.text = ""
             }
         }
     }
@@ -49,6 +74,7 @@ class ChatMessageCell: UICollectionViewCell{
         textView.backgroundColor = UIColor.clear
         textView.textColor = UIColor.white
         textView.font = UIFont(name: Fonts.helvetica, size: 16)
+        textView.isEditable = false
         return textView
     }()
     
@@ -70,6 +96,13 @@ class ChatMessageCell: UICollectionViewCell{
         return imageView
     }()
     
+    let timeLabel : UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.gray
+        label.font = UIFont(name: Fonts.helvetica, size: 10)
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -80,6 +113,7 @@ class ChatMessageCell: UICollectionViewCell{
         addSubview(bubbleView)
         addSubview(textView)
         addSubview(profileImageView)
+        addSubview(timeLabel)
     }
     
     func setupConstraints(){
@@ -110,6 +144,13 @@ class ChatMessageCell: UICollectionViewCell{
         profileImageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         profileImageView.widthAnchor.constraint(equalToConstant: 32).isActive = true
         profileImageView.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        
+        //time label constraints
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        timeTrailingAnchor = timeLabel.trailingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: -5)
+        timeTrailingAnchor?.isActive = true
+        timeLeadingAnchor = timeLabel.leadingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: 5)
+        timeLabel.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant : -2).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
