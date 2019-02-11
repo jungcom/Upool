@@ -154,6 +154,10 @@ extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegat
     }
     
     func calendar(_ calendar: CalendarView, canSelectDate date: Date) -> Bool {
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
+        if yesterday! > date{
+            return false
+        }
         return true
     }
     

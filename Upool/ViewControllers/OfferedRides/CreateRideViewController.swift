@@ -149,7 +149,7 @@ class CreateRideViewController: UIViewController {
     lazy var passengerCosmosView : CosmosView = {
         let cosmos = CosmosView()
         cosmos.rating = 3
-        cosmos.settings.totalStars = 6
+        cosmos.settings.totalStars = 4
         cosmos.settings.filledColor = Colors.maroon
         cosmos.settings.filledBorderColor = Colors.maroon
         cosmos.settings.emptyColor = UIColor.white
@@ -173,9 +173,10 @@ class CreateRideViewController: UIViewController {
     
     lazy var pickupDetailsTextView : UITextView = {
         let textView = UITextView()
+        textView.text = "Payment in Cash"
         textView.layer.borderWidth = 1
         textView.layer.borderColor = UIColor.gray.cgColor
-        textView.textColor = UIColor.gray
+        textView.textColor = UIColor.black
         textView.font = UIFont(name: Fonts.helvetica, size: 14)
         return textView
     }()

@@ -59,7 +59,7 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         imageView.layer.cornerRadius = 7
         imageView.backgroundColor = UIColor.blue
         imageView.tintColor = UIColor.blue
-        imageView.image = UIImage(named: "MockProfileImage")
+        imageView.image = UIImage(named: "ProfileImagePlaceholder")
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()

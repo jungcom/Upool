@@ -122,6 +122,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E0CD8D122121E8500256906 /* StoryBoard */ = {
+			isa = PBXGroup;
+			children = (
+				4E49BFDC2208E363002FB09A /* LaunchScreen.storyboard */,
+				4EEB91DF21F7679F0079209B /* Main.storyboard */,
+			);
+			path = StoryBoard;
+			sourceTree = "<group>";
+		};
 		4E49BFD72208C115002FB09A /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,11 +300,10 @@
 				4EEB91F521F775B50079209B /* ViewControllers */,
 				4EEB91F221F7734D0079209B /* Extensions */,
 				4EEB91F121F772800079209B /* Constants */,
-				4EEB91DF21F7679F0079209B /* Main.storyboard */,
-				4E49BFDC2208E363002FB09A /* LaunchScreen.storyboard */,
-				4EEB91E221F767A10079209B /* Assets.xcassets */,
+				4E0CD8D122121E8500256906 /* StoryBoard */,
 				4EEB91E721F767A10079209B /* Info.plist */,
 				4EEB91ED21F76CA50079209B /* GoogleService-Info.plist */,
+				4EEB91E221F767A10079209B /* Assets.xcassets */,
 			);
 			path = Upool;
 			sourceTree = "<group>";
