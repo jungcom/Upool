@@ -27,6 +27,9 @@ class ChatLogViewController : UICollectionViewController{
         }
     }
     
+    //to remove listeners
+    var listener : ListenerRegistration?
+    
     var inputBottomAnchor : NSLayoutConstraint?
     
     //MARK : Input Text Views
@@ -64,6 +67,7 @@ class ChatLogViewController : UICollectionViewController{
         setupInputView()
         retrieveUserMessages()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupKeyboardNotifications()
@@ -73,11 +77,14 @@ class ChatLogViewController : UICollectionViewController{
         self.tabBarController?.tabBar.isHidden = false
         self.tabBarController?.tabBar.isTranslucent = false
         NotificationCenter.default.removeObserver(self)
+        if let listener = listener{
+            listener.remove()
+        }
     }
     
     func retrieveUserMessages(){
-        guard let id = fromUser?.uid else {return}
-        let listener = db.collection("user-Messages").document(id).collection("userMessageIds").addSnapshotListener{ (snapshot, error) in
+        guard let id = fromUser?.uid, let toUser = toUser else {return}
+        listener = db.collection("user-Messages").document(id).collection("toUserId").document(toUser.uid).collection("messageIds").addSnapshotListener{ (snapshot, error) in
             guard let snapshot = snapshot else {return}
             
             snapshot.documentChanges.forEach { diff in
@@ -125,11 +132,15 @@ class ChatLogViewController : UICollectionViewController{
             }
         }
         
-        let userMessageRef = db.collection("user-Messages").document(message.fromId).collection("userMessageIds").document(sentMessageId.documentID)
+        let userMessageRef = db.collection("user-Messages").document(message.fromId).collection("toUserId").document(message.toId).collection("messageIds").document(sentMessageId.documentID)
         userMessageRef.setData([sentMessageId.documentID : 1])
+        let userMapRefForSubcollection = db.collection("user-Messages").document(message.fromId).collection("toUserId").document("currentToUserIds")
+        userMapRefForSubcollection.setData([message.toId : 1], merge: true)
         
-        let receiverUserMessageRef = db.collection("user-Messages").document(message.toId).collection("userMessageIds").document(sentMessageId.documentID)
+        let receiverUserMessageRef = db.collection("user-Messages").document(message.toId).collection("toUserId").document(message.fromId).collection("messageIds").document(sentMessageId.documentID)
         receiverUserMessageRef.setData([sentMessageId.documentID : 1])
+        let receiverMapRefForSubcollection = db.collection("user-Messages").document(message.toId).collection("toUserId").document("currentToUserIds")
+        receiverMapRefForSubcollection.setData([message.fromId : 1], merge: true)
         
         //Clear Input + Scroll To Bottom
         inputTextField.text = nil
@@ -187,6 +198,9 @@ extension ChatLogViewController {
             UIView.animate(withDuration: keyboardDuration) {
                 self.view.layoutIfNeeded()
             }
+            //Scroll to bottom of message
+            let bottomOffset = CGPoint(x: 0, y: collectionView.contentSize.height - collectionView.bounds.size.height + collectionView.contentInset.bottom + keyboardSize.height)
+            collectionView.setContentOffset(bottomOffset, animated: true)
         }
     }
     
