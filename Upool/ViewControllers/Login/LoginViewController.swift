@@ -124,6 +124,8 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
 //            return
 //        }
 
+        startAnimating(type: NVActivityIndicatorType.ballTrianglePath, color: Colors.maroon, displayTimeThreshold:2, minimumDisplayTime: 1)
+        
         let email : String? = "anthonylee3737@gmail.com"
         let password : String? = "123123"
         
@@ -131,6 +133,7 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
 
             guard self.authUser?.isEmailVerified == true else {
                 self.errorLabel.text = "Account not verified. Please check your email for verification"
+                self.stopAnimating()
                 return
             }
 
@@ -149,12 +152,15 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
                             self.errorLabel.text = "An error has occured. Please try again"
                         }
                     }
+                    self.stopAnimating()
                     print("Error: \(error.localizedDescription)")
                 }
                 return
             }
 
-            self.present(LoginViewController.presentMainPage(), animated: true, completion: nil)
+            self.present(LoginViewController.presentMainPage(), animated: true, completion: {
+                self.stopAnimating()
+            })
         })
         
     }
