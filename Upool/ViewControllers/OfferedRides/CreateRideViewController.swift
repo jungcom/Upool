@@ -305,14 +305,16 @@ class CreateRideViewController: UIViewController {
         let searchLocationVC = SearchLocationViewController()
         searchLocationVC.delegate = self
         searchLocationVC.forDeparture = true
-        self.present(searchLocationVC, animated: true, completion: nil)
+        let nav = UINavigationController(rootViewController: searchLocationVC)
+        self.present(nav, animated: true, completion: nil)
     }
 
     @objc func handleToView(){
         let searchLocationVC = SearchLocationViewController()
         searchLocationVC.delegate = self
         searchLocationVC.forDeparture = false
-        self.present(searchLocationVC, animated: true, completion: nil)
+        let nav = UINavigationController(rootViewController: searchLocationVC)
+        self.present(nav, animated: true, completion: nil)
     }
     
     @objc func sliderValueChanged(){

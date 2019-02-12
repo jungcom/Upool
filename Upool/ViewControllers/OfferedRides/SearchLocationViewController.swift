@@ -23,15 +23,8 @@ class SearchLocationViewController: UIViewController {
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: resultsViewController)
         searchController.searchResultsUpdater = resultsViewController
+        searchController.searchBar.delegate = self
         return searchController
-    }()
-    
-    let cancelButton : UIButton = {
-        let button = UIButton()
-        button.setTitle("Cancel", for: .normal)
-        button.backgroundColor = UIColor.blue
-        button.addTarget(self, action: #selector(handleCancel), for: .touchUpInside)
-        return button
     }()
     
     let topView : UIView = {
@@ -39,70 +32,38 @@ class SearchLocationViewController: UIViewController {
         return view
     }()
     
-    var searchBar : UISearchBar!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
-        setupTopViewAndSearch()
-        
-        navigationController?.navigationBar.isTranslucent = false
-        searchController.hidesNavigationBarDuringPresentation = false
+        setupNavBarAndSearchBar()
         
         // This makes the view area include the nav bar even though it is opaque.
         // Adjust the view placement down.
-        self.extendedLayoutIncludesOpaqueBars = true
-        self.edgesForExtendedLayout = .top
-    }
-    
-    func setupTopViewAndSearch(){
-        
-        searchBar = searchController.searchBar
-        searchBar.sizeToFit()
-        searchController.hidesNavigationBarDuringPresentation = true
-        
-        topView.addSubview(searchBar)
-        view.addSubview(topView)
-        //view.addSubview(cancelButton)
-        
-        //topView Constraints
-        topView.translatesAutoresizingMaskIntoConstraints = false
-        topView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        topView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        topView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier:0.8).isActive = true
-        topView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        //SearchBarConstraints
-//        searchBar.translatesAutoresizingMaskIntoConstraints = false
-//        searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-//        searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-//        searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        //searchBar.bottomAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
 
-        //buttonConstraints
-//        cancelButton.translatesAutoresizingMaskIntoConstraints = false
-//        cancelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-//        cancelButton.leadingAnchor.constraint(equalTo: topView.trailingAnchor).isActive = true
-//        cancelButton.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-//        cancelButton.heightAnchor.constraint(equalTo: topView.heightAnchor, multiplier: 1).isActive = true
-        
-        // When UISearchController presents the results view, present it in
-        // this view controller, not one further up the chain.
-//        definesPresentationContext = true
-        modalPresentationStyle = .currentContext
     }
     
-    @objc func handleCancel(){
-        dismiss(animated: true, completion: nil)
+    func setupNavBarAndSearchBar(){
+        navigationController?.navigationBar.barTintColor = Colors.maroon
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationItem.searchController = searchController
+        
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.sizeToFit()
+        searchController.searchBar.showsCancelButton = true
+        searchController.searchBar.tintColor = UIColor.white
+        (UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]) ).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        self.definesPresentationContext = true
+        modalPresentationStyle = .currentContext
     }
 }
 
 // Handle the user's selection.
-extension SearchLocationViewController: GMSAutocompleteResultsViewControllerDelegate {
+extension SearchLocationViewController: GMSAutocompleteResultsViewControllerDelegate, UISearchBarDelegate {
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
                            didAutocompleteWith place: GMSPlace) {
-        searchController.isActive = false
+        searchController.isActive = true
         
         // Do something with the selected place.
 //        let gms = component?[0]
@@ -115,7 +76,7 @@ extension SearchLocationViewController: GMSAutocompleteResultsViewControllerDele
         } else {
             delegate?.sendArrivalData(arrivalCity: "\(place.formattedAddress!)")
         }
-        self.dismiss(animated: true, completion: nil)
+        navigationController?.dismiss(animated: true, completion: nil)
         
     }
     
@@ -132,5 +93,14 @@ extension SearchLocationViewController: GMSAutocompleteResultsViewControllerDele
     
     func didUpdateAutocompletePredictions(forResultsController resultsController: GMSAutocompleteResultsViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("Clicked")
+        navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchController.searchBar.showsCancelButton = true
     }
 }
