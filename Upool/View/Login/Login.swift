@@ -25,7 +25,7 @@ extension LoginViewController{
         bottomlabelStackView.alignment = .center
         
         //Bottom stack view
-        bottomStackView = UIStackView(arrangedSubviews: [emptyUIView, loginLabel, emailTextField, passwordTextField, errorLabel ,loginButton,bottomlabelStackView])
+        bottomStackView = UIStackView(arrangedSubviews: [ emptyUIView,loginLabel, emailTextField, passwordTextField, errorLabel ,loginButton,bottomlabelStackView])
         bottomStackView.axis = .vertical
         bottomStackView.distribution = .fillEqually
         bottomStackView.spacing = 25
@@ -35,6 +35,7 @@ extension LoginViewController{
     }
     
     func setupUI(){
+        view.backgroundColor = UIColor.white
         bottomContainer.addSubview(bottomStackView)
         view.addSubview(bottomContainer)
         view.addSubview(umassBackgroundImageView)
@@ -56,7 +57,7 @@ extension LoginViewController{
         
         //Bottom Stack View Constraints
         bottomStackView.translatesAutoresizingMaskIntoConstraints = false
-        bottomStackView.bottomAnchor.constraint(equalTo: bottomContainer.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        bottomStackView.bottomAnchor.constraint(equalTo: bottomContainer.safeAreaLayoutGuide.bottomAnchor, constant:-15).isActive = true
         bottomStackView.leadingAnchor.constraint(equalTo: bottomContainer.safeAreaLayoutGuide.leadingAnchor).isActive = true
         bottomStackView.trailingAnchor.constraint(equalTo: bottomContainer.safeAreaLayoutGuide.trailingAnchor).isActive = true
         bottomStackView.topAnchor.constraint(equalTo: bottomContainer.topAnchor).isActive = true

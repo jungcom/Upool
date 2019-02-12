@@ -25,15 +25,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         settings.areTimestampsInSnapshotsEnabled = true
         db.settings = settings
 
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            print("Signout Unsuccessful")
-        }
         
-        //        window = UIWindow(frame: UIScreen.main.bounds)
-//        window?.makeKeyAndVisible()
-//
+        window = UIWindow(frame: UIScreen.main.bounds)
+        if let _ = Auth.auth().currentUser {
+            // segue to main view controller
+            print("signed in")
+            window?.rootViewController = LoginViewController.presentMainPage()
+        } else {
+            // sign in
+            let loginVC = LoginViewController()
+            window?.rootViewController = loginVC
+//            loginVC.present(LoginViewController.presentMainPage(), animated: true, completion: nil)
+            
+        }
+        window?.makeKeyAndVisible()
+        
+//        do {
+//            try Auth.auth().signOut()
+//        } catch {
+//            print("Signout Unsuccessful")
+//        }
+
+
 //        let ridesVC = OfferedRidesCollectionViewController(collectionViewLayout: UICollectionViewLayout())
 //        let navigationVC = UINavigationController(rootViewController: ridesVC)
 //        window?.rootViewController = navigationVC
