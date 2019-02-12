@@ -7,8 +7,9 @@
 //
 import UIKit
 import Firebase
+import NVActivityIndicatorView
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, NVActivityIndicatorViewable {
 
     private var authUser : User? {
         return Auth.auth().currentUser

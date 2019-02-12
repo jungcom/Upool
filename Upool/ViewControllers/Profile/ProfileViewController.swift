@@ -8,8 +8,9 @@
 
 import UIKit
 import Firebase
+import NVActivityIndicatorView
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
 
     let db = Firestore.firestore()
     private var authUser : User?{
@@ -65,6 +66,10 @@ class ProfileViewController: UIViewController {
         profileImageView.heightAnchor.constraint(equalTo: profileImageView.widthAnchor).isActive = true
     }
     
+    func startActivity(){
+        startAnimating(type: NVActivityIndicatorType.ballTrianglePath, color: Colors.maroon, displayTimeThreshold:2, minimumDisplayTime: 1)
+    }
+    
     @objc func handleLogout(){
         do {
             try Auth.auth().signOut()
@@ -78,10 +83,13 @@ class ProfileViewController: UIViewController {
 // MARK : ImagePicker Protocol
 extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     @objc func handleImageSelection(){
+        startActivity()
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
-        present(picker, animated: true, completion: nil)
+        present(picker, animated: true, completion: {
+            self.stopAnimating()
+        })
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -89,7 +97,7 @@ extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationC
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        print(info)
+        startActivity()
         var selectedImage : UIImage?
         
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
@@ -104,7 +112,9 @@ extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationC
         
         //save image to firebase storage
         saveProfileImageToFirebaseStorage()
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: {
+            self.stopAnimating()
+        })
     }
     
     func saveProfileImageToFirebaseStorage(){
