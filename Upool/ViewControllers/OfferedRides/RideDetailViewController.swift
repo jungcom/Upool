@@ -18,7 +18,13 @@ class RideDetailViewController: UIViewController {
     let db = Firestore.firestore()
     var ridePost : RidePost!
     var driver : UPoolUser?
-    var currentUser : UPoolUser!
+    var currentUser : UPoolUser!{
+        didSet{
+            if let url = currentUser.profileImageUrl{
+                profileImageView.loadImageUsingCacheWithUrlString(url)
+            }
+        }
+    }
     
     let scrollView = UIScrollView()
     
@@ -75,9 +81,9 @@ class RideDetailViewController: UIViewController {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 7
-        imageView.backgroundColor = UIColor.blue
-        imageView.tintColor = UIColor.blue
-        imageView.image = UIImage(named: "MockProfileImage")
+        imageView.backgroundColor = UIColor.gray
+        imageView.tintColor = UIColor.gray
+        imageView.image = UIImage(named: "ProfileImagePlaceholder")
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -119,7 +125,7 @@ class RideDetailViewController: UIViewController {
     
     lazy var pickupDetailTextView : UITextView = {
         let label = UITextView()
-        label.text = (ridePost.pickUpDetails == "") ? ridePost.pickUpDetails : "None"
+        label.text = (ridePost.pickUpDetails == "") ? "None" : ridePost.pickUpDetails
         label.font = UIFont(name: Fonts.futura, size: 14)
         label.textColor = UIColor.gray
         label.isEditable = false

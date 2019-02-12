@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import Firebase
 
 class OfferedRidesCollectionViewCell: UICollectionViewCell {
+    
+    let db = Firestore.firestore()
+    
     let dateFormatter : DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd, "
@@ -38,6 +42,19 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
             if let maxPassenger = post.maxPassengers {
                 passengerSeatsLabel.text = "Passengers 0/\(maxPassenger)"
             }
+            if let driverId = post.driverUid{
+                setupImageProfileView(driverId)
+            }
+        }
+    }
+    
+    func setupImageProfileView(_ driverId : String){
+        db.collection("users").document(driverId).getDocument { (snapshot, error) in
+            guard let snapshot = snapshot, let data = snapshot.data() else {return}
+            let user = UPoolUser(dictionary: data)
+            if let url = user?.profileImageUrl {
+                self.profileImageView.loadImageUsingCacheWithUrlString(url)
+            }
         }
     }
     
@@ -57,8 +74,8 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 7
-        imageView.backgroundColor = UIColor.blue
-        imageView.tintColor = UIColor.blue
+        imageView.backgroundColor = UIColor.gray
+        imageView.tintColor = UIColor.gray
         imageView.image = UIImage(named: "ProfileImagePlaceholder")
         imageView.contentMode = .scaleAspectFill
         return imageView

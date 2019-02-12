@@ -48,8 +48,7 @@ class OfferedRidesCollectionViewController: UICollectionViewController {
         
         //Retrieve Data
         let docRef = db.collection("ridePosts")
-        
-        docRef.order(by: "departureDate", descending: false).getDocuments { (querySnapshot, err) in
+        docRef.whereField("departureDate", isGreaterThan: Date().timeIntervalSinceReferenceDate).order(by: "departureDate", descending: false).getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
