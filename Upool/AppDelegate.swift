@@ -25,20 +25,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         settings.areTimestampsInSnapshotsEnabled = true
         db.settings = settings
 
-        
         window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
         if let _ = Auth.auth().currentUser {
             // segue to main view controller
             print("signed in")
-            window?.rootViewController = LoginViewController.presentMainPage()
-        } else {
-            // sign in
             let loginVC = LoginViewController()
             window?.rootViewController = loginVC
-//            loginVC.present(LoginViewController.presentMainPage(), animated: true, completion: nil)
+            loginVC.signedIn = true
+        } else {
+            // sign in
+            window?.rootViewController = LoginViewController()
             
         }
-        window?.makeKeyAndVisible()
         
 //        do {
 //            try Auth.auth().signOut()

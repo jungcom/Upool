@@ -11,6 +11,17 @@ import NVActivityIndicatorView
 
 class LoginViewController: UIViewController, NVActivityIndicatorViewable {
 
+    var signedIn : Bool = false {
+        didSet{
+            if signedIn{
+                print("present")
+                startAnimating(type: NVActivityIndicatorType.ballTrianglePath, color: Colors.maroon, displayTimeThreshold:2, minimumDisplayTime: 1)
+                self.present(LoginViewController.presentMainPage(), animated: true, completion: {
+                    self.stopAnimating()
+                })
+            }
+        }
+    }
     private var authUser : User? {
         return Auth.auth().currentUser
     }
@@ -109,7 +120,7 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
     }
-
+    
     func setupKeyboardNotifications(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)

@@ -77,6 +77,7 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
             print("Sign Out Failed")
         }
         self.navigationController?.dismiss(animated: true, completion: nil)
+        //present(LoginViewController(), animated: true)
     }
 }
 
