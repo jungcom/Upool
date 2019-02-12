@@ -12,7 +12,7 @@ import Firebase
 private let offeredRidesCellId = "Cell"
 private let headerCellId = "HeaderForMyStatus"
 
-class MyStatusViewController: UICollectionViewController {
+class MyStatusViewController: UICollectionViewController  {
     
     private var authUser : User!{
         return Auth.auth().currentUser
@@ -140,7 +140,7 @@ class MyStatusViewController: UICollectionViewController {
     
     func addRefresher(){
         self.refresher = UIRefreshControl()
-        self.refresher.tintColor = UIColor.red
+        self.refresher.tintColor = UIColor.gray
         self.refresher.addTarget(self, action: #selector(retrieveMyRidePosts), for: .valueChanged)
         self.refresher.addTarget(self, action: #selector(retrieveMyRequestedRidePosts), for: .valueChanged)
         self.collectionView!.addSubview(refresher)

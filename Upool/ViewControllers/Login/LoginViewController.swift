@@ -35,7 +35,11 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     }()
     
     let emailTextField = UITextField.getTextField(Strings.emailPlaceholder)
-    let passwordTextField = UITextField.getTextField(Strings.passwordPlaceholder)
+    let passwordTextField : UITextField = {
+        let txtField = UITextField.getTextField(Strings.passwordPlaceholder)
+        txtField.isSecureTextEntry = true
+        return txtField
+    }()
     
     let loginButton : UIButton = {
         let button = UIButton()

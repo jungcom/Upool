@@ -28,9 +28,18 @@ class SignUpViewController: UIViewController {
         return button
     }()
     
+    //TextFields
     let emailTextField = UITextField.getTextField(Strings.emailPlaceholder)
-    let passwordTextField = UITextField.getTextField(Strings.passwordPlaceholder)
-    let reEnterPasswordTextField = UITextField.getTextField(Strings.reEnterPasswordPlaceholder)
+    let passwordTextField : UITextField = {
+        let txtField = UITextField.getTextField(Strings.passwordPlaceholder)
+        txtField.isSecureTextEntry = true
+        return txtField
+    }()
+    let reEnterPasswordTextField : UITextField = {
+        let txtField = UITextField.getTextField(Strings.reEnterPasswordPlaceholder)
+        txtField.isSecureTextEntry = true
+        return txtField
+    }()
     let firstNameTextField = UITextField.getTextField(Strings.firstNamePlaceholder)
     let lastNameTextField = UITextField.getTextField(Strings.lastNamePlaceholder)
     
@@ -73,6 +82,7 @@ class SignUpViewController: UIViewController {
         return label
     }()
     
+    //MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white

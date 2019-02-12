@@ -26,7 +26,7 @@ class ResetPasswordViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Continue", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 24)
+        button.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 20)
         button.backgroundColor = Colors.maroon
         button.addTarget(self, action: #selector(handleContinue), for: .touchUpInside)
         button.layer.masksToBounds = true

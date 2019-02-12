@@ -8,8 +8,9 @@
 
 import UIKit
 import Firebase
+import NVActivityIndicatorView
 
-class RideDetailViewController: UIViewController {
+class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
 
     private var authUser : User? {
         return Auth.auth().currentUser
@@ -244,6 +245,7 @@ class RideDetailViewController: UIViewController {
              .getDocuments { (snapshot, error) in
             if let error = error{
                 print(error.localizedDescription)
+                self.stopAnimating()
             } else {
                 if let document = snapshot?.documents.first{
                     print("\(document.documentID) => \(document.data())")
@@ -256,6 +258,7 @@ class RideDetailViewController: UIViewController {
                         }
                     }
                 }
+                self.stopAnimating()
             }
         }
     }

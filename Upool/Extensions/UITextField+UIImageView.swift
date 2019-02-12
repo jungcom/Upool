@@ -15,6 +15,7 @@ extension UITextField{
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.gray.cgColor
         textField.backgroundColor = UIColor.white
+        textField.autocapitalizationType = .none
         return textField
     }
 }

@@ -8,11 +8,12 @@
 
 import UIKit
 import Firebase
+import NVActivityIndicatorView
 
 private let offeredRidesCellId = "Cell"
 private let headerCellId = "Header"
 
-class OfferedRidesCollectionViewController: UICollectionViewController {
+class OfferedRidesCollectionViewController: UICollectionViewController, NVActivityIndicatorViewable {
     
     let db = Firestore.firestore()
     
@@ -137,6 +138,7 @@ extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLay
         } else {
             rideDetailsVC.ridePost = laterRidePosts[indexPath.row]
         }
+        startAnimating(type: NVActivityIndicatorType.ballTrianglePath, color: Colors.maroon, displayTimeThreshold:2, minimumDisplayTime: 1)
         navigationController?.pushViewController(rideDetailsVC, animated: true)
     }
 

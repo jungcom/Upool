@@ -29,7 +29,7 @@ extension SignUpViewController{
         let emptyView = UIView()        
         let termsStackView = UIStackView(arrangedSubviews: [agreeWithTermsLabel, termsAndConditionsButton])
         
-        textFieldStackView = UIStackView(arrangedSubviews: [emailTextField,passwordTextField,reEnterPasswordTextField,firstNameTextField,lastNameTextField, errorLabel, signUpButton, emptyView, termsStackView])
+        textFieldStackView = UIStackView(arrangedSubviews: [emailTextField,passwordTextField,reEnterPasswordTextField,firstNameTextField,lastNameTextField, errorLabel, signUpButton, termsStackView])
         textFieldStackView.axis = .vertical
         textFieldStackView.alignment = .center
         textFieldStackView.spacing = 20
@@ -46,7 +46,7 @@ extension SignUpViewController{
         textFieldStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant:-10).isActive = true
         textFieldStackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         textFieldStackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9).isActive = true
-        textFieldStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6).isActive = true
+        textFieldStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.65).isActive = true
         
         //Textfield Constraints
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
