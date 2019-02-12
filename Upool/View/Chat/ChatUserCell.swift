@@ -22,7 +22,7 @@ class ChatUserCell: UITableViewCell {
                     return
                 }
                 if let toUser = UPoolUser(dictionary: snapshot.data()!){
-                    self.textLabel?.text = toUser.firstName
+                    self.nameLabel.text = toUser.firstName
                     if let profileImageUrl = toUser.profileImageUrl{
                         self.profileImageView.loadImageUsingCacheWithUrlString(profileImageUrl)
                     }
@@ -36,7 +36,7 @@ class ChatUserCell: UITableViewCell {
             setupNameAndProfileImage()
             
             //set text
-            detailTextLabel?.text = message?.text
+            detailLabel.text = message?.text
             
             //set timestamp
             if let time = message?.timeStamp{
@@ -45,16 +45,6 @@ class ChatUserCell: UITableViewCell {
                 timeLabel.text = dateformatter.string(from: time)
             }
         }
-    }
-    
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        textLabel?.frame = CGRect(x: 90, y: textLabel!.frame.origin.y - 2, width: textLabel!.frame.width, height: textLabel!.frame.height)
-        
-        detailTextLabel?.frame = CGRect(x: 90, y: detailTextLabel!.frame.origin.y + 2, width: detailTextLabel!.frame.width - 100, height: detailTextLabel!.frame.height)
-        detailTextLabel?.textColor = UIColor.gray
     }
     
     let timeLabel: UILabel = {
@@ -76,9 +66,24 @@ class ChatUserCell: UITableViewCell {
         return imageView
     }()
     
+    let nameLabel : UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 18)
+        return label
+    }()
+    
+    let detailLabel : UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.gray
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 14)
+        return label
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-        
+        //layoutSubviews()
         addSubview(profileImageView)
         
         //ios 9 constraint anchors
@@ -89,12 +94,28 @@ class ChatUserCell: UITableViewCell {
         profileImageView.heightAnchor.constraint(equalToConstant: 64).isActive = true
         
         
-        //timeLabel contraints
+        //timeLabel contsraints
         addSubview(timeLabel)
-        timeLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant : -20).isActive = true
+        timeLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant : -20).isActive = true
         timeLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
         timeLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
         timeLabel.heightAnchor.constraint(equalTo: (textLabel?.heightAnchor)!).isActive = true
+        
+        //NameLabel Constraints
+        addSubview(nameLabel)
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.topAnchor.constraint(equalTo: profileImageView.topAnchor).isActive = true
+        nameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant : 15).isActive = true
+        nameLabel.trailingAnchor.constraint(equalTo: timeLabel.leadingAnchor).isActive = true
+        nameLabel.heightAnchor.constraint(equalTo: profileImageView.heightAnchor, multiplier:0.5).isActive = true
+        
+        //detail Label
+        addSubview(detailLabel)
+        detailLabel.translatesAutoresizingMaskIntoConstraints = false
+        detailLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor).isActive = true
+        detailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
+        detailLabel.heightAnchor.constraint(equalTo: nameLabel.heightAnchor).isActive = true
+        detailLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         
     }
     

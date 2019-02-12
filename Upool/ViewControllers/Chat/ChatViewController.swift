@@ -8,10 +8,11 @@
 
 import UIKit
 import Firebase
+import NVActivityIndicatorView
 
 let cellId = "cellId"
 
-class ChatViewController: UITableViewController {
+class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
     let db = Firestore.firestore()
     
     var messages = [Message]()
@@ -24,6 +25,7 @@ class ChatViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        startAnimating(type: NVActivityIndicatorType.ballTrianglePath, color: Colors.maroon, displayTimeThreshold:2, minimumDisplayTime: 1)
         view.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
         
@@ -100,6 +102,7 @@ class ChatViewController: UITableViewController {
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                         }
+                        self.stopAnimating()
                     })
                 }
                 
@@ -150,6 +153,6 @@ extension ChatViewController{
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0
+        return 90.0
     }
 }
