@@ -148,7 +148,7 @@ class CreateRideViewController: UIViewController {
     
     lazy var passengerCosmosView : CosmosView = {
         let cosmos = CosmosView()
-        cosmos.rating = 3
+        cosmos.rating = 2
         cosmos.settings.totalStars = 4
         cosmos.settings.filledColor = Colors.maroon
         cosmos.settings.filledBorderColor = Colors.maroon
