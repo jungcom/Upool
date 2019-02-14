@@ -50,6 +50,7 @@ class SearchLocationViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = Colors.maroon
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationItem.searchController = searchController
+        navigationItem.title = forDeparture! ? "From" : "To"
         
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
@@ -96,7 +97,8 @@ extension SearchLocationViewController: GMSAutocompleteResultsViewControllerDele
     func shortStateName(_ state:String) -> String {
         let lowercaseNames = fullStateNames.map { $0.lowercased() }
         let dic = NSDictionary(objects: stateCodes, forKeys: lowercaseNames as [NSCopying])
-        return dic.object(forKey:state.lowercased()) as? String ?? state}
+        return dic.object(forKey:state.lowercased()) as? String ?? state
+    }
     
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
                            didFailAutocompleteWithError error: Error){

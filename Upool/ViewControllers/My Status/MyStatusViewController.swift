@@ -25,7 +25,6 @@ class MyStatusViewController: UICollectionViewController  {
     var isMyRides : Bool = true
     
     var myRidePosts = [RidePost]()
-    var myPassengerRequests = [[RideRequest]]()
     
     var myRequests = [RideRequest]()
     var joinedRidePosts = [RidePost]()
@@ -50,12 +49,11 @@ class MyStatusViewController: UICollectionViewController  {
     @objc func retrieveMyRidePosts(){
         //Reset Posts
         self.myRidePosts.removeAll()
-        self.myPassengerRequests.removeAll()
         
         //Retrieve Data
         let docRef = db.collection("ridePosts")
         
-        docRef.order(by: "departureDate", descending: false).whereField("driverUid", isEqualTo: authUser.uid).getDocuments { (querySnapshot, err) in
+        docRef.order(by: "departureDate", descending: false).whereField("departureDate", isGreaterThan: Date().timeIntervalSinceReferenceDate).whereField("driverUid", isEqualTo: authUser.uid).getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -65,7 +63,8 @@ class MyStatusViewController: UICollectionViewController  {
                         self.myRidePosts.append(post)
                     }
                 }
-                self.retrieveMyPassengers()
+                self.collectionView.reloadData()
+                self.endRefresher()
             }
         }
     }
@@ -109,34 +108,32 @@ class MyStatusViewController: UICollectionViewController  {
                             self.joinedRidePosts.append(post)
                         }
                     }
-                    self.collectionView.reloadData()
-                    self.endRefresher()
                 }
             })
         }
     }
     
-    func retrieveMyPassengers(){
-        var index = 0
-        for ridePost in myRidePosts{
-            myPassengerRequests.append([])
-            db.collection("rideRequests").whereField("ridePostId", isEqualTo: ridePost.ridePostUid!).getDocuments(completion: { (snapshot, error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
-                    for document in snapshot!.documents {
-                        print("My Passenger Requests : \(document.documentID) => \(document.data())")
-                        if let request = RideRequest(dictionary: document.data()){
-                            self.myPassengerRequests[index].append(request)
-                        }
-                    }
-                    index += 1
-                    self.collectionView.reloadData()
-                    self.endRefresher()
-                }
-            })
-        }
-    }
+//    func retrieveMyPassengers(){
+//        var index = 0
+//        for ridePost in myRidePosts{
+//            myPassengerRequests.append([])
+//            db.collection("rideRequests").whereField("ridePostId", isEqualTo: ridePost.ridePostUid!).getDocuments(completion: { (snapshot, error) in
+//                if let error = error {
+//                    print(error.localizedDescription)
+//                } else {
+//                    for document in snapshot!.documents {
+//                        print("My Passenger Requests : \(document.documentID) => \(document.data())")
+//                        if let request = RideRequest(dictionary: document.data()){
+//                            self.myPassengerRequests[index].append(request)
+//                        }
+//                    }
+//                    index += 1
+//                    self.collectionView.reloadData()
+//                    self.endRefresher()
+//                }
+//            })
+//        }
+//    }
     
     func addRefresher(){
         self.refresher = UIRefreshControl()
@@ -178,7 +175,6 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath) as! OfferedRidesCollectionViewCell
             cell.backgroundColor = UIColor.white
             cell.post = myRidePosts[indexPath.row]
-            cell.returnToOriginalView()
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath) as! OfferedRidesCollectionViewCell
@@ -188,25 +184,12 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
             } else {
                 cell.post = joinedRidePosts[indexPath.row]
             }
-            cell.returnToOriginalView()
             return cell
         }
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! OfferedRidesCollectionViewCell
-        cell.requests = self.myPassengerRequests[indexPath.row]
-        cell.changeView()
-        // MARK : delegate
-        setCellsDelegates(cell:cell)
-        print(myPassengerRequests[indexPath.row])
-        collectionView.performBatchUpdates(nil, completion: nil)
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! OfferedRidesCollectionViewCell
-        cell.returnToOriginalView()
-        collectionView.performBatchUpdates(nil, completion: nil)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -245,44 +228,5 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 70)
-    }
-}
-
-
-//When receive passenger request from tapping image
-extension MyStatusViewController : PassengersRequestData{
-    
-    func setCellsDelegates(cell:OfferedRidesCollectionViewCell){
-        cell.bottomUIView?.passengerOne.delegate = self
-        cell.bottomUIView?.passengerTwo.delegate = self
-        cell.bottomUIView?.passengerThree.delegate = self
-        cell.bottomUIView?.passengerFour.delegate = self
-    }
-    
-    func rideRequestFromTappedPassenger(rideRequest: RideRequest) {
-        setupPopUpView()
-    }
-    
-    func setupPopUpView(){
-        let black = UIView()
-        black.backgroundColor = UIColor(white: 0, alpha: 0.5)
-        black.alpha = 0
-        
-        if let window = UIApplication.shared.keyWindow {
-            black.frame = window.frame
-            black.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismissPopUpView)))
-            window.addSubview(black)
-            
-            UIView.animate(withDuration: 0.3) {
-                black.alpha = 1
-            }
-            UIView.animate(withDuration: 0.3) {
-                black.alpha = 0
-            }
-        }
-    }
-    
-    @objc func handleDismissPopUpView(){
-        
     }
 }

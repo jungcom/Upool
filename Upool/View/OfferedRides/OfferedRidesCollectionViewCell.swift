@@ -207,51 +207,5 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         passengerSeatsLabel.trailingAnchor.constraint(equalTo: topUIView.trailingAnchor, constant: -3).isActive = true
         passengerSeatsLabel.heightAnchor.constraint(equalTo: topUIView.heightAnchor, multiplier: 0.15).isActive = true
         passengerSeatsLabel.widthAnchor.constraint(equalTo: topUIView.widthAnchor, multiplier: 0.3).isActive = true
-        
     }
-    
-    //MARK: Bottom View
-    
-    //Cell changes
-    func changeView(){
-        topViewHeightConstraintWhenTapped.isActive = true
-        topViewHeightConstraintWhenNotTapped.isActive = false
-        setupBottomViews()
-    }
-    
-    func returnToOriginalView(){
-        topViewHeightConstraintWhenTapped.isActive = false
-        topViewHeightConstraintWhenNotTapped.isActive = true
-        deleteBottomSubview()
-    }
-    
-    var requests : [RideRequest]?
-    
-    var bottomUIView : BottomCellView?
-    
-    func setupBottomViews(){
-        if let bottomUIView = bottomUIView{
-            bottomUIView.removeFromSuperview()
-        }
-        if let requests = requests{
-            bottomUIView = BottomCellView(requests: requests)
-        } else {
-            bottomUIView = BottomCellView()
-        }
-        addSubview(bottomUIView!)
-        //Bottom View Constraints
-        bottomUIView!.translatesAutoresizingMaskIntoConstraints = false
-        bottomUIView!.topAnchor.constraint(equalTo: topUIView.bottomAnchor).isActive = true
-        bottomUIView!.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        bottomUIView!.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        bottomUIView!.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-    }
-    
-    func deleteBottomSubview(){
-        guard let bottomUIView = bottomUIView else {return}
-        bottomUIView.removeFromSuperview()
-    }
-    
-    
-    
 }

@@ -2,22 +2,25 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "UPoolLogo.png",
+      "filename" : "UpoolLogo2x copy.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "UPoolLogo@2x.png",
+      "filename" : "UpoolLogo3x-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "UPoolLogo@3x.png",
+      "filename" : "UpoolLogo4x.png",
       "scale" : "3x"
     }
   ],
   "info" : {
     "version" : 1,
     "author" : "xcode"
+  },
+  "properties" : {
+    "template-rendering-intent" : "template"
   }
 }
