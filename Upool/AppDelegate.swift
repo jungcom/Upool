@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import GooglePlaces
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -54,6 +55,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            NSAttributedString.Key.foregroundColor : UIColor.white,
 //        ]
         
+        
+        //notifications
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: {_, _ in
+                
+        })
+//        let settings: UIUserNotificationSettings =
+//            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+//        application.registerUserNotificationSettings(settings)
+//        
+//        application.registerForRemoteNotifications()
         return true
     }
 

@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import NVActivityIndicatorView
+import UserNotifications
 
 private let offeredRidesCellId = "Cell"
 private let headerCellId = "Header"
@@ -39,6 +40,7 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
         addRefresher()
         setupNavBar()
         retrieveRidePosts()
+        
     }
     
     @objc func retrieveRidePosts(){
