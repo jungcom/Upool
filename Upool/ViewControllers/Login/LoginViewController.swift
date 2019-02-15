@@ -131,18 +131,18 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
 //        present(LoginViewController.presentMainPage(), animated: true, completion: nil)
         
         
-//        let email = emailTextField.text
-//        let password = passwordTextField.text
-//
-//        guard email != "" && password != "" else{
-//            self.errorLabel.text = "Empty email/password field"
-//            return
-//        }
+        let email = emailTextField.text
+        let password = passwordTextField.text
+
+        guard email != "" && password != "" else{
+            self.errorLabel.text = "Empty email/password field"
+            return
+        }
 
         startAnimating(type: NVActivityIndicatorType.ballTrianglePath, color: Colors.maroon, displayTimeThreshold:2, minimumDisplayTime: 1)
         
-        let email : String? = "anthonylee3737@gmail.com"
-        let password : String? = "123123"
+//        let email : String? = "anthonylee3737@gmail.com"
+//        let password : String? = "123123"
         
         Auth.auth().signIn(withEmail: email!, password: password!, completion: { (authResult, error) in
 

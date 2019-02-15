@@ -13,12 +13,14 @@ class UPoolUser:NSObject ,Encodable,Decodable{
     var lastName: String!
     var email: String!
     var uid : String!
+    var fcmToken : String!
     var profileImageUrl : String?
     
-    init(email:String, fn:String, ln:String, uid: String) {
+    init(email:String, fn:String, ln:String, uid: String, fcmToken : String) {
         self.email = email
         self.firstName = fn
         self.lastName = ln
         self.uid = uid
+        self.fcmToken = fcmToken
     }
 }

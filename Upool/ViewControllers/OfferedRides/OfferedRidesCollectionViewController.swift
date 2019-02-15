@@ -41,6 +41,17 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
         setupNavBar()
         retrieveRidePosts()
         
+        //Test Notifications
+        let content = UNMutableNotificationContent()
+        content.title = "Title"
+        content.body = "Body"
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: "testIdentifier", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
     
     @objc func retrieveRidePosts(){

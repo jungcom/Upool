@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseMessaging
 
 class SignUpViewController: UIViewController {
 
@@ -144,7 +145,11 @@ class SignUpViewController: UIViewController {
             }
 
             // if successful add user
-            let newUser = UPoolUser(email: email, fn: firstName, ln: lastName, uid: authDataResult.user.uid)
+            
+            //get FCM Token First
+            guard let fcmToken = Messaging.messaging().fcmToken else {return}
+            
+            let newUser = UPoolUser(email: email, fn: firstName, ln: lastName, uid: authDataResult.user.uid, fcmToken: fcmToken)
             print(newUser)
             //Add user to the Firebase database
             self.db.collection("users").document(authDataResult.user.uid).setData(newUser.dictionary, completion: { (err) in

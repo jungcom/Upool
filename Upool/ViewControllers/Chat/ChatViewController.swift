@@ -44,10 +44,19 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
         //Get user message info from the map document
         let toUsers = db.collection("user-Messages").document(id).collection("toUserId").document("currentToUserIds")
         toUsers.getDocument(completion: { (snapshot, error) in
-            guard let snapshot = snapshot, let keys = snapshot.data()?.keys else {return}
+            guard let snapshot = snapshot, let keys = snapshot.data()?.keys else {
+                print("error \(error?.localizedDescription)")
+                print("Nothing Found")
+                self.stopAnimating()
+                return
+            }
             let userIds = Array(keys)
             
             //For each toUserId create a listener
+            
+            //Create a semaphore
+            let group = DispatchGroup()
+            
             for toUserId in userIds{
                 let listener = self.db.collection("user-Messages").document(id).collection("toUserId").document(toUserId).collection("messageIds").addSnapshotListener { (snapshot, error) in
                     guard let snapshot = snapshot else {
@@ -55,9 +64,6 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
                         return
                     }
                     print("Snapshot : \(snapshot)")
-                    
-                    //Create a lock/semaphore
-                    let group = DispatchGroup()
                     
                     //listen for changes
                     snapshot.documentChanges.forEach { diff in
@@ -92,7 +98,7 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
                             })
                         }
                     }
-                    //When all threads are finished, Group by user and update tableview
+//                    When all threads are finished, Group by user and update tableview
                     group.notify(queue: .main, execute: {
                         self.messages = Array(self.messagesDictionary.values)
                         self.messages.sort(by: { (m1, m2) -> Bool in
@@ -105,7 +111,6 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
                         self.stopAnimating()
                     })
                 }
-                
                 self.listeners.append(listener)
             }
         })
