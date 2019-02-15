@@ -191,6 +191,11 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
     }
     
     @objc func handleMessage(){
+        //Don't allow messaging to myself
+        guard let fromId = authUser?.uid, let toId = driver?.uid, fromId != toId else {
+            print("Cannot message myself")
+            return
+        }
         let chatlogVC = ChatLogViewController(collectionViewLayout: UICollectionViewFlowLayout())
         chatlogVC.toUser = driver
         navigationController?.pushViewController(chatlogVC, animated: true)

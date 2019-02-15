@@ -160,4 +160,29 @@ extension ChatViewController{
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90.0
     }
+    
+    //Edit and delete Messages
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let message = messages[indexPath.row]
+        
+        if let chatPartnerId = message.chatPartnerId(){
+            db.collection("user-Messages").document(userId).collection("toUser").document(chatPartnerId).collection("messageIds")
+//            Database.database().reference(fromURL: Constants.databaseURL).child("user-message").child(uid).child(chatPartnerId).removeValue { (error, ref) in
+//                if error != nil{
+//                    print("Failed to delete message",error)
+//                    return
+//                }
+//
+//                self.messagesDictionary.removeValue(forKey: chatPartnerId)
+//                self.handleReloadTable()
+//            }
+        }
+    }
 }
