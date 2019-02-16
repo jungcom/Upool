@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import NVActivityIndicatorView
+import FirebaseFunctions
 
 let cellId = "cellId"
 
@@ -166,6 +167,23 @@ extension ChatViewController{
         return true
     }
     
+    fileprivate func sendTriggerToDeleteCloudFunction() {
+        Functions.functions().httpsCallable("recursiveDelete").call(["path": "hello/123"]) { (result, error) in
+            if let error = error as NSError? {
+                print(error.localizedDescription)
+                if error.domain == FunctionsErrorDomain {
+                    let code = FunctionsErrorCode(rawValue: error.code)
+                    let message = error.localizedDescription
+                    let details = error.userInfo[FunctionsErrorDetailsKey]
+                    print("Error : \(message), \(details) with code \(code)")
+                }
+            }
+            if let text = (result?.data as? [String: Any])?["text"] as? String {
+                print("Some value \(text) was returned")
+            }
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard let userId = Auth.auth().currentUser?.uid else {
             return
@@ -173,7 +191,8 @@ extension ChatViewController{
         let message = messages[indexPath.row]
         
         if let chatPartnerId = message.chatPartnerId(){
-            db.collection("user-Messages").document(userId).collection("toUser").document(chatPartnerId).collection("messageIds")
+            sendTriggerToDeleteCloudFunction()
+//            db.collection("user-Messages").document(userId).collection("toUser").document(chatPartnerId).collection("messageIds")
 //            Database.database().reference(fromURL: Constants.databaseURL).child("user-message").child(uid).child(chatPartnerId).removeValue { (error, ref) in
 //                if error != nil{
 //                    print("Failed to delete message",error)
