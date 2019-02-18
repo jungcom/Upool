@@ -22,7 +22,11 @@ class MyStatusViewController: UICollectionViewController  {
     
     var refresher : UIRefreshControl!
     
-    var isMyRides : Bool = true
+    var isMyRides : Bool = true {
+        didSet{
+            
+        }
+    }
     
     var myRidePosts = [RidePost]()
     
@@ -159,10 +163,6 @@ class MyStatusViewController: UICollectionViewController  {
 extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isMyRides{
             return myRidePosts.count
         } else {
@@ -170,19 +170,21 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
         }
     }
     
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath) as! OfferedRidesCollectionViewCell
+        cell.backgroundColor = UIColor.white
         if isMyRides{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath) as! OfferedRidesCollectionViewCell
-            cell.backgroundColor = UIColor.white
-            cell.post = myRidePosts[indexPath.row]
+            cell.post = myRidePosts[indexPath.section]
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath) as! OfferedRidesCollectionViewCell
-            cell.backgroundColor = UIColor.white
-            if indexPath.row >= joinedRidePosts.count{
-                cell.post = pendingRidePosts[indexPath.row - joinedRidePosts.count]
+            if indexPath.section >= joinedRidePosts.count{
+                cell.post = pendingRidePosts[indexPath.section - joinedRidePosts.count]
             } else {
-                cell.post = joinedRidePosts[indexPath.row]
+                cell.post = joinedRidePosts[indexPath.section]
             }
             return cell
         }
@@ -202,31 +204,41 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 15, left: 0, bottom: 15, right: 0)
+        return UIEdgeInsets(top: 5, left: 0, bottom: 15, right: 0)
     }
     
     //Collectionview Header delegates
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerCellId, for: indexPath) as! MyStatusSectionHeaderCell
-        header.segmentTapped = { (index) in
-            if index == 0{
-                print("My Rides")
-                self.isMyRides = true
-                collectionView.reloadData()
-                
-            } else {
-                print("Pending Rides")
-                self.isMyRides = false
-                collectionView.reloadData()
-                
+        
+        //reset the reused cell
+        header.contentView.removeFromSuperview()
+        
+        if indexPath.section == 0{
+            header.isFirst = true
+            header.segmentTapped = { (index) in
+                if index == 0{
+                    print("My Rides")
+                    self.isMyRides = true
+                    collectionView.reloadData()
+                    
+                } else {
+                    print("Pending Rides")
+                    self.isMyRides = false
+                    collectionView.reloadData()
+                    
+                }
             }
         }
         return header
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 70)
+        if section == 0{
+            return CGSize(width: view.frame.width, height: 100)
+        } else {
+            return CGSize(width: view.frame.width, height: 30)
+        }
     }
 }

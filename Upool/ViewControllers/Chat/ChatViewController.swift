@@ -167,8 +167,8 @@ extension ChatViewController{
         return true
     }
     
-    fileprivate func sendTriggerToDeleteCloudFunction() {
-        Functions.functions().httpsCallable("recursiveDelete").call(["path": "hello/123"]) { (result, error) in
+    fileprivate func sendTriggerToDeleteCloudFunction(path: String) {
+        Functions.functions().httpsCallable("recursiveDelete").call(["path": path]) { (result, error) in
             if let error = error as NSError? {
                 print(error.localizedDescription)
                 if error.domain == FunctionsErrorDomain {
@@ -190,8 +190,6 @@ extension ChatViewController{
         }
         let message = messages[indexPath.row]
         
-        if let chatPartnerId = message.chatPartnerId(){
-            sendTriggerToDeleteCloudFunction()
 //            db.collection("user-Messages").document(userId).collection("toUser").document(chatPartnerId).collection("messageIds")
 //            Database.database().reference(fromURL: Constants.databaseURL).child("user-message").child(uid).child(chatPartnerId).removeValue { (error, ref) in
 //                if error != nil{
@@ -202,6 +200,9 @@ extension ChatViewController{
 //                self.messagesDictionary.removeValue(forKey: chatPartnerId)
 //                self.handleReloadTable()
 //            }
+        
+        if let chatPartnerId = message.chatPartnerId(){
+            sendTriggerToDeleteCloudFunction(path: "hello/12323")
         }
     }
 }
