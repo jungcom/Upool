@@ -10,6 +10,7 @@
 		4E0CD8CE220CA20C00256906 /* ChatUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0CD8CD220CA20C00256906 /* ChatUserCell.swift */; };
 		4E0CD8D0220D4CE300256906 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0CD8CF220D4CE300256906 /* ChatMessageCell.swift */; };
 		4E0CD8D522138D1100256906 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0CD8D422138D1100256906 /* LaunchViewController.swift */; };
+		4E399D28221A5FEE00605A50 /* MyStatusTrashCanHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E399D27221A5FEE00605A50 /* MyStatusTrashCanHeaderCell.swift */; };
 		4E431FA721FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FA621FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift */; };
 		4E431FA921FE90810081CA52 /* CreateRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FA821FE90810081CA52 /* CreateRideViewController.swift */; };
 		4E431FAB21FE94AC0081CA52 /* RideDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */; };
@@ -60,6 +61,7 @@
 		4E0CD8CD220CA20C00256906 /* ChatUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUserCell.swift; sourceTree = "<group>"; };
 		4E0CD8CF220D4CE300256906 /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		4E0CD8D422138D1100256906 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		4E399D27221A5FEE00605A50 /* MyStatusTrashCanHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStatusTrashCanHeaderCell.swift; sourceTree = "<group>"; };
 		4E431FA621FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedRidesSectionHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		4E431FA821FE90810081CA52 /* CreateRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideViewController.swift; sourceTree = "<group>"; };
 		4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetailViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 			children = (
 				4E49BFE42209455F002FB09A /* MyStatus.swift */,
 				4E49BFE2220940FC002FB09A /* MyStatusSectionHeaderCell.swift */,
+				4E399D27221A5FEE00605A50 /* MyStatusTrashCanHeaderCell.swift */,
 			);
 			path = MyStatus;
 			sourceTree = "<group>";
@@ -571,6 +574,7 @@
 				4E8B4C722201219B002EC784 /* CreateRideCalendar.swift in Sources */,
 				4EEB91DC21F7679F0079209B /* AppDelegate.swift in Sources */,
 				4E49BFD92208C140002FB09A /* EmailSentViewController.swift in Sources */,
+				4E399D28221A5FEE00605A50 /* MyStatusTrashCanHeaderCell.swift in Sources */,
 				4E5F9E1C220B85120037A10C /* ProfileViewController.swift in Sources */,
 				4E49BFDF220928F2002FB09A /* ResetPasswordViewController.swift in Sources */,
 				4E5F9E2C220C8CE80037A10C /* Message.swift in Sources */,

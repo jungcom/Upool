@@ -15,7 +15,9 @@ class MyStatusSectionHeaderCell : UICollectionViewCell {
     
     var isFirst : Bool? = false {
         didSet{
-            setupSegmentControl()
+            if isFirst!{
+                setupSegmentControl()
+            }
         }
     }
     
@@ -47,7 +49,7 @@ class MyStatusSectionHeaderCell : UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+       
     func setupSegmentControl(){
         addSubview(segmentControl)
         segmentControl.translatesAutoresizingMaskIntoConstraints = false

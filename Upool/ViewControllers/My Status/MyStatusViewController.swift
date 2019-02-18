@@ -11,6 +11,7 @@ import Firebase
 
 private let offeredRidesCellId = "Cell"
 private let headerCellId = "HeaderForMyStatus"
+private let headerDeleteCellId = "headerDeleteCell"
 
 class MyStatusViewController: UICollectionViewController  {
     
@@ -42,6 +43,7 @@ class MyStatusViewController: UICollectionViewController  {
         // Register cell classes
         self.collectionView!.register(OfferedRidesCollectionViewCell.self, forCellWithReuseIdentifier: offeredRidesCellId)
         self.collectionView.register(MyStatusSectionHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerCellId)
+        self.collectionView.register(MyStatusTrashCanHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerDeleteCellId)
         
         // Do any additional setup after loading the view.
         setupNavBar()
@@ -210,12 +212,10 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     //Collectionview Header delegates
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerCellId, for: indexPath) as! MyStatusSectionHeaderCell
-        
         //reset the reused cell
-        header.contentView.removeFromSuperview()
         
         if indexPath.section == 0{
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerCellId, for: indexPath) as! MyStatusSectionHeaderCell
             header.isFirst = true
             header.segmentTapped = { (index) in
                 if index == 0{
@@ -230,12 +230,17 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
                     
                 }
             }
+            header.deleteButtonTapped = { () in
+                print("Delete Button Tapped in section \(indexPath.section)")
+            }
+            return header
+        } else{
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerDeleteCellId, for: indexPath) as! MyStatusTrashCanHeaderCell
+            header.deleteButtonTapped = { () in
+                print("Delete Button Tapped in section \(indexPath.section)")
+            }
+            return header
         }
-        header.deleteButtonTapped = { () in
-            print("Delete Button Tapped in section \(indexPath.section)")
-        }
-        
-        return header
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
