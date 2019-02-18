@@ -231,6 +231,10 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
                 }
             }
         }
+        header.deleteButtonTapped = { () in
+            print("Delete Button Tapped in section \(indexPath.section)")
+        }
+        
         return header
     }
     

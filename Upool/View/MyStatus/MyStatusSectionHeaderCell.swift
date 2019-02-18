@@ -11,6 +11,7 @@ import UIKit
 class MyStatusSectionHeaderCell : UICollectionViewCell {
     
     var segmentTapped : ((Int) -> ())?
+    var deleteButtonTapped : (() -> ())?
     
     var isFirst : Bool? = false {
         didSet{
@@ -27,13 +28,14 @@ class MyStatusSectionHeaderCell : UICollectionViewCell {
         let stringAtt : [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.font : UIFont(name: Fonts.helvetica, size: 16)!]
         segment.setTitleTextAttributes(stringAtt, for: .normal)
-        segment.addTarget(self, action: #selector(tapped), for: .valueChanged)
+        segment.addTarget(self, action: #selector(segmentTappedFunc), for: .valueChanged)
         return segment
     }()
     
     lazy var deleteRideButton : UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "Trash"), for: .normal)
+        button.addTarget(self, action: #selector(deleteButtonTappedFunc), for: .touchUpInside)
         return button
     }()
     
@@ -66,7 +68,11 @@ class MyStatusSectionHeaderCell : UICollectionViewCell {
         deleteRideButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
     }
     
-    @objc func tapped(){
+    @objc func segmentTappedFunc(){
         segmentTapped?(segmentControl.selectedSegmentIndex)
+    }
+    
+    @objc func deleteButtonTappedFunc(){
+        deleteButtonTapped?()
     }
 }
