@@ -26,8 +26,6 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
         self.collectionView!.register(OfferedRidesCollectionViewCell.self, forCellWithReuseIdentifier: offeredRidesCellId)
@@ -42,16 +40,16 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
         retrieveRidePosts()
         
         //Test Notifications
-        let content = UNMutableNotificationContent()
-        content.title = "Title"
-        content.body = "Body"
-        content.sound = UNNotificationSound.default
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: "testIdentifier", content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+//        let content = UNMutableNotificationContent()
+//        content.title = "Title"
+//        content.body = "Body"
+//        content.sound = UNNotificationSound.default
+//        
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//        
+//        let request = UNNotificationRequest(identifier: "testIdentifier", content: content, trigger: trigger)
+//        
+//        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
     
     @objc func retrieveRidePosts(){
