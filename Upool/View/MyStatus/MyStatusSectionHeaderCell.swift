@@ -13,14 +13,6 @@ class MyStatusSectionHeaderCell : UICollectionViewCell {
     var segmentTapped : ((Int) -> ())?
     var deleteButtonTapped : (() -> ())?
     
-    var isFirst : Bool? = false {
-        didSet{
-            if isFirst!{
-                setupSegmentControl()
-            }
-        }
-    }
-    
     lazy var segmentControl : UISegmentedControl = {
         let titles = ["My Rides","Joined Rides"]
         let segment = UISegmentedControl(items: titles)
@@ -43,6 +35,7 @@ class MyStatusSectionHeaderCell : UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame:frame)
+        setupSegmentControl()
         setupTrashButton()
     }
     

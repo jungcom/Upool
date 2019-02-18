@@ -100,7 +100,6 @@ class MyStatusViewController: UICollectionViewController  {
     }
     
     @objc func retrieveJoinedAndPendingRidePosts(){
-        
         //Retrieve Ride Data for each request
         for request in myRequests{
             db.collection("ridePosts").document(request.ridePostId).getDocument(completion: { (snapshot, error) in
@@ -114,6 +113,7 @@ class MyStatusViewController: UICollectionViewController  {
                             self.joinedRidePosts.append(post)
                         }
                     }
+                    self.collectionView.reloadData()
                 }
             })
         }
@@ -216,7 +216,6 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
         
         if indexPath.section == 0{
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerCellId, for: indexPath) as! MyStatusSectionHeaderCell
-            header.isFirst = true
             header.segmentTapped = { (index) in
                 if index == 0{
                     print("My Rides")
