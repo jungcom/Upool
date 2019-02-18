@@ -18,14 +18,15 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
     
     let db = Firestore.firestore()
     var ridePost : RidePost!
-    var driver : UPoolUser?
-    var currentUser : UPoolUser!{
+    var driver : UPoolUser?{
         didSet{
-            if let url = currentUser.profileImageUrl{
+            if let url = driver?.profileImageUrl{
+                print("Image url is \(url)")
                 profileImageView.loadImageUsingCacheWithUrlString(url)
             }
         }
     }
+    var currentUser : UPoolUser!
     
     let scrollView = UIScrollView()
     
