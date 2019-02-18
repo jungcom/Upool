@@ -119,28 +119,6 @@ class MyStatusViewController: UICollectionViewController  {
         }
     }
     
-//    func retrieveMyPassengers(){
-//        var index = 0
-//        for ridePost in myRidePosts{
-//            myPassengerRequests.append([])
-//            db.collection("rideRequests").whereField("ridePostId", isEqualTo: ridePost.ridePostUid!).getDocuments(completion: { (snapshot, error) in
-//                if let error = error {
-//                    print(error.localizedDescription)
-//                } else {
-//                    for document in snapshot!.documents {
-//                        print("My Passenger Requests : \(document.documentID) => \(document.data())")
-//                        if let request = RideRequest(dictionary: document.data()){
-//                            self.myPassengerRequests[index].append(request)
-//                        }
-//                    }
-//                    index += 1
-//                    self.collectionView.reloadData()
-//                    self.endRefresher()
-//                }
-//            })
-//        }
-//    }
-    
     func addRefresher(){
         self.refresher = UIRefreshControl()
         self.refresher.tintColor = UIColor.gray
@@ -193,7 +171,8 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let detailVC = MyStatusDetailViewController()
+        navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
