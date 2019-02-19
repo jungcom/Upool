@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum Status : Int {
+    case pending = 0
+    case confirmed = 1
+    case notAccepted = -1
+}
+
 @objcMembers
 class RideRequest:NSObject ,Encodable,Decodable{
     var fromId: String!
@@ -23,9 +29,4 @@ class RideRequest:NSObject ,Encodable,Decodable{
 //        self.lastName = ln
 //        self.uid = uid
 //    }
-    enum Status : Int {
-        case pending = 0
-        case confirmed = 1
-        case notAccepted = -1
-    }
 }

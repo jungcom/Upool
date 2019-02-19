@@ -68,6 +68,13 @@ class MyStatusSectionHeaderCell : UICollectionViewCell {
     }
     
     @objc func deleteButtonTappedFunc(){
-        deleteButtonTapped?()
+        let alert = UIAlertController(title: "Delete Ride Post", message: "Are you sure you want to delete this ride?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let declineAction = UIAlertAction(title: "Delete", style: .default) { (_) in
+            self.deleteButtonTapped?()
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(declineAction)
+        self.parentViewController?.present(alert, animated: true, completion: nil)
     }
 }
