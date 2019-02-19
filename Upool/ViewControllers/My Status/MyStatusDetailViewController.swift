@@ -9,6 +9,9 @@
 import UIKit
 import Firebase
 
+private let acceptedPassengerCellId = "acceptedPassengerCellId"
+private let pendingPassengerCellId = "pendingPassengerCellId"
+
 class MyStatusDetailViewController: UIViewController{
 
     let db = Firestore.firestore()
@@ -26,6 +29,7 @@ class MyStatusDetailViewController: UIViewController{
     
     //Mark: UI Variables
     let topPassengerDetailView = UIView()
+    
     let passengerStatusLabel : UILabel = {
         let label = UILabel()
         label.text = "Passenger Status"
@@ -35,13 +39,18 @@ class MyStatusDetailViewController: UIViewController{
         return label
     }()
     
+    let lineSpacing : CGFloat = 15.0
     lazy var acceptedPassengersCollectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = lineSpacing
         let collection = UICollectionView(frame : CGRect.zero ,collectionViewLayout: layout)
+        collection.register(AcceptedPassengerCollectionViewCell.self, forCellWithReuseIdentifier: acceptedPassengerCellId)
         collection.backgroundColor = UIColor.groupTableViewBackground
         collection.delegate = self
         collection.dataSource = self
+        collection.isScrollEnabled = false
+        collection.backgroundColor = UIColor.white
         return collection
     }()
     
@@ -80,16 +89,35 @@ class MyStatusDetailViewController: UIViewController{
     }
 }
 
-extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellId", for: indexPath)
-        cell.backgroundColor = Colors.maroon
-        return cell
+        if collectionView == acceptedPassengersCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: acceptedPassengerCellId, for: indexPath) as! AcceptedPassengerCollectionViewCell
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellId", for: indexPath)
+            return cell
+        }
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        if collectionView == acceptedPassengersCollectionView{
+            let totalCellWidth = collectionView.frame.width * 0.20 * 4
+            let totalSpacingWidth =  CGFloat(lineSpacing * (4 - 1))
+            let leftInset = (collectionView.frame.width - (totalCellWidth + totalSpacingWidth)) / 2
+            let rightInset = leftInset
+            
+            return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: rightInset)
+        } else {
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        }
+    }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: acceptedPassengersCollectionView.frame.width * 0.20, height: acceptedPassengersCollectionView.frame.height)
+    }
 }

@@ -1,26 +1,11 @@
 //
-//  MyStatus.swift
+//  MyStatusDetail.swift
 //  Upool
 //
-//  Created by Anthony Lee on 2/4/19.
+//  Created by Anthony Lee on 2/19/19.
 //  Copyright © 2019 anthonyLee. All rights reserved.
 //
-
 import UIKit
-
-extension MyStatusViewController{
-    func setupNavBar() {
-        collectionView.backgroundColor = UIColor.groupTableViewBackground
-        collectionView.alwaysBounceVertical = true
-        
-        let image: UIImage = UIImage(named: "UPoolLogo")!
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        imageView.contentMode = .scaleAspectFill
-        imageView.image = image
-        
-        navigationItem.titleView = imageView
-    }
-}
 
 extension MyStatusDetailViewController{
     func setupNavBar() {
@@ -39,7 +24,6 @@ extension MyStatusDetailViewController{
         topPassengerDetailView.addSubview(passengerStatusLabel)
         
         //The whole top ui view
-        topPassengerDetailView.backgroundColor = UIColor.gray
         topPassengerDetailView.translatesAutoresizingMaskIntoConstraints = false
         topPassengerDetailView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12).isActive = true
         topPassengerDetailView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12).isActive = true
@@ -61,6 +45,6 @@ extension MyStatusDetailViewController{
         acceptedPassengersCollectionView.bottomAnchor.constraint(equalTo: topPassengerDetailView.bottomAnchor, constant: -12).isActive = true
         acceptedPassengersCollectionView.leadingAnchor.constraint(equalTo: topPassengerDetailView.leadingAnchor, constant: 12).isActive = true
         acceptedPassengersCollectionView.trailingAnchor.constraint(equalTo: topPassengerDetailView.trailingAnchor, constant: -12).isActive = true
-        acceptedPassengersCollectionView.heightAnchor.constraint(equalTo: topPassengerDetailView.heightAnchor, multiplier: 0.5).isActive = true
+        acceptedPassengersCollectionView.heightAnchor.constraint(equalTo: topPassengerDetailView.heightAnchor, multiplier: 0.6).isActive = true
     }
 }

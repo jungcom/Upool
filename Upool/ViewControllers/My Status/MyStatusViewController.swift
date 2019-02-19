@@ -146,7 +146,11 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
         if isMyRides{
             return myRidePosts.count
         } else {
-            return joinedRidePosts.count + pendingRidePosts.count
+            if joinedRidePosts.count + pendingRidePosts.count == 0{
+                return 1
+            } else {
+                return joinedRidePosts.count + pendingRidePosts.count
+            }
         }
     }
     
@@ -205,7 +209,6 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
                     print("Pending Rides")
                     self.isMyRides = false
                     collectionView.reloadData()
-                    
                 }
             }
             header.deleteButtonTapped = { () in
