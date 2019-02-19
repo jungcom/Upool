@@ -119,7 +119,7 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
         if collectionView == acceptedPassengersCollectionView{
             return CGSize(width: acceptedPassengersCollectionView.frame.width * 0.20, height: acceptedPassengersCollectionView.frame.height)
         } else {
-            return CGSize(width: pendingPassengersCollectionView.frame.width * 0.9, height: 80)
+            return CGSize(width: pendingPassengersCollectionView.frame.width * 0.9, height: 90)
         }
     }
 }
