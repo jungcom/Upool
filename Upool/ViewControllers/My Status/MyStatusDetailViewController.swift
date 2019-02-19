@@ -15,25 +15,20 @@ private let pendingPassengerCellId = "pendingPassengerCellId"
 class MyStatusDetailViewController: UIViewController{
 
     let db = Firestore.firestore()
-    lazy var pendingPassengersCollectionView : UICollectionView = {
-        let collection = UICollectionView(frame : CGRect.zero ,collectionViewLayout: UICollectionViewFlowLayout())
-        collection.backgroundColor = UIColor.groupTableViewBackground
-        collection.delegate = self
-        collection.dataSource = self
-        collection.alwaysBounceVertical = true
-        return collection
-    }()
     
     var ridePost : RidePost?
     var myPassengerRequests = [RideRequest]()
     
     //Mark: UI Variables
-    let topPassengerDetailView = UIView()
+    let topPassengerDetailView : UIView = {
+        let view = UIView()
+        return view
+    }()
     
     let passengerStatusLabel : UILabel = {
         let label = UILabel()
         label.text = "Passenger Status"
-        label.font = UIFont(name: Fonts.helvetica, size: 18)
+        label.font = UIFont(name: Fonts.helvetica, size: 16)
         label.textColor = Colors.maroon
         label.textAlignment = .center
         return label
@@ -54,6 +49,16 @@ class MyStatusDetailViewController: UIViewController{
         return collection
     }()
     
+    lazy var pendingPassengersCollectionView : UICollectionView = {
+        let collection = UICollectionView(frame : CGRect.zero ,collectionViewLayout: UICollectionViewFlowLayout())
+        collection.register(PendingPassengerCollectionViewCell.self, forCellWithReuseIdentifier: pendingPassengerCellId)
+        collection.backgroundColor = UIColor.groupTableViewBackground
+        collection.delegate = self
+        collection.dataSource = self
+        collection.alwaysBounceVertical = true
+        return collection
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -62,13 +67,6 @@ class MyStatusDetailViewController: UIViewController{
         setupTopPassengerDetailView()
         setupAcceptedPassengerCollectionView()
         setupPendingPassengerCollectionView()
-    }
-    
-    func setupPendingPassengerCollectionView(){
-        //register Cells
-        //collectionView.register(, forCellWithReuseIdentifier: )
-        
-        pendingPassengersCollectionView.translatesAutoresizingMaskIntoConstraints = false
     }
 
     func retrieveMyPassengers(){
@@ -99,7 +97,7 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: acceptedPassengerCellId, for: indexPath) as! AcceptedPassengerCollectionViewCell
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellId", for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: pendingPassengerCellId, for: indexPath) as! PendingPassengerCollectionViewCell
             return cell
         }
     }
@@ -113,11 +111,15 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
             
             return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: rightInset)
         } else {
-            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            return UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: acceptedPassengersCollectionView.frame.width * 0.20, height: acceptedPassengersCollectionView.frame.height)
+        if collectionView == acceptedPassengersCollectionView{
+            return CGSize(width: acceptedPassengersCollectionView.frame.width * 0.20, height: acceptedPassengersCollectionView.frame.height)
+        } else {
+            return CGSize(width: pendingPassengersCollectionView.frame.width * 0.9, height: 80)
+        }
     }
 }

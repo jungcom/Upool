@@ -22,7 +22,7 @@ class AcceptedPassengerCollectionViewCell: UICollectionViewCell {
         image.image = UIImage(named: "ProfileImagePlaceholder")
         image.contentMode = .scaleAspectFill
         image.layer.masksToBounds = true
-        image.layer.cornerRadius = 5
+        image.layer.cornerRadius = 12
         return image
     }()
     

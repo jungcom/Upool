@@ -47,4 +47,14 @@ extension MyStatusDetailViewController{
         acceptedPassengersCollectionView.trailingAnchor.constraint(equalTo: topPassengerDetailView.trailingAnchor, constant: -12).isActive = true
         acceptedPassengersCollectionView.heightAnchor.constraint(equalTo: topPassengerDetailView.heightAnchor, multiplier: 0.6).isActive = true
     }
+    
+    func setupPendingPassengerCollectionView(){
+        view.addSubview(pendingPassengersCollectionView)
+        
+        pendingPassengersCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        pendingPassengersCollectionView.topAnchor.constraint(equalTo: topPassengerDetailView.bottomAnchor).isActive = true
+        pendingPassengersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        pendingPassengersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        pendingPassengersCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
 }
