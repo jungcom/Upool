@@ -114,11 +114,37 @@ class PendingPassengerCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //Button handlers
     @objc func handleDecline(){
         print("Decline")
+        let alert = UIAlertController(title: "Decline Request", message: "Are you sure you want to decline this passenger?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            
+        }
+        let declineAction = UIAlertAction(title: "Decline", style: .default) { (_) in
+            
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(declineAction)
+        self.parentViewController?.present(alert, animated: true, completion: {
+            
+        })
+        
     }
     
     @objc func handleAccept(){
         print("Accept")
+        let alert = UIAlertController(title: "Accept Request", message: "Are you sure you want to accept this passenger?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            
+        }
+        let declineAction = UIAlertAction(title: "Accept", style: .default) { (_) in
+            
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(declineAction)
+        self.parentViewController?.present(alert, animated: true, completion: {
+            
+        })
     }
 }

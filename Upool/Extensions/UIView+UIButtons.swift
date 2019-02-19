@@ -9,6 +9,17 @@
 import UIKit
 
 extension UIView{
+    var parentViewController: UIViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if parentResponder is UIViewController {
+                return parentResponder as? UIViewController
+            }
+        }
+        return nil
+    }
+    
     static func dropShadow(view : UIView) {
         view.layer.masksToBounds = false
         view.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
