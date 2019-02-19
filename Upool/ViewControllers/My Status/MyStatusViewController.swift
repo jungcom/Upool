@@ -175,8 +175,11 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailVC = MyStatusDetailViewController()
-        navigationController?.pushViewController(detailVC, animated: true)
+        if isMyRides{
+            let detailVC = MyStatusDetailViewController()
+            detailVC.ridePost = myRidePosts[indexPath.section]
+            navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

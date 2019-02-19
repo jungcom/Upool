@@ -7,8 +7,27 @@
 //
 
 import UIKit
+import Firebase
 
 class PendingPassengerCollectionViewCell: UICollectionViewCell {
+    
+    let db = Firestore.firestore()
+    var request : RideRequest? {
+        didSet{
+            //Retrieve the requesting user data and show the name and profile image of that user
+            if let request = request, let requestingUserId = request.fromId{
+                db.collection("users").document(requestingUserId).getDocument { (snapshot, error) in
+                    guard let snapshot = snapshot else {return}
+                    if let data = snapshot.data(), let requestingUser = UPoolUser(dictionary: data){
+                        self.nameLabel.text = "\(requestingUser.firstName!) \(requestingUser.lastName!) wants to join your ride"
+                        guard let profileImageUrl = requestingUser.profileImageUrl else {return}
+                        self.profileImageView.loadImageUsingCacheWithUrlString(profileImageUrl)
+                    }
+                }
+            }
+        }
+    }
+    
     lazy var nameLabel :UILabel = {
         let label = UILabel()
         label.text = "Bob Marley wants to join your ride"

@@ -11,6 +11,7 @@ import Firebase
 
 private let acceptedPassengerCellId = "acceptedPassengerCellId"
 private let pendingPassengerCellId = "pendingPassengerCellId"
+private let pendingPassengerHeaderCellId = "pendingPassengerHeaderCellId"
 
 class MyStatusDetailViewController: UIViewController{
 
@@ -41,6 +42,7 @@ class MyStatusDetailViewController: UIViewController{
         layout.minimumLineSpacing = lineSpacing
         let collection = UICollectionView(frame : CGRect.zero ,collectionViewLayout: layout)
         collection.register(AcceptedPassengerCollectionViewCell.self, forCellWithReuseIdentifier: acceptedPassengerCellId)
+        collection.register(PendingPassengerHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: pendingPassengerHeaderCellId)
         collection.backgroundColor = UIColor.groupTableViewBackground
         collection.delegate = self
         collection.dataSource = self
@@ -52,6 +54,7 @@ class MyStatusDetailViewController: UIViewController{
     lazy var pendingPassengersCollectionView : UICollectionView = {
         let collection = UICollectionView(frame : CGRect.zero ,collectionViewLayout: UICollectionViewFlowLayout())
         collection.register(PendingPassengerCollectionViewCell.self, forCellWithReuseIdentifier: pendingPassengerCellId)
+        collection.register(PendingPassengerHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: pendingPassengerHeaderCellId)
         collection.backgroundColor = UIColor.groupTableViewBackground
         collection.delegate = self
         collection.dataSource = self
@@ -67,6 +70,7 @@ class MyStatusDetailViewController: UIViewController{
         setupTopPassengerDetailView()
         setupAcceptedPassengerCollectionView()
         setupPendingPassengerCollectionView()
+        retrieveMyPassengers()
     }
 
     func retrieveMyPassengers(){
@@ -89,7 +93,11 @@ class MyStatusDetailViewController: UIViewController{
 
 extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        if collectionView == acceptedPassengersCollectionView{
+            return 4
+        } else {
+            return myPassengerRequests.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -98,6 +106,7 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: pendingPassengerCellId, for: indexPath) as! PendingPassengerCollectionViewCell
+            cell.request = myPassengerRequests[indexPath.row]
             return cell
         }
     }
@@ -122,4 +131,20 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
             return CGSize(width: pendingPassengersCollectionView.frame.width * 0.9, height: 90)
         }
     }
+    
+    //Collectionview Header delegates
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: pendingPassengerHeaderCellId, for: indexPath)
+        return header
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if collectionView == pendingPassengersCollectionView{
+            return CGSize(width: view.frame.width, height: 70)
+        } else {
+            return CGSize(width: 0, height: 0)
+        }
+    }
+
 }
