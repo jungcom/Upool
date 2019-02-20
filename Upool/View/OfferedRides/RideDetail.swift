@@ -73,7 +73,7 @@ extension RideDetailViewController{
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.topAnchor.constraint(equalTo: firstTopView.topAnchor, constant: 10).isActive = true
         dateLabel.leadingAnchor.constraint(equalTo: firstTopView.leadingAnchor, constant: 20).isActive = true
-        dateLabel.widthAnchor.constraint(equalTo: firstTopView.widthAnchor, multiplier: 0.5).isActive = true
+        dateLabel.widthAnchor.constraint(equalTo: firstTopView.widthAnchor, multiplier: 0.7).isActive = true
         dateLabel.heightAnchor.constraint(equalTo: firstTopView.heightAnchor, multiplier: 0.4).isActive = true
         
         //Passenger Count Label Constraints
@@ -86,7 +86,7 @@ extension RideDetailViewController{
         locationStackView.translatesAutoresizingMaskIntoConstraints = false
         locationStackView.centerXAnchor.constraint(equalTo: firstTopView.centerXAnchor).isActive = true
         locationStackView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant:0).isActive = true
-        locationStackView.widthAnchor.constraint(equalTo: firstTopView.widthAnchor, multiplier: 0.7).isActive = true
+        locationStackView.widthAnchor.constraint(equalTo: firstTopView.widthAnchor, multiplier: 0.8).isActive = true
         locationStackView.heightAnchor.constraint(equalTo: firstTopView.heightAnchor, multiplier: 0.5).isActive = true
         
         //Bottom border view and Constraints

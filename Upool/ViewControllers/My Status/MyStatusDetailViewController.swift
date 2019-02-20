@@ -18,7 +18,8 @@ class MyStatusDetailViewController: UIViewController{
     let db = Firestore.firestore()
     
     var ridePost : RidePost?
-    var myPassengerRequests = [RideRequest]()
+    var myPendingPassengerRequests = [RideRequest]()
+    var myAcceptedPassengerRequests = [RideRequest]()
     
     //Mark: UI Variables
     let topPassengerDetailView : UIView = {
@@ -29,7 +30,7 @@ class MyStatusDetailViewController: UIViewController{
     let passengerStatusLabel : UILabel = {
         let label = UILabel()
         label.text = "Passenger Status"
-        label.font = UIFont(name: Fonts.helvetica, size: 16)
+        label.font = UIFont(name: Fonts.helvetica, size: 18)
         label.textColor = Colors.maroon
         label.textAlignment = .center
         return label
@@ -70,10 +71,10 @@ class MyStatusDetailViewController: UIViewController{
         setupTopPassengerDetailView()
         setupAcceptedPassengerCollectionView()
         setupPendingPassengerCollectionView()
-        retrieveMyPassengers()
+        retrieveMyPassengerRequests()
     }
 
-    func retrieveMyPassengers(){
+    func retrieveMyPassengerRequests(){
         guard let ridePost = ridePost else {return}
         db.collection("rideRequests").whereField("ridePostId", isEqualTo: ridePost.ridePostUid!).getDocuments(completion: { (snapshot, error) in
             if let error = error {
@@ -82,10 +83,17 @@ class MyStatusDetailViewController: UIViewController{
                 for document in snapshot!.documents {
                     print("My Passenger Requests : \(document.documentID) => \(document.data())")
                     if let request = RideRequest(dictionary: document.data()){
-                        self.myPassengerRequests.append(request)
+                        if request.requestStatus == Status.confirmed.rawValue{
+                            self.myAcceptedPassengerRequests.append(request)
+                        } else if request.requestStatus == Status.pending.rawValue{
+                            self.myPendingPassengerRequests.append(request)
+                        } else if request.requestStatus == Status.notAccepted.rawValue{
+                            //Code For Not Accepted Passengers
+                        }
                     }
                 }
                 self.pendingPassengersCollectionView.reloadData()
+                self.acceptedPassengersCollectionView.reloadData()
             }
         })
     }
@@ -96,18 +104,28 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
         if collectionView == acceptedPassengersCollectionView{
             return 4
         } else {
-            return myPassengerRequests.count
+            return myPendingPassengerRequests.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == acceptedPassengersCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: acceptedPassengerCellId, for: indexPath) as! AcceptedPassengerCollectionViewCell
+            if indexPath.row < myAcceptedPassengerRequests.count {
+                cell.rideRequest = myAcceptedPassengerRequests[indexPath.row]
+            }
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: pendingPassengerCellId, for: indexPath) as! PendingPassengerCollectionViewCell
-            cell.rideRequest = myPassengerRequests[indexPath.row]
-            
+            cell.rideRequest = myPendingPassengerRequests[indexPath.row]
+            cell.ridePost = self.ridePost
+            //When user accepts a ride request
+            cell.acceptButtonTapped = { () in
+                let acceptedRequest = self.myPendingPassengerRequests.remove(at: indexPath.row)
+                self.myAcceptedPassengerRequests.append(acceptedRequest)
+                self.pendingPassengersCollectionView.reloadData()
+                self.acceptedPassengersCollectionView.reloadData()
+            }
             return cell
         }
     }

@@ -39,8 +39,8 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
             if let price = post.price {
                 priceLabel.text = "$\(price)"
             }
-            if let maxPassenger = post.maxPassengers {
-                passengerSeatsLabel.text = "Passengers 0/\(maxPassenger)"
+            if let maxPassenger = post.maxPassengers, let currentPassengers = post.currentPassengers {
+                passengerSeatsLabel.text = "Passengers \(currentPassengers)/\(maxPassenger)"
             }
             if let driverId = post.driverUid{
                 setupImageProfileView(driverId)
@@ -84,7 +84,7 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
     let dateLabel : UILabel = {
         let label = UILabel()
         label.text = "Jan 7th, 3 pm"
-        label.font = UIFont(name: Fonts.futuraMedium, size: 18)
+        label.font = UIFont(name: Fonts.futuraMedium, size: 16)
         return label
     }()
     

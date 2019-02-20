@@ -15,6 +15,7 @@ class PendingPassengerCollectionViewCell: UICollectionViewCell {
     var acceptButtonTapped : (() -> ())?
     
     let db = Firestore.firestore()
+    var ridePost : RidePost?
     var rideRequest : RideRequest? {
         didSet{
             //Retrieve the requesting user data and show the name and profile image of that user
@@ -139,7 +140,18 @@ class PendingPassengerCollectionViewCell: UICollectionViewCell {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let acceptAction = UIAlertAction(title: "Accept", style: .default) { (_) in
             if let request = self.rideRequest{
+               //Update the request status to confirmed
                 self.db.collection("rideRequests").document(request.rideRequestId).updateData(["requestStatus":Status.confirmed.rawValue])
+                
+                //Update the ridePost's Current passengers to +1
+                guard let ridePost = self.ridePost, let ridePostUid = ridePost.ridePostUid else {return}
+                self.db.collection("ridePosts").document(ridePostUid).getDocument(completion: { (snapshot, error) in
+                    guard let snapshot = snapshot, let data = snapshot.data() else {return}
+                    if let retrievedRidePost = RidePost(dictionary: data), let current = retrievedRidePost.currentPassengers{
+                        self.db.collection("ridePosts").document(ridePostUid).updateData(["currentPassengers" : (current+1)])
+                    }
+                })
+                
             }
             
             self.acceptButtonTapped?()
