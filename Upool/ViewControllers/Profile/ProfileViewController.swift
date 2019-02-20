@@ -19,13 +19,21 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
     
     var thisUser : UPoolUser? {
         didSet{
-            if let url = thisUser?.profileImageUrl{
+            guard let thisUser = thisUser else {return}
+            if let url = thisUser.profileImageUrl{
                 profileImageView.loadImageUsingCacheWithUrlString(url)
-                profileImageView.layer.cornerRadius = 8
+                profileImageView.layer.cornerRadius = 30
                 profileImageView.layer.masksToBounds = true
             }
+            self.nameLabel.text = "\(thisUser.firstName ?? "") \(thisUser.lastName ?? "")"
         }
     }
+    
+    //UI Properties
+    lazy var profileImageAndNameContainer : UIView = {
+        let view = UIView()
+        return view
+    }()
     
     lazy var profileImageView : UIImageView = {
         let image = UIImageView()
@@ -37,12 +45,22 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         return image
     }()
     
+    lazy var nameLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Name"
+        label.textColor = Colors.maroon
+        label.font = UIFont(name: Fonts.helvetica, size: 20)
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
         setupNavBar()
-        setupProfileImage()
+        setupProfileImageAndNameContainer()
         retrieveUserData()
     }
     
@@ -57,27 +75,24 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         }
     }
     
-    func setupProfileImage(){
-        view.addSubview(profileImageView)
-        profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        profileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
-        profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        profileImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3).isActive = true
-        profileImageView.heightAnchor.constraint(equalTo: profileImageView.widthAnchor).isActive = true
-    }
-    
     func startActivity(){
         startAnimating(type: NVActivityIndicatorType.ballTrianglePath, color: Colors.maroon, displayTimeThreshold:2, minimumDisplayTime: 1)
     }
     
     @objc func handleLogout(){
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            print("Sign Out Failed")
+        let alert = UIAlertController(title: "Log Out", message: "Are you sure you want to log out?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let signOutAction = UIAlertAction(title: "Log Out", style: .default) { (_) in
+            do {
+                try Auth.auth().signOut()
+            } catch {
+                print("Sign Out Failed")
+            }
+            self.navigationController?.dismiss(animated: true, completion: nil)
         }
-        self.navigationController?.dismiss(animated: true, completion: nil)
-        //present(LoginViewController(), animated: true)
+        alert.addAction(cancelAction)
+        alert.addAction(signOutAction)
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -131,7 +146,7 @@ extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationC
                 
                 storage.downloadURL(completion: { (url, error) in
                     if error != nil {
-                        print(error)
+                        print(error?.localizedDescription ?? "")
                         return
                     }
                     guard let url = url else { return }

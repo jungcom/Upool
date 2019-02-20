@@ -26,7 +26,7 @@ extension SignUpViewController{
     }
     
     func setStackViews(){
-        let emptyView = UIView()        
+        //let emptyView = UIView()        
         let termsStackView = UIStackView(arrangedSubviews: [agreeWithTermsLabel, termsAndConditionsButton])
         
         textFieldStackView = UIStackView(arrangedSubviews: [emailTextField,passwordTextField,reEnterPasswordTextField,firstNameTextField,lastNameTextField, errorLabel, signUpButton, termsStackView])

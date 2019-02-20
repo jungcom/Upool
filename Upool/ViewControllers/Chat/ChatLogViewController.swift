@@ -105,7 +105,7 @@ class ChatLogViewController : UICollectionViewController{
                         guard let docSnapshot = docSnapshot, let data = docSnapshot.data() else {return}
                         if let message = Message(dictionary: data){
                             self.messages.append(message)
-                            print("My Message : \(message.text)")
+                            print("My Message : \(String(describing: message.text))")
                         }
                         group.leave()
                     })

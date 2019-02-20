@@ -46,7 +46,7 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
         let toUsers = db.collection("user-Messages").document(id).collection("toUserId").document("currentToUserIds")
         toUsers.getDocument(completion: { (snapshot, error) in
             guard let snapshot = snapshot, let keys = snapshot.data()?.keys else {
-                print("error \(error?.localizedDescription)")
+                print("error \(String(describing: error?.localizedDescription))")
                 print("Nothing Found")
                 self.stopAnimating()
                 return

@@ -140,7 +140,7 @@ class MyStatusViewController: UICollectionViewController  {
                     let code = FunctionsErrorCode(rawValue: error.code)
                     let message = error.localizedDescription
                     let details = error.userInfo[FunctionsErrorDetailsKey]
-                    print("Error : \(message), \(details) with code \(code)")
+                    print("Error : \(message), \(String(describing: details)) with code \(String(describing: code))")
                 }
             }
             if let text = (result?.data as? [String: Any])?["text"] as? String {
