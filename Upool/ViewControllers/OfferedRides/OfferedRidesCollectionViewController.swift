@@ -113,6 +113,12 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
 extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLayout{
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        if todayRidePosts.count == 0 && tomorrowRidePosts.count == 0 && laterRidePosts.count == 0{
+            collectionView.setEmptyMessage("No available Rides")
+            return 0
+        } else {
+            collectionView.restore()
+        }
         return 3
     }
 
@@ -158,7 +164,7 @@ extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLay
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 15, left: 0, bottom: 15, right: 0)
+        return UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
     }
     
     //Collectionview Header delegates
