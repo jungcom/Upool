@@ -318,6 +318,8 @@ class CreateRideViewController: UIViewController {
     }
     
     @objc func sliderValueChanged(){
+        let roundedValue = round(priceSlider.value / 5) * 5
+        priceSlider.value = roundedValue
         dollarLabel.text = "$\(Int(priceSlider.value))"
     }
     
