@@ -6,19 +6,24 @@
 challenges
 The following functionalities are implemented:
 
-- [O] User can sign up and sign in to the login screen
+- [O] User can sign up and sign in to the login screen (Firebase Authentication)
 - [O] User can sign up with an email and it requires email verification (Also works for password resets)
-- [O] User can post a ride
+- [O] Persist logged in user
+- [O] User can post a ride post With the help of Google Places API
 - [O] More user friendly UI/UX
 - [O] User has a status tab that shows the list of rides they are riding and offering
-- [O] Users can send requests to others
+- [O] Users can send requests to others and accept rides
+- [O] User can compose and send chat messages to other peers AND also send push notifications to the receiving users with Firebase Cloud Functions
 
 The following functionalities should be implemented:
 
-- [ ] User can compose and send chat messages to other peers
 - [ ] User has a profile page which can edit their information, indluding their profile picture
-- [ ] Persist logged in user
-- [ ] Users can accept of decline ride requests
+- [ ] Users can decline ride requests
+- [ ] Users can delete their posted rides using recursive delete with Firebase Cloud Functions
+- [ ] Users can receive and give ratings to others
+- [ ] Chat shows the time log in a more efficient manner, with the date of the chat as headers
+- [ ] Users can receive push notifications when they are accepted on a ride
+
 
 ## Video Walkthrough/ScreenShots
 
@@ -33,6 +38,8 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 Describe any difficulties encountered while building the app.
 
 Handling the server database is somewhat tricky in terms of retrieving, updating, adding, and deleting data.
+
+Handling push notifications with Firebase Cloud functions is challenging, because the cloud functions have to be written in node.js
 
 ## License
 
