@@ -30,7 +30,7 @@ The following functionalities should be implemented:
 Here are screenshots of the app:
 
 <img src='https://i.imgur.com/4ewUkOU.png' title='ScreenShots' width='200' />
-
+<img src='https://i.imgur.com/UnAtZEj.png' title='ScreenShots' width='200' />
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
