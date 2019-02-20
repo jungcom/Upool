@@ -10,7 +10,6 @@ import UIKit
 import Firebase
 
 private let offeredRidesCellId = "Cell"
-private let headerCellId = "HeaderForMyStatus"
 private let headerDeleteCellId = "headerDeleteCell"
 
 class MyStatusViewController: UICollectionViewController  {
@@ -35,6 +34,24 @@ class MyStatusViewController: UICollectionViewController  {
     var joinedRidePosts = [RidePost]()
     var pendingRidePosts = [RidePost]()
     
+    lazy var segmentControl : UISegmentedControl = {
+        let titles = ["My Rides","Joined Rides"]
+        let segment = UISegmentedControl(items: titles)
+        segment.selectedSegmentIndex = 0
+        segment.backgroundColor = UIColor.white
+        segment.tintColor = Colors.maroon
+        let stringAtt : [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.font : UIFont(name: Fonts.helvetica, size: 16)!]
+        segment.setTitleTextAttributes(stringAtt, for: .normal)
+        segment.addTarget(self, action: #selector(segmentTappedFunc), for: .valueChanged)
+        return segment
+    }()
+    
+    @objc func segmentTappedFunc(){
+        isMyRides = segmentControl.selectedSegmentIndex == 0 ? true : false
+        collectionView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Uncomment the following line to preserve selection between presentations
@@ -42,11 +59,11 @@ class MyStatusViewController: UICollectionViewController  {
         
         // Register cell classes
         self.collectionView!.register(OfferedRidesCollectionViewCell.self, forCellWithReuseIdentifier: offeredRidesCellId)
-        self.collectionView.register(MyStatusSectionHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerCellId)
         self.collectionView.register(MyStatusTrashCanHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerDeleteCellId)
         
         // Do any additional setup after loading the view.
         setupNavBar()
+        setupSegmentControlAndCollectionView()
         retrieveMyRidePosts()
         retrieveMyRequestedRidePosts()
         addRefresher()
@@ -132,10 +149,6 @@ class MyStatusViewController: UICollectionViewController  {
             refresher.endRefreshing()
         }
     }
-    
-    func passengerImageTapped(){
-        print("passenger popup view")
-    }
 }
 
 
@@ -144,13 +157,19 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         if isMyRides{
+            if myRidePosts.count == 0{
+                collectionView.setEmptyMessage("No Rides")
+            } else {
+                collectionView.restore()
+            }
             return myRidePosts.count
         } else {
             if joinedRidePosts.count + pendingRidePosts.count == 0{
-                return 1
+                collectionView.setEmptyMessage("No Joined Rides")
             } else {
-                return joinedRidePosts.count + pendingRidePosts.count
+                collectionView.restore()
             }
+            return joinedRidePosts.count + pendingRidePosts.count
         }
     }
     
@@ -183,12 +202,7 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch collectionView.indexPathsForSelectedItems?.first {
-        case .some(indexPath):
-            return CGSize(width: view.frame.width * 0.9, height: 300)
-        default:
-            return CGSize(width: view.frame.width * 0.9, height: 100)
-        }
+        return CGSize(width: view.frame.width * 0.9, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -200,38 +214,18 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         //reset the reused cell
         
-        if indexPath.section == 0{
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerCellId, for: indexPath) as! MyStatusSectionHeaderCell
-            header.segmentTapped = { (index) in
-                if index == 0{
-                    print("My Rides")
-                    self.isMyRides = true
-                    collectionView.reloadData()
-                    
-                } else {
-                    print("Pending Rides")
-                    self.isMyRides = false
-                    collectionView.reloadData()
-                }
-            }
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerDeleteCellId, for: indexPath) as! MyStatusTrashCanHeaderCell
             header.deleteButtonTapped = { () in
                 print("Delete Button Tapped in section \(indexPath.section)")
             }
-            return header
-        } else{
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerDeleteCellId, for: indexPath) as! MyStatusTrashCanHeaderCell
-            header.deleteButtonTapped = { () in
-                print("Delete Button Tapped in section \(indexPath.section)")
-            }
-            return header
-        }
+        return header
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if section == 0{
-            return CGSize(width: view.frame.width, height: 100)
-        } else {
+        if isMyRides{
             return CGSize(width: view.frame.width, height: 30)
+        } else {
+            return CGSize(width: 0, height: 0)
         }
     }
 }

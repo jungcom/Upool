@@ -22,6 +22,7 @@ class RideRequest:NSObject ,Encodable,Decodable{
     var timeStamp : Date!
     var ridePostId : String!
     var fromIdFirstName : String!
+    var rideRequestId : String!
     
 //    init(email:String, fn:String, ln:String, uid: String) {
 //        self.email = email

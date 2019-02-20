@@ -222,7 +222,9 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
         rideRequest.requestStatus = 0
         rideRequest.ridePostId = ridePost.ridePostUid
         rideRequest.fromIdFirstName = currentUser.firstName
-        db.collection("rideRequests").addDocument(data: rideRequest.dictionary)
+        let ref = db.collection("rideRequests").document()
+        rideRequest.rideRequestId = ref.documentID
+        ref.setData(rideRequest.dictionary)
     }
     
     func retrieveDriver(){

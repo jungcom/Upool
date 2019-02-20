@@ -106,7 +106,8 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: pendingPassengerCellId, for: indexPath) as! PendingPassengerCollectionViewCell
-            cell.request = myPassengerRequests[indexPath.row]
+            cell.rideRequest = myPassengerRequests[indexPath.row]
+            
             return cell
         }
     }

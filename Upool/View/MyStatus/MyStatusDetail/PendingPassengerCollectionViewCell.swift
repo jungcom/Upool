@@ -11,11 +11,14 @@ import Firebase
 
 class PendingPassengerCollectionViewCell: UICollectionViewCell {
     
+    var declineButtonTapped : (() -> ())?
+    var acceptButtonTapped : (() -> ())?
+    
     let db = Firestore.firestore()
-    var request : RideRequest? {
+    var rideRequest : RideRequest? {
         didSet{
             //Retrieve the requesting user data and show the name and profile image of that user
-            if let request = request, let requestingUserId = request.fromId{
+            if let request = rideRequest, let requestingUserId = request.fromId{
                 db.collection("users").document(requestingUserId).getDocument { (snapshot, error) in
                     guard let snapshot = snapshot else {return}
                     if let data = snapshot.data(), let requestingUser = UPoolUser(dictionary: data){
@@ -134,13 +137,15 @@ class PendingPassengerCollectionViewCell: UICollectionViewCell {
         print("Accept")
         let alert = UIAlertController(title: "Accept Request", message: "Are you sure you want to accept this passenger?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let declineAction = UIAlertAction(title: "Accept", style: .default) { (_) in
+        let acceptAction = UIAlertAction(title: "Accept", style: .default) { (_) in
+            if let request = self.rideRequest{
+                self.db.collection("rideRequests").document(request.rideRequestId).updateData(["requestStatus":Status.confirmed.rawValue])
+            }
             
+            self.acceptButtonTapped?()
         }
         alert.addAction(cancelAction)
-        alert.addAction(declineAction)
-        self.parentViewController?.present(alert, animated: true, completion: {
-            
-        })
+        alert.addAction(acceptAction)
+        self.parentViewController?.present(alert, animated: true, completion: nil)
     }
 }
