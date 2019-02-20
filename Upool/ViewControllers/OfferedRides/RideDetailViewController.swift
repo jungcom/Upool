@@ -203,6 +203,11 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
     }
     
     @objc func handleJoinRide(){
+        //Don't allow joining my own rides
+        guard let fromId = authUser?.uid, let toId = driver?.uid, fromId != toId else {
+            print("Cannot join my own ride")
+            return
+        }
         let alert = UIAlertController(title: "Join Ride?", message: "Are you sure you want to join this ride?", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
             self.joinRideButton.requestedOrJoined(joined: false)

@@ -42,11 +42,11 @@
 		4E9AA4E72209F67E00609E39 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AA4E62209F67E00609E39 /* ChatViewController.swift */; };
 		4E9AA4E92209F7BC00609E39 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AA4E82209F7BC00609E39 /* Chat.swift */; };
 		4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */; };
-		4EA3D8A221F90609003D7CE7 /* UITextField+UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A121F90609003D7CE7 /* UITextField+UIImageView.swift */; };
+		4EA3D8A221F90609003D7CE7 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A121F90609003D7CE7 /* UIImageView.swift */; };
 		4EA3D8A421F9168E003D7CE7 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A321F9168E003D7CE7 /* SignUp.swift */; };
 		4EA3D8A621FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A521FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift */; };
 		4EA3D8A921FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A821FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift */; };
-		4EAE28F121FF5455006966E4 /* UIView+UIButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAE28F021FF5455006966E4 /* UIView+UIButtons.swift */; };
+		4EAE28F121FF5455006966E4 /* UIView+UIButtons+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAE28F021FF5455006966E4 /* UIView+UIButtons+UITextField.swift */; };
 		4EAE28F321FF83D3006966E4 /* CreateRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAE28F221FF83D3006966E4 /* CreateRide.swift */; };
 		4EE58FA62204DB0900918778 /* RidePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA52204DB0900918778 /* RidePost.swift */; };
 		4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA722052F6900918778 /* Encodable+Decodable.swift */; };
@@ -99,11 +99,11 @@
 		4E9AA4E62209F67E00609E39 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		4E9AA4E82209F7BC00609E39 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		4EA3D8A121F90609003D7CE7 /* UITextField+UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+UIImageView.swift"; sourceTree = "<group>"; };
+		4EA3D8A121F90609003D7CE7 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		4EA3D8A321F9168E003D7CE7 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		4EA3D8A521FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedRidesCollectionViewController.swift; sourceTree = "<group>"; };
 		4EA3D8A821FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedRidesCollectionViewCell.swift; sourceTree = "<group>"; };
-		4EAE28F021FF5455006966E4 /* UIView+UIButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+UIButtons.swift"; sourceTree = "<group>"; };
+		4EAE28F021FF5455006966E4 /* UIView+UIButtons+UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+UIButtons+UITextField.swift"; sourceTree = "<group>"; };
 		4EAE28F221FF83D3006966E4 /* CreateRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRide.swift; sourceTree = "<group>"; };
 		4EE58FA52204DB0900918778 /* RidePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidePost.swift; sourceTree = "<group>"; };
 		4EE58FA722052F6900918778 /* Encodable+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Decodable.swift"; sourceTree = "<group>"; };
@@ -339,8 +339,8 @@
 			isa = PBXGroup;
 			children = (
 				4EEB91F321F773630079209B /* UIColor.swift */,
-				4EA3D8A121F90609003D7CE7 /* UITextField+UIImageView.swift */,
-				4EAE28F021FF5455006966E4 /* UIView+UIButtons.swift */,
+				4EA3D8A121F90609003D7CE7 /* UIImageView.swift */,
+				4EAE28F021FF5455006966E4 /* UIView+UIButtons+UITextField.swift */,
 				4EE58FA722052F6900918778 /* Encodable+Decodable.swift */,
 				4E5F9E1F220BCB960037A10C /* UIDate.swift */,
 				4E685BC4221D01E400C53987 /* UICollectionView.swift */,
@@ -582,13 +582,13 @@
 				4E8B4C7822023A43002EC784 /* SearchLocationViewController.swift in Sources */,
 				4E6E6047221B33C2001CFBD8 /* AcceptedPassengerCollectionViewCell.swift in Sources */,
 				4E8B4C742201F290002EC784 /* MyStatusViewController.swift in Sources */,
-				4EA3D8A221F90609003D7CE7 /* UITextField+UIImageView.swift in Sources */,
+				4EA3D8A221F90609003D7CE7 /* UIImageView.swift in Sources */,
 				4E431FA721FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift in Sources */,
 				4EE58FA62204DB0900918778 /* RidePost.swift in Sources */,
 				4EEB91F821F7A6AA0079209B /* Login.swift in Sources */,
 				4EA3D8A621FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift in Sources */,
 				4E431FAB21FE94AC0081CA52 /* RideDetailViewController.swift in Sources */,
-				4EAE28F121FF5455006966E4 /* UIView+UIButtons.swift in Sources */,
+				4EAE28F121FF5455006966E4 /* UIView+UIButtons+UITextField.swift in Sources */,
 				4E49BFDB2208C9F8002FB09A /* RideRequest.swift in Sources */,
 				4EEB91F421F773630079209B /* UIColor.swift in Sources */,
 				4E5F9E1E220B882A0037A10C /* Profile.swift in Sources */,

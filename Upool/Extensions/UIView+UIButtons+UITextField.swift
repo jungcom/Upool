@@ -63,3 +63,15 @@ extension UIButton{
         self.isEnabled = false
     }
 }
+
+extension UITextField{
+    static func getTextField(_ string : String) -> UITextField{
+        let textField = UITextField()
+        textField.placeholder = string
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.gray.cgColor
+        textField.backgroundColor = UIColor.white
+        textField.autocapitalizationType = .none
+        return textField
+    }
+}

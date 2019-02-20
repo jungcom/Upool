@@ -102,8 +102,13 @@ class MyStatusDetailViewController: UIViewController{
 extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == acceptedPassengersCollectionView{
-            return 4
+            return ridePost?.maxPassengers ?? 4
         } else {
+            if myPendingPassengerRequests.count == 0{
+                collectionView.setEmptyMessage("No Requests")
+            } else {
+                collectionView.restore()
+            }
             return myPendingPassengerRequests.count
         }
     }
@@ -131,9 +136,11 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        //Center the AccepetedPassengerCells
         if collectionView == acceptedPassengersCollectionView{
-            let totalCellWidth = collectionView.frame.width * 0.20 * 4
-            let totalSpacingWidth =  CGFloat(lineSpacing * (4 - 1))
+            let cellNumber = CGFloat(ridePost?.maxPassengers ?? 4)
+            let totalCellWidth = collectionView.frame.width * 0.20 * cellNumber
+            let totalSpacingWidth =  CGFloat(lineSpacing * (cellNumber - 1))
             let leftInset = (collectionView.frame.width - (totalCellWidth + totalSpacingWidth)) / 2
             let rightInset = leftInset
             
@@ -160,7 +167,11 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if collectionView == pendingPassengersCollectionView{
-            return CGSize(width: view.frame.width, height: 70)
+            if myPendingPassengerRequests.count == 0{
+                return CGSize(width: 0, height: 0)
+            } else {
+                return CGSize(width: view.frame.width, height: 70)
+            }
         } else {
             return CGSize(width: 0, height: 0)
         }

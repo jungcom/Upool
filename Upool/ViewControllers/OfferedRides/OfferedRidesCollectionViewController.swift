@@ -24,6 +24,24 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
     var tomorrowRidePosts = [RidePost]()
     var laterRidePosts = [RidePost]()
     
+    let addRideButton : UIButton = {
+        let button = UIButton()
+        button.tintColor = UIColor.white
+        button.backgroundColor = Colors.maroon
+        button.layer.masksToBounds = true
+        button.layer.cornerRadius = 25
+        button.setImage(UIImage(named: "PlusSign"), for: .normal)
+        button.imageView?.contentMode = .center
+        button.contentMode = .center
+        button.addTarget(self, action: #selector(handleAdd), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func handleAdd(){
+        let createRideVC = CreateRideViewController()
+        navigationController?.pushViewController(createRideVC, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,6 +55,7 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
         
         addRefresher()
         setupNavBar()
+        setupFloatingButton()
         retrieveRidePosts()
         
         //Test Notifications
@@ -86,11 +105,6 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
                 laterRidePosts.append(post)
             }
         }
-    }
-    
-    @objc func createRide(){
-        let createRideVC = CreateRideViewController()
-        navigationController?.pushViewController(createRideVC, animated: true)
     }
     
     func addRefresher(){
@@ -173,6 +187,9 @@ extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLay
             if current >= max {
                 cell.isUserInteractionEnabled = false
                 cell.alpha = 0.5
+            } else {
+                cell.isUserInteractionEnabled = true
+                cell.alpha = 1.0
             }
         }
     }

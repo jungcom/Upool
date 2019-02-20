@@ -54,6 +54,8 @@ class AcceptedPassengerCollectionViewCell: UICollectionViewCell {
     let profileImageView :UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
+        image.tintColor = UIColor.gray
+        image.image = UIImage(named: "SmallPlusSign")
         image.layer.masksToBounds = true
         image.layer.cornerRadius = 12
         image.layer.borderWidth = 1
