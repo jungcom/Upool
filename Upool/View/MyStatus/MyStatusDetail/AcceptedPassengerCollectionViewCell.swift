@@ -47,7 +47,9 @@ class AcceptedPassengerCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.textColor = UIColor.gray
-        label.font = UIFont(name: Fonts.helvetica, size: 10)
+        label.font = UIFont(name: Fonts.helvetica, size: 11)
+        label.textAlignment = .center
+        label.numberOfLines = 0
         return label
     }()
     

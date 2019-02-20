@@ -22,11 +22,7 @@ class MyStatusViewController: UICollectionViewController  {
     
     var refresher : UIRefreshControl!
     
-    var isMyRides : Bool = true {
-        didSet{
-            
-        }
-    }
+    var isMyRides : Bool = true
     
     var myRidePosts = [RidePost]()
     
@@ -136,6 +132,23 @@ class MyStatusViewController: UICollectionViewController  {
         }
     }
     
+    fileprivate func sendTriggerToDeleteCloudFunction(path: String) {
+        Functions.functions().httpsCallable("recursiveDelete").call(["path": path]) { (result, error) in
+            if let error = error as NSError? {
+                print(error.localizedDescription)
+                if error.domain == FunctionsErrorDomain {
+                    let code = FunctionsErrorCode(rawValue: error.code)
+                    let message = error.localizedDescription
+                    let details = error.userInfo[FunctionsErrorDetailsKey]
+                    print("Error : \(message), \(details) with code \(code)")
+                }
+            }
+            if let text = (result?.data as? [String: Any])?["text"] as? String {
+                print("Some value \(text) was returned")
+            }
+        }
+    }
+    
     func addRefresher(){
         self.refresher = UIRefreshControl()
         self.refresher.tintColor = UIColor.gray
@@ -150,7 +163,6 @@ class MyStatusViewController: UICollectionViewController  {
         }
     }
 }
-
 
 // MARK: UICollectionViewDataSource
 extension MyStatusViewController : UICollectionViewDelegateFlowLayout{

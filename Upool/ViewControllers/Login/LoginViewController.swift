@@ -127,9 +127,6 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     }
     
     @objc func handleLogin(){
-        //Faster Login
-//        present(LoginViewController.presentMainPage(), animated: true, completion: nil)
-        
         
         let email = emailTextField.text
         let password = passwordTextField.text

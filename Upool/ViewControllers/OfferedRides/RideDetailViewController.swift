@@ -204,10 +204,10 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
     
     @objc func handleJoinRide(){
         //Don't allow joining my own rides
-        guard let fromId = authUser?.uid, let toId = driver?.uid, fromId != toId else {
-            print("Cannot join my own ride")
-            return
-        }
+//        guard let fromId = authUser?.uid, let toId = driver?.uid, fromId != toId else {
+//            print("Cannot join my own ride")
+//            return
+//        }
         let alert = UIAlertController(title: "Join Ride?", message: "Are you sure you want to join this ride?", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
             self.joinRideButton.requestedOrJoined(joined: false)
@@ -240,8 +240,6 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
                 if let dictionary = snapShot?.data(){
                     self.driver = UPoolUser(dictionary: dictionary)
                     self.nameLabel.text = "\(self.driver?.firstName ?? "") \(self.driver?.lastName ?? "")"
-                    //TODO : Set User Profile Image
-                    
                     //Check to see if a request exist for this ridePost and user
                     self.checkIfRequestExists()
                 } else {
