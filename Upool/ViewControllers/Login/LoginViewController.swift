@@ -146,16 +146,11 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
         
         Auth.auth().signIn(withEmail: email!, password: password!, completion: { (authResult, error) in
 
-            guard self.authUser?.isEmailVerified == true else {
-                self.errorLabel.text = "Account not verified. Please check your email for verification"
-                self.stopAnimating()
-                return
-            }
-
             guard let _ = authResult else {
 
                 if let error = error {
                     if let errCode = AuthErrorCode(rawValue: error._code){
+                        print("The error is \(error.localizedDescription)")
                         switch (errCode){
                         case .userNotFound:
                             self.errorLabel.text = "User account not found"
@@ -172,7 +167,13 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
                 }
                 return
             }
-
+            
+            guard self.authUser?.isEmailVerified == true else {
+                self.errorLabel.text = "Account not verified. Please check your email for verification"
+                self.stopAnimating()
+                return
+            }
+            
             self.present(LoginViewController.presentMainPage(), animated: true, completion: {
                 self.stopAnimating()
             })

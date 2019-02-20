@@ -30,12 +30,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        if let _ = Auth.auth().currentUser {
-            // segue to main view controller
-            print("signed in")
-            let loginVC = LoginViewController()
-            window?.rootViewController = loginVC
-            loginVC.signedIn = true
+        if let user = Auth.auth().currentUser {
+            // segue to main view controller if the user is email verified
+            if user.isEmailVerified{
+                print("signed in")
+                let loginVC = LoginViewController()
+                window?.rootViewController = loginVC
+                loginVC.signedIn = true
+            } else {
+                window?.rootViewController = LoginViewController()
+            }
+
         } else {
             // sign in
             window?.rootViewController = LoginViewController()
