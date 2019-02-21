@@ -30,7 +30,8 @@ class SignUpViewController: UIViewController {
     }()
     
     //TextFields
-    let emailTextField = UITextField.getTextField(Strings.emailPlaceholder)
+    var email : String?
+    
     let passwordTextField : UITextField = {
         let txtField = UITextField.getTextField(Strings.passwordPlaceholder)
         txtField.isSecureTextEntry = true
@@ -60,6 +61,7 @@ class SignUpViewController: UIViewController {
         let label = UILabel()
         label.text = Strings.acceptTermsAndConditions
         label.textColor = UIColor.gray
+        label.textAlignment = .right
         label.font = UIFont(name: Fonts.helvetica, size: 12)
         return label
     }()
@@ -95,7 +97,7 @@ class SignUpViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupKeyboardNotifications()
+        //setupKeyboardNotifications()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -112,7 +114,7 @@ class SignUpViewController: UIViewController {
         //for Testing
         //pushEmailSentVC()
         
-        guard let email = emailTextField.text ,let password = passwordTextField.text ,let rePassword = reEnterPasswordTextField.text,let firstName = firstNameTextField.text,let lastName = lastNameTextField.text, allFieldsFull() else {
+        guard let email = self.email ,let password = passwordTextField.text ,let rePassword = reEnterPasswordTextField.text,let firstName = firstNameTextField.text,let lastName = lastNameTextField.text, allFieldsFull() else {
             self.errorLabel.text = "All fields must be full"
             return
         }
@@ -185,9 +187,7 @@ class SignUpViewController: UIViewController {
     }
     
     private func allFieldsFull() -> Bool{
-        if emailTextField.text == ""{
-            return false
-        } else if passwordTextField.text == ""{
+        if passwordTextField.text == ""{
             return false
         } else if reEnterPasswordTextField.text == ""{
             return false

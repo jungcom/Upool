@@ -29,9 +29,9 @@ struct Strings{
     static let signUp = "Sign Up"
     
     //SignUpVC
-    static let reEnterPasswordPlaceholder = " Re-enter Password"
-    static let firstNamePlaceholder = " First Name"
-    static let lastNamePlaceholder = " Last Name"
+    static let reEnterPasswordPlaceholder = "Re-enter Password"
+    static let firstNamePlaceholder = "First Name"
+    static let lastNamePlaceholder = "Last Name"
     static let acceptTermsAndConditions = "By creating an account, you agree to our "
     static let termsAndConditions = "Terms & Conditions"
 }

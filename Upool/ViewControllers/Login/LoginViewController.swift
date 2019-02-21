@@ -187,16 +187,16 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     
     @objc func handleSignUp(){
         print("SignUp")
-        let signUpVC = SignUpViewController()
+        let signUpVC = SignUpEmailViewController()
         let navVC = UINavigationController(rootViewController: signUpVC)
         present(navVC, animated: true, completion: nil)
     }
     
     static func presentMainPage() -> UIViewController{
         let ridesVC = OfferedRidesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        ridesVC.tabBarItem = UITabBarItem(title: "Rides", image: UIImage(named: "RideIcon"), tag: 0)
+        ridesVC.tabBarItem = UITabBarItem(title: "All Rides", image: UIImage(named: "RideIcon"), tag: 0)
         let statusVC = MyStatusViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        statusVC.tabBarItem = UITabBarItem(title: "Status", image: UIImage(named: "StatusLogo"), tag: 1)
+        statusVC.tabBarItem = UITabBarItem(title: "My Rides", image: UIImage(named: "StatusLogo"), tag: 1)
         let chatVC = ChatViewController()
         chatVC.tabBarItem = UITabBarItem(title: "Chat", image: UIImage(named: "ChatIcon"), tag: 2)
         let profileVC = ProfileViewController()

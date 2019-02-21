@@ -48,6 +48,7 @@
 		4EA3D8A921FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A821FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift */; };
 		4EAE28F121FF5455006966E4 /* UIView+UIButtons+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAE28F021FF5455006966E4 /* UIView+UIButtons+UITextField.swift */; };
 		4EAE28F321FF83D3006966E4 /* CreateRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAE28F221FF83D3006966E4 /* CreateRide.swift */; };
+		4EC0B1DE221F409800EE8A20 /* SignUpEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1DD221F409800EE8A20 /* SignUpEmailViewController.swift */; };
 		4EE58FA62204DB0900918778 /* RidePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA52204DB0900918778 /* RidePost.swift */; };
 		4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA722052F6900918778 /* Encodable+Decodable.swift */; };
 		4EE58FAA220674DE00918778 /* UPoolUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA9220674DE00918778 /* UPoolUser.swift */; };
@@ -105,6 +106,7 @@
 		4EA3D8A821FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedRidesCollectionViewCell.swift; sourceTree = "<group>"; };
 		4EAE28F021FF5455006966E4 /* UIView+UIButtons+UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+UIButtons+UITextField.swift"; sourceTree = "<group>"; };
 		4EAE28F221FF83D3006966E4 /* CreateRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRide.swift; sourceTree = "<group>"; };
+		4EC0B1DD221F409800EE8A20 /* SignUpEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailViewController.swift; sourceTree = "<group>"; };
 		4EE58FA52204DB0900918778 /* RidePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidePost.swift; sourceTree = "<group>"; };
 		4EE58FA722052F6900918778 /* Encodable+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Decodable.swift"; sourceTree = "<group>"; };
 		4EE58FA9220674DE00918778 /* UPoolUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPoolUser.swift; sourceTree = "<group>"; };
@@ -148,9 +150,10 @@
 		4E49BFD72208C115002FB09A /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				4EC0B1DD221F409800EE8A20 /* SignUpEmailViewController.swift */,
 				4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */,
 				4E49BFD82208C140002FB09A /* EmailSentViewController.swift */,
-				4E49BFDE220928F2002FB09A /* ResetPasswordViewController.swift */,
+				4EC0B1DF221F43B500EE8A20 /* Reset Password */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -288,6 +291,14 @@
 				4E5F9E21220BF8060037A10C /* ChatLogViewController.swift */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		4EC0B1DF221F43B500EE8A20 /* Reset Password */ = {
+			isa = PBXGroup;
+			children = (
+				4E49BFDE220928F2002FB09A /* ResetPasswordViewController.swift */,
+			);
+			path = "Reset Password";
 			sourceTree = "<group>";
 		};
 		4EEB91CF21F7679F0079209B = {
@@ -600,6 +611,7 @@
 				4E0CD8CE220CA20C00256906 /* ChatUserCell.swift in Sources */,
 				4E0CD8D0220D4CE300256906 /* ChatMessageCell.swift in Sources */,
 				4E8B4C722201219B002EC784 /* CreateRideCalendar.swift in Sources */,
+				4EC0B1DE221F409800EE8A20 /* SignUpEmailViewController.swift in Sources */,
 				4EEB91DC21F7679F0079209B /* AppDelegate.swift in Sources */,
 				4E49BFD92208C140002FB09A /* EmailSentViewController.swift in Sources */,
 				4E399D28221A5FEE00605A50 /* MyStatusTrashCanHeaderCell.swift in Sources */,
