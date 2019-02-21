@@ -124,13 +124,14 @@ class PendingPassengerCollectionViewCell: UICollectionViewCell {
         let alert = UIAlertController(title: "Decline Request", message: "Are you sure you want to decline this passenger?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let declineAction = UIAlertAction(title: "Decline", style: .default) { (_) in
-            
+            if let request = self.rideRequest{
+                //Update the request status to confirmed
+                self.db.collection("rideRequests").document(request.rideRequestId).updateData(["requestStatus":Status.notAccepted.rawValue])
+            }
         }
         alert.addAction(cancelAction)
         alert.addAction(declineAction)
-        self.parentViewController?.present(alert, animated: true, completion: {
-            
-        })
+        self.parentViewController?.present(alert, animated: true, completion: nil)
         
     }
     

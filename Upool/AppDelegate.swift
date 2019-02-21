@@ -47,21 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             
         }
         
-//        do {
-//            try Auth.auth().signOut()
-//        } catch {
-//            print("Signout Unsuccessful")
-//        }
-
-
-//        let ridesVC = OfferedRidesCollectionViewController(collectionViewLayout: UICollectionViewLayout())
-//        let navigationVC = UINavigationController(rootViewController: ridesVC)
-//        window?.rootViewController = navigationVC
-//        UINavigationBar.appearance().barTintColor = Colors.maroon
-//        UINavigationBar.appearance().titleTextAttributes = [
-//            NSAttributedString.Key.foregroundColor : UIColor.white,
-//        ]
-        
         //notifications
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -86,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return true
     }
     
-    //local notifications
+    //Notifications pop up while app is running
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert,.sound])
     }
