@@ -210,7 +210,7 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
 //        }
         let alert = UIAlertController(title: "Join Ride?", message: "Are you sure you want to join this ride?", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
-            self.joinRideButton.requestedOrJoined(joined: false)
+            self.joinRideButton.requestedOrJoined(status: Status.pending)
             self.sendRequestToDriver()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -263,9 +263,11 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
                     if let request = RideRequest(dictionary: document.data()){
                         //Set the request button depending on the status
                         if request.requestStatus == 0{
-                            self.joinRideButton.requestedOrJoined(joined: false)
-                        } else if request.requestStatus == 1{
-                            self.joinRideButton.requestedOrJoined(joined: true)
+                            self.joinRideButton.requestedOrJoined(status: Status.pending)
+                        } else if request.requestStatus >= 1{
+                            self.joinRideButton.requestedOrJoined(status: Status.confirmed)
+                        } else {
+                            self.joinRideButton.requestedOrJoined(status: Status.notAccepted)
                         }
                     }
                 }

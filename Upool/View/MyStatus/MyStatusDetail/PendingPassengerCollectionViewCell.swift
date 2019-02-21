@@ -128,6 +128,8 @@ class PendingPassengerCollectionViewCell: UICollectionViewCell {
                 //Update the request status to confirmed
                 self.db.collection("rideRequests").document(request.rideRequestId).updateData(["requestStatus":Status.notAccepted.rawValue])
             }
+            //Execute Closure
+            self.declineButtonTapped?()
         }
         alert.addAction(cancelAction)
         alert.addAction(declineAction)
@@ -154,7 +156,7 @@ class PendingPassengerCollectionViewCell: UICollectionViewCell {
                 })
                 
             }
-            
+            //Execute Closure
             self.acceptButtonTapped?()
         }
         alert.addAction(cancelAction)

@@ -131,6 +131,12 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
                 self.pendingPassengersCollectionView.reloadData()
                 self.acceptedPassengersCollectionView.reloadData()
             }
+            //When user declines a ride Request
+            cell.declineButtonTapped = { () in
+                self.myPendingPassengerRequests.remove(at: indexPath.row)
+                self.pendingPassengersCollectionView.reloadData()
+                self.acceptedPassengersCollectionView.reloadData()
+            }
             return cell
         }
     }

@@ -49,13 +49,16 @@ extension UIView{
 }
 
 extension UIButton{
-    func requestedOrJoined(joined : Bool){
-        if joined{
+    func requestedOrJoined(status : Status){
+        if status == Status.confirmed{
             self.setTitle("Ride Joined ", for: .normal)
-        } else {
+            self.setImage(UIImage(named: "CheckMark"), for: .normal)
+        } else if status == Status.pending {
             self.setTitle("Requested ", for: .normal)
+            self.setImage(UIImage(named: "CheckMark"), for: .normal)
+        } else {
+            self.setTitle("Declined", for: .normal)
         }
-        self.setImage(UIImage(named: "CheckMark"), for: .normal)
         self.setTitleColor(Colors.maroon, for: .normal)
         self.semanticContentAttribute = .forceRightToLeft
         self.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 17)
