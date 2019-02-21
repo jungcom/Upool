@@ -60,9 +60,13 @@ class MyStatusViewController: UICollectionViewController  {
         // Do any additional setup after loading the view.
         setupNavBar()
         setupSegmentControlAndCollectionView()
+        addRefresher()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         retrieveMyRidePosts()
         retrieveMyRequestedRidePosts()
-        addRefresher()
     }
     
     @objc func retrieveMyRidePosts(){

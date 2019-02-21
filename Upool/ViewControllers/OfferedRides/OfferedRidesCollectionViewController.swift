@@ -125,9 +125,6 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
     }
 }
 
-
-
-
     // MARK: UICollectionViewDataSource
 extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLayout{
     
