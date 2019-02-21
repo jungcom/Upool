@@ -44,7 +44,7 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("viewdidload")
         // Register cell classes
         self.collectionView!.register(OfferedRidesCollectionViewCell.self, forCellWithReuseIdentifier: offeredRidesCellId)
         self.collectionView.register(OfferedRidesSectionHeaderCollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerCellId)
@@ -56,7 +56,6 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
         addRefresher()
         setupNavBar()
         setupFloatingButton()
-        retrieveRidePosts()
         
         //Test Notifications
 //        let content = UNMutableNotificationContent()
@@ -69,6 +68,12 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
 //        let request = UNNotificationRequest(identifier: "testIdentifier", content: content, trigger: trigger)
 //        
 //        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("viewwillappear")
+        retrieveRidePosts()
     }
     
     @objc func retrieveRidePosts(){

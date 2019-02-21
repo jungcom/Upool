@@ -132,19 +132,47 @@ class MyStatusViewController: UICollectionViewController  {
         }
     }
     
-    fileprivate func sendTriggerToDeleteCloudFunction(path: String) {
-        Functions.functions().httpsCallable("recursiveDelete").call(["path": path]) { (result, error) in
-            if let error = error as NSError? {
-                print(error.localizedDescription)
-                if error.domain == FunctionsErrorDomain {
-                    let code = FunctionsErrorCode(rawValue: error.code)
-                    let message = error.localizedDescription
-                    let details = error.userInfo[FunctionsErrorDetailsKey]
-                    print("Error : \(message), \(String(describing: details)) with code \(String(describing: code))")
-                }
+//    fileprivate func sendTriggerToDeleteCloudFunction(path: String, ridePostId : String) {
+//        Functions.functions().httpsCallable("recursiveDelete").call(["path": path]) { (result, error) in
+//            if let error = error as NSError? {
+//                print(error.localizedDescription)
+//                if error.domain == FunctionsErrorDomain {
+//                    let code = FunctionsErrorCode(rawValue: error.code)
+//                    let message = error.localizedDescription
+//                    let details = error.userInfo[FunctionsErrorDetailsKey]
+//                    print("Error : \(message), \(String(describing: details)) with code \(String(describing: code))")
+//                }
+//            }
+//            if let text = (result?.data as? [String: Any])?["text"] as? String {
+//                print("Some value \(text) was returned")
+//            }
+//        }
+//    }
+    
+    func deleteRidePost(ridePostId:String){
+        db.collection("ridePosts").document(ridePostId).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
             }
-            if let text = (result?.data as? [String: Any])?["text"] as? String {
-                print("Some value \(text) was returned")
+        }
+    }
+    
+    func deleteCorrespondingRideRequests(ridePostId:String){
+        db.collection("rideRequests").whereField("ridePostId", isEqualTo: ridePostId).getDocuments { (snapshot, error) in
+            guard let snapshot = snapshot else {return}
+            //delete each rideRequest Associated with the ridePost
+            for document in snapshot.documents{
+                if let rideRequest = RideRequest(dictionary: document.data()){
+                    self.db.collection("rideRequests").document(rideRequest.rideRequestId).delete(completion: { (err) in
+                        if let err = err {
+                            print("Error removing document: \(err)")
+                        } else {
+                            print("Document successfully removed!")
+                        }
+                    })
+                }
             }
         }
     }
@@ -194,15 +222,15 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
         cell.backgroundColor = UIColor.white
         if isMyRides{
             cell.post = myRidePosts[indexPath.section]
-            return cell
         } else {
             if indexPath.section >= joinedRidePosts.count{
                 cell.post = pendingRidePosts[indexPath.section - joinedRidePosts.count]
             } else {
                 cell.post = joinedRidePosts[indexPath.section]
             }
-            return cell
         }
+        
+        return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -224,12 +252,17 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     //Collectionview Header delegates
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        //reset the reused cell
-        
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerDeleteCellId, for: indexPath) as! MyStatusTrashCanHeaderCell
+        if isMyRides{
             header.deleteButtonTapped = { () in
                 print("Delete Button Tapped in section \(indexPath.section)")
+                let ridePost = self.myRidePosts.remove(at: indexPath.section)
+                guard let ridePostId = ridePost.ridePostUid else {return}
+                self.deleteRidePost(ridePostId: ridePostId)
+                self.deleteCorrespondingRideRequests(ridePostId: ridePostId)
+                self.collectionView.reloadData()
             }
+        }
         return header
     }
     
