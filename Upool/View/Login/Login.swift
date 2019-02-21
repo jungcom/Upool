@@ -87,7 +87,7 @@ extension LoginViewController{
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             print("notification: Login Keyboard will show")
             if self.view.frame.origin.y == 0{
-                self.view.frame.origin.y -= keyboardSize.height
+                self.view.frame.origin.y -= keyboardSize.height/2
             }
         }
         

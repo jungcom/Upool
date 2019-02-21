@@ -75,6 +75,15 @@ extension UITextField{
         textField.layer.borderColor = UIColor.gray.cgColor
         textField.backgroundColor = UIColor.white
         textField.autocapitalizationType = .none
+        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 20))
+        textField.leftView = paddingView
+        textField.leftViewMode = .always
         return textField
+    }
+    
+    func addLeftPadding(){
+        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 20))
+        self.leftView = paddingView
+        self.leftViewMode = .always
     }
 }
