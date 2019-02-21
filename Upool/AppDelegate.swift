@@ -79,24 +79,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
         let db = Firestore.firestore()
-        let chatlogVC = ChatLogViewController(collectionViewLayout: UICollectionViewFlowLayout())
         
-        //Get the toId
+        //Handle notifications associated with chat messages
         if let toId = userInfo["toId"] as? String{
-            
-            db.collection("users").document(toId).getDocument { (snapshot, error) in
-                if let error = error{
-                    print(error.localizedDescription)
-                } else {
-                    let toUser = UPoolUser(dictionary: (snapshot?.data())!)
-                    chatlogVC.toUser = toUser
-                    
-                    //Push the chat log VC
-                    if let mainTabBarVC = self.window?.rootViewController?.presentedViewController as? UITabBarController{
-                        if let chatVC = mainTabBarVC.viewControllers?[2] as? UINavigationController{
-                            mainTabBarVC.selectedIndex = 2
-                            chatVC.pushViewController(chatlogVC, animated: true)
-                        }
+            handleChatNotifications(db, toId)
+        }
+        
+        //handle notifications associated with sending a rideRequest
+        if let ridePostId = userInfo["ridePostId"] as? String{
+            handleRideRequestSentNotifications(db, ridePostId)
+        }
+    }
+    
+    fileprivate func handleChatNotifications(_ db: Firestore, _ toId: String) {
+        db.collection("users").document(toId).getDocument { (snapshot, error) in
+            if let error = error{
+                print(error.localizedDescription)
+            } else {
+                let chatlogVC = ChatLogViewController(collectionViewLayout: UICollectionViewFlowLayout())
+                let toUser = UPoolUser(dictionary: (snapshot?.data())!)
+                chatlogVC.toUser = toUser
+                
+                //Push the chat log VC
+                if let mainTabBarVC = self.window?.rootViewController?.presentedViewController as? UITabBarController{
+                    if let chatVC = mainTabBarVC.viewControllers?[2] as? UINavigationController{
+                        mainTabBarVC.selectedIndex = 2
+                        chatVC.pushViewController(chatlogVC, animated: true)
+                    }
+                }
+            }
+        }
+    }
+    
+    fileprivate func handleRideRequestSentNotifications(_ db: Firestore, _ ridePostId: String) {
+        db.collection("ridePosts").document(ridePostId).getDocument { (snapshot, error) in
+            if let error = error{
+                print(error.localizedDescription)
+            } else {
+                let ridePost = RidePost(dictionary: (snapshot?.data())!)
+                if let mainTabBarVC = self.window?.rootViewController?.presentedViewController as? UITabBarController{
+                    if let myStatusNavVC = mainTabBarVC.viewControllers?[1] as? UINavigationController{
+                        mainTabBarVC.selectedIndex = 1
+                        //myStatusNavVC.pushViewController(chatlogVC, animated: true)
+                        let detailVC = MyStatusDetailViewController()
+                        detailVC.ridePost = ridePost
+                        myStatusNavVC.pushViewController(detailVC, animated: true)
                     }
                 }
             }
