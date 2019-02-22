@@ -29,9 +29,12 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         }
     }
     
-    //UI Properties
+    //MARK : UI Properties
+    
+    //TopProfileImageContainer
     lazy var profileImageAndNameContainer : UIView = {
         let view = UIView()
+        view.backgroundColor = UIColor.groupTableViewBackground
         return view
     }()
     
@@ -55,12 +58,39 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         return label
     }()
     
+    //Container About the User
+    let aboutContainerView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.groupTableViewBackground
+        return view
+    }()
+    
+    let aboutLabel : UILabel = {
+        let label = UILabel()
+        label.text = "About"
+        label.textColor = UIColor.gray
+        label.font = UIFont.init(name: Fonts.helvetica, size: 20)
+        return label
+    }()
+    
+    //StackView for UserInfo
+    
+    let userInfoUIView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        UIView.dropShadow(view: view)
+        return view
+    }()
+    
+    let userInfoStackView : UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
         setupNavBar()
         setupProfileImageAndNameContainer()
+        setupAboutContainer()
         retrieveUserData()
     }
     

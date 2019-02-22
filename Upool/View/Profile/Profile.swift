@@ -22,7 +22,6 @@ extension ProfileViewController{
     
     func setupProfileImageAndNameContainer(){
         view.addSubview(profileImageAndNameContainer)
-        profileImageAndNameContainer.backgroundColor = UIColor.groupTableViewBackground
         profileImageAndNameContainer.translatesAutoresizingMaskIntoConstraints = false
         profileImageAndNameContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         profileImageAndNameContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -42,5 +41,37 @@ extension ProfileViewController{
         nameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 10).isActive = true
         nameLabel.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor).isActive = true
         nameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
+    }
+    
+    func setupAboutContainer(){
+        //Add Subviews
+        view.addSubview(aboutContainerView)
+        aboutContainerView.addSubview(aboutLabel)
+        aboutContainerView.addSubview(userInfoUIView)
+        
+        aboutContainerView.translatesAutoresizingMaskIntoConstraints = false
+        aboutContainerView.topAnchor.constraint(equalTo: profileImageAndNameContainer.bottomAnchor, constant:10).isActive = true
+        aboutContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        aboutContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        aboutContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        //About Label
+        aboutLabel.translatesAutoresizingMaskIntoConstraints = false
+        aboutLabel.topAnchor.constraint(equalTo: aboutContainerView.topAnchor, constant:5).isActive = true
+        aboutLabel.leadingAnchor.constraint(equalTo: aboutContainerView.leadingAnchor, constant:20).isActive = true
+        
+        //UserInfo UIView
+        userInfoUIView.translatesAutoresizingMaskIntoConstraints = false
+        userInfoUIView.topAnchor.constraint(equalTo: aboutLabel.bottomAnchor, constant:5).isActive = true
+        userInfoUIView.leadingAnchor.constraint(equalTo: aboutLabel.leadingAnchor).isActive = true
+        userInfoUIView.trailingAnchor.constraint(equalTo: aboutContainerView.trailingAnchor, constant:-20).isActive = true
+        userInfoUIView.heightAnchor.constraint(equalTo: aboutContainerView.heightAnchor, multiplier:0.4).isActive = true
+        
+        //setup user info stack View
+        setupUserInfoStackView()
+    }
+    
+    func setupUserInfoStackView(){
+        
     }
 }
