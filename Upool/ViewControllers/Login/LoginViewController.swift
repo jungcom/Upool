@@ -93,8 +93,10 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     
     let umassBackgroundImageView : UIImageView = {
         let image = UIImage(named: Images.umassBackgroundImage)
+        //let image = UIImage(named: "BackGround")
         let imageView = UIImageView(image: image)
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = image
         imageView.alpha = 0.5
         return imageView
     }()

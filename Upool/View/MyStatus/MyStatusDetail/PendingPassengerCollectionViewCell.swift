@@ -125,6 +125,9 @@ class PendingPassengerCollectionViewCell: UICollectionViewCell {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let declineAction = UIAlertAction(title: "Decline", style: .default) { (_) in
             if let request = self.rideRequest{
+                //Call Clound function to send notification to the user
+                self.callCloudFunctionToSendNotification(toUserId: request.fromId, accepted: true)
+                
                 //Update the request status to confirmed
                 self.db.collection("rideRequests").document(request.rideRequestId).updateData(["requestStatus":Status.notAccepted.rawValue])
             }
@@ -143,8 +146,11 @@ class PendingPassengerCollectionViewCell: UICollectionViewCell {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let acceptAction = UIAlertAction(title: "Accept", style: .default) { (_) in
             if let request = self.rideRequest{
-               //Update the request status to confirmed
-                self.db.collection("rideRequests").document(request.rideRequestId).updateData(["requestStatus":Status.confirmed.rawValue])
+                //Call Clound function to send notification to the user
+                self.callCloudFunctionToSendNotification(toUserId: request.fromId, accepted: true)
+                
+                //Update the request status to confirmed
+                 self.db.collection("rideRequests").document(request.rideRequestId).updateData(["requestStatus":Status.confirmed.rawValue])
                 
                 //Update the ridePost's Current passengers to +1
                 guard let ridePost = self.ridePost, let ridePostUid = ridePost.ridePostUid else {return}
@@ -162,5 +168,23 @@ class PendingPassengerCollectionViewCell: UICollectionViewCell {
         alert.addAction(cancelAction)
         alert.addAction(acceptAction)
         self.parentViewController?.present(alert, animated: true, completion: nil)
+    }
+    
+    fileprivate func callCloudFunctionToSendNotification(toUserId : String, accepted : Bool) {
+        //Call Cloud function to send notification to user
+        let data = ["accepted": accepted, "toUserId" : toUserId] as [String : Any]
+        Functions.functions().httpsCallable("rideRequestAcceptedOrDeclined").call(data) { (result, error) in
+            if let error = error as NSError? {
+                if error.domain == FunctionsErrorDomain {
+                    let code = FunctionsErrorCode(rawValue: error.code)
+                    let message = error.localizedDescription
+                    let details = error.userInfo[FunctionsErrorDetailsKey]
+                }
+                // ...
+            }
+            if let text = (result?.data as? [String: Any])?["text"] as? String {
+                //Do something with the returned value
+            }
+        }
     }
 }
