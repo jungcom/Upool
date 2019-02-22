@@ -150,7 +150,10 @@ class PendingPassengerCollectionViewCell: UICollectionViewCell {
                 self.callCloudFunctionToSendNotification(toUserId: request.fromId, accepted: true)
                 
                 //Update the request status to confirmed
-                 self.db.collection("rideRequests").document(request.rideRequestId).updateData(["requestStatus":Status.confirmed.rawValue])
+                self.db.collection("rideRequests").document(request.rideRequestId).updateData(["requestStatus":Status.confirmed.rawValue], completion: { (error) in
+                    //Execute Closure
+                    self.acceptButtonTapped?()
+                })
                 
                 //Update the ridePost's Current passengers to +1
                 guard let ridePost = self.ridePost, let ridePostUid = ridePost.ridePostUid else {return}
@@ -162,8 +165,6 @@ class PendingPassengerCollectionViewCell: UICollectionViewCell {
                 })
                 
             }
-            //Execute Closure
-            self.acceptButtonTapped?()
         }
         alert.addAction(cancelAction)
         alert.addAction(acceptAction)

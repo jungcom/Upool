@@ -75,6 +75,9 @@ class MyStatusDetailViewController: UIViewController{
     }
 
     func retrieveMyPassengerRequests(){
+        myAcceptedPassengerRequests.removeAll()
+        myPendingPassengerRequests.removeAll()
+        
         guard let ridePost = ridePost else {return}
         db.collection("rideRequests").whereField("ridePostId", isEqualTo: ridePost.ridePostUid!).getDocuments(completion: { (snapshot, error) in
             if let error = error {
@@ -118,6 +121,9 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: acceptedPassengerCellId, for: indexPath) as! AcceptedPassengerCollectionViewCell
             if indexPath.row < myAcceptedPassengerRequests.count {
                 cell.rideRequest = myAcceptedPassengerRequests[indexPath.row]
+            } else {
+                //set cell to empty
+                cell.empty = true
             }
             return cell
         } else {
@@ -128,14 +134,13 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
             cell.acceptButtonTapped = { () in
                 let acceptedRequest = self.myPendingPassengerRequests.remove(at: indexPath.row)
                 self.myAcceptedPassengerRequests.append(acceptedRequest)
-                self.pendingPassengersCollectionView.reloadData()
                 self.acceptedPassengersCollectionView.reloadData()
+                self.pendingPassengersCollectionView.reloadData()
             }
             //When user declines a ride Request
             cell.declineButtonTapped = { () in
                 self.myPendingPassengerRequests.remove(at: indexPath.row)
                 self.pendingPassengersCollectionView.reloadData()
-                self.acceptedPassengersCollectionView.reloadData()
             }
             return cell
         }

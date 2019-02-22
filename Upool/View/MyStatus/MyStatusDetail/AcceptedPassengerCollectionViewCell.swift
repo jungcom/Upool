@@ -31,6 +31,15 @@ class AcceptedPassengerCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    //Reset cell to empty one (This should be done because cells are being re-used)
+    var empty : Bool? {
+        didSet{
+            joinedLabel.text = ""
+            profileImageView.image = UIImage(named: "SmallPlusSign")
+            nameLabel.text = ""
+        }
+    }
+    
     func addJoinedLabel(){
         let attachment = NSTextAttachment()
         attachment.image = UIImage(named: "CheckMark")
