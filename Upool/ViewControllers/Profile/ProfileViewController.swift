@@ -78,9 +78,31 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         return label
     }()
     
+    var isEditingInfo : Bool = false {
+        didSet{
+            if isEditingInfo{
+                pencilEditButton.setTitle("Save", for: .normal)
+                pencilEditButton.setImage(nil, for: .normal)
+                let userInfoFields = userInfoStackView.subviews as! [UserInfoField]
+                for userInfoField in userInfoFields{
+                    userInfoField.isUserInteractionEnabled = true
+                }
+            } else {
+                pencilEditButton.setImage(UIImage(named: "PencilEdit"), for: .normal)
+                pencilEditButton.setTitle("", for: .normal)
+                let userInfoFields = userInfoStackView.subviews as! [UserInfoField]
+                for userInfoField in userInfoFields{
+                    userInfoField.isUserInteractionEnabled = false
+                }
+            }
+        }
+    }
+    
     let pencilEditButton : UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "PencilEdit"), for: .normal)
+        button.setTitleColor(Colors.maroon, for: .normal)
+        button.addTarget(self, action: #selector(handlePencilEdit), for: .touchUpInside)
         return button
     }()
     
@@ -94,6 +116,22 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
     }()
     
     var userInfoStackView : UIStackView!
+    
+    let userFirstName : UserInfoField = {
+        let userInfo = UserInfoField()
+        userInfo.subjectLabel.text = "First Name"
+        userInfo.subjectTextField.placeholder = "First Name"
+        userInfo.isUserInteractionEnabled = false
+        return userInfo
+    }()
+    
+    let userLastName : UserInfoField = {
+        let userInfo = UserInfoField()
+        userInfo.subjectLabel.text = "Last Name"
+        userInfo.subjectTextField.placeholder = "Last Name"
+        userInfo.isUserInteractionEnabled = false
+        return userInfo
+    }()
     
     let userGradYear : UserInfoField = {
         let userInfo = UserInfoField()
@@ -152,6 +190,16 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
     
     func startActivity(){
         startAnimating(type: NVActivityIndicatorType.ballTrianglePath, color: Colors.maroon, displayTimeThreshold:2, minimumDisplayTime: 1)
+    }
+    
+    @objc func handlePencilEdit(){
+        print("Handle Edit")
+        if isEditingInfo{
+            isEditingInfo = false
+        } else {
+            isEditingInfo = true
+        }
+        
     }
     
     @objc func handleLogout(){

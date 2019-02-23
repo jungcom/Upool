@@ -73,11 +73,12 @@ extension ProfileViewController{
         
         //About Label
         aboutLabel.translatesAutoresizingMaskIntoConstraints = false
-        aboutLabel.topAnchor.constraint(equalTo: aboutContainerView.topAnchor, constant:5).isActive = true
+        aboutLabel.topAnchor.constraint(equalTo: aboutContainerView.topAnchor).isActive = true
         aboutLabel.leadingAnchor.constraint(equalTo: aboutContainerView.leadingAnchor, constant:20).isActive = true
         
         //Pencil Edit Button Constraints
         pencilEditButton.translatesAutoresizingMaskIntoConstraints = false
+        pencilEditButton.bottomAnchor.constraint(equalTo: aboutLabel.bottomAnchor)
         pencilEditButton.trailingAnchor.constraint(equalTo: aboutContainerView.trailingAnchor, constant:-20).isActive = true
         pencilEditButton.heightAnchor.constraint(equalTo: aboutLabel.heightAnchor).isActive = true
         pencilEditButton.widthAnchor.constraint(equalTo: pencilEditButton.heightAnchor).isActive = true
@@ -95,9 +96,9 @@ extension ProfileViewController{
     }
     
     func setupUserInfoStackView(){
-        userInfoStackView = UIStackView(arrangedSubviews: [userGradYear, userMajor, userAge, userGender])
+        userInfoStackView = UIStackView(arrangedSubviews: [userFirstName, userLastName, userGradYear, userMajor, userAge, userGender])
         userInfoStackView.axis = .vertical
-        userInfoStackView.spacing = 10
+        userInfoStackView.distribution = .equalSpacing
         
         userInfoUIView.addSubview(userInfoStackView)
         
@@ -105,6 +106,6 @@ extension ProfileViewController{
         userInfoStackView.topAnchor.constraint(equalTo: userInfoUIView.topAnchor, constant:5).isActive = true
         userInfoStackView.leadingAnchor.constraint(equalTo: userInfoUIView.leadingAnchor, constant:5).isActive = true
         userInfoStackView.trailingAnchor.constraint(equalTo: userInfoUIView.trailingAnchor, constant:-5).isActive = true
-        userInfoUIView.bottomAnchor.constraint(equalTo: userInfoUIView.bottomAnchor, constant:-5).isActive = true
+        userInfoStackView.bottomAnchor.constraint(equalTo: userInfoUIView.bottomAnchor, constant:-5).isActive = true
     }
 }
