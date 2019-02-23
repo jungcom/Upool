@@ -127,11 +127,6 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func setupKeyboardNotifications(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
     @objc func handleLogin(){
         
         let email = emailTextField.text
@@ -220,6 +215,11 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
 
 //Textfield Notifications
 extension LoginViewController{
+    func setupKeyboardNotifications(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     @objc func keyboardWillShow(notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             print("notification: Login Keyboard will show")

@@ -33,6 +33,7 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
     lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
+        scrollView.contentSize.height = 1500
         return scrollView
     }()
     
@@ -287,5 +288,13 @@ extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationC
                 print(error.localizedDescription)
             }
         }
+    }
+}
+
+//Keyboard Notifications
+extension ProfileViewController{
+    
+    @objc func handleTapped(){
+        view.endEditing(true)
     }
 }

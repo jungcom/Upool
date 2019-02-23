@@ -22,10 +22,6 @@ extension ProfileViewController{
 
     }
     
-    @objc func handleTapped(){
-        view.endEditing(true)
-    }
-    
     func setupScrollBar(){
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
