@@ -78,6 +78,12 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         return label
     }()
     
+    let pencilEditButton : UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "PencilEdit"), for: .normal)
+        return button
+    }()
+    
     //StackView for UserInfo
     
     let userInfoUIView : UIView = {
@@ -101,6 +107,7 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         let userInfo = UserInfoField()
         userInfo.subjectLabel.text = "Major"
         userInfo.subjectTextField.placeholder = "Major"
+        userInfo.isUserInteractionEnabled = false
         return userInfo
     }()
     
@@ -108,6 +115,7 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         let userInfo = UserInfoField()
         userInfo.subjectLabel.text = "Age"
         userInfo.subjectTextField.placeholder = "Age"
+        userInfo.isUserInteractionEnabled = false
         return userInfo
     }()
     
@@ -115,6 +123,7 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         let userInfo = UserInfoField()
         userInfo.subjectLabel.text = "Gender"
         userInfo.subjectTextField.placeholder = "Gender"
+        userInfo.isUserInteractionEnabled = false
         return userInfo
     }()
     

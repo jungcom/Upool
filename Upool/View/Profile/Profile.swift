@@ -62,10 +62,11 @@ extension ProfileViewController{
         //Add Subviews
         scrollView.addSubview(aboutContainerView)
         aboutContainerView.addSubview(aboutLabel)
+        aboutContainerView.addSubview(pencilEditButton)
         aboutContainerView.addSubview(userInfoUIView)
         
         aboutContainerView.translatesAutoresizingMaskIntoConstraints = false
-        aboutContainerView.topAnchor.constraint(equalTo: profileImageAndNameContainer.bottomAnchor, constant:10).isActive = true
+        aboutContainerView.topAnchor.constraint(equalTo: profileImageAndNameContainer.bottomAnchor).isActive = true
         aboutContainerView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         aboutContainerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         aboutContainerView.heightAnchor.constraint(equalTo: scrollView.heightAnchor).isActive = true
@@ -74,6 +75,13 @@ extension ProfileViewController{
         aboutLabel.translatesAutoresizingMaskIntoConstraints = false
         aboutLabel.topAnchor.constraint(equalTo: aboutContainerView.topAnchor, constant:5).isActive = true
         aboutLabel.leadingAnchor.constraint(equalTo: aboutContainerView.leadingAnchor, constant:20).isActive = true
+        
+        //Pencil Edit Button Constraints
+        pencilEditButton.translatesAutoresizingMaskIntoConstraints = false
+        pencilEditButton.trailingAnchor.constraint(equalTo: aboutContainerView.trailingAnchor, constant:-20).isActive = true
+        pencilEditButton.heightAnchor.constraint(equalTo: aboutLabel.heightAnchor).isActive = true
+        pencilEditButton.widthAnchor.constraint(equalTo: pencilEditButton.heightAnchor).isActive = true
+        
         
         //UserInfo UIView
         userInfoUIView.translatesAutoresizingMaskIntoConstraints = false

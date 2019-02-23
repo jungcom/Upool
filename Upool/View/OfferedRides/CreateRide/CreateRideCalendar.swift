@@ -65,6 +65,7 @@ extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegat
         CalendarView.Style.cellSelectedBorderColor  = Colors.maroon
         CalendarView.Style.cellSelectedColor        = Colors.maroon
         CalendarView.Style.cellSelectedTextColor    = UIColor.white
+        CalendarView.Style.firstWeekday = .sunday
         
         //calendarView setup
         calendarView.setDisplayDate(Date())
