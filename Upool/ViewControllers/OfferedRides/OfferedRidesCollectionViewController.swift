@@ -56,18 +56,6 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
         addRefresher()
         setupNavBar()
         setupFloatingButton()
-        
-        //Test Notifications
-//        let content = UNMutableNotificationContent()
-//        content.title = "Title"
-//        content.body = "Body"
-//        content.sound = UNNotificationSound.default
-//        
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-//        
-//        let request = UNNotificationRequest(identifier: "testIdentifier", content: content, trigger: trigger)
-//        
-//        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,10 +74,11 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
         let docRef = db.collection("ridePosts")
         docRef.whereField("departureDate", isGreaterThan: Date().timeIntervalSinceReferenceDate).order(by: "departureDate", descending: false).getDocuments { (querySnapshot, err) in
             if let err = err {
+                self.endRefresher()
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
+                    //print("\(document.documentID) => \(document.data())")
                     if let post = RidePost(dictionary: document.data()){
                         self.addToCorrectSection(post)
                     }
@@ -159,6 +148,19 @@ extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLay
         } else {
             cell.post = laterRidePosts[indexPath.row]
         }
+        
+        //Disable the ridePosts that are full
+        let post = cell.post
+        if let current = post?.currentPassengers, let max = post?.maxPassengers{
+            if current >= max {
+                cell.isUserInteractionEnabled = false
+                cell.alpha = 0.5
+            } else {
+                cell.isUserInteractionEnabled = true
+                cell.alpha = 1.0
+            }
+        }
+        
         return cell
     }
     
@@ -173,27 +175,6 @@ extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLay
         }
         startAnimating(type: NVActivityIndicatorType.ballTrianglePath, color: Colors.maroon, displayTimeThreshold:2, minimumDisplayTime: 1)
         navigationController?.pushViewController(rideDetailsVC, animated: true)
-    }
-    
-    //Disable the ridePosts that are full
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let post : RidePost?
-        if indexPath.section == 0{
-            post = todayRidePosts[indexPath.row]
-        } else if indexPath.section == 1{
-            post = tomorrowRidePosts[indexPath.row]
-        } else {
-            post = laterRidePosts[indexPath.row]
-        }
-        if let current = post?.currentPassengers, let max = post?.maxPassengers{
-            if current >= max {
-                cell.isUserInteractionEnabled = false
-                cell.alpha = 0.5
-            } else {
-                cell.isUserInteractionEnabled = true
-                cell.alpha = 1.0
-            }
-        }
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
