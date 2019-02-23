@@ -30,9 +30,14 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
     }
     
     //MARK : UI Properties
+    lazy var scrollView : UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.alwaysBounceVertical = true
+        return scrollView
+    }()
     
     //TopProfileImageContainer
-    lazy var profileImageAndNameContainer : UIView = {
+    let profileImageAndNameContainer : UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.groupTableViewBackground
         return view
@@ -82,13 +87,44 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         return view
     }()
     
-    let userInfoStackView : UIStackView!
+    var userInfoStackView : UIStackView!
+    
+    let userGradYear : UserInfoField = {
+        let userInfo = UserInfoField()
+        userInfo.subjectLabel.text = "Grad Year"
+        userInfo.subjectTextField.placeholder = "Your Graduation Year"
+        userInfo.isUserInteractionEnabled = false
+        return userInfo
+    }()
+    
+    let userMajor : UserInfoField = {
+        let userInfo = UserInfoField()
+        userInfo.subjectLabel.text = "Major"
+        userInfo.subjectTextField.placeholder = "Major"
+        return userInfo
+    }()
+    
+    let userAge : UserInfoField = {
+        let userInfo = UserInfoField()
+        userInfo.subjectLabel.text = "Age"
+        userInfo.subjectTextField.placeholder = "Age"
+        return userInfo
+    }()
+    
+    let userGender : UserInfoField = {
+        let userInfo = UserInfoField()
+        userInfo.subjectLabel.text = "Gender"
+        userInfo.subjectTextField.placeholder = "Gender"
+        return userInfo
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
         setupNavBar()
+        setupScrollBar()
         setupProfileImageAndNameContainer()
         setupAboutContainer()
         retrieveUserData()

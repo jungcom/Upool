@@ -17,16 +17,31 @@ extension ProfileViewController{
         
         navigationItem.titleView = imageView
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(handleLogout))
+        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapped)))
 
     }
     
+    @objc func handleTapped(){
+        view.endEditing(true)
+    }
+    
+    func setupScrollBar(){
+        view.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
     func setupProfileImageAndNameContainer(){
-        view.addSubview(profileImageAndNameContainer)
+        scrollView.addSubview(profileImageAndNameContainer)
         profileImageAndNameContainer.translatesAutoresizingMaskIntoConstraints = false
-        profileImageAndNameContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        profileImageAndNameContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        profileImageAndNameContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        profileImageAndNameContainer.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier:0.3).isActive = true
+        profileImageAndNameContainer.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        profileImageAndNameContainer.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        profileImageAndNameContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        profileImageAndNameContainer.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier:0.3).isActive = true
         
         profileImageAndNameContainer.addSubview(profileImageView)
         profileImageAndNameContainer.addSubview(nameLabel)
@@ -45,15 +60,15 @@ extension ProfileViewController{
     
     func setupAboutContainer(){
         //Add Subviews
-        view.addSubview(aboutContainerView)
+        scrollView.addSubview(aboutContainerView)
         aboutContainerView.addSubview(aboutLabel)
         aboutContainerView.addSubview(userInfoUIView)
         
         aboutContainerView.translatesAutoresizingMaskIntoConstraints = false
         aboutContainerView.topAnchor.constraint(equalTo: profileImageAndNameContainer.bottomAnchor, constant:10).isActive = true
-        aboutContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        aboutContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        aboutContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        aboutContainerView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        aboutContainerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        aboutContainerView.heightAnchor.constraint(equalTo: scrollView.heightAnchor).isActive = true
         
         //About Label
         aboutLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -72,6 +87,16 @@ extension ProfileViewController{
     }
     
     func setupUserInfoStackView(){
+        userInfoStackView = UIStackView(arrangedSubviews: [userGradYear, userMajor, userAge, userGender])
+        userInfoStackView.axis = .vertical
+        userInfoStackView.spacing = 10
         
+        userInfoUIView.addSubview(userInfoStackView)
+        
+        userInfoStackView.translatesAutoresizingMaskIntoConstraints = false
+        userInfoStackView.topAnchor.constraint(equalTo: userInfoUIView.topAnchor, constant:5).isActive = true
+        userInfoStackView.leadingAnchor.constraint(equalTo: userInfoUIView.leadingAnchor, constant:5).isActive = true
+        userInfoStackView.trailingAnchor.constraint(equalTo: userInfoUIView.trailingAnchor, constant:-5).isActive = true
+        userInfoUIView.bottomAnchor.constraint(equalTo: userInfoUIView.bottomAnchor, constant:-5).isActive = true
     }
 }

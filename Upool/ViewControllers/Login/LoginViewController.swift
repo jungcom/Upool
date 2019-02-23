@@ -18,6 +18,8 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
                 startAnimating(type: NVActivityIndicatorType.ballTrianglePath, color: Colors.maroon, displayTimeThreshold:2, minimumDisplayTime: 1)
                 self.present(LoginViewController.presentMainPage(), animated: true, completion: {
                     self.stopAnimating()
+                    //fix bug where observer won't be removed when autosigning in
+                    NotificationCenter.default.removeObserver(self)
                 })
             }
         }
@@ -117,9 +119,11 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setupKeyboardNotifications()
     }
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
     }
     

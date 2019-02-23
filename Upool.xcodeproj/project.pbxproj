@@ -49,6 +49,7 @@
 		4EAE28F121FF5455006966E4 /* UIView+UIButtons+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAE28F021FF5455006966E4 /* UIView+UIButtons+UITextField.swift */; };
 		4EAE28F321FF83D3006966E4 /* CreateRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAE28F221FF83D3006966E4 /* CreateRide.swift */; };
 		4EC0B1DE221F409800EE8A20 /* SignUpEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1DD221F409800EE8A20 /* SignUpEmailViewController.swift */; };
+		4EC0B1E122209B0600EE8A20 /* UserInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1E022209B0600EE8A20 /* UserInfoField.swift */; };
 		4EE58FA62204DB0900918778 /* RidePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA52204DB0900918778 /* RidePost.swift */; };
 		4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA722052F6900918778 /* Encodable+Decodable.swift */; };
 		4EE58FAA220674DE00918778 /* UPoolUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA9220674DE00918778 /* UPoolUser.swift */; };
@@ -107,6 +108,7 @@
 		4EAE28F021FF5455006966E4 /* UIView+UIButtons+UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+UIButtons+UITextField.swift"; sourceTree = "<group>"; };
 		4EAE28F221FF83D3006966E4 /* CreateRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRide.swift; sourceTree = "<group>"; };
 		4EC0B1DD221F409800EE8A20 /* SignUpEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailViewController.swift; sourceTree = "<group>"; };
+		4EC0B1E022209B0600EE8A20 /* UserInfoField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoField.swift; sourceTree = "<group>"; };
 		4EE58FA52204DB0900918778 /* RidePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidePost.swift; sourceTree = "<group>"; };
 		4EE58FA722052F6900918778 /* Encodable+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Decodable.swift"; sourceTree = "<group>"; };
 		4EE58FA9220674DE00918778 /* UPoolUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPoolUser.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				4E5F9E1D220B882A0037A10C /* Profile.swift */,
+				4EC0B1E022209B0600EE8A20 /* UserInfoField.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -577,6 +580,7 @@
 				4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */,
 				4E6E6049221C6C87001CFBD8 /* MyStatusDetail.swift in Sources */,
 				4E49BFE52209455F002FB09A /* MyStatus.swift in Sources */,
+				4EC0B1E122209B0600EE8A20 /* UserInfoField.swift in Sources */,
 				4EE58FAA220674DE00918778 /* UPoolUser.swift in Sources */,
 				4E685BC5221D01E400C53987 /* UICollectionView.swift in Sources */,
 				4E9AA4E92209F7BC00609E39 /* Chat.swift in Sources */,
