@@ -154,6 +154,7 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         userInfo.subjectLabel.text = "Grad Year"
         userInfo.subjectTextField.placeholder = "Your Graduation Year"
         userInfo.isUserInteractionEnabled = false
+        userInfo.subjectTextField.keyboardType = .numberPad
         return userInfo
     }()
     
@@ -170,6 +171,7 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         userInfo.subjectLabel.text = "Age"
         userInfo.subjectTextField.placeholder = "Age"
         userInfo.isUserInteractionEnabled = false
+        userInfo.subjectTextField.keyboardType = .numberPad
         return userInfo
     }()
     
