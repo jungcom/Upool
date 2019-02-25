@@ -19,13 +19,21 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
     
     var thisUser : UPoolUser? {
         didSet{
+            print("dideSet")
             guard let thisUser = thisUser else {return}
             if let url = thisUser.profileImageUrl{
                 profileImageView.loadImageUsingCacheWithUrlString(url)
                 profileImageView.layer.cornerRadius = 30
                 profileImageView.layer.masksToBounds = true
             }
-            self.nameLabel.text = "\(thisUser.firstName ?? "") \(thisUser.lastName ?? "")"
+            self.nameLabel.text = "\(thisUser.firstName ?? "") \(thisUser.lastName ?? "" )"
+            self.userFirstName.subjectTextField.text = "\(thisUser.firstName ?? "" )"
+            self.userLastName.subjectTextField.text = "\(thisUser.lastName ?? "" )"
+            self.userGradYear.subjectTextField.text = "\(thisUser.gradYear ?? "" )"
+            self.userMajor.subjectTextField.text = "\(thisUser.major ?? "" )"
+            self.userAge.subjectTextField.text = "\(thisUser.age ?? "" )"
+            self.userGender.subjectTextField.text = "\(thisUser.gender ?? "" )"
+            
         }
     }
     
@@ -33,7 +41,7 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
     lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
-        scrollView.contentSize.height = 1500
+        scrollView.contentSize.height = 1000
         return scrollView
     }()
     
@@ -89,12 +97,19 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
                     userInfoField.isUserInteractionEnabled = true
                 }
             } else {
-                pencilEditButton.setImage(UIImage(named: "PencilEdit"), for: .normal)
-                pencilEditButton.setTitle("", for: .normal)
-                let userInfoFields = userInfoStackView.subviews as! [UserInfoField]
-                for userInfoField in userInfoFields{
-                    userInfoField.isUserInteractionEnabled = false
-                }
+                let alert = UIAlertController(title: "Save", message: "Are you sure you want to save these changes?", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (_) in
+                    //Set alert view to make sure to save user info
+                    self.pencilEditButton.setImage(UIImage(named: "PencilEdit"), for: .normal)
+                    self.pencilEditButton.setTitle("", for: .normal)
+                    let userInfoFields = self.userInfoStackView.subviews as! [UserInfoField]
+                    for userInfoField in userInfoFields{
+                        userInfoField.isUserInteractionEnabled = false
+                    }
+                    self.saveUserInfoToDatabase()
+                }))
+                present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -182,9 +197,29 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         if let user = authUser{
             db.collection("users").document(user.uid).getDocument { (snapshot, error) in
                 guard let snapshot = snapshot, let dict = snapshot.data() else {return}
+                print("retrive data")
                 if let user = UPoolUser(dictionary: dict){
                     self.thisUser = user
                 }
+            }
+        }
+    }
+    
+    //Save user information to database
+    func saveUserInfoToDatabase(){
+        guard let userId = thisUser?.uid else {return}
+        var userInfo = [String : Any]()
+        userInfo["firstName"] = userFirstName.subjectTextField.text
+        userInfo["lastName"] = userLastName.subjectTextField.text
+        userInfo["gradYear"] = userGradYear.subjectTextField.text
+        userInfo["major"] = userMajor.subjectTextField.text
+        userInfo["age"] = userAge.subjectTextField.text
+        userInfo["gender"] = userGender.subjectTextField.text
+        db.collection("users").document(userId).setData(userInfo, merge: true) { (err) in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("UserInfo successfully written and saved!")
             }
         }
     }

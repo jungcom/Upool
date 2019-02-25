@@ -16,6 +16,12 @@ class UPoolUser:NSObject ,Encodable,Decodable{
     var fcmToken : String!
     var profileImageUrl : String?
     
+    //Profile Information
+    var gradYear : String?
+    var major : String?
+    var age : String?
+    var gender : String?
+    
     init(email:String, fn:String, ln:String, uid: String, fcmToken : String) {
         self.email = email
         self.firstName = fn
