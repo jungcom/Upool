@@ -43,15 +43,16 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
                 passengerSeatsLabel.text = "Passengers \(currentPassengers)/\(maxPassenger)"
             }
             if let driverId = post.driverUid{
-                setupImageProfileView(driverId)
+                setupImageProfileViewAndName(driverId)
             }
         }
     }
     
-    func setupImageProfileView(_ driverId : String){
+    func setupImageProfileViewAndName(_ driverId : String){
         db.collection("users").document(driverId).getDocument { (snapshot, error) in
             guard let snapshot = snapshot, let data = snapshot.data() else {return}
             let user = UPoolUser(dictionary: data)
+            self.nameLabel.text = "By \(user?.firstName ?? "" )"
             if let url = user?.profileImageUrl {
                 self.profileImageView.loadImageUsingCacheWithUrlString(url)
             }
@@ -130,6 +131,14 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    let nameLabel :UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.black
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.thin)
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame:frame)
         setupTopViews()
@@ -149,6 +158,7 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         topUIView.addSubview(dateLabel)
         topUIView.addSubview(priceLabel)
         topUIView.addSubview(passengerSeatsLabel)
+        topUIView.addSubview(nameLabel)
         
         addSubview(topUIView)
     }
@@ -207,5 +217,10 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
         passengerSeatsLabel.trailingAnchor.constraint(equalTo: topUIView.trailingAnchor, constant: -3).isActive = true
         passengerSeatsLabel.heightAnchor.constraint(equalTo: topUIView.heightAnchor, multiplier: 0.15).isActive = true
         passengerSeatsLabel.widthAnchor.constraint(equalTo: topUIView.widthAnchor, multiplier: 0.3).isActive = true
+        
+        //Name Label Constraints
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 0).isActive = true
+        nameLabel.leadingAnchor.constraint(equalTo: dateLabel.leadingAnchor).isActive = true
     }
 }

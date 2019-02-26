@@ -37,7 +37,7 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
     
     lazy var dateLabel : UILabel = {
         let label = UILabel()
-        label.text = ridePost.dateString() + " " + ridePost.timeString()
+        label.text = ridePost.dateString() + " at " + ridePost.timeString()
         label.font = UIFont(name: Fonts.futuraMedium, size: 18)
         return label
     }()

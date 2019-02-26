@@ -18,7 +18,8 @@ extension ProfileViewController{
         navigationItem.titleView = imageView
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(handleLogout))
         
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapped)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapped))
+        view.addGestureRecognizer(tap)
 
     }
     
