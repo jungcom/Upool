@@ -112,12 +112,17 @@ class ChatLogViewController : UICollectionViewController{
                 }
             }
             
+            //When all network requests are completed
             group.notify(queue: .main, execute: {
                 self.messages.sort(by: { (m1, m2) -> Bool in
                     return m1.timeStamp < m2.timeStamp
                 })
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
+                    //  MARK: TODO: The Section should be dynamic
+                    //  Scroll to Bottom of the chat
+                    let lastItemIndex = NSIndexPath(item: self.messages.count - 1, section: 0)
+                    self.collectionView.scrollToItem(at: lastItemIndex as IndexPath, at: .bottom, animated: true)
                 }
                 if let keyboardSize = self.keyboardSize{
                     self.scrollToBottom(keyboardSize.height + self.containerView.bounds.height)

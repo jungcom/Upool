@@ -37,6 +37,7 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
         tableView.register(ChatUserCell.self, forCellReuseIdentifier: cellId)
         setupNavBar()
         observeUserMessages()
+        
     }
     
     func observeUserMessages(){
