@@ -10,12 +10,14 @@ import UIKit
 import Firebase
 
 
-private let chatCellId = "cellID"
-
+private let chatCellId = "chatCellId"
+private let chatDateSectionHeaderId = "chatDateSectionHeaderId"
 class ChatLogViewController : UICollectionViewController{
     let db = Firestore.firestore()
     
     private var messages = [Message]()
+    private var groupedChatMessages = [[Message]]()
+    private var messagesSortedKeys = [DateComponents]()
     
     private var fromUser : User?{
         return Auth.auth().currentUser
@@ -66,6 +68,7 @@ class ChatLogViewController : UICollectionViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(ChatMessageCell.self, forCellWithReuseIdentifier: chatCellId)
+        self.collectionView.register(ChatDateSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: chatDateSectionHeaderId)
         
         setupInitialUI()
         setupInputView()
@@ -118,15 +121,18 @@ class ChatLogViewController : UICollectionViewController{
                 self.messages.sort(by: { (m1, m2) -> Bool in
                     return m1.timeStamp < m2.timeStamp
                 })
+                //Create section for creating different
+                self.createMessageDictionary()
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                     //  MARK: TODO: The Section should be dynamic
                     //  Scroll to Bottom of the chat
-                    let lastItemIndex = NSIndexPath(item: self.messages.count - 1, section: 0)
-                    self.collectionView.scrollToItem(at: lastItemIndex as IndexPath, at: .bottom, animated: true)
+                    if let last = self.groupedChatMessages.last{
+                        let lastItemIndex = NSIndexPath(item: last.count - 1, section: self.groupedChatMessages.count - 1)
+                        self.collectionView.scrollToItem(at: lastItemIndex as IndexPath, at: .bottom, animated: true)
+                    }
                 }
-                //Create section for creating different
-                self.createMessageDictionary()
+
                 if let keyboardSize = self.keyboardSize{
                     self.scrollToBottom(keyboardSize.height + self.containerView.bounds.height)
                     print("scroolllll \(keyboardSize.height)")
@@ -137,12 +143,28 @@ class ChatLogViewController : UICollectionViewController{
     
     func createMessageDictionary(){
         let groupDic = Dictionary(grouping: messages) { (message) -> DateComponents in
-            
-            let date = Calendar.current.dateComponents([.day, .year, .month], from: (message.timeStamp)!)
-            
+            let date = Calendar.current.dateComponents([.day, .year, .month, .weekday], from: (message.timeStamp)!)
             return date
         }
-        print(groupDic)
+        // Sort the keys
+        let sortedKeys = groupDic.keys.sorted { (date1, date2) -> Bool in
+            if date1.year! != date2.year!{
+                return date1.year! < date2.year!
+            } else if date1.month! != date2.month!{
+                return date1.month! < date2.month!
+            } else {
+                return date1.day! < date2.day!
+            }
+        }
+        messagesSortedKeys = sortedKeys
+        
+        //Remove all groupedChatMessages and create a new one
+        groupedChatMessages.removeAll()
+        sortedKeys.forEach { (key) in
+            let values = groupDic[key]
+            groupedChatMessages.append(values ?? [])
+        }
+        print(groupedChatMessages)
     }
     
     @objc func handleSendMessage(){
@@ -176,13 +198,14 @@ class ChatLogViewController : UICollectionViewController{
 }
 
 extension ChatLogViewController : UICollectionViewDelegateFlowLayout{
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return messages.count
+        return groupedChatMessages[section].count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: chatCellId, for: indexPath) as! ChatMessageCell
-        let message = messages[indexPath.row]
+        let message = groupedChatMessages[indexPath.section][indexPath.row]
         cell.message = message
         cell.toUser = toUser
         cell.bubbleWidthAnchor?.constant = estimateFrameForText(text: message.text).width + 32
@@ -208,6 +231,21 @@ extension ChatLogViewController : UICollectionViewDelegateFlowLayout{
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    //Date Section headers
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return messagesSortedKeys.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: chatDateSectionHeaderId, for: indexPath) as! ChatDateSectionHeader
+        header.date = messagesSortedKeys[indexPath.section]
+        return header
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 50)
     }
 }
 

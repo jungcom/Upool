@@ -50,6 +50,7 @@
 		4EAE28F321FF83D3006966E4 /* CreateRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAE28F221FF83D3006966E4 /* CreateRide.swift */; };
 		4EC0B1DE221F409800EE8A20 /* SignUpEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1DD221F409800EE8A20 /* SignUpEmailViewController.swift */; };
 		4EC0B1E122209B0600EE8A20 /* UserInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1E022209B0600EE8A20 /* UserInfoField.swift */; };
+		4EC0B1E3222D859C00EE8A20 /* ChatDateSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1E2222D859B00EE8A20 /* ChatDateSectionHeader.swift */; };
 		4EE58FA62204DB0900918778 /* RidePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA52204DB0900918778 /* RidePost.swift */; };
 		4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA722052F6900918778 /* Encodable+Decodable.swift */; };
 		4EE58FAA220674DE00918778 /* UPoolUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA9220674DE00918778 /* UPoolUser.swift */; };
@@ -109,6 +110,7 @@
 		4EAE28F221FF83D3006966E4 /* CreateRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRide.swift; sourceTree = "<group>"; };
 		4EC0B1DD221F409800EE8A20 /* SignUpEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailViewController.swift; sourceTree = "<group>"; };
 		4EC0B1E022209B0600EE8A20 /* UserInfoField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoField.swift; sourceTree = "<group>"; };
+		4EC0B1E2222D859B00EE8A20 /* ChatDateSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDateSectionHeader.swift; sourceTree = "<group>"; };
 		4EE58FA52204DB0900918778 /* RidePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidePost.swift; sourceTree = "<group>"; };
 		4EE58FA722052F6900918778 /* Encodable+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Decodable.swift"; sourceTree = "<group>"; };
 		4EE58FA9220674DE00918778 /* UPoolUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPoolUser.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				4E5F9E29220C01BD0037A10C /* ChatLog.swift */,
 				4E0CD8CD220CA20C00256906 /* ChatUserCell.swift */,
 				4E0CD8CF220D4CE300256906 /* ChatMessageCell.swift */,
+				4EC0B1E2222D859B00EE8A20 /* ChatDateSectionHeader.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -599,6 +602,7 @@
 				4E8B4C742201F290002EC784 /* MyStatusViewController.swift in Sources */,
 				4EA3D8A221F90609003D7CE7 /* UIImageView.swift in Sources */,
 				4E431FA721FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift in Sources */,
+				4EC0B1E3222D859C00EE8A20 /* ChatDateSectionHeader.swift in Sources */,
 				4EE58FA62204DB0900918778 /* RidePost.swift in Sources */,
 				4EEB91F821F7A6AA0079209B /* Login.swift in Sources */,
 				4EA3D8A621FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift in Sources */,
