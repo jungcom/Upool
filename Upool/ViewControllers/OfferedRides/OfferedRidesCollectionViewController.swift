@@ -65,10 +65,10 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
     }
     
     @objc func retrieveRidePosts(){
-        //Remove all Ride Posts
-        todayRidePosts.removeAll()
-        tomorrowRidePosts.removeAll()
-        laterRidePosts.removeAll()
+//        //Remove all Ride Posts
+//        todayRidePosts.removeAll()
+//        tomorrowRidePosts.removeAll()
+//        laterRidePosts.removeAll()
         
         //Retrieve Data
         let docRef = db.collection("ridePosts")
@@ -77,6 +77,11 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
                 self.endRefresher()
                 print("Error getting documents: \(err)")
             } else {
+                //Remove all Ride Posts
+                self.todayRidePosts.removeAll()
+                self.tomorrowRidePosts.removeAll()
+                self.laterRidePosts.removeAll()
+                
                 for document in querySnapshot!.documents {
                     //print("\(document.documentID) => \(document.data())")
                     if let post = RidePost(dictionary: document.data()){
@@ -146,6 +151,7 @@ extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLay
         } else if indexPath.section == 1{
             cell.post = tomorrowRidePosts[indexPath.row]
         } else {
+            print("indexPath : \(indexPath.row)")
             cell.post = laterRidePosts[indexPath.row]
         }
         
