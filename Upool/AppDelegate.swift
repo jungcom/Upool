@@ -73,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     //Notifications pop up while app is running
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert,.sound])
+        completionHandler([.alert,.sound,.badge])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
@@ -104,7 +104,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 if let mainTabBarVC = self.window?.rootViewController?.presentedViewController as? UITabBarController{
                     if let chatVC = mainTabBarVC.viewControllers?[2] as? UINavigationController{
                         mainTabBarVC.selectedIndex = 2
-                        chatVC.pushViewController(chatlogVC, animated: true)
+                        //Dont push another chat log VC when it is currently open
+                        if let _ = chatVC.viewControllers.last as? ChatLogViewController{
+                            print("This is the Same ViewController")
+                        } else {
+                            chatVC.pushViewController(chatlogVC, animated: true)
+                        }
                     }
                 }
             }
@@ -157,6 +162,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        application.applicationIconBadgeNumber = 0
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

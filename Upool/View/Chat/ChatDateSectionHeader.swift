@@ -24,7 +24,7 @@ class ChatDateSectionHeader : UICollectionViewCell {
     let titleLabel : UILabel = {
         let label = UILabel()
         label.text = ""
-        label.font = UIFont(name: Fonts.futura, size: 14)
+        label.font = UIFont(name: Fonts.helvetica, size: 14)
         label.textColor = UIColor.darkGray
         label.textAlignment = .center
         return label
@@ -83,7 +83,6 @@ class ChatDateSectionHeader : UICollectionViewCell {
     }
     override init(frame: CGRect) {
         super.init(frame:frame)
-        print("headercell initialized")
         setupViews()
         setupConstraints()
     }

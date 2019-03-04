@@ -109,7 +109,7 @@ class ChatLogViewController : UICollectionViewController{
                         guard let docSnapshot = docSnapshot, let data = docSnapshot.data() else {return}
                         if let message = Message(dictionary: data){
                             self.messages.append(message)
-                            print("My Message : \(String(describing: message.text))")
+                            //print("My Message : \(String(describing: message.text))")
                         }
                         group.leave()
                     })
@@ -135,7 +135,6 @@ class ChatLogViewController : UICollectionViewController{
 
                 if let keyboardSize = self.keyboardSize{
                     self.scrollToBottom(keyboardSize.height + self.containerView.bounds.height)
-                    print("scroolllll \(keyboardSize.height)")
                 }
             })
         }
@@ -164,7 +163,6 @@ class ChatLogViewController : UICollectionViewController{
             let values = groupDic[key]
             groupedChatMessages.append(values ?? [])
         }
-        print(groupedChatMessages)
     }
     
     @objc func handleSendMessage(){
@@ -214,7 +212,7 @@ extension ChatLogViewController : UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var height : CGFloat = 80
-        if let text = messages[indexPath.row].text {
+        if let text = groupedChatMessages[indexPath.section][indexPath.row].text {
             height = estimateFrameForText(text : text).height + 20
         }
         
@@ -245,7 +243,7 @@ extension ChatLogViewController : UICollectionViewDelegateFlowLayout{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 50)
+        return CGSize(width: collectionView.frame.width, height: 70)
     }
 }
 
