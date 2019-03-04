@@ -11,6 +11,8 @@ import NVActivityIndicatorView
 
 class LoginViewController: UIViewController, NVActivityIndicatorViewable {
 
+    lazy var db = Firestore.firestore()
+    
     var signedIn : Bool = false {
         didSet{
             if signedIn{
@@ -144,7 +146,7 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
         
         Auth.auth().signIn(withEmail: email!, password: password!, completion: { (authResult, error) in
 
-            guard let _ = authResult else {
+            guard let authResult = authResult else {
 
                 if let error = error {
                     if let errCode = AuthErrorCode(rawValue: error._code){
@@ -171,6 +173,10 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
                 self.stopAnimating()
                 return
             }
+            
+            //Update user's fcmToken to this Device
+            let noFcmToken = ["fcmToken": AppDelegate.DEVICE_FCM_TOKEN]
+            self.db.collection("users").document(authResult.user.uid).updateData(noFcmToken)
             
             self.present(LoginViewController.presentMainPage(), animated: true, completion: {
                 self.stopAnimating()

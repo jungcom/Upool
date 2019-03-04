@@ -243,12 +243,18 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         let alert = UIAlertController(title: "Log Out", message: "Are you sure you want to log out?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let signOutAction = UIAlertAction(title: "Log Out", style: .default) { (_) in
+            let currentUserId = self.authUser?.uid
             do {
                 try Auth.auth().signOut()
             } catch {
                 print("Sign Out Failed")
             }
-            self.navigationController?.dismiss(animated: true, completion: nil)
+            if let currentUserId = currentUserId{
+                print(currentUserId)
+                let noFcmToken = ["fcmToken": ""]
+                self.db.collection("users").document(currentUserId).updateData(noFcmToken)
+                self.navigationController?.dismiss(animated: true, completion: nil)
+            }
         }
         alert.addAction(cancelAction)
         alert.addAction(signOutAction)
