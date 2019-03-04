@@ -91,8 +91,9 @@ class ChatLogViewController : UICollectionViewController{
         listener = db.collection("user-Messages").document(id).collection("toUserId").document(toUser.uid).collection("messageIds").addSnapshotListener{ (snapshot, error) in
             guard let snapshot = snapshot else {return}
             
-            //Threading handled
+            //Multi-Threading handled
             let group = DispatchGroup()
+            
             snapshot.documentChanges.forEach { diff in
                 if (diff.type == .modified) {
                     print("Modified message: \(diff.document.data())")
@@ -124,12 +125,24 @@ class ChatLogViewController : UICollectionViewController{
                     let lastItemIndex = NSIndexPath(item: self.messages.count - 1, section: 0)
                     self.collectionView.scrollToItem(at: lastItemIndex as IndexPath, at: .bottom, animated: true)
                 }
+                //Create section for creating different
+                self.createMessageDictionary()
                 if let keyboardSize = self.keyboardSize{
                     self.scrollToBottom(keyboardSize.height + self.containerView.bounds.height)
                     print("scroolllll \(keyboardSize.height)")
                 }
             })
         }
+    }
+    
+    func createMessageDictionary(){
+        let groupDic = Dictionary(grouping: messages) { (message) -> DateComponents in
+            
+            let date = Calendar.current.dateComponents([.day, .year, .month], from: (message.timeStamp)!)
+            
+            return date
+        }
+        print(groupDic)
     }
     
     @objc func handleSendMessage(){
