@@ -10,27 +10,27 @@ The following functionalities are implemented:
 - [O] User can sign up with an email and it requires email verification (Also works for password resets)
 - [O] Persist logged in user
 - [O] User can post a ride post With the help of Google Places API
-- [O] More user friendly UI/UX
 - [O] User has a status tab that shows the list of rides they are riding and offering
-- [O] Users can send requests to others and accept rides
+- [O] Users can send requests to others and accept and decline rides
 - [O] User can compose and send chat messages to other peers AND also send push notifications to the receiving users with Firebase Cloud Functions
+- [O] Chat shows the time log in a more efficient manner, with the date of the chat as headers
+- [O] Users can receive push notifications when they are accepted or declined on a ride
+- [O] User has a profile page which can edit their information, indluding their profile picture
+- [O] Users can delete their posted rides
 
 The following functionalities should be implemented:
 
-- [ ] User has a profile page which can edit their information, indluding their profile picture
-- [ ] Users can decline ride requests
-- [ ] Users can delete their posted rides using recursive delete with Firebase Cloud Functions
 - [ ] Users can receive and give ratings to others
-- [ ] Chat shows the time log in a more efficient manner, with the date of the chat as headers
-- [ ] Users can receive push notifications when they are accepted on a ride
-
+- [ ] The chat shows the information about the driver's ride
+- [ ] Users can kick or message the passenger in the My Rides View Controller
+- [ ] Users receive push notifications when they are kicked from a ride or when the driver deletes their ride
 
 ## Video Walkthrough/ScreenShots
 
 Here are screenshots of the app:
 
 <img src='https://i.imgur.com/4ewUkOU.png' title='ScreenShots' width='200' />
-<img src='https://i.imgur.com/UnAtZEj.png' title='ScreenShots' width='200' />
+<img src='https://i.imgur.com/YxEjMXf.gif' title='ScreenShots' width='250' />
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
