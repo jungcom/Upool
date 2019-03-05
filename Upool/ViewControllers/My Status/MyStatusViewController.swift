@@ -50,8 +50,6 @@ class MyStatusViewController: UICollectionViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
         
         // Register cell classes
         self.collectionView!.register(OfferedRidesCollectionViewCell.self, forCellWithReuseIdentifier: offeredRidesCellId)
@@ -60,7 +58,7 @@ class MyStatusViewController: UICollectionViewController  {
         // Do any additional setup after loading the view.
         setupNavBar()
         setupSegmentControlAndCollectionView()
-        addRefresher()
+        //addRefresher()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,21 +85,19 @@ class MyStatusViewController: UICollectionViewController  {
                     }
                 }
                 self.collectionView.reloadData()
-                self.endRefresher()
+                //self.endRefresher()
             }
         }
     }
     
     @objc func retrieveMyRequestedRidePosts(){
-        //Reset Posts
-        self.joinedRidePosts.removeAll()
-        self.pendingRidePosts.removeAll()
-        self.myRequests.removeAll()
         
         //Retrieve Request Data
         let docRef = db.collection("rideRequests")
         
         docRef.order(by: "timeStamp", descending: false).whereField("fromId", isEqualTo: authUser.uid).getDocuments { (querySnapshot, err) in
+            //reset my Requests
+            self.myRequests.removeAll()
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -117,6 +113,10 @@ class MyStatusViewController: UICollectionViewController  {
     }
     
     @objc func retrieveJoinedAndPendingRidePosts(){
+        //Reset Request Data
+        self.joinedRidePosts.removeAll()
+        self.pendingRidePosts.removeAll()
+        
         //Retrieve Ride Data for each request
         for request in myRequests{
             db.collection("ridePosts").document(request.ridePostId).getDocument(completion: { (snapshot, error) in
@@ -135,23 +135,6 @@ class MyStatusViewController: UICollectionViewController  {
             })
         }
     }
-    
-//    fileprivate func sendTriggerToDeleteCloudFunction(path: String, ridePostId : String) {
-//        Functions.functions().httpsCallable("recursiveDelete").call(["path": path]) { (result, error) in
-//            if let error = error as NSError? {
-//                print(error.localizedDescription)
-//                if error.domain == FunctionsErrorDomain {
-//                    let code = FunctionsErrorCode(rawValue: error.code)
-//                    let message = error.localizedDescription
-//                    let details = error.userInfo[FunctionsErrorDetailsKey]
-//                    print("Error : \(message), \(String(describing: details)) with code \(String(describing: code))")
-//                }
-//            }
-//            if let text = (result?.data as? [String: Any])?["text"] as? String {
-//                print("Some value \(text) was returned")
-//            }
-//        }
-//    }
     
     func deleteRidePost(ridePostId:String){
         db.collection("ridePosts").document(ridePostId).delete() { err in
@@ -180,20 +163,19 @@ class MyStatusViewController: UICollectionViewController  {
             }
         }
     }
-    
-    func addRefresher(){
-        self.refresher = UIRefreshControl()
-        self.refresher.tintColor = UIColor.gray
-        self.refresher.addTarget(self, action: #selector(retrieveMyRidePosts), for: .valueChanged)
-        self.refresher.addTarget(self, action: #selector(retrieveMyRequestedRidePosts), for: .valueChanged)
-        self.collectionView!.addSubview(refresher)
-    }
-    
-    func endRefresher(){
-        if let refresher = self.refresher{
-            refresher.endRefreshing()
-        }
-    }
+//    func addRefresher(){
+//        self.refresher = UIRefreshControl()
+//        self.refresher.tintColor = UIColor.gray
+//        self.refresher.addTarget(self, action: #selector(retrieveMyRidePosts), for: .valueChanged)
+//        self.refresher.addTarget(self, action: #selector(retrieveMyRequestedRidePosts), for: .valueChanged)
+//        self.collectionView!.addSubview(refresher)
+//    }
+//
+//    func endRefresher(){
+//        if let refresher = self.refresher{
+//            refresher.endRefreshing()
+//        }
+//    }
 }
 
 // MARK: UICollectionViewDataSource
