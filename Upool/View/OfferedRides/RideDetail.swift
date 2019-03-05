@@ -45,9 +45,9 @@ extension RideDetailViewController{
         topContainer.addSubview(buttonView)
         
         topContainer.translatesAutoresizingMaskIntoConstraints = false
-        topContainer.topAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.topAnchor).isActive = true
-        topContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        topContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        topContainer.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        topContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        topContainer.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         topContainer.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
         
     }
@@ -169,7 +169,6 @@ extension RideDetailViewController{
         
         //PickUp Detail TextView Constraints
         pickupDetailTextView.translatesAutoresizingMaskIntoConstraints = false
-//        pickupDetailTextView.leadingAnchor.constraint(equalTo: pickUpLabel.leadingAnchor, constant: 15).isActive = true
         pickupDetailTextView.topAnchor.constraint(equalTo: pickUpLabel.bottomAnchor, constant: 5).isActive = true
         pickupDetailTextView.centerXAnchor.constraint(equalTo: thirdTopView.centerXAnchor).isActive = true
         pickupDetailTextView.widthAnchor.constraint(equalTo: thirdTopView.widthAnchor, multiplier: 0.7).isActive = true
@@ -178,8 +177,6 @@ extension RideDetailViewController{
     }
     
     func setupButtonStackView(){
-//        buttonView.backgroundColor = UIColor.blue
-        
         buttonStackView = UIStackView(arrangedSubviews: [messageButton, joinRideButton])
         buttonStackView.alignment = .center
         buttonStackView.spacing = 15
