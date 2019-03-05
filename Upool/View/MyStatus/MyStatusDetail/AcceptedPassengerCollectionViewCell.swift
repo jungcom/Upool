@@ -11,6 +11,8 @@ import Firebase
 
 class AcceptedPassengerCollectionViewCell: UICollectionViewCell {
     
+    var tapToMessageOrDelete : ((RideRequest) -> ())?
+    
     let db = Firestore.firestore()
     var rideRequest : RideRequest? {
         didSet{
@@ -84,6 +86,16 @@ class AcceptedPassengerCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame:frame)
         setupConstraints()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapped(_:)))
+        self.addGestureRecognizer(tap)
+    }
+    
+    @objc func handleTapped(_ sender : UITapGestureRecognizer){
+        print("Tapped")
+        
+        guard let rideRequest = self.rideRequest else {return}
+        tapToMessageOrDelete?(rideRequest)
     }
     
     func setupConstraints(){

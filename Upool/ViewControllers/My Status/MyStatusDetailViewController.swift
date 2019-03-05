@@ -119,6 +119,57 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == acceptedPassengersCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: acceptedPassengerCellId, for: indexPath) as! AcceptedPassengerCollectionViewCell
+            
+            //When the user taps on the accepted Passenger
+            cell.tapToMessageOrDelete = { ( rideRequest) in
+                let alert = UIAlertController(title: "Hello", message: nil, preferredStyle: .actionSheet)
+                let message = UIAlertAction(title: "Message", style: .default) { (action) in
+                    self.db.collection("users").document(rideRequest.fromId).getDocument { (snapshot, error) in
+                        if let error = error{
+                            print(error.localizedDescription)
+                        } else {
+                            let chatlogVC = ChatLogViewController(collectionViewLayout: UICollectionViewFlowLayout())
+                            let toUser = UPoolUser(dictionary: (snapshot?.data())!)
+                            chatlogVC.toUser = toUser
+                            
+                            print(self.navigationController?.popViewController(animated: true))
+                            if let tabBarVC = self.navigationController?.parent as? UITabBarController, let chatNavVC = tabBarVC.viewControllers?[2] as? UINavigationController{
+                                tabBarVC.selectedIndex = 2
+                                chatNavVC.pushViewController(chatlogVC, animated: true)
+                            }
+                        }
+                    }
+                }
+                let kick = UIAlertAction(title: "Kick", style: .default) { (action) in
+                    let alertKick = UIAlertController(title: "Are you sure you want to kick this passenger?", message: nil, preferredStyle: .alert)
+                    let no = UIAlertAction(title: "No", style: .cancel, handler: nil)
+                    let yes = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                       
+                        //Update the request status to declined
+                        self.db.collection("rideRequests").document(rideRequest.rideRequestId).updateData(["requestStatus":Status.notAccepted.rawValue], completion: { (error) in
+                        })
+                        //Update the ridePost's Current passengers to -1
+                        guard let ridePost = self.ridePost, let ridePostUid = ridePost.ridePostUid else {return}
+                        self.db.collection("ridePosts").document(ridePostUid).getDocument(completion: { (snapshot, error) in
+                            guard let snapshot = snapshot, let data = snapshot.data() else {return}
+                            if let retrievedRidePost = RidePost(dictionary: data), let current = retrievedRidePost.currentPassengers{
+                                self.db.collection("ridePosts").document(ridePostUid).updateData(["currentPassengers" : (current-1)])
+                            }
+                        })
+                        //Update Cell
+                        cell.empty = true
+                    })
+                    alertKick.addAction(no)
+                    alertKick.addAction(yes)
+                    self.present(alertKick, animated: true, completion: nil)
+                }
+                let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alert.addAction(message)
+                alert.addAction(kick)
+                alert.addAction(cancel)
+                self.present(alert, animated: true, completion: nil)
+            }
+            
             if indexPath.row < myAcceptedPassengerRequests.count {
                 cell.rideRequest = myAcceptedPassengerRequests[indexPath.row]
             } else {

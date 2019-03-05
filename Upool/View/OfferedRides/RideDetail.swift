@@ -29,7 +29,7 @@ extension RideDetailViewController{
     func setupScrollView(){
         scrollView.addSubview(topContainer)
         scrollView.addSubview(bottomContainer)
-        scrollView.contentSize = CGSize(width: view.frame.width, height: 2000)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: 1500)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -49,7 +49,6 @@ extension RideDetailViewController{
         topContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         topContainer.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         topContainer.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
-        
     }
     
     func setupFirstTopView(){
@@ -172,8 +171,6 @@ extension RideDetailViewController{
         pickupDetailTextView.topAnchor.constraint(equalTo: pickUpLabel.bottomAnchor, constant: 5).isActive = true
         pickupDetailTextView.centerXAnchor.constraint(equalTo: thirdTopView.centerXAnchor).isActive = true
         pickupDetailTextView.widthAnchor.constraint(equalTo: thirdTopView.widthAnchor, multiplier: 0.7).isActive = true
-        
-
     }
     
     func setupButtonStackView(){
@@ -203,9 +200,8 @@ extension RideDetailViewController{
         bottomContainer.backgroundColor = UIColor.groupTableViewBackground
         bottomContainer.translatesAutoresizingMaskIntoConstraints = false
         bottomContainer.topAnchor.constraint(equalTo: topContainer.bottomAnchor).isActive = true
-        bottomContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        bottomContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        bottomContainer.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        bottomContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         bottomContainer.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier:1.0).isActive = true
     }
-    
 }
