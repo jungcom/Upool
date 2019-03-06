@@ -17,82 +17,15 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         return Auth.auth().currentUser
     }
     
-    var thisUser : UPoolUser? {
-        didSet{
-            print("dideSet")
-            guard let thisUser = thisUser else {return}
-            if let url = thisUser.profileImageUrl{
-                profileImageView.loadImageUsingCacheWithUrlString(url)
-                profileImageView.layer.cornerRadius = 30
-                profileImageView.layer.masksToBounds = true
-            }
-            self.nameLabel.text = "\(thisUser.firstName ?? "") \(thisUser.lastName ?? "" )"
-            self.userFirstName.subjectTextField.text = "\(thisUser.firstName ?? "" )"
-            self.userLastName.subjectTextField.text = "\(thisUser.lastName ?? "" )"
-            self.userGradYear.subjectTextField.text = "\(thisUser.gradYear ?? "" )"
-            self.userMajor.subjectTextField.text = "\(thisUser.major ?? "" )"
-            self.userAge.subjectTextField.text = "\(thisUser.age ?? "" )"
-            self.userGender.subjectTextField.text = "\(thisUser.gender ?? "" )"
-            
-        }
-    }
-    
-    //MARK : UI Properties
-    lazy var scrollView : UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.alwaysBounceVertical = true
-        scrollView.contentSize.height = 1000
-        return scrollView
-    }()
-    
-    //TopProfileImageContainer
-    let profileImageAndNameContainer : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.groupTableViewBackground
-        return view
-    }()
-    
-    lazy var profileImageView : UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: "AddProfileImage")
-        image.backgroundColor = UIColor.clear
-        image.contentMode = .scaleAspectFill
-        image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleImageSelection)))
-        image.isUserInteractionEnabled = true
-        return image
-    }()
-    
-    lazy var nameLabel : UILabel = {
-        let label = UILabel()
-        label.text = "Name"
-        label.textColor = Colors.maroon
-        label.font = UIFont(name: Fonts.helvetica, size: 20)
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        return label
-    }()
-    
-    //Container About the User
-    let aboutContainerView : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.groupTableViewBackground
-        return view
-    }()
-    
-    let aboutLabel : UILabel = {
-        let label = UILabel()
-        label.text = "About"
-        label.textColor = UIColor.gray
-        label.font = UIFont.init(name: Fonts.helvetica, size: 20)
-        return label
-    }()
+    //ProfileView
+    var profileView : ProfileView!
     
     var isEditingInfo : Bool = false {
         didSet{
             if isEditingInfo{
-                pencilEditButton.setTitle("Save", for: .normal)
-                pencilEditButton.setImage(nil, for: .normal)
-                let userInfoFields = userInfoStackView.subviews as! [UserInfoField]
+                profileView.pencilEditButton.setTitle("Save", for: .normal)
+                profileView.pencilEditButton.setImage(nil, for: .normal)
+                let userInfoFields = profileView.userInfoStackView.subviews as! [UserInfoField]
                 for userInfoField in userInfoFields{
                     userInfoField.isUserInteractionEnabled = true
                 }
@@ -101,9 +34,9 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (_) in
                     //Set alert view to make sure to save user info
-                    self.pencilEditButton.setImage(UIImage(named: "PencilEdit"), for: .normal)
-                    self.pencilEditButton.setTitle("", for: .normal)
-                    let userInfoFields = self.userInfoStackView.subviews as! [UserInfoField]
+                    self.profileView.pencilEditButton.setImage(UIImage(named: "PencilEdit"), for: .normal)
+                    self.profileView.pencilEditButton.setTitle("", for: .normal)
+                    let userInfoFields = self.profileView.userInfoStackView.subviews as! [UserInfoField]
                     for userInfoField in userInfoFields{
                         userInfoField.isUserInteractionEnabled = false
                     }
@@ -114,84 +47,39 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         }
     }
     
-    let pencilEditButton : UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "PencilEdit"), for: .normal)
-        button.setTitleColor(Colors.maroon, for: .normal)
-        button.addTarget(self, action: #selector(handlePencilEdit), for: .touchUpInside)
-        return button
-    }()
-    
-    //StackView for UserInfo
-    
-    let userInfoUIView : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.white
-        UIView.dropShadow(view: view)
-        return view
-    }()
-    
-    var userInfoStackView : UIStackView!
-    
-    let userFirstName : UserInfoField = {
-        let userInfo = UserInfoField()
-        userInfo.subjectLabel.text = "First Name"
-        userInfo.subjectTextField.placeholder = "First Name"
-        userInfo.isUserInteractionEnabled = false
-        return userInfo
-    }()
-    
-    let userLastName : UserInfoField = {
-        let userInfo = UserInfoField()
-        userInfo.subjectLabel.text = "Last Name"
-        userInfo.subjectTextField.placeholder = "Last Name"
-        userInfo.isUserInteractionEnabled = false
-        return userInfo
-    }()
-    
-    let userGradYear : UserInfoField = {
-        let userInfo = UserInfoField()
-        userInfo.subjectLabel.text = "Grad Year"
-        userInfo.subjectTextField.placeholder = "Your Graduation Year"
-        userInfo.isUserInteractionEnabled = false
-        userInfo.subjectTextField.keyboardType = .numberPad
-        return userInfo
-    }()
-    
-    let userMajor : UserInfoField = {
-        let userInfo = UserInfoField()
-        userInfo.subjectLabel.text = "Major"
-        userInfo.subjectTextField.placeholder = "Major"
-        userInfo.isUserInteractionEnabled = false
-        return userInfo
-    }()
-    
-    let userAge : UserInfoField = {
-        let userInfo = UserInfoField()
-        userInfo.subjectLabel.text = "Age"
-        userInfo.subjectTextField.placeholder = "Age"
-        userInfo.isUserInteractionEnabled = false
-        userInfo.subjectTextField.keyboardType = .numberPad
-        return userInfo
-    }()
-    
-    let userGender : UserInfoField = {
-        let userInfo = UserInfoField()
-        userInfo.subjectLabel.text = "Gender"
-        userInfo.subjectTextField.placeholder = "Gender"
-        userInfo.isUserInteractionEnabled = false
-        return userInfo
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
         setupNavBar()
-        setupScrollBar()
-        setupProfileImageAndNameContainer()
-        setupAboutContainer()
+        setupProfileView()
         retrieveUserData()
+    }
+    
+    fileprivate func setupNavBar() {
+        let image: UIImage = UIImage(named: "UPoolLogo")!
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = image
+        
+        navigationItem.titleView = imageView
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(handleLogout))
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapped))
+        view.addGestureRecognizer(tap)
+    }
+    
+    fileprivate func setupProfileView() {
+        profileView = ProfileView()
+        view.addSubview(profileView)
+        profileView.translatesAutoresizingMaskIntoConstraints = false
+        profileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        profileView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        profileView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        profileView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        profileView.profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleImageSelection)))
+        profileView.pencilEditButton.addTarget(self, action: #selector(handlePencilEdit), for: .touchUpInside)
     }
     
     func retrieveUserData(){
@@ -200,7 +88,7 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
                 guard let snapshot = snapshot, let dict = snapshot.data() else {return}
                 print("retrive data")
                 if let user = UPoolUser(dictionary: dict){
-                    self.thisUser = user
+                    self.profileView.thisUser = user
                 }
             }
         }
@@ -208,14 +96,14 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
     
     //Save user information to database
     func saveUserInfoToDatabase(){
-        guard let userId = thisUser?.uid else {return}
+        guard let userId = profileView.thisUser?.uid else {return}
         var userInfo = [String : Any]()
-        userInfo["firstName"] = userFirstName.subjectTextField.text
-        userInfo["lastName"] = userLastName.subjectTextField.text
-        userInfo["gradYear"] = userGradYear.subjectTextField.text
-        userInfo["major"] = userMajor.subjectTextField.text
-        userInfo["age"] = userAge.subjectTextField.text
-        userInfo["gender"] = userGender.subjectTextField.text
+        userInfo["firstName"] = profileView.userFirstName.subjectTextField.text
+        userInfo["lastName"] = profileView.userLastName.subjectTextField.text
+        userInfo["gradYear"] = profileView.userGradYear.subjectTextField.text
+        userInfo["major"] = profileView.userMajor.subjectTextField.text
+        userInfo["age"] = profileView.userAge.subjectTextField.text
+        userInfo["gender"] = profileView.userGender.subjectTextField.text
         db.collection("users").document(userId).setData(userInfo, merge: true) { (err) in
             if let err = err {
                 print("Error writing document: \(err)")
@@ -236,7 +124,10 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         } else {
             isEditingInfo = true
         }
-        
+    }
+    
+    @objc func handleTapped(){
+        view.endEditing(true)
     }
     
     @objc func handleLogout(){
@@ -289,7 +180,7 @@ extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationC
         }
         
         if let selectedImage = selectedImage{
-            profileImageView.image = selectedImage
+            profileView.profileImageView.image = selectedImage
         }
         
         //save image to firebase storage
@@ -303,7 +194,7 @@ extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationC
         guard let id = authUser?.uid else {return}
         
         let storage = Storage.storage().reference().child("profileImages").child(id)
-        if let profileImage = self.profileImageView.image, let uploadData = profileImage.jpegData(compressionQuality: 0.05) {
+        if let profileImage = self.profileView.profileImageView.image, let uploadData = profileImage.jpegData(compressionQuality: 0.05) {
             storage.putData(uploadData, metadata: nil) { (metadata, error) in
                 if let error = error{
                     print(error.localizedDescription)
@@ -330,13 +221,5 @@ extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationC
                 print(error.localizedDescription)
             }
         }
-    }
-}
-
-//Keyboard Notifications
-extension ProfileViewController{
-    
-    @objc func handleTapped(){
-        view.endEditing(true)
     }
 }
