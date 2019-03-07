@@ -3,7 +3,6 @@
 <img src='https://i.imgur.com/KPEDnOK.jpg' title='UPool' width='' />
 
 **UPool** is a carpool app for Umass Amherst using a Firebase backend.
-challenges
 The following functionalities are implemented:
 
 - [O] User can sign up and sign in to the login screen (Firebase Authentication)
