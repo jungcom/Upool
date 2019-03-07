@@ -23,7 +23,6 @@
 		4E5F9E1C220B85120037A10C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F9E1B220B85120037A10C /* ProfileViewController.swift */; };
 		4E5F9E20220BCB960037A10C /* UIDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F9E1F220BCB960037A10C /* UIDate.swift */; };
 		4E5F9E22220BF8060037A10C /* ChatLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F9E21220BF8060037A10C /* ChatLogViewController.swift */; };
-		4E5F9E2A220C01BD0037A10C /* ChatLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F9E29220C01BD0037A10C /* ChatLog.swift */; };
 		4E5F9E2C220C8CE80037A10C /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F9E2B220C8CE80037A10C /* Message.swift */; };
 		4E685BC5221D01E400C53987 /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E685BC4221D01E400C53987 /* UICollectionView.swift */; };
 		4E6DF32E2215D3F300F07EEA /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E6DF32D2215D3F300F07EEA /* Keys.plist */; };
@@ -39,7 +38,6 @@
 		4E8DD4FC2203B1190077D85C /* CreateRideProtocolsForPassingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8DD4FB2203B1190077D85C /* CreateRideProtocolsForPassingData.swift */; };
 		4E8DD4FF2203FF760077D85C /* OfferedRides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8DD4FE2203FF760077D85C /* OfferedRides.swift */; };
 		4E9AA4E72209F67E00609E39 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AA4E62209F67E00609E39 /* ChatViewController.swift */; };
-		4E9AA4E92209F7BC00609E39 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AA4E82209F7BC00609E39 /* Chat.swift */; };
 		4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */; };
 		4EA3D8A221F90609003D7CE7 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A121F90609003D7CE7 /* UIImageView.swift */; };
 		4EA3D8A421F9168E003D7CE7 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A321F9168E003D7CE7 /* SignUp.swift */; };
@@ -51,6 +49,7 @@
 		4EC0B1E122209B0600EE8A20 /* UserInfoField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1E022209B0600EE8A20 /* UserInfoField.swift */; };
 		4EC0B1E3222D859C00EE8A20 /* ChatDateSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1E2222D859B00EE8A20 /* ChatDateSectionHeader.swift */; };
 		4EC0B1E52230864500EE8A20 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1E42230864500EE8A20 /* ProfileView.swift */; };
+		4EC0B1E92230923300EE8A20 /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1E82230923300EE8A20 /* ChatLogView.swift */; };
 		4EE58FA62204DB0900918778 /* RidePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA52204DB0900918778 /* RidePost.swift */; };
 		4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA722052F6900918778 /* Encodable+Decodable.swift */; };
 		4EE58FAA220674DE00918778 /* UPoolUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA9220674DE00918778 /* UPoolUser.swift */; };
@@ -82,7 +81,6 @@
 		4E5F9E1B220B85120037A10C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4E5F9E1F220BCB960037A10C /* UIDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDate.swift; sourceTree = "<group>"; };
 		4E5F9E21220BF8060037A10C /* ChatLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogViewController.swift; sourceTree = "<group>"; };
-		4E5F9E29220C01BD0037A10C /* ChatLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLog.swift; sourceTree = "<group>"; };
 		4E5F9E2B220C8CE80037A10C /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		4E685BC4221D01E400C53987 /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		4E6DF32D2215D3F300F07EEA /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
@@ -99,7 +97,6 @@
 		4E8DD4FB2203B1190077D85C /* CreateRideProtocolsForPassingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideProtocolsForPassingData.swift; sourceTree = "<group>"; };
 		4E8DD4FE2203FF760077D85C /* OfferedRides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedRides.swift; sourceTree = "<group>"; };
 		4E9AA4E62209F67E00609E39 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		4E9AA4E82209F7BC00609E39 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4EA3D8A121F90609003D7CE7 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		4EA3D8A321F9168E003D7CE7 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
@@ -111,6 +108,7 @@
 		4EC0B1E022209B0600EE8A20 /* UserInfoField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoField.swift; sourceTree = "<group>"; };
 		4EC0B1E2222D859B00EE8A20 /* ChatDateSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDateSectionHeader.swift; sourceTree = "<group>"; };
 		4EC0B1E42230864500EE8A20 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		4EC0B1E82230923300EE8A20 /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
 		4EE58FA52204DB0900918778 /* RidePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidePost.swift; sourceTree = "<group>"; };
 		4EE58FA722052F6900918778 /* Encodable+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Decodable.swift"; sourceTree = "<group>"; };
 		4EE58FA9220674DE00918778 /* UPoolUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPoolUser.swift; sourceTree = "<group>"; };
@@ -211,8 +209,7 @@
 		4E5F9E27220C01530037A10C /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				4E9AA4E82209F7BC00609E39 /* Chat.swift */,
-				4E5F9E29220C01BD0037A10C /* ChatLog.swift */,
+				4EC0B1E82230923300EE8A20 /* ChatLogView.swift */,
 				4E0CD8CD220CA20C00256906 /* ChatUserCell.swift */,
 				4E0CD8CF220D4CE300256906 /* ChatMessageCell.swift */,
 				4EC0B1E2222D859B00EE8A20 /* ChatDateSectionHeader.swift */,
@@ -586,7 +583,6 @@
 				4EC0B1E122209B0600EE8A20 /* UserInfoField.swift in Sources */,
 				4EE58FAA220674DE00918778 /* UPoolUser.swift in Sources */,
 				4E685BC5221D01E400C53987 /* UICollectionView.swift in Sources */,
-				4E9AA4E92209F7BC00609E39 /* Chat.swift in Sources */,
 				4EAE28F321FF83D3006966E4 /* CreateRide.swift in Sources */,
 				4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */,
 				4E8DD4FF2203FF760077D85C /* OfferedRides.swift in Sources */,
@@ -596,7 +592,6 @@
 				4E5F9E22220BF8060037A10C /* ChatLogViewController.swift in Sources */,
 				4E8B4C7622023243002EC784 /* CreateRideTimePicker.swift in Sources */,
 				4E0CD8D522138D1100256906 /* LaunchViewController.swift in Sources */,
-				4E5F9E2A220C01BD0037A10C /* ChatLog.swift in Sources */,
 				4E8B4C7822023A43002EC784 /* SearchLocationViewController.swift in Sources */,
 				4E6E6047221B33C2001CFBD8 /* AcceptedPassengerCollectionViewCell.swift in Sources */,
 				4E8B4C742201F290002EC784 /* MyStatusViewController.swift in Sources */,
@@ -620,6 +615,7 @@
 				4E8B4C722201219B002EC784 /* CreateRideCalendar.swift in Sources */,
 				4EC0B1DE221F409800EE8A20 /* SignUpEmailViewController.swift in Sources */,
 				4EEB91DC21F7679F0079209B /* AppDelegate.swift in Sources */,
+				4EC0B1E92230923300EE8A20 /* ChatLogView.swift in Sources */,
 				4EC0B1E52230864500EE8A20 /* ProfileView.swift in Sources */,
 				4E49BFD92208C140002FB09A /* EmailSentViewController.swift in Sources */,
 				4E399D28221A5FEE00605A50 /* MyStatusTrashCanHeaderCell.swift in Sources */,

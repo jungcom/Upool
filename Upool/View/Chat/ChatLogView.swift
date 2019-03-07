@@ -1,48 +1,72 @@
 //
-//  ChatLog.swift
+//  ChatLogView.swift
 //  Upool
 //
-//  Created by Anthony Lee on 2/7/19.
+//  Created by Anthony Lee on 3/6/19.
 //  Copyright © 2019 anthonyLee. All rights reserved.
 //
 
 import UIKit
 
-extension ChatLogViewController{
+class ChatLogView : UIView{
     
-    func setupInitialUI(){
-        //keyboard setup
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapped))
-        view.addGestureRecognizer(tap)
-        
-        collectionView.backgroundColor = UIColor.groupTableViewBackground
-        collectionView.alwaysBounceVertical = true
-        collectionView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 80, right: 0)
-        collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
-        self.tabBarController?.tabBar.isHidden = true
-        self.tabBarController?.tabBar.isTranslucent = true
+    //move input Bottom view
+    var inputBottomAnchor : NSLayoutConstraint?
+    
+    //MARK : Input Text Views
+    lazy var containerView : UIView = {
+        let container = UIView()
+        container.backgroundColor = UIColor.white
+        return container
+    }()
+    
+    lazy var sendButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("Send", for: .normal)
+        button.setTitleColor(Colors.maroon, for: .normal)
+        return button
+    }()
+    
+    lazy var inputTextField : UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Enter message..."
+        return textField
+    }()
+    
+    lazy var bottomSafeArea : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        return view
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func setupInputView(){
         
-        view.addSubview(containerView)
-        view.addSubview(bottomSafeArea)
+        addSubview(containerView)
+        addSubview(bottomSafeArea)
         containerView.addSubview(sendButton)
         containerView.addSubview(inputTextField)
         
         //SafeArea View
         bottomSafeArea.translatesAutoresizingMaskIntoConstraints = false
-        bottomSafeArea.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        bottomSafeArea.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        bottomSafeArea.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        bottomSafeArea.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        bottomSafeArea.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        bottomSafeArea.topAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
         //variable for bottom anchor of bottomSafeAreaView
-        inputBottomAnchor = bottomSafeArea.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        inputBottomAnchor = bottomSafeArea.bottomAnchor.constraint(equalTo: bottomAnchor)
         inputBottomAnchor!.isActive = true
         
         //Constraints
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         containerView.bottomAnchor.constraint(equalTo: bottomSafeArea.topAnchor).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
@@ -50,7 +74,7 @@ extension ChatLogViewController{
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         sendButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        sendButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier:0.2).isActive = true
+        sendButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier:0.2).isActive = true
         sendButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         
         //Button Contraints

@@ -35,44 +35,42 @@ class ChatLogViewController : UICollectionViewController{
     //to remove listeners
     var listener : ListenerRegistration?
     
-    //move input Bottom view
-    var inputBottomAnchor : NSLayoutConstraint?
-    
-    //MARK : Input Text Views
-    lazy var containerView : UIView = {
-        let container = UIView()
-        container.backgroundColor = UIColor.white
-        return container
-    }()
-    
-    lazy var sendButton : UIButton = {
-        let button = UIButton()
-        button.setTitle("Send", for: .normal)
-        button.setTitleColor(Colors.maroon, for: .normal)
-        button.addTarget(self, action: #selector(handleSendMessage), for: .touchUpInside)
-        return button
-    }()
-    
-    lazy var inputTextField : UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Enter message..."
-        return textField
-    }()
-    
-    lazy var bottomSafeArea : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.white
-        return view
-    }()
+    var chatLogView : ChatLogView!
 
+    fileprivate func setupChatLogView() {
+        chatLogView = ChatLogView()
+        view.addSubview(chatLogView)
+        chatLogView.translatesAutoresizingMaskIntoConstraints = false
+        chatLogView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        chatLogView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        chatLogView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        chatLogView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        chatLogView.sendButton.addTarget(self, action: #selector(handleSendMessage), for: .touchUpInside)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Register Cells
         collectionView.register(ChatMessageCell.self, forCellWithReuseIdentifier: chatCellId)
-        self.collectionView.register(ChatDateSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: chatDateSectionHeaderId)
+        collectionView.register(ChatDateSectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: chatDateSectionHeaderId)
         
         setupInitialUI()
-        setupInputView()
+        setupChatLogView()
         retrieveUserMessages()
+    }
+    
+    func setupInitialUI(){
+        //keyboard setup
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapped))
+        view.addGestureRecognizer(tap)
+        
+        collectionView.backgroundColor = UIColor.groupTableViewBackground
+        collectionView.alwaysBounceVertical = true
+        collectionView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 80, right: 0)
+        collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
+        self.tabBarController?.tabBar.isHidden = true
+        self.tabBarController?.tabBar.isTranslucent = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,7 +132,7 @@ class ChatLogViewController : UICollectionViewController{
                 }
 
                 if let keyboardSize = self.keyboardSize{
-                    self.scrollToBottom(keyboardSize.height + self.containerView.bounds.height)
+                    self.scrollToBottom(keyboardSize.height + self.chatLogView.containerView.bounds.height)
                 }
             })
         }
@@ -166,7 +164,7 @@ class ChatLogViewController : UICollectionViewController{
     }
     
     @objc func handleSendMessage(){
-        guard let text = inputTextField.text, text != "" else {return}
+        guard let text = chatLogView.inputTextField.text, text != "" else {return}
         
         let message = Message()
         message.text = text
@@ -191,7 +189,7 @@ class ChatLogViewController : UICollectionViewController{
         receiverMapRefForSubcollection.setData([message.fromId : 1], merge: true)
         
         //Clear Input + Scroll To Bottom
-        inputTextField.text = nil
+        chatLogView.inputTextField.text = nil
     }
 }
 
@@ -264,7 +262,7 @@ extension ChatLogViewController {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue, let keyboardDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double {
             print("notification: Chat Keyboard will show")
             self.keyboardSize = keyboardSize
-            self.inputBottomAnchor?.constant = -keyboardSize.height
+            self.chatLogView.inputBottomAnchor?.constant = -keyboardSize.height
             UIView.animate(withDuration: keyboardDuration) {
                 self.view.layoutIfNeeded()
             }
@@ -274,7 +272,7 @@ extension ChatLogViewController {
     
     @objc func keyboardWillHide(notification: Notification) {
         if let _ = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue, let keyboardDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double {
-            self.inputBottomAnchor?.constant = 0
+            self.chatLogView.inputBottomAnchor?.constant = 0
             UIView.animate(withDuration: keyboardDuration) {
                 self.view.layoutIfNeeded()
             }
