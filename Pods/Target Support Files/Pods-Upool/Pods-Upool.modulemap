@@ -1,0 +1,6 @@
+framework module Pods_Upool {
+  umbrella header "Pods-Upool-umbrella.h"
+
+  export *
+  module * { export * }
+}
