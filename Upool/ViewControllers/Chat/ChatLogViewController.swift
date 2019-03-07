@@ -37,11 +37,31 @@ class ChatLogViewController : UICollectionViewController{
     
     var chatLogView : ChatLogView!
 
+    lazy var bottomSafeArea : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        return view
+    }()
+    
+    //move input Bottom view
+    var inputBottomAnchor : NSLayoutConstraint?
+    
     fileprivate func setupChatLogView() {
+        //SafeArea View
+        view.addSubview(bottomSafeArea)
+        bottomSafeArea.translatesAutoresizingMaskIntoConstraints = false
+        bottomSafeArea.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        bottomSafeArea.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        bottomSafeArea.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        //variable for bottom anchor of bottomSafeAreaView
+        inputBottomAnchor = bottomSafeArea.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        inputBottomAnchor!.isActive = true
+
+        //ChatLog View
         chatLogView = ChatLogView()
         view.addSubview(chatLogView)
         chatLogView.translatesAutoresizingMaskIntoConstraints = false
-        chatLogView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        chatLogView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         chatLogView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         chatLogView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         chatLogView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
@@ -262,7 +282,7 @@ extension ChatLogViewController {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue, let keyboardDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double {
             print("notification: Chat Keyboard will show")
             self.keyboardSize = keyboardSize
-            self.chatLogView.inputBottomAnchor?.constant = -keyboardSize.height
+            self.inputBottomAnchor?.constant = -keyboardSize.height
             UIView.animate(withDuration: keyboardDuration) {
                 self.view.layoutIfNeeded()
             }
@@ -272,7 +292,7 @@ extension ChatLogViewController {
     
     @objc func keyboardWillHide(notification: Notification) {
         if let _ = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue, let keyboardDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double {
-            self.chatLogView.inputBottomAnchor?.constant = 0
+            self.inputBottomAnchor?.constant = 0
             UIView.animate(withDuration: keyboardDuration) {
                 self.view.layoutIfNeeded()
             }

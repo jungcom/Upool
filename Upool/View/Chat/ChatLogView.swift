@@ -10,9 +10,6 @@ import UIKit
 
 class ChatLogView : UIView{
     
-    //move input Bottom view
-    var inputBottomAnchor : NSLayoutConstraint?
-    
     //MARK : Input Text Views
     lazy var containerView : UIView = {
         let container = UIView()
@@ -50,25 +47,15 @@ class ChatLogView : UIView{
     func setupInputView(){
         
         addSubview(containerView)
-        addSubview(bottomSafeArea)
         containerView.addSubview(sendButton)
         containerView.addSubview(inputTextField)
-        
-        //SafeArea View
-        bottomSafeArea.translatesAutoresizingMaskIntoConstraints = false
-        bottomSafeArea.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        bottomSafeArea.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        bottomSafeArea.topAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
-        //variable for bottom anchor of bottomSafeAreaView
-        inputBottomAnchor = bottomSafeArea.bottomAnchor.constraint(equalTo: bottomAnchor)
-        inputBottomAnchor!.isActive = true
         
         //Constraints
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         containerView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: bottomSafeArea.topAnchor).isActive = true
-        containerView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        containerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         
         //Button Contraints
         sendButton.translatesAutoresizingMaskIntoConstraints = false
