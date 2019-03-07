@@ -29,10 +29,9 @@ class ChatLogViewController : UICollectionViewController{
         }
     }
     
-    //keyboard height
     var keyboardSize : CGRect?
     
-    //to remove listeners
+    //to remove listener for the chat
     var listener : ListenerRegistration?
     
     var chatLogView : ChatLogView!
@@ -47,7 +46,7 @@ class ChatLogViewController : UICollectionViewController{
     var inputBottomAnchor : NSLayoutConstraint?
     
     fileprivate func setupChatLogView() {
-        //SafeArea View
+        //BottomSafeArea View
         view.addSubview(bottomSafeArea)
         bottomSafeArea.translatesAutoresizingMaskIntoConstraints = false
         bottomSafeArea.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
