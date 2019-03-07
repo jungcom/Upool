@@ -64,7 +64,7 @@ class ChatLogViewController : UICollectionViewController{
         chatLogView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         chatLogView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         chatLogView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        chatLogView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        chatLogView.bottomAnchor.constraint(equalTo: bottomSafeArea.topAnchor).isActive = true
         
         chatLogView.sendButton.addTarget(self, action: #selector(handleSendMessage), for: .touchUpInside)
     }

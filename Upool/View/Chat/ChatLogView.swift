@@ -38,6 +38,7 @@ class ChatLogView : UIView{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupInputView()
     }
     
     required init?(coder aDecoder: NSCoder) {
