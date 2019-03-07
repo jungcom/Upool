@@ -58,7 +58,6 @@ class MyStatusViewController: UICollectionViewController  {
         // Do any additional setup after loading the view.
         setupNavBar()
         setupSegmentControlAndCollectionView()
-        //addRefresher()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -163,19 +162,6 @@ class MyStatusViewController: UICollectionViewController  {
             }
         }
     }
-//    func addRefresher(){
-//        self.refresher = UIRefreshControl()
-//        self.refresher.tintColor = UIColor.gray
-//        self.refresher.addTarget(self, action: #selector(retrieveMyRidePosts), for: .valueChanged)
-//        self.refresher.addTarget(self, action: #selector(retrieveMyRequestedRidePosts), for: .valueChanged)
-//        self.collectionView!.addSubview(refresher)
-//    }
-//
-//    func endRefresher(){
-//        if let refresher = self.refresher{
-//            refresher.endRefreshing()
-//        }
-//    }
 }
 
 // MARK: UICollectionViewDataSource

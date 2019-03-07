@@ -34,7 +34,6 @@ extension MyStatusDetailViewController{
         passengerStatusLabel.translatesAutoresizingMaskIntoConstraints = false
         passengerStatusLabel.topAnchor.constraint(equalTo: topPassengerDetailView.topAnchor, constant: 20).isActive = true
         passengerStatusLabel.centerXAnchor.constraint(equalTo: topPassengerDetailView.centerXAnchor).isActive = true
-        //passengerStatusLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
         
     }
     
