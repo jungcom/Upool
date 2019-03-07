@@ -50,7 +50,6 @@ class CreateRideViewController: UIViewController {
     let dateFormatter : DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd, yyyy"
-        //formatter.timeZone = TimeZone(abbreviation: "GMT-0:00")
         return formatter
     }()
     
@@ -351,5 +350,4 @@ class CreateRideViewController: UIViewController {
             }
         }
     }
-    
 }

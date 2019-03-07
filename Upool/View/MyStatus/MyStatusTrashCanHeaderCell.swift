@@ -36,8 +36,8 @@ class MyStatusTrashCanHeaderCell : UICollectionViewCell {
         deleteRideButton.translatesAutoresizingMaskIntoConstraints = false
         deleteRideButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: frame.width*(-0.05)).isActive = true
         deleteRideButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        deleteRideButton.widthAnchor.constraint(equalToConstant: 15).isActive = true
-        deleteRideButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        deleteRideButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        deleteRideButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     @objc func deleteButtonTappedFunc(){

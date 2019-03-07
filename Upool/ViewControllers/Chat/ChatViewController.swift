@@ -30,14 +30,24 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
         view.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
         
-        //register cell
-        print("Chat did load")
+        //remove all messages
         messages.removeAll()
         messagesDictionary.removeAll()
+        
+        //register cell
         tableView.register(ChatUserCell.self, forCellReuseIdentifier: cellId)
+        
         setupNavBar()
         observeUserMessages()
         
+    }
+    
+    func setupNavBar() {
+        let image: UIImage = UIImage(named: "UPoolLogo")!
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = image
+        navigationItem.titleView = imageView
     }
     
     func observeUserMessages(){
@@ -69,15 +79,16 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
                     
                     //listen for changes
                     snapshot.documentChanges.forEach { diff in
+                        //If the data is already there, Don't retrieve it again
                         if (diff.type == .modified) {
                             print("Modified message: \(diff.document.data())")
                         } else if (diff.type == .removed) {
                             print("Removed message: \(diff.document.data())")
                         } else {
-                            //start thread
+                            //start semaphore flag
                             group.enter()
                             
-                            //If the data is already there, Don't retrieve it again
+                            //if there are new messages, add the messages
                             let messageID = diff.document.documentID
                             self.db.collection("messages").document(messageID).getDocument(completion: { (messageSnapShot, error) in
                                 guard let messageSnapShot = messageSnapShot, let data = messageSnapShot.data() else {
@@ -100,7 +111,7 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
                             })
                         }
                     }
-//                    When all threads are finished, Group by user and update tableview
+                    //When all threads are finished, Group by user and update tableview
                     group.notify(queue: .main, execute: {
                         self.messages = Array(self.messagesDictionary.values)
                         self.messages.sort(by: { (m1, m2) -> Bool in
