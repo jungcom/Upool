@@ -30,8 +30,6 @@ extension OfferedRidesCollectionViewController{
         collectionView.bringSubviewToFront(addRideButton)
         
         addRideButton.translatesAutoresizingMaskIntoConstraints = false
-        //addRideButton.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor).isActive = true
-//        addRideButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         addRideButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         addRideButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         addRideButton.heightAnchor.constraint(equalToConstant: 50).isActive = true

@@ -76,6 +76,16 @@ class SignUpView : UIView{
         return label
     }()
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setStackViews()
+        setConstraints()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setStackViews(){
         //let emptyView = UIView()
         let termsStackView = UIStackView(arrangedSubviews: [agreeWithTermsLabel, termsAndConditionsButton])

@@ -18,6 +18,7 @@ class SignUpViewController: UIViewController {
         return Auth.auth().currentUser
     }
     
+    //Setup View
     let signUpView : SignUpView = {
         let signUpView = SignUpView()
         signUpView.signUpButton.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
@@ -30,6 +31,7 @@ class SignUpViewController: UIViewController {
     override func loadView() {
         view = signUpView
     }
+    
     //MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +48,10 @@ class SignUpViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func handleTapped(){
+        view.endEditing(true)
     }
     
     @objc func handleCancel(){
