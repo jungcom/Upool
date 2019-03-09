@@ -117,7 +117,7 @@ class SignUpEmailViewController: UIViewController {
 //        }
         
         let signUpVC = SignUpViewController()
-        signUpVC.email = email
+        signUpVC.signUpView.email = email
         self.navigationController?.pushViewController(signUpVC, animated: true)
     }
     
