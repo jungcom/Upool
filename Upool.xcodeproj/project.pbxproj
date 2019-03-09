@@ -14,7 +14,6 @@
 		4E431FA721FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FA621FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift */; };
 		4E431FA921FE90810081CA52 /* CreateRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FA821FE90810081CA52 /* CreateRideViewController.swift */; };
 		4E431FAB21FE94AC0081CA52 /* RideDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */; };
-		4E431FAD21FEA1F80081CA52 /* RideDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FAC21FEA1F80081CA52 /* RideDetail.swift */; };
 		4E49BFD92208C140002FB09A /* EmailSentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E49BFD82208C140002FB09A /* EmailSentViewController.swift */; };
 		4E49BFDB2208C9F8002FB09A /* RideRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E49BFDA2208C9F8002FB09A /* RideRequest.swift */; };
 		4E49BFDD2208E363002FB09A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E49BFDC2208E363002FB09A /* LaunchScreen.storyboard */; };
@@ -51,6 +50,7 @@
 		4EC0B1E92230923300EE8A20 /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1E82230923300EE8A20 /* ChatLogView.swift */; };
 		4EC0B1EB223314CC00EE8A20 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1EA223314CC00EE8A20 /* LoginView.swift */; };
 		4EC0B1ED2233642D00EE8A20 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1EC2233642D00EE8A20 /* SignUpView.swift */; };
+		4EC0B1EF223368D100EE8A20 /* RideDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1EE223368D100EE8A20 /* RideDetailView.swift */; };
 		4EE58FA62204DB0900918778 /* RidePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA52204DB0900918778 /* RidePost.swift */; };
 		4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA722052F6900918778 /* Encodable+Decodable.swift */; };
 		4EE58FAA220674DE00918778 /* UPoolUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA9220674DE00918778 /* UPoolUser.swift */; };
@@ -72,7 +72,6 @@
 		4E431FA621FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedRidesSectionHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		4E431FA821FE90810081CA52 /* CreateRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideViewController.swift; sourceTree = "<group>"; };
 		4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetailViewController.swift; sourceTree = "<group>"; };
-		4E431FAC21FEA1F80081CA52 /* RideDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetail.swift; sourceTree = "<group>"; };
 		4E49BFD82208C140002FB09A /* EmailSentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSentViewController.swift; sourceTree = "<group>"; };
 		4E49BFDA2208C9F8002FB09A /* RideRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideRequest.swift; sourceTree = "<group>"; };
 		4E49BFDC2208E363002FB09A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -110,6 +109,7 @@
 		4EC0B1E82230923300EE8A20 /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
 		4EC0B1EA223314CC00EE8A20 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4EC0B1EC2233642D00EE8A20 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		4EC0B1EE223368D100EE8A20 /* RideDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetailView.swift; sourceTree = "<group>"; };
 		4EE58FA52204DB0900918778 /* RidePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidePost.swift; sourceTree = "<group>"; };
 		4EE58FA722052F6900918778 /* Encodable+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Decodable.swift"; sourceTree = "<group>"; };
 		4EE58FA9220674DE00918778 /* UPoolUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPoolUser.swift; sourceTree = "<group>"; };
@@ -190,7 +190,7 @@
 				4E8DD4FE2203FF760077D85C /* OfferedRides.swift */,
 				4EA3D8A821FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift */,
 				4E431FA621FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift */,
-				4E431FAC21FEA1F80081CA52 /* RideDetail.swift */,
+				4EC0B1EE223368D100EE8A20 /* RideDetailView.swift */,
 				4E8B4C7022012183002EC784 /* CreateRide */,
 			);
 			path = OfferedRides;
@@ -587,7 +587,6 @@
 				4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */,
 				4E8DD4FF2203FF760077D85C /* OfferedRides.swift in Sources */,
 				4E6E604D221C91D6001CFBD8 /* PendingPassengerHeaderCell.swift in Sources */,
-				4E431FAD21FEA1F80081CA52 /* RideDetail.swift in Sources */,
 				4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */,
 				4E5F9E22220BF8060037A10C /* ChatLogViewController.swift in Sources */,
 				4E8B4C7622023243002EC784 /* CreateRideTimePicker.swift in Sources */,
@@ -606,6 +605,7 @@
 				4E49BFDB2208C9F8002FB09A /* RideRequest.swift in Sources */,
 				4EEB91F421F773630079209B /* UIColor.swift in Sources */,
 				4E6E6044221B22D6001CFBD8 /* MyStatusDetailViewController.swift in Sources */,
+				4EC0B1EF223368D100EE8A20 /* RideDetailView.swift in Sources */,
 				4E6E604B221C8759001CFBD8 /* PendingPassengerCollectionViewCell.swift in Sources */,
 				4E8DD4FC2203B1190077D85C /* CreateRideProtocolsForPassingData.swift in Sources */,
 				4EEB91F021F772770079209B /* Constants.swift in Sources */,

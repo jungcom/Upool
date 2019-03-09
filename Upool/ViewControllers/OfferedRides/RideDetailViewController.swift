@@ -22,159 +22,34 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
         didSet{
             if let url = driver?.profileImageUrl{
                 print("Image url is \(url)")
-                profileImageView.loadImageUsingCacheWithUrlString(url)
+                rideDetailView.profileImageView.loadImageUsingCacheWithUrlString(url)
             }
         }
     }
     var currentUser : UPoolUser!
     
-    let scrollView = UIScrollView()
-    
-    var topContainer = UIView()
-    
-    // First Top View
-    let firstTopView = UIView()
-    
-    lazy var dateLabel : UILabel = {
-        let label = UILabel()
-        label.text = ridePost.dateString() + " at " + ridePost.timeString()
-        label.font = UIFont(name: Fonts.futuraMedium, size: 18)
-        return label
+    //RideDetailView
+    let rideDetailView : RideDetailView = {
+        let rideDetailView = RideDetailView()
+        rideDetailView.messageButton.addTarget(self, action: #selector(handleMessage), for: .touchUpInside)
+        rideDetailView.joinRideButton.addTarget(self, action: #selector(handleJoinRide), for: .touchUpInside)
+        return rideDetailView
     }()
     
-    lazy var departureCityLabel : UILabel = {
-        let label = UILabel()
-        label.text = ridePost.departureCity!
-        label.font = UIFont(name: Fonts.futura, size: 18)
-        label.textColor = Colors.maroon
-        return label
-    }()
-    
-    let rightArrowIconImageView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: Images.rightArrow)
-        imageView.tintColor = Colors.maroon
-        return imageView
-    }()
-    
-    lazy var destinationCityLabel : UILabel = {
-        let label = UILabel()
-        label.text = ridePost.arrivalCity!
-        label.font = UIFont(name: Fonts.futura, size: 18)
-        label.textColor = Colors.maroon
-        return label
-    }()
-    
-    var locationStackView : UIStackView!
-    
-    lazy var passengerSeatsLabel : UILabel = {
-        let label = UILabel()
-        label.text = "Passengers  \(ridePost.currentPassengers!)/\(ridePost.maxPassengers!)"
-        label.textColor = UIColor.gray
-        label.textAlignment = .right
-        label.font = UIFont.systemFont(ofSize: 13)
-        return label
-    }()
-    
-    //Second Top View
-    let secondTopView = UIView()
-    
-    lazy var profileImageView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = 7
-        imageView.backgroundColor = UIColor.gray
-        imageView.tintColor = UIColor.gray
-        imageView.image = UIImage(named: "ProfileImagePlaceholder")
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
-    
-    let nameLabel : UILabel = {
-        let label = UILabel()
-        label.text = "Robinson Crusoe"
-        label.font = UIFont(name: Fonts.futura, size: 14)
-        label.textColor = UIColor.gray
-        return label
-    }()
-    
-    let driverInfoLabel : UILabel = {
-        let label = UILabel()
-        label.text = "\u{2022}Major in Computer Science"
-        label.font = UIFont(name: Fonts.futura, size: 12)
-        label.textColor = UIColor.gray
-        return label
-    }()
-    
-    lazy var priceLabel : UILabel = {
-        let label = UILabel()
-        label.text = "$\(ridePost.price!)"
-        label.font = UIFont(name: Fonts.futura, size: 18)
-        label.textColor = Colors.moneyGreen
-        return label
-    }()
-    
-    //Third Top View
-    let thirdTopView = UIView()
-    
-    let pickUpLabel : UILabel = {
-        let label = UILabel()
-        label.text = "Pickup Details"
-        label.font = UIFont(name: Fonts.futura, size: 17)
-        label.textColor = UIColor.gray
-        return label
-    }()
-    
-    lazy var pickupDetailTextView : UITextView = {
-        let label = UITextView()
-        label.text = (ridePost.pickUpDetails == "") ? "None" : ridePost.pickUpDetails
-        label.font = UIFont(name: Fonts.futura, size: 14)
-        label.textColor = UIColor.gray
-        label.isEditable = false
-        label.isScrollEnabled = false
-        return label
-    }()
-    
-    //Fourth Top view
-    let buttonView = UIView()
-    
-    var buttonStackView : UIStackView!
-    
-    let messageButton : UIButton = {
-        let button = UIButton()
-        button.setTitle("MESSAGE", for: .normal)
-        button.setTitleColor(Colors.maroon, for: .normal)
-        button.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 18)
-        button.backgroundColor = UIColor.clear
-        button.layer.masksToBounds = true
-        button.layer.borderColor = Colors.maroon.cgColor
-        button.layer.borderWidth = 1
-        button.layer.cornerRadius = 5
-        button.addTarget(self, action: #selector(handleMessage), for: .touchUpInside)
-        return button
-    }()
-    
-    let joinRideButton : UIButton = {
-        let button = UIButton()
-        button.setTitle("JOIN RIDE", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 17)
-        button.backgroundColor = Colors.maroon
-        button.layer.masksToBounds = true
-        button.layer.cornerRadius = 5
-        button.addTarget(self, action: #selector(handleJoinRide), for: .touchUpInside)
-        return button
-    }()
-    
-    //Bottom Container
-    
-    let bottomContainer = UIView()
+    override func loadView() {
+        rideDetailView.dateLabel.text = ridePost.dateString() + " at " + ridePost.timeString()
+        rideDetailView.departureCityLabel.text = ridePost.departureCity!
+        rideDetailView.destinationCityLabel.text = ridePost.arrivalCity!
+        rideDetailView.passengerSeatsLabel.text = "Passengers  \(ridePost.currentPassengers!)/\(ridePost.maxPassengers!)"
+        rideDetailView.priceLabel.text = "$\(ridePost.price!)"
+        rideDetailView.pickupDetailTextView.text = (ridePost.pickUpDetails == "") ? "None" : ridePost.pickUpDetails
+        view = rideDetailView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationItem.title = "Ride Details"
         // Do any additional setup after loading the view.
-        setupUI()
         retrieveCurrentUser()
         retrieveDriver()
     }
@@ -210,7 +85,7 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
 //        }
         let alert = UIAlertController(title: "Join Ride?", message: "Are you sure you want to join this ride?", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
-            self.joinRideButton.requestedOrJoined(status: Status.pending)
+            self.rideDetailView.joinRideButton.requestedOrJoined(status: Status.pending)
             self.sendRequestToDriver()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -239,7 +114,7 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
             } else {
                 if let dictionary = snapShot?.data(){
                     self.driver = UPoolUser(dictionary: dictionary)
-                    self.nameLabel.text = "\(self.driver?.firstName ?? "") \(self.driver?.lastName ?? "")"
+                    self.rideDetailView.nameLabel.text = "\(self.driver?.firstName ?? "") \(self.driver?.lastName ?? "")"
                     //Check to see if a request exist for this ridePost and user
                     self.checkIfRequestExists()
                 } else {
@@ -263,11 +138,11 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
                     if let request = RideRequest(dictionary: document.data()){
                         //Set the request button depending on the status
                         if request.requestStatus == 0{
-                            self.joinRideButton.requestedOrJoined(status: Status.pending)
+                            self.rideDetailView.joinRideButton.requestedOrJoined(status: Status.pending)
                         } else if request.requestStatus >= 1{
-                            self.joinRideButton.requestedOrJoined(status: Status.confirmed)
+                            self.rideDetailView.joinRideButton.requestedOrJoined(status: Status.confirmed)
                         } else {
-                            self.joinRideButton.requestedOrJoined(status: Status.notAccepted)
+                            self.rideDetailView.joinRideButton.requestedOrJoined(status: Status.notAccepted)
                         }
                     }
                 }
