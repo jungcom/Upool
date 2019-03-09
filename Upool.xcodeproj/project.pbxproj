@@ -50,6 +50,7 @@
 		4EC0B1E3222D859C00EE8A20 /* ChatDateSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1E2222D859B00EE8A20 /* ChatDateSectionHeader.swift */; };
 		4EC0B1E52230864500EE8A20 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1E42230864500EE8A20 /* ProfileView.swift */; };
 		4EC0B1E92230923300EE8A20 /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1E82230923300EE8A20 /* ChatLogView.swift */; };
+		4EC0B1EB223314CC00EE8A20 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1EA223314CC00EE8A20 /* LoginView.swift */; };
 		4EE58FA62204DB0900918778 /* RidePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA52204DB0900918778 /* RidePost.swift */; };
 		4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA722052F6900918778 /* Encodable+Decodable.swift */; };
 		4EE58FAA220674DE00918778 /* UPoolUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA9220674DE00918778 /* UPoolUser.swift */; };
@@ -60,7 +61,6 @@
 		4EEB91EE21F76CA50079209B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EEB91ED21F76CA50079209B /* GoogleService-Info.plist */; };
 		4EEB91F021F772770079209B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91EF21F772770079209B /* Constants.swift */; };
 		4EEB91F421F773630079209B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91F321F773630079209B /* UIColor.swift */; };
-		4EEB91F821F7A6AA0079209B /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91F721F7A6AA0079209B /* Login.swift */; };
 		FCD509AA7C5BACDF9B722203 /* Pods_Upool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F908952193F9A94F806566E5 /* Pods_Upool.framework */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +109,7 @@
 		4EC0B1E2222D859B00EE8A20 /* ChatDateSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDateSectionHeader.swift; sourceTree = "<group>"; };
 		4EC0B1E42230864500EE8A20 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		4EC0B1E82230923300EE8A20 /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
+		4EC0B1EA223314CC00EE8A20 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4EE58FA52204DB0900918778 /* RidePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidePost.swift; sourceTree = "<group>"; };
 		4EE58FA722052F6900918778 /* Encodable+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Decodable.swift"; sourceTree = "<group>"; };
 		4EE58FA9220674DE00918778 /* UPoolUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPoolUser.swift; sourceTree = "<group>"; };
@@ -121,7 +122,6 @@
 		4EEB91ED21F76CA50079209B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4EEB91EF21F772770079209B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4EEB91F321F773630079209B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		4EEB91F721F7A6AA0079209B /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		991ABBFE84A7A90833986D7F /* Pods-Upool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Upool.release.xcconfig"; path = "Pods/Target Support Files/Pods-Upool/Pods-Upool.release.xcconfig"; sourceTree = "<group>"; };
 		DA832B2CAE8C7D81DA9D837A /* Pods-Upool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Upool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Upool/Pods-Upool.debug.xcconfig"; sourceTree = "<group>"; };
 		F908952193F9A94F806566E5 /* Pods_Upool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Upool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,7 +171,7 @@
 		4E5F9E23220C00D90037A10C /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				4EEB91F721F7A6AA0079209B /* Login.swift */,
+				4EC0B1EA223314CC00EE8A20 /* LoginView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -599,7 +599,6 @@
 				4E431FA721FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift in Sources */,
 				4EC0B1E3222D859C00EE8A20 /* ChatDateSectionHeader.swift in Sources */,
 				4EE58FA62204DB0900918778 /* RidePost.swift in Sources */,
-				4EEB91F821F7A6AA0079209B /* Login.swift in Sources */,
 				4EA3D8A621FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift in Sources */,
 				4E431FAB21FE94AC0081CA52 /* RideDetailViewController.swift in Sources */,
 				4EAE28F121FF5455006966E4 /* UIView+UIButtons+UITextField.swift in Sources */,
@@ -613,6 +612,7 @@
 				4E0CD8CE220CA20C00256906 /* ChatUserCell.swift in Sources */,
 				4E0CD8D0220D4CE300256906 /* ChatMessageCell.swift in Sources */,
 				4E8B4C722201219B002EC784 /* CreateRideCalendar.swift in Sources */,
+				4EC0B1EB223314CC00EE8A20 /* LoginView.swift in Sources */,
 				4EC0B1DE221F409800EE8A20 /* SignUpEmailViewController.swift in Sources */,
 				4EEB91DC21F7679F0079209B /* AppDelegate.swift in Sources */,
 				4EC0B1E92230923300EE8A20 /* ChatLogView.swift in Sources */,
