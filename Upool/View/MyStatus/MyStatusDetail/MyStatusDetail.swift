@@ -22,6 +22,7 @@ extension MyStatusDetailViewController{
         //add subviews
         view.addSubview(topPassengerDetailView)
         topPassengerDetailView.addSubview(passengerStatusLabel)
+        UIView.dropShadow(view: topPassengerDetailView)
         
         //The whole top ui view
         topPassengerDetailView.translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +40,7 @@ extension MyStatusDetailViewController{
     
     func setupAcceptedPassengerCollectionView(){
         topPassengerDetailView.addSubview(acceptedPassengersCollectionView)
-        
+
         acceptedPassengersCollectionView.translatesAutoresizingMaskIntoConstraints = false
         acceptedPassengersCollectionView.bottomAnchor.constraint(equalTo: topPassengerDetailView.bottomAnchor, constant: -20).isActive = true
         acceptedPassengersCollectionView.leadingAnchor.constraint(equalTo: topPassengerDetailView.leadingAnchor, constant: 12).isActive = true
@@ -51,7 +52,7 @@ extension MyStatusDetailViewController{
         view.addSubview(pendingPassengersCollectionView)
         
         pendingPassengersCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        pendingPassengersCollectionView.topAnchor.constraint(equalTo: topPassengerDetailView.bottomAnchor).isActive = true
+        pendingPassengersCollectionView.topAnchor.constraint(equalTo: topPassengerDetailView.bottomAnchor, constant:10).isActive = true
         pendingPassengersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         pendingPassengersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         pendingPassengersCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
