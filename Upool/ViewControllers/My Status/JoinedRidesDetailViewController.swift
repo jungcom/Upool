@@ -10,11 +10,7 @@ import UIKit
 
 class JoinedRidesDetailViewController: UIViewController{
     
-    var ridePost : RidePost? {
-        didSet{
-            
-        }
-    }
+    var ridePost : RidePost!
     
     let joinedRidesDetailView : JoinedRidesDetailView = {
         let view = JoinedRidesDetailView()
@@ -22,6 +18,11 @@ class JoinedRidesDetailViewController: UIViewController{
     }()
     
     override func loadView() {
+        joinedRidesDetailView.dateLabel.text = ridePost.dateString() + " at " + ridePost.timeString()
+        joinedRidesDetailView.departureCityLabel.text = ridePost.departureCity!
+        joinedRidesDetailView.destinationCityLabel.text = ridePost.arrivalCity!
+        joinedRidesDetailView.priceLabel.text = "$\(ridePost.price!)"
+//        joinedRidesDetailView.pickupDetailTextView.text = (ridePost.pickUpDetails == "") ? "None" : ridePost.pickUpDetails
         view = joinedRidesDetailView
     }
     override func viewDidLoad() {
