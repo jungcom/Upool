@@ -27,6 +27,7 @@ class MyStatusViewController: UICollectionViewController  {
     var myRidePosts = [RidePost]()
     
     var myRequests = [RideRequest]()
+    var joinedAndPendingRidePosts = [[RidePost]]()
     var joinedRidePosts = [RidePost]()
     var pendingRidePosts = [RidePost]()
     
@@ -209,6 +210,10 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
         if isMyRides{
             let detailVC = MyStatusDetailViewController()
             detailVC.ridePost = myRidePosts[indexPath.section]
+            navigationController?.pushViewController(detailVC, animated: true)
+        } else {
+            let detailVC = JoinedRidesDetailViewController()
+            //detailVC.ridePost = pendingRidePosts[indexPath.section]
             navigationController?.pushViewController(detailVC, animated: true)
         }
     }
