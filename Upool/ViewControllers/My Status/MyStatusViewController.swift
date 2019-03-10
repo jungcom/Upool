@@ -241,7 +241,13 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
         } else {
             print("Section : \(indexPath.section)")
             let detailVC = JoinedRidesDetailViewController()
-            detailVC.ridePost = pendingRidePosts[indexPath.section]
+            if indexPath.section == 0{
+                detailVC.ridePost = joinedRidePosts[indexPath.row]
+            } else if indexPath.section == 1{
+                detailVC.ridePost = pendingRidePosts[indexPath.row]
+            } else {
+                detailVC.ridePost = declinedRidePosts[indexPath.row]
+            }
             navigationController?.pushViewController(detailVC, animated: true)
         }
     }
