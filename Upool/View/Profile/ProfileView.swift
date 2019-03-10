@@ -146,6 +146,15 @@ class ProfileView: UIView{
         return userInfo
     }()
     
+    //Settings Container
+    
+    let settingsContainerView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        UIView.dropShadow(view: view)
+        return view
+    }()
+    
     override init(frame: CGRect){
         super.init(frame: frame)
         setupScrollBar()
