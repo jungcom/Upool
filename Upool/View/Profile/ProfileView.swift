@@ -150,15 +150,34 @@ class ProfileView: UIView{
     
     let settingsContainerView : UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.white
-        UIView.dropShadow(view: view)
         return view
+    }()
+    
+    let settingsLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Settings"
+        label.textColor = UIColor.gray
+        label.font = UIFont.init(name: Fonts.helvetica, size: 20)
+        return label
+    }()
+    
+    let settingsTableView : UITableView = {
+        let table = UITableView()
+        table.backgroundColor = UIColor.white
+        table.isScrollEnabled = true
+        table.allowsSelection = true
+        table.allowsMultipleSelection = false
+        table.isUserInteractionEnabled = true
+        table.separatorColor = UIColor.lightGray
+        UIView.dropShadow(view: table)
+        return table
     }()
     
     
     
     override init(frame: CGRect){
         super.init(frame: frame)
+        backgroundColor = UIColor.groupTableViewBackground
         setupScrollBar()
         setupProfileImageAndNameContainer()
         setupAboutContainer()
@@ -254,12 +273,27 @@ class ProfileView: UIView{
     }
     
     func setupSettingsView(){
-        addSubview(settingsContainerView)
+        scrollView.addSubview(settingsContainerView)
+        settingsContainerView.addSubview(settingsLabel)
+        settingsContainerView.addSubview(settingsTableView)
         
         settingsContainerView.translatesAutoresizingMaskIntoConstraints = false
-        settingsContainerView.topAnchor.constraint(equalTo: userInfoUIView.bottomAnchor, constant:10).isActive = true
+        settingsContainerView.topAnchor.constraint(equalTo: userInfoUIView.bottomAnchor, constant:30).isActive = true
         settingsContainerView.leadingAnchor.constraint(equalTo: userInfoUIView.leadingAnchor).isActive = true
         settingsContainerView.trailingAnchor.constraint(equalTo: userInfoUIView.trailingAnchor).isActive = true
-        settingsContainerView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3).isActive = true
+        settingsContainerView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4).isActive = true
+        
+        //SettingLabel View
+        settingsLabel.translatesAutoresizingMaskIntoConstraints = false
+        settingsLabel.topAnchor.constraint(equalTo: settingsContainerView.topAnchor).isActive = true
+        settingsLabel.leadingAnchor.constraint(equalTo: settingsContainerView.leadingAnchor).isActive = true
+        settingsLabel.heightAnchor.constraint(equalTo: settingsContainerView.heightAnchor, multiplier: 0.2).isActive = true
+        
+        //settingsTable View Constraints
+        settingsTableView.translatesAutoresizingMaskIntoConstraints = false
+        settingsTableView.topAnchor.constraint(equalTo: settingsLabel.bottomAnchor, constant:10).isActive = true
+        settingsTableView.leadingAnchor.constraint(equalTo: settingsContainerView.leadingAnchor).isActive = true
+        settingsTableView.trailingAnchor.constraint(equalTo: settingsContainerView.trailingAnchor).isActive = true
+        settingsTableView.heightAnchor.constraint(equalTo: settingsContainerView.heightAnchor, multiplier: 0.8).isActive = true
     }
 }

@@ -52,6 +52,7 @@
 		4EC0B1EF223368D100EE8A20 /* RideDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1EE223368D100EE8A20 /* RideDetailView.swift */; };
 		4EC0B1F222356FF700EE8A20 /* JoinedRidesDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1F122356FF700EE8A20 /* JoinedRidesDetailView.swift */; };
 		4EC0B1F42235705600EE8A20 /* JoinedRidesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1F32235705600EE8A20 /* JoinedRidesDetailViewController.swift */; };
+		4EC0B2162236FC1E00EE8A20 /* ProfileViewControllerImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B2152236FC1E00EE8A20 /* ProfileViewControllerImagePicker.swift */; };
 		4EE58FA62204DB0900918778 /* RidePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA52204DB0900918778 /* RidePost.swift */; };
 		4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA722052F6900918778 /* Encodable+Decodable.swift */; };
 		4EE58FAA220674DE00918778 /* UPoolUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA9220674DE00918778 /* UPoolUser.swift */; };
@@ -112,6 +113,7 @@
 		4EC0B1EE223368D100EE8A20 /* RideDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetailView.swift; sourceTree = "<group>"; };
 		4EC0B1F122356FF700EE8A20 /* JoinedRidesDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedRidesDetailView.swift; sourceTree = "<group>"; };
 		4EC0B1F32235705600EE8A20 /* JoinedRidesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedRidesDetailViewController.swift; sourceTree = "<group>"; };
+		4EC0B2152236FC1E00EE8A20 /* ProfileViewControllerImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerImagePicker.swift; sourceTree = "<group>"; };
 		4EE58FA52204DB0900918778 /* RidePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidePost.swift; sourceTree = "<group>"; };
 		4EE58FA722052F6900918778 /* Encodable+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Decodable.swift"; sourceTree = "<group>"; };
 		4EE58FA9220674DE00918778 /* UPoolUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPoolUser.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				4E5F9E1B220B85120037A10C /* ProfileViewController.swift */,
+				4EC0B2152236FC1E00EE8A20 /* ProfileViewControllerImagePicker.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -613,6 +616,7 @@
 				4EA3D8A621FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift in Sources */,
 				4E431FAB21FE94AC0081CA52 /* RideDetailViewController.swift in Sources */,
 				4EAE28F121FF5455006966E4 /* UIView+UIButtons+UITextField.swift in Sources */,
+				4EC0B2162236FC1E00EE8A20 /* ProfileViewControllerImagePicker.swift in Sources */,
 				4E49BFDB2208C9F8002FB09A /* RideRequest.swift in Sources */,
 				4EEB91F421F773630079209B /* UIColor.swift in Sources */,
 				4E6E6044221B22D6001CFBD8 /* MyStatusDetailViewController.swift in Sources */,

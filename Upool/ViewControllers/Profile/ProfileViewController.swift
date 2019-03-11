@@ -10,10 +10,11 @@ import UIKit
 import Firebase
 import NVActivityIndicatorView
 
+private let profileTableViewCellId = "profileTableViewCell"
 class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
 
     let db = Firestore.firestore()
-    private var authUser : User?{
+    var authUser : User?{
         return Auth.auth().currentUser
     }
     
@@ -46,10 +47,9 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
             }
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
         // Do any additional setup after loading the view.
         setupNavBar()
         setupProfileView()
@@ -80,6 +80,12 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         
         profileView.profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleImageSelection)))
         profileView.pencilEditButton.addTarget(self, action: #selector(handlePencilEdit), for: .touchUpInside)
+        
+        //register Cell AND Set delegates and datasource
+        profileView.settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: profileTableViewCellId)
+        profileView.settingsTableView.delegate = self
+        profileView.settingsTableView.dataSource = self
+        
     }
     
     func retrieveUserData(){
@@ -153,73 +159,41 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
     }
 }
 
-// MARK : ImagePicker Protocol
-extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-    @objc func handleImageSelection(){
-        startActivity()
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = true
-        present(picker, animated: true, completion: {
-            self.stopAnimating()
-        })
+extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        startActivity()
-        var selectedImage : UIImage?
-        
-        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
-            selectedImage = editedImage
-        } else {
-            selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: profileTableViewCellId, for: indexPath)
+        cell.textLabel?.font = UIFont(name: Fonts.helvetica, size: 18)
+        cell.textLabel?.textColor = UIColor.gray
+        cell.accessoryView = UIImageView(image: UIImage(named: "SmallRightArrow"))
+        cell.accessoryView?.tintColor = Colors.maroon
+        switch indexPath.row {
+        case 0:
+            cell.textLabel?.text = "About"
+        case 1:
+            cell.textLabel?.text = "Help"
+        case 2:
+            cell.textLabel?.text = "Terms & Conditions"
+        case 3:
+            cell.textLabel?.text = "Contact"
+            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude);
+        default: break
         }
-        
-        if let selectedImage = selectedImage{
-            profileView.profileImageView.image = selectedImage
-        }
-        
-        //save image to firebase storage
-        saveProfileImageToFirebaseStorage()
-        dismiss(animated: true, completion: {
-            self.stopAnimating()
-        })
+        return cell
     }
     
-    func saveProfileImageToFirebaseStorage(){
-        guard let id = authUser?.uid else {return}
-        
-        let storage = Storage.storage().reference().child("profileImages").child(id)
-        if let profileImage = self.profileView.profileImageView.image, let uploadData = profileImage.jpegData(compressionQuality: 0.05) {
-            storage.putData(uploadData, metadata: nil) { (metadata, error) in
-                if let error = error{
-                    print(error.localizedDescription)
-                    return
-                }
-                
-                storage.downloadURL(completion: { (url, error) in
-                    if error != nil {
-                        print(error?.localizedDescription ?? "")
-                        return
-                    }
-                    guard let url = url else { return }
-                    let urlString = url.absoluteString
-                    self.updateUserProfileImageUrl(id, urlString)
-                })
-            }
-        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Settings Selected in : \(indexPath.row)")
     }
     
-    func updateUserProfileImageUrl(_ uid : String, _ url : String){
-        let data = ["profileImageUrl" : url]
-        db.collection("users").document(uid).updateData(data) { (error) in
-            if let error = error{
-                print(error.localizedDescription)
-            }
-        }
+    func tableView(_ tableView:UITableView, heightForRowAt indexPath:IndexPath)->CGFloat {
+        return tableView.frame.height/4
     }
 }
