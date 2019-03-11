@@ -14,6 +14,7 @@ class JoinedRidesDetailView : UIView {
     let rideLocationView : UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.white
+        UIView.dropShadow(view: view)
         return view
     }()
     
@@ -59,6 +60,7 @@ class JoinedRidesDetailView : UIView {
     lazy var driverDetailView : UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.white
+        UIView.dropShadow(view: view)
         return view
     }()
     
@@ -110,11 +112,42 @@ class JoinedRidesDetailView : UIView {
         return label
     }()
     
+    //Passenger Status View
+    
+    lazy var passengerStatusView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        UIView.dropShadow(view: view)
+        return view
+    }()
+    
+    let passengerStatusLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Passenger Status"
+        label.font = UIFont(name: Fonts.helvetica, size: 20)
+        label.textColor = Colors.maroon
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy var passengersCollectionView : UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 15.0
+        let collection = UICollectionView(frame : CGRect.zero ,collectionViewLayout: layout)
+        collection.register(AcceptedPassengerCollectionViewCell.self, forCellWithReuseIdentifier: acceptedPassengerCellId)
+        collection.register(PendingPassengerHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: pendingPassengerHeaderCellId)
+        collection.isScrollEnabled = false
+        collection.backgroundColor = UIColor.white
+        return collection
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.groupTableViewBackground
         setupTopContainer()
         setupDriverDetailView()
+        setupPassengerStatusView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -123,7 +156,6 @@ class JoinedRidesDetailView : UIView {
     
     func setupTopContainer(){
         addSubview(rideLocationView)
-        UIView.dropShadow(view: rideLocationView)
         
         locationStackView = UIStackView(arrangedSubviews: [departureCityLabel, rightArrowIconImageView, destinationCityLabel])
         locationStackView.axis = .horizontal
@@ -165,7 +197,6 @@ class JoinedRidesDetailView : UIView {
     
     func setupDriverDetailView(){
         addSubview(driverDetailView)
-        UIView.dropShadow(view: driverDetailView)
         driverDetailView.addSubview(driverDetailLabel)
         driverDetailView.addSubview(driverNameLabel)
         driverDetailView.addSubview(profileImageView)
@@ -208,5 +239,30 @@ class JoinedRidesDetailView : UIView {
         pickupDetailTextView.leadingAnchor.constraint(equalTo: driverDetailLabel.leadingAnchor).isActive = true
         pickupDetailTextView.trailingAnchor.constraint(equalTo: driverDetailView.trailingAnchor).isActive = true
         pickupDetailTextView.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor).isActive = true
+    }
+    
+    func setupPassengerStatusView(){
+        addSubview(passengerStatusView)
+        passengerStatusView.addSubview(passengerStatusLabel)
+        passengerStatusView.addSubview(passengersCollectionView)
+        
+        passengerStatusView.translatesAutoresizingMaskIntoConstraints = false
+        passengerStatusView.topAnchor.constraint(equalTo: driverDetailView.bottomAnchor, constant: 30).isActive = true
+        passengerStatusView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        passengerStatusView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9).isActive = true
+        passengerStatusView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2).isActive = true
+        
+        //Passenger Status Label
+        passengerStatusLabel.translatesAutoresizingMaskIntoConstraints = false
+        passengerStatusLabel.topAnchor.constraint(equalTo: passengerStatusView.topAnchor, constant:8).isActive = true
+        passengerStatusLabel.centerXAnchor.constraint(equalTo: passengerStatusView.centerXAnchor).isActive = true
+        passengerStatusLabel.heightAnchor.constraint(equalTo: passengerStatusView.heightAnchor, multiplier: 0.2).isActive = true
+        
+        //CollectionView
+        passengersCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        passengersCollectionView.topAnchor.constraint(equalTo: passengerStatusLabel.bottomAnchor).isActive = true
+        passengersCollectionView.leadingAnchor.constraint(equalTo: passengerStatusView.leadingAnchor).isActive = true
+        passengersCollectionView.trailingAnchor.constraint(equalTo: passengerStatusView.trailingAnchor).isActive = true
+        passengersCollectionView.bottomAnchor.constraint(equalTo: passengerStatusView.bottomAnchor).isActive = true
     }
 }

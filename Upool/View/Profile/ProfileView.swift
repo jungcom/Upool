@@ -155,12 +155,15 @@ class ProfileView: UIView{
         return view
     }()
     
+    
+    
     override init(frame: CGRect){
         super.init(frame: frame)
         setupScrollBar()
         setupProfileImageAndNameContainer()
         setupAboutContainer()
         setupUserInfoStackView()
+        setupSettingsView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -248,5 +251,15 @@ class ProfileView: UIView{
         userInfoStackView.leadingAnchor.constraint(equalTo: userInfoUIView.leadingAnchor, constant:5).isActive = true
         userInfoStackView.trailingAnchor.constraint(equalTo: userInfoUIView.trailingAnchor, constant:-5).isActive = true
         userInfoStackView.bottomAnchor.constraint(equalTo: userInfoUIView.bottomAnchor, constant:-5).isActive = true
+    }
+    
+    func setupSettingsView(){
+        addSubview(settingsContainerView)
+        
+        settingsContainerView.translatesAutoresizingMaskIntoConstraints = false
+        settingsContainerView.topAnchor.constraint(equalTo: userInfoUIView.bottomAnchor, constant:10).isActive = true
+        settingsContainerView.leadingAnchor.constraint(equalTo: userInfoUIView.leadingAnchor).isActive = true
+        settingsContainerView.trailingAnchor.constraint(equalTo: userInfoUIView.trailingAnchor).isActive = true
+        settingsContainerView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3).isActive = true
     }
 }

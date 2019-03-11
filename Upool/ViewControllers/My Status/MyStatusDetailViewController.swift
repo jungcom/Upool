@@ -9,9 +9,9 @@
 import UIKit
 import Firebase
 
-private let acceptedPassengerCellId = "acceptedPassengerCellId"
-private let pendingPassengerCellId = "pendingPassengerCellId"
-private let pendingPassengerHeaderCellId = "pendingPassengerHeaderCellId"
+let acceptedPassengerCellId = "acceptedPassengerCellId"
+let pendingPassengerCellId = "pendingPassengerCellId"
+let pendingPassengerHeaderCellId = "pendingPassengerHeaderCellId"
 
 class MyStatusDetailViewController: UIViewController{
 

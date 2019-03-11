@@ -15,6 +15,8 @@ class JoinedRidesDetailViewController: UIViewController{
     
     var ridePost : RidePost!
     
+    var acceptedPassengerRequests = [RideRequest]()
+    
     let joinedRidesDetailView : JoinedRidesDetailView = {
         let view = JoinedRidesDetailView()
         return view
@@ -45,5 +47,61 @@ class JoinedRidesDetailViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Ride Details"
+        joinedRidesDetailView.passengersCollectionView.delegate = self
+        joinedRidesDetailView.passengersCollectionView.dataSource = self
+        retrievePassengerRequests()
+    }
+    
+    func retrievePassengerRequests(){
+        acceptedPassengerRequests.removeAll()
+        
+        db.collection("rideRequests").whereField("ridePostId", isEqualTo: ridePost.ridePostUid!).getDocuments(completion: { (snapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                for document in snapshot!.documents {
+                    if let request = RideRequest(dictionary: document.data()){
+                        if request.requestStatus == Status.confirmed.rawValue{
+                            print("Confirmed Passenger Requests : \(document.documentID) => \(document.data())")
+                            self.acceptedPassengerRequests.append(request)
+                        }
+                    }
+                }
+                self.joinedRidesDetailView.passengersCollectionView.reloadData()
+            }
+        })
+    }
+}
+
+extension JoinedRidesDetailViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return ridePost.maxPassengers ?? 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: acceptedPassengerCellId, for: indexPath) as! AcceptedPassengerCollectionViewCell
+        if indexPath.row < acceptedPassengerRequests.count {
+            cell.rideRequest = acceptedPassengerRequests[indexPath.row]
+        } else {
+            //set cell to empty
+            cell.empty = true
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        //Center the Passenger Cells
+        let cellNumber = CGFloat(ridePost.maxPassengers ?? 4)
+        let totalCellWidth = collectionView.frame.width * 0.20 * cellNumber
+        let totalSpacingWidth =  CGFloat(15.0 * (cellNumber - 1))
+        let leftInset = (collectionView.frame.width - (totalCellWidth + totalSpacingWidth)) / 2
+        let rightInset = leftInset
+                
+        return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: rightInset)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width * 0.20, height: collectionView.frame.height)
+
     }
 }

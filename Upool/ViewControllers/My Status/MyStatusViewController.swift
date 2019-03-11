@@ -87,7 +87,6 @@ class MyStatusViewController: UICollectionViewController  {
                     }
                 }
                 self.collectionView.reloadData()
-                //self.endRefresher()
             }
         }
     }
@@ -150,8 +149,6 @@ class MyStatusViewController: UICollectionViewController  {
         
         //When all ridePosts are retrieved for all requests
         group.notify(queue: .main) {
-//            self.joinedAndPendingRidePosts.append(self.joinedRidePosts)
-//            self.joinedAndPendingRidePosts.append(self.pendingRidePosts)
             self.collectionView.reloadData()
         }
     }
