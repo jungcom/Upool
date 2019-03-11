@@ -25,7 +25,7 @@ class JoinedRidesDetailView : UIView {
     
     lazy var departureCityLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Fonts.futura, size: 18)
+        label.font = UIFont(name: Fonts.helvetica, size: 18)
         label.textColor = Colors.maroon
         return label
     }()
@@ -39,7 +39,7 @@ class JoinedRidesDetailView : UIView {
     
     lazy var destinationCityLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Fonts.futura, size: 18)
+        label.font = UIFont(name: Fonts.helvetica, size: 18)
         label.textColor = Colors.maroon
         return label
     }()
@@ -54,10 +54,67 @@ class JoinedRidesDetailView : UIView {
     
     var locationStackView : UIStackView!
     
+    //Driver Detail View
+    
+    lazy var driverDetailView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        return view
+    }()
+    
+    lazy var driverDetailLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Driver Details"
+        label.font = UIFont(name: Fonts.helvetica, size: 20)
+        label.textColor = Colors.maroon
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy var driverNameLabel :UILabel = {
+        let label = UILabel()
+        label.text = "Name"
+        label.textColor = UIColor.gray
+        label.font = UIFont(name: Fonts.helvetica, size: 12)
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    lazy var profileImageView :UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleAspectFill
+        image.tintColor = UIColor.gray
+        image.image = UIImage(named: "SmallPlusSign")
+        image.layer.masksToBounds = true
+        image.layer.cornerRadius = 12
+        image.layer.borderWidth = 1
+        image.layer.borderColor = UIColor.gray.cgColor
+        return image
+    }()
+    
+    lazy var pickUpLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Pickup Details:"
+        label.font = UIFont(name: Fonts.futura, size: 14)
+        label.textColor = UIColor.gray
+        return label
+    }()
+    
+    lazy var pickupDetailTextView : UITextView = {
+        let label = UITextView()
+        label.font = UIFont(name: Fonts.helvetica, size: 12)
+        label.textColor = UIColor.gray
+        label.isEditable = false
+        label.isScrollEnabled = false
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.groupTableViewBackground
         setupTopContainer()
+        setupDriverDetailView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -104,5 +161,52 @@ class JoinedRidesDetailView : UIView {
         priceLabel.trailingAnchor.constraint(equalTo: rideLocationView.trailingAnchor, constant: -10).isActive = true
         priceLabel.widthAnchor.constraint(equalTo: rideLocationView.widthAnchor, multiplier: 0.4).isActive = true
         priceLabel.heightAnchor.constraint(equalTo: rideLocationView.heightAnchor, multiplier: 0.2).isActive = true
+    }
+    
+    func setupDriverDetailView(){
+        addSubview(driverDetailView)
+        UIView.dropShadow(view: driverDetailView)
+        driverDetailView.addSubview(driverDetailLabel)
+        driverDetailView.addSubview(driverNameLabel)
+        driverDetailView.addSubview(profileImageView)
+        driverDetailView.addSubview(pickUpLabel)
+        driverDetailView.addSubview(pickupDetailTextView)
+        
+        driverDetailView.translatesAutoresizingMaskIntoConstraints = false
+        driverDetailView.topAnchor.constraint(equalTo: rideLocationView.bottomAnchor, constant: 30).isActive = true
+        driverDetailView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        driverDetailView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9).isActive = true
+        driverDetailView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2).isActive = true
+        
+        //DriverDetail Label Constraints
+        driverDetailLabel.translatesAutoresizingMaskIntoConstraints = false
+        driverDetailLabel.topAnchor.constraint(equalTo: driverDetailView.topAnchor, constant:8).isActive = true
+        driverDetailLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        driverDetailLabel.heightAnchor.constraint(equalTo: driverDetailView.heightAnchor, multiplier: 0.2).isActive = true
+        
+        //Pickup Label Constraints
+        driverNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        driverNameLabel.topAnchor.constraint(equalTo: driverDetailLabel.bottomAnchor, constant:8).isActive = true
+        driverNameLabel.leadingAnchor.constraint(equalTo: driverDetailView.leadingAnchor, constant:15).isActive = true
+        driverNameLabel.widthAnchor.constraint(equalTo: driverDetailView.widthAnchor, multiplier: 0.2).isActive = true
+        
+        //profileImageView Constraints
+        profileImageView.translatesAutoresizingMaskIntoConstraints = false
+        profileImageView.topAnchor.constraint(equalTo: driverNameLabel.bottomAnchor, constant: 5).isActive = true
+        profileImageView.leadingAnchor.constraint(equalTo: driverNameLabel.leadingAnchor).isActive = true
+        profileImageView.widthAnchor.constraint(equalTo: driverNameLabel.widthAnchor).isActive = true
+        profileImageView.heightAnchor.constraint(equalTo: driverNameLabel.widthAnchor).isActive = true
+        
+        //Pickup Detail View Constraints
+        pickUpLabel.translatesAutoresizingMaskIntoConstraints = false
+        pickUpLabel.topAnchor.constraint(equalTo: driverNameLabel.topAnchor).isActive = true
+        pickUpLabel.leadingAnchor.constraint(equalTo: driverDetailLabel.leadingAnchor).isActive = true
+        
+        //Pickup Detail TextView Constraints
+        pickupDetailTextView.translatesAutoresizingMaskIntoConstraints = false
+        pickupDetailTextView.topAnchor.constraint(equalTo: pickUpLabel.bottomAnchor).isActive = true
+        pickupDetailTextView.leadingAnchor.constraint(equalTo: driverDetailLabel.leadingAnchor).isActive = true
+        pickupDetailTextView.trailingAnchor.constraint(equalTo: driverDetailView.trailingAnchor).isActive = true
+        pickupDetailTextView.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor).isActive = true
     }
 }
