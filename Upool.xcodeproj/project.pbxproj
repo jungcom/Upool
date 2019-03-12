@@ -55,6 +55,7 @@
 		4EC0B2162236FC1E00EE8A20 /* ProfileViewControllerImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B2152236FC1E00EE8A20 /* ProfileViewControllerImagePicker.swift */; };
 		4EC0B21822381ACF00EE8A20 /* ProfileSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B21722381ACF00EE8A20 /* ProfileSettingsViewController.swift */; };
 		4EC0B21A22381BE500EE8A20 /* ProfileSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B21922381BE500EE8A20 /* ProfileSettingsView.swift */; };
+		4EC0B21F22383AD400EE8A20 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B21E22383AD400EE8A20 /* PrivacyPolicyViewController.swift */; };
 		4EE58FA62204DB0900918778 /* RidePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA52204DB0900918778 /* RidePost.swift */; };
 		4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA722052F6900918778 /* Encodable+Decodable.swift */; };
 		4EE58FAA220674DE00918778 /* UPoolUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA9220674DE00918778 /* UPoolUser.swift */; };
@@ -118,6 +119,7 @@
 		4EC0B2152236FC1E00EE8A20 /* ProfileViewControllerImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerImagePicker.swift; sourceTree = "<group>"; };
 		4EC0B21722381ACF00EE8A20 /* ProfileSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewController.swift; sourceTree = "<group>"; };
 		4EC0B21922381BE500EE8A20 /* ProfileSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsView.swift; sourceTree = "<group>"; };
+		4EC0B21E22383AD400EE8A20 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		4EE58FA52204DB0900918778 /* RidePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidePost.swift; sourceTree = "<group>"; };
 		4EE58FA722052F6900918778 /* Encodable+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Decodable.swift"; sourceTree = "<group>"; };
 		4EE58FA9220674DE00918778 /* UPoolUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPoolUser.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				4E5F9E1B220B85120037A10C /* ProfileViewController.swift */,
 				4EC0B2152236FC1E00EE8A20 /* ProfileViewControllerImagePicker.swift */,
 				4EC0B21722381ACF00EE8A20 /* ProfileSettingsViewController.swift */,
+				4EC0B21B2238366F00EE8A20 /* ProfileSettings */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -322,6 +325,14 @@
 				4EC0B1F122356FF700EE8A20 /* JoinedRidesDetailView.swift */,
 			);
 			path = JoinedRidesDetail;
+			sourceTree = "<group>";
+		};
+		4EC0B21B2238366F00EE8A20 /* ProfileSettings */ = {
+			isa = PBXGroup;
+			children = (
+				4EC0B21E22383AD400EE8A20 /* PrivacyPolicyViewController.swift */,
+			);
+			path = ProfileSettings;
 			sourceTree = "<group>";
 		};
 		4EEB91CF21F7679F0079209B = {
@@ -610,6 +621,7 @@
 				4E6E604D221C91D6001CFBD8 /* PendingPassengerHeaderCell.swift in Sources */,
 				4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */,
 				4EC0B1F222356FF700EE8A20 /* JoinedRidesDetailView.swift in Sources */,
+				4EC0B21F22383AD400EE8A20 /* PrivacyPolicyViewController.swift in Sources */,
 				4E5F9E22220BF8060037A10C /* ChatLogViewController.swift in Sources */,
 				4E8B4C7622023243002EC784 /* CreateRideTimePicker.swift in Sources */,
 				4EC0B1ED2233642D00EE8A20 /* SignUpView.swift in Sources */,

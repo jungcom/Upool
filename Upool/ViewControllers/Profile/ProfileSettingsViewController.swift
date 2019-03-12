@@ -50,9 +50,9 @@ extension ProfileSettingsViewController : UITableViewDelegate, UITableViewDataSo
         case 0:
             cell.textLabel?.text = "About"
         case 1:
-            cell.textLabel?.text = "Help"
-        case 2:
             cell.textLabel?.text = "Terms & Conditions"
+        case 2:
+            cell.textLabel?.text = "Privacy Policy"
         case 3:
             cell.textLabel?.text = "Contact"
         default: break
@@ -62,6 +62,19 @@ extension ProfileSettingsViewController : UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Settings Selected in : \(indexPath.row)")
+        switch indexPath.row {
+        case 0:
+            break
+        case 1:
+            break
+        case 2:
+            let privacyPolicyVC = PrivacyPolicyViewController()
+            navigationController?.pushViewController(privacyPolicyVC, animated: true)
+        case 3:
+            break
+        default: break
+        }
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
     func tableView(_ tableView:UITableView, heightForRowAt indexPath:IndexPath)->CGFloat {
