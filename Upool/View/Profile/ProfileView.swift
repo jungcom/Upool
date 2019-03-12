@@ -17,6 +17,7 @@ class ProfileView: UIView{
                 profileImageView.loadImageUsingCacheWithUrlString(url)
                 profileImageView.layer.cornerRadius = 30
                 profileImageView.layer.masksToBounds = true
+                profileImageViewShadow.layer.cornerRadius = 30
             }
             self.nameLabel.text = "\(thisUser.firstName ?? "") \(thisUser.lastName ?? "" )"
             self.userFirstName.subjectTextField.text = "\(thisUser.firstName ?? "" )"
@@ -51,6 +52,13 @@ class ProfileView: UIView{
         image.contentMode = .scaleAspectFill
         image.isUserInteractionEnabled = true
         return image
+    }()
+    
+    lazy var profileImageViewShadow : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.groupTableViewBackground
+        UIView.dropShadow(view: view)
+        return view
     }()
     
     lazy var nameLabel : UILabel = {
@@ -192,14 +200,24 @@ class ProfileView: UIView{
         profileImageAndNameContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         profileImageAndNameContainer.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier:0.3).isActive = true
         
+        profileImageAndNameContainer.addSubview(profileImageViewShadow)
         profileImageAndNameContainer.addSubview(profileImageView)
+//        profileImageAndNameContainer.addSubview(profileImageViewShadow)
         profileImageAndNameContainer.addSubview(nameLabel)
         
+        //ProfileImageView Constraints
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView.topAnchor.constraint(equalTo: profileImageAndNameContainer.topAnchor, constant: 40).isActive = true
         profileImageView.centerXAnchor.constraint(equalTo: profileImageAndNameContainer.centerXAnchor).isActive = true
         profileImageView.widthAnchor.constraint(equalTo: profileImageAndNameContainer.widthAnchor, multiplier: 0.3).isActive = true
         profileImageView.heightAnchor.constraint(equalTo: profileImageView.widthAnchor).isActive = true
+        
+        //ImageShadowView Constraints
+        profileImageViewShadow.translatesAutoresizingMaskIntoConstraints = false
+        profileImageViewShadow.topAnchor.constraint(equalTo: profileImageView.topAnchor, constant:0).isActive = true
+        profileImageViewShadow.leadingAnchor.constraint(equalTo: profileImageView.leadingAnchor, constant:0).isActive = true
+        profileImageViewShadow.trailingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant:0).isActive = true
+        profileImageViewShadow.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant:0).isActive = true
         
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 10).isActive = true
