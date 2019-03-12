@@ -10,7 +10,6 @@ import UIKit
 import Firebase
 import NVActivityIndicatorView
 
-private let profileTableViewCellId = "profileTableViewCell"
 class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
 
     let db = Firestore.firestore()
@@ -133,7 +132,8 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
     }
     
     @objc func handleSettingsButton(){
-        
+        let profileSettingsVC = ProfileSettingsViewController()
+        self.navigationController?.pushViewController(profileSettingsVC, animated: true)
     }
     
     @objc func handleLogout(){
@@ -156,44 +156,5 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         alert.addAction(cancelAction)
         alert.addAction(signOutAction)
         present(alert, animated: true, completion: nil)
-    }
-}
-
-extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: profileTableViewCellId, for: indexPath)
-        cell.textLabel?.font = UIFont(name: Fonts.helvetica, size: 18)
-        cell.textLabel?.textColor = UIColor.gray
-        cell.accessoryView = UIImageView(image: UIImage(named: "SmallRightArrow"))
-        cell.accessoryView?.tintColor = Colors.maroon
-        switch indexPath.row {
-        case 0:
-            cell.textLabel?.text = "About"
-        case 1:
-            cell.textLabel?.text = "Help"
-        case 2:
-            cell.textLabel?.text = "Terms & Conditions"
-        case 3:
-            cell.textLabel?.text = "Contact"
-            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude);
-        default: break
-        }
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Settings Selected in : \(indexPath.row)")
-    }
-    
-    func tableView(_ tableView:UITableView, heightForRowAt indexPath:IndexPath)->CGFloat {
-        return tableView.frame.height/4
     }
 }

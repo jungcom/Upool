@@ -53,6 +53,8 @@
 		4EC0B1F222356FF700EE8A20 /* JoinedRidesDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1F122356FF700EE8A20 /* JoinedRidesDetailView.swift */; };
 		4EC0B1F42235705600EE8A20 /* JoinedRidesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1F32235705600EE8A20 /* JoinedRidesDetailViewController.swift */; };
 		4EC0B2162236FC1E00EE8A20 /* ProfileViewControllerImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B2152236FC1E00EE8A20 /* ProfileViewControllerImagePicker.swift */; };
+		4EC0B21822381ACF00EE8A20 /* ProfileSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B21722381ACF00EE8A20 /* ProfileSettingsViewController.swift */; };
+		4EC0B21A22381BE500EE8A20 /* ProfileSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B21922381BE500EE8A20 /* ProfileSettingsView.swift */; };
 		4EE58FA62204DB0900918778 /* RidePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA52204DB0900918778 /* RidePost.swift */; };
 		4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA722052F6900918778 /* Encodable+Decodable.swift */; };
 		4EE58FAA220674DE00918778 /* UPoolUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA9220674DE00918778 /* UPoolUser.swift */; };
@@ -114,6 +116,8 @@
 		4EC0B1F122356FF700EE8A20 /* JoinedRidesDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedRidesDetailView.swift; sourceTree = "<group>"; };
 		4EC0B1F32235705600EE8A20 /* JoinedRidesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinedRidesDetailViewController.swift; sourceTree = "<group>"; };
 		4EC0B2152236FC1E00EE8A20 /* ProfileViewControllerImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerImagePicker.swift; sourceTree = "<group>"; };
+		4EC0B21722381ACF00EE8A20 /* ProfileSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewController.swift; sourceTree = "<group>"; };
+		4EC0B21922381BE500EE8A20 /* ProfileSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsView.swift; sourceTree = "<group>"; };
 		4EE58FA52204DB0900918778 /* RidePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidePost.swift; sourceTree = "<group>"; };
 		4EE58FA722052F6900918778 /* Encodable+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Decodable.swift"; sourceTree = "<group>"; };
 		4EE58FA9220674DE00918778 /* UPoolUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPoolUser.swift; sourceTree = "<group>"; };
@@ -168,6 +172,7 @@
 			children = (
 				4E5F9E1B220B85120037A10C /* ProfileViewController.swift */,
 				4EC0B2152236FC1E00EE8A20 /* ProfileViewControllerImagePicker.swift */,
+				4EC0B21722381ACF00EE8A20 /* ProfileSettingsViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -227,6 +232,7 @@
 			children = (
 				4EC0B1E42230864500EE8A20 /* ProfileView.swift */,
 				4EC0B1E022209B0600EE8A20 /* UserInfoField.swift */,
+				4EC0B21922381BE500EE8A20 /* ProfileSettingsView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -592,6 +598,7 @@
 				4E431FA921FE90810081CA52 /* CreateRideViewController.swift in Sources */,
 				4EA3D8A921FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift in Sources */,
 				4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */,
+				4EC0B21A22381BE500EE8A20 /* ProfileSettingsView.swift in Sources */,
 				4E6E6049221C6C87001CFBD8 /* MyStatusDetail.swift in Sources */,
 				4E49BFE52209455F002FB09A /* MyStatus.swift in Sources */,
 				4EC0B1E122209B0600EE8A20 /* UserInfoField.swift in Sources */,
@@ -632,6 +639,7 @@
 				4EC0B1DE221F409800EE8A20 /* SignUpEmailViewController.swift in Sources */,
 				4EEB91DC21F7679F0079209B /* AppDelegate.swift in Sources */,
 				4EC0B1E92230923300EE8A20 /* ChatLogView.swift in Sources */,
+				4EC0B21822381ACF00EE8A20 /* ProfileSettingsViewController.swift in Sources */,
 				4EC0B1E52230864500EE8A20 /* ProfileView.swift in Sources */,
 				4E49BFD92208C140002FB09A /* EmailSentViewController.swift in Sources */,
 				4E399D28221A5FEE00605A50 /* MyStatusTrashCanHeaderCell.swift in Sources */,
