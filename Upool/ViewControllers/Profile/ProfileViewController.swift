@@ -80,11 +80,7 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         
         profileView.profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleImageSelection)))
         profileView.pencilEditButton.addTarget(self, action: #selector(handlePencilEdit), for: .touchUpInside)
-        
-        //register Cell AND Set delegates and datasource
-        profileView.settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: profileTableViewCellId)
-        profileView.settingsTableView.delegate = self
-        profileView.settingsTableView.dataSource = self
+        profileView.settingsButton.addTarget(self, action: #selector(handleSettingsButton), for: .touchUpInside)
         
     }
     
@@ -134,6 +130,10 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
     
     @objc func handleTapped(){
         view.endEditing(true)
+    }
+    
+    @objc func handleSettingsButton(){
+        
     }
     
     @objc func handleLogout(){
