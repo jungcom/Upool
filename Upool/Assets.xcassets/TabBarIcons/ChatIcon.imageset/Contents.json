@@ -2,22 +2,25 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "chatIcon.png",
+      "filename" : "chatIconx1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "chatIcon-1.png",
+      "filename" : "chatIconx2.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "chatIcon3.png",
+      "filename" : "chatIconx3.png",
       "scale" : "3x"
     }
   ],
   "info" : {
     "version" : 1,
     "author" : "xcode"
+  },
+  "properties" : {
+    "template-rendering-intent" : "template"
   }
 }
