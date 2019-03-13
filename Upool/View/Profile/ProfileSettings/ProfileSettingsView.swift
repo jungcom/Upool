@@ -11,7 +11,7 @@ import UIKit
 class ProfileSettingsView : UIView{
     
     let settingsTableView : UITableView = {
-        let table = UITableView()
+        let table = UITableView(frame: .zero, style: .grouped)
         table.backgroundColor = UIColor.groupTableViewBackground
         table.tableFooterView = UIView()
         return table

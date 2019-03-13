@@ -7,38 +7,20 @@
 //
 
 import UIKit
+import UserNotifications
 
 class ProfileSettingsTableViewNotificationCell: UITableViewCell {
-
-    let toggle : UISwitch = {
-        let toggle = UISwitch()
-        toggle.onTintColor = Colors.maroon
-        return toggle
-    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: UITableViewCell.CellStyle.value1, reuseIdentifier: reuseIdentifier)
         print("cell initialized")
-        setupToggle()
+        self.selectionStyle = .none
         setupLabel()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
-    func setupToggle(){
-        addSubview(toggle)
-        toggle.translatesAutoresizingMaskIntoConstraints = false
-        toggle.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        toggle.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        toggle.widthAnchor.constraint(equalTo: widthAnchor, multiplier:0.2).isActive = true
     }
     
     func setupLabel() {

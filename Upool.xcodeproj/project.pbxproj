@@ -57,7 +57,6 @@
 		4EC0B21A22381BE500EE8A20 /* ProfileSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B21922381BE500EE8A20 /* ProfileSettingsView.swift */; };
 		4EC0B21F22383AD400EE8A20 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B21E22383AD400EE8A20 /* PrivacyPolicyViewController.swift */; };
 		4EC0B222223963F000EE8A20 /* ProfileSettingsTableViewNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B221223963F000EE8A20 /* ProfileSettingsTableViewNotificationCell.swift */; };
-		4EC0B22422396B3000EE8A20 /* ProfileSettingsSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B22322396B3000EE8A20 /* ProfileSettingsSectionHeaderView.swift */; };
 		4EE58FA62204DB0900918778 /* RidePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA52204DB0900918778 /* RidePost.swift */; };
 		4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA722052F6900918778 /* Encodable+Decodable.swift */; };
 		4EE58FAA220674DE00918778 /* UPoolUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA9220674DE00918778 /* UPoolUser.swift */; };
@@ -123,7 +122,6 @@
 		4EC0B21922381BE500EE8A20 /* ProfileSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsView.swift; sourceTree = "<group>"; };
 		4EC0B21E22383AD400EE8A20 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		4EC0B221223963F000EE8A20 /* ProfileSettingsTableViewNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsTableViewNotificationCell.swift; sourceTree = "<group>"; };
-		4EC0B22322396B3000EE8A20 /* ProfileSettingsSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsSectionHeaderView.swift; sourceTree = "<group>"; };
 		4EE58FA52204DB0900918778 /* RidePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidePost.swift; sourceTree = "<group>"; };
 		4EE58FA722052F6900918778 /* Encodable+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Decodable.swift"; sourceTree = "<group>"; };
 		4EE58FA9220674DE00918778 /* UPoolUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPoolUser.swift; sourceTree = "<group>"; };
@@ -344,7 +342,6 @@
 			children = (
 				4EC0B21922381BE500EE8A20 /* ProfileSettingsView.swift */,
 				4EC0B221223963F000EE8A20 /* ProfileSettingsTableViewNotificationCell.swift */,
-				4EC0B22322396B3000EE8A20 /* ProfileSettingsSectionHeaderView.swift */,
 			);
 			path = ProfileSettings;
 			sourceTree = "<group>";
@@ -632,7 +629,6 @@
 				4EAE28F321FF83D3006966E4 /* CreateRide.swift in Sources */,
 				4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */,
 				4E8DD4FF2203FF760077D85C /* OfferedRides.swift in Sources */,
-				4EC0B22422396B3000EE8A20 /* ProfileSettingsSectionHeaderView.swift in Sources */,
 				4E6E604D221C91D6001CFBD8 /* PendingPassengerHeaderCell.swift in Sources */,
 				4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */,
 				4EC0B1F222356FF700EE8A20 /* JoinedRidesDetailView.swift in Sources */,

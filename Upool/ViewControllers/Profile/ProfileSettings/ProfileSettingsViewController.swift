@@ -74,35 +74,35 @@ extension ProfileSettingsViewController : UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Settings Selected in : \(indexPath.row)")
-        switch indexPath.row {
-        case 0:
-            break
-        case 1:
-            break
-        case 2:
-            let privacyPolicyVC = PrivacyPolicyViewController()
-            navigationController?.pushViewController(privacyPolicyVC, animated: true)
-        case 3:
-            break
-        default: break
+        if indexPath.section == 0{
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                return
+            }
+            
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                    print("Settings opened: \(success)") // Prints true
+                })
+            }
+        } else {
+            switch indexPath.row {
+            case 0:
+                break
+            case 1:
+                break
+            case 2:
+                let privacyPolicyVC = PrivacyPolicyViewController()
+                navigationController?.pushViewController(privacyPolicyVC, animated: true)
+            case 3:
+                break
+            default: break
+            }
         }
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
     func tableView(_ tableView:UITableView, heightForRowAt indexPath:IndexPath)->CGFloat {
-        return 50
-    }
-    
-    //Section Headers
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label = UILabel()
-        label.text = "Push Notifications"
-        label.textColor = UIColor.gray
-        label.font = UIFont(name: Fonts.helvetica, size: 18)
-        return label
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         return 50.0
+
     }
 }
