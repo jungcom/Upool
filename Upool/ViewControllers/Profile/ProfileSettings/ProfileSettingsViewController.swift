@@ -8,6 +8,7 @@
 
 import UIKit
 
+private let profileTableViewNotificationsCellId = "profileTableViewNotificationsCell"
 private let profileTableViewCellId = "profileTableViewCell"
 
 class ProfileSettingsViewController : UIViewController{
@@ -21,6 +22,7 @@ class ProfileSettingsViewController : UIViewController{
         profileSettingsView.settingsTableView.delegate = self
         profileSettingsView.settingsTableView.dataSource = self
         profileSettingsView.settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: profileTableViewCellId)
+        profileSettingsView.settingsTableView.register(ProfileSettingsTableViewNotificationCell.self, forCellReuseIdentifier: profileTableViewNotificationsCellId)
         view = profileSettingsView
         navigationItem.title = "Settings"
     }
@@ -33,31 +35,41 @@ class ProfileSettingsViewController : UIViewController{
 
 extension ProfileSettingsViewController : UITableViewDelegate, UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        if section == 0{
+            return 1
+        } else {
+            return 4
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: profileTableViewCellId, for: indexPath)
-        cell.textLabel?.font = UIFont(name: Fonts.helvetica, size: 18)
-        cell.textLabel?.textColor = UIColor.gray
-        cell.accessoryView = UIImageView(image: UIImage(named: "SmallRightArrow"))
-        cell.accessoryView?.tintColor = Colors.maroon
-        switch indexPath.row {
-        case 0:
-            cell.textLabel?.text = "About"
-        case 1:
-            cell.textLabel?.text = "Terms & Conditions"
-        case 2:
-            cell.textLabel?.text = "Privacy Policy"
-        case 3:
-            cell.textLabel?.text = "Contact"
-        default: break
+        if indexPath.section == 0{
+            let cell = tableView.dequeueReusableCell(withIdentifier: profileTableViewNotificationsCellId, for: indexPath) as! ProfileSettingsTableViewNotificationCell
+            return cell
+            
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: profileTableViewCellId, for: indexPath)
+            cell.textLabel?.font = UIFont(name: Fonts.helvetica, size: 18)
+            cell.textLabel?.textColor = UIColor.lightGray
+            cell.accessoryView = UIImageView(image: UIImage(named: "SmallRightArrow"))
+            cell.accessoryView?.tintColor = Colors.maroon
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = "About"
+            case 1:
+                cell.textLabel?.text = "Terms & Conditions"
+            case 2:
+                cell.textLabel?.text = "Privacy Policy"
+            case 3:
+                cell.textLabel?.text = "Contact"
+            default: break
+            }
+            return cell
         }
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -79,5 +91,18 @@ extension ProfileSettingsViewController : UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView:UITableView, heightForRowAt indexPath:IndexPath)->CGFloat {
         return 50
+    }
+    
+    //Section Headers
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = "Push Notifications"
+        label.textColor = UIColor.gray
+        label.font = UIFont(name: Fonts.helvetica, size: 18)
+        return label
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return 50.0
     }
 }
