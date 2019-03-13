@@ -27,8 +27,10 @@ class MyStatusViewController: UICollectionViewController  {
     var myRidePosts = [RidePost]()
     
     var myRequests = [RideRequest]()
+    //var joinedAndPendingRidePosts = [[RidePost]]()
     var joinedRidePosts = [RidePost]()
     var pendingRidePosts = [RidePost]()
+    var declinedRidePosts = [RidePost]()
     
     lazy var segmentControl : UISegmentedControl = {
         let titles = ["My Rides","Joined Rides"]
@@ -54,6 +56,7 @@ class MyStatusViewController: UICollectionViewController  {
         // Register cell classes
         self.collectionView!.register(OfferedRidesCollectionViewCell.self, forCellWithReuseIdentifier: offeredRidesCellId)
         self.collectionView.register(MyStatusTrashCanHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerDeleteCellId)
+        self.collectionView.register(OfferedRidesSectionHeaderCollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerCellId)
         
         // Do any additional setup after loading the view.
         setupNavBar()
@@ -84,7 +87,6 @@ class MyStatusViewController: UICollectionViewController  {
                     }
                 }
                 self.collectionView.reloadData()
-                //self.endRefresher()
             }
         }
     }
@@ -115,23 +117,39 @@ class MyStatusViewController: UICollectionViewController  {
         //Reset Request Data
         self.joinedRidePosts.removeAll()
         self.pendingRidePosts.removeAll()
+        self.declinedRidePosts.removeAll()
+        
+        //Handle Asynchronous tasks
+        let group = DispatchGroup()
         
         //Retrieve Ride Data for each request
         for request in myRequests{
+            group.enter()
             db.collection("ridePosts").document(request.ridePostId).getDocument(completion: { (snapshot, error) in
                 if let error = error {
                     print(error.localizedDescription)
+                    group.leave()
                 } else {
-                    if let post = RidePost(dictionary: (snapshot?.data())!){
-                        if request.requestStatus == 0{
-                            self.pendingRidePosts.append(post)
-                        } else if request.requestStatus == 1{
-                            self.joinedRidePosts.append(post)
+                    if let post = RidePost(dictionary: (snapshot?.data())!), let date = post.departureDate{
+                        //If the ride is in the near future
+                        if date > Date(){
+                            if request.requestStatus == 0{
+                                self.pendingRidePosts.append(post)
+                            } else if request.requestStatus == 1{
+                                self.joinedRidePosts.append(post)
+                            } else if request.requestStatus == -1{
+                                self.declinedRidePosts.append(post)
+                            }
                         }
                     }
-                    self.collectionView.reloadData()
+                    group.leave()
                 }
             })
+        }
+        
+        //When all ridePosts are retrieved for all requests
+        group.notify(queue: .main) {
+            self.collectionView.reloadData()
         }
     }
     
@@ -176,17 +194,22 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
             }
             return myRidePosts.count
         } else {
-            if joinedRidePosts.count + pendingRidePosts.count == 0{
-                collectionView.setEmptyMessage("No Joined Rides")
-            } else {
-                collectionView.restore()
-            }
-            return joinedRidePosts.count + pendingRidePosts.count
+            return 3
         }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        if isMyRides{
+            return 1
+        } else {
+            if section == 0{
+                return joinedRidePosts.count
+            } else if section == 1{
+                return pendingRidePosts.count
+            } else {
+                return declinedRidePosts.count
+            }
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -195,10 +218,12 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
         if isMyRides{
             cell.post = myRidePosts[indexPath.section]
         } else {
-            if indexPath.section >= joinedRidePosts.count{
-                cell.post = pendingRidePosts[indexPath.section - joinedRidePosts.count]
+            if indexPath.section == 0{
+                cell.post = joinedRidePosts[indexPath.row]
+            } else if indexPath.section == 1{
+                cell.post = pendingRidePosts[indexPath.row]
             } else {
-                cell.post = joinedRidePosts[indexPath.section]
+                cell.post = declinedRidePosts[indexPath.row]
             }
         }
         
@@ -209,6 +234,17 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
         if isMyRides{
             let detailVC = MyStatusDetailViewController()
             detailVC.ridePost = myRidePosts[indexPath.section]
+            navigationController?.pushViewController(detailVC, animated: true)
+        } else {
+            print("Section : \(indexPath.section)")
+            let detailVC = JoinedRidesDetailViewController()
+            if indexPath.section == 0{
+                detailVC.ridePost = joinedRidePosts[indexPath.row]
+            } else if indexPath.section == 1{
+                detailVC.ridePost = pendingRidePosts[indexPath.row]
+            } else {
+                detailVC.ridePost = declinedRidePosts[indexPath.row]
+            }
             navigationController?.pushViewController(detailVC, animated: true)
         }
     }
@@ -224,8 +260,8 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     //Collectionview Header delegates
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerDeleteCellId, for: indexPath) as! MyStatusTrashCanHeaderCell
         if isMyRides{
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerDeleteCellId, for: indexPath) as! MyStatusTrashCanHeaderCell
             header.deleteButtonTapped = { () in
                 print("Delete Button Tapped in section \(indexPath.section)")
                 let ridePost = self.myRidePosts.remove(at: indexPath.section)
@@ -234,15 +270,31 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
                 self.deleteCorrespondingRideRequests(ridePostId: ridePostId)
                 self.collectionView.reloadData()
             }
+            return header
+        } else {
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerCellId, for: indexPath) as! OfferedRidesSectionHeaderCollectionViewCell
+            if indexPath.section == 0{
+                header.titleLabel.text = "Joined Rides"
+            } else if indexPath.section == 1{
+                header.titleLabel.text = "Pending Rides"
+            } else {
+                header.titleLabel.text = "Declined Rides"
+            }
+            return header
         }
-        return header
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if isMyRides{
             return CGSize(width: view.frame.width, height: 30)
         } else {
-            return CGSize(width: 0, height: 0)
+            if section == 0 && joinedRidePosts.count != 0 ||
+               section == 1 && pendingRidePosts.count != 0 ||
+                section == 2 && declinedRidePosts.count != 0 {
+                return CGSize(width: view.frame.width, height: 30)
+            } else {
+                return CGSize(width: 0, height: 0)
+            }
         }
     }
 }

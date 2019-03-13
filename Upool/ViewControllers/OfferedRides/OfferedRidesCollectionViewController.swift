@@ -12,7 +12,7 @@ import NVActivityIndicatorView
 import UserNotifications
 
 private let offeredRidesCellId = "Cell"
-private let headerCellId = "Header"
+let headerCellId = "Header"
 
 class OfferedRidesCollectionViewController: UICollectionViewController, NVActivityIndicatorViewable {
     

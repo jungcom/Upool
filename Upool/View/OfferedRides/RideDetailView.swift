@@ -10,7 +10,11 @@ import UIKit
 class RideDetailView : UIView{
     let scrollView = UIScrollView()
     
-    var topContainer = UIView()
+    let topContainer : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        return view
+    }()
     
     // First Top View
     let firstTopView = UIView()
@@ -169,8 +173,10 @@ class RideDetailView : UIView{
     
     func setupScrollView(){
         scrollView.addSubview(topContainer)
+        UIView.dropShadow(view: topContainer)
         scrollView.addSubview(bottomContainer)
         scrollView.contentSize = CGSize(width: frame.width, height: 1500)
+        scrollView.backgroundColor = UIColor.groupTableViewBackground
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
@@ -340,7 +346,7 @@ class RideDetailView : UIView{
     func setupBottomContainer(){
         bottomContainer.backgroundColor = UIColor.groupTableViewBackground
         bottomContainer.translatesAutoresizingMaskIntoConstraints = false
-        bottomContainer.topAnchor.constraint(equalTo: topContainer.bottomAnchor).isActive = true
+        bottomContainer.topAnchor.constraint(equalTo: topContainer.bottomAnchor, constant: 10).isActive = true
         bottomContainer.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         bottomContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         bottomContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier:1.0).isActive = true

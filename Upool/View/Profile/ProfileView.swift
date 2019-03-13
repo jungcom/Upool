@@ -17,6 +17,7 @@ class ProfileView: UIView{
                 profileImageView.loadImageUsingCacheWithUrlString(url)
                 profileImageView.layer.cornerRadius = 30
                 profileImageView.layer.masksToBounds = true
+                profileImageViewShadow.layer.cornerRadius = 30
             }
             self.nameLabel.text = "\(thisUser.firstName ?? "") \(thisUser.lastName ?? "" )"
             self.userFirstName.subjectTextField.text = "\(thisUser.firstName ?? "" )"
@@ -51,6 +52,13 @@ class ProfileView: UIView{
         image.contentMode = .scaleAspectFill
         image.isUserInteractionEnabled = true
         return image
+    }()
+    
+    lazy var profileImageViewShadow : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.groupTableViewBackground
+        UIView.dropShadow(view: view)
+        return view
     }()
     
     lazy var nameLabel : UILabel = {
@@ -148,19 +156,27 @@ class ProfileView: UIView{
     
     //Settings Container
     
-    let settingsContainerView : UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.white
-        UIView.dropShadow(view: view)
-        return view
+    let settingsButton : UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "SmallRightArrow"), for: .normal)
+        button.imageView?.tintColor = Colors.maroon
+        button.imageView?.contentMode = .right
+        button.setTitle("Settings", for: .normal)
+        button.setTitleColor(UIColor.lightGray, for: .normal)
+        button.titleLabel?.font = UIFont(name: Fonts.futuraMedium, size: 18)
+        button.backgroundColor = UIColor.white
+        UIView.dropShadow(view: button)
+        return button
     }()
     
     override init(frame: CGRect){
         super.init(frame: frame)
+        backgroundColor = UIColor.groupTableViewBackground
         setupScrollBar()
         setupProfileImageAndNameContainer()
         setupAboutContainer()
         setupUserInfoStackView()
+        setupSettingsView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -184,14 +200,24 @@ class ProfileView: UIView{
         profileImageAndNameContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         profileImageAndNameContainer.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier:0.3).isActive = true
         
+        profileImageAndNameContainer.addSubview(profileImageViewShadow)
         profileImageAndNameContainer.addSubview(profileImageView)
+//        profileImageAndNameContainer.addSubview(profileImageViewShadow)
         profileImageAndNameContainer.addSubview(nameLabel)
         
+        //ProfileImageView Constraints
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView.topAnchor.constraint(equalTo: profileImageAndNameContainer.topAnchor, constant: 40).isActive = true
         profileImageView.centerXAnchor.constraint(equalTo: profileImageAndNameContainer.centerXAnchor).isActive = true
         profileImageView.widthAnchor.constraint(equalTo: profileImageAndNameContainer.widthAnchor, multiplier: 0.3).isActive = true
         profileImageView.heightAnchor.constraint(equalTo: profileImageView.widthAnchor).isActive = true
+        
+        //ImageShadowView Constraints
+        profileImageViewShadow.translatesAutoresizingMaskIntoConstraints = false
+        profileImageViewShadow.topAnchor.constraint(equalTo: profileImageView.topAnchor, constant:0).isActive = true
+        profileImageViewShadow.leadingAnchor.constraint(equalTo: profileImageView.leadingAnchor, constant:0).isActive = true
+        profileImageViewShadow.trailingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant:0).isActive = true
+        profileImageViewShadow.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant:0).isActive = true
         
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 10).isActive = true
@@ -248,5 +274,23 @@ class ProfileView: UIView{
         userInfoStackView.leadingAnchor.constraint(equalTo: userInfoUIView.leadingAnchor, constant:5).isActive = true
         userInfoStackView.trailingAnchor.constraint(equalTo: userInfoUIView.trailingAnchor, constant:-5).isActive = true
         userInfoStackView.bottomAnchor.constraint(equalTo: userInfoUIView.bottomAnchor, constant:-5).isActive = true
+    }
+    
+    func setupSettingsView(){
+        scrollView.addSubview(settingsButton)
+        
+        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        settingsButton.topAnchor.constraint(equalTo: userInfoUIView.bottomAnchor, constant:30).isActive = true
+        settingsButton.leadingAnchor.constraint(equalTo: userInfoUIView.leadingAnchor).isActive = true
+        settingsButton.trailingAnchor.constraint(equalTo: userInfoUIView.trailingAnchor).isActive = true
+        settingsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        settingsButton.imageView?.translatesAutoresizingMaskIntoConstraints = false
+        settingsButton.imageView?.centerYAnchor.constraint(equalTo: settingsButton.centerYAnchor).isActive = true
+        settingsButton.imageView?.trailingAnchor.constraint(equalTo: settingsButton.trailingAnchor, constant: -20).isActive = true
+        
+        settingsButton.titleLabel?.translatesAutoresizingMaskIntoConstraints = false
+        settingsButton.titleLabel?.leadingAnchor.constraint(equalTo: settingsButton.leadingAnchor, constant: 15).isActive = true
+        settingsButton.titleLabel?.centerYAnchor.constraint(equalTo: settingsButton.centerYAnchor).isActive = true
     }
 }
