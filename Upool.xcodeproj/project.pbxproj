@@ -14,7 +14,6 @@
 		4E431FA721FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FA621FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift */; };
 		4E431FA921FE90810081CA52 /* CreateRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FA821FE90810081CA52 /* CreateRideViewController.swift */; };
 		4E431FAB21FE94AC0081CA52 /* RideDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */; };
-		4E431FAD21FEA1F80081CA52 /* RideDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FAC21FEA1F80081CA52 /* RideDetail.swift */; };
 		4E49BFD92208C140002FB09A /* EmailSentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E49BFD82208C140002FB09A /* EmailSentViewController.swift */; };
 		4E49BFDB2208C9F8002FB09A /* RideRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E49BFDA2208C9F8002FB09A /* RideRequest.swift */; };
 		4E49BFDD2208E363002FB09A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E49BFDC2208E363002FB09A /* LaunchScreen.storyboard */; };
@@ -40,7 +39,6 @@
 		4E9AA4E72209F67E00609E39 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AA4E62209F67E00609E39 /* ChatViewController.swift */; };
 		4EA3D8A021F90027003D7CE7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */; };
 		4EA3D8A221F90609003D7CE7 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A121F90609003D7CE7 /* UIImageView.swift */; };
-		4EA3D8A421F9168E003D7CE7 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A321F9168E003D7CE7 /* SignUp.swift */; };
 		4EA3D8A621FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A521FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift */; };
 		4EA3D8A921FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3D8A821FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift */; };
 		4EAE28F121FF5455006966E4 /* UIView+UIButtons+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAE28F021FF5455006966E4 /* UIView+UIButtons+UITextField.swift */; };
@@ -50,6 +48,9 @@
 		4EC0B1E3222D859C00EE8A20 /* ChatDateSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1E2222D859B00EE8A20 /* ChatDateSectionHeader.swift */; };
 		4EC0B1E52230864500EE8A20 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1E42230864500EE8A20 /* ProfileView.swift */; };
 		4EC0B1E92230923300EE8A20 /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1E82230923300EE8A20 /* ChatLogView.swift */; };
+		4EC0B1EB223314CC00EE8A20 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1EA223314CC00EE8A20 /* LoginView.swift */; };
+		4EC0B1ED2233642D00EE8A20 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1EC2233642D00EE8A20 /* SignUpView.swift */; };
+		4EC0B1EF223368D100EE8A20 /* RideDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B1EE223368D100EE8A20 /* RideDetailView.swift */; };
 		4EE58FA62204DB0900918778 /* RidePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA52204DB0900918778 /* RidePost.swift */; };
 		4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA722052F6900918778 /* Encodable+Decodable.swift */; };
 		4EE58FAA220674DE00918778 /* UPoolUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA9220674DE00918778 /* UPoolUser.swift */; };
@@ -60,7 +61,6 @@
 		4EEB91EE21F76CA50079209B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EEB91ED21F76CA50079209B /* GoogleService-Info.plist */; };
 		4EEB91F021F772770079209B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91EF21F772770079209B /* Constants.swift */; };
 		4EEB91F421F773630079209B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91F321F773630079209B /* UIColor.swift */; };
-		4EEB91F821F7A6AA0079209B /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEB91F721F7A6AA0079209B /* Login.swift */; };
 		FCD509AA7C5BACDF9B722203 /* Pods_Upool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F908952193F9A94F806566E5 /* Pods_Upool.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,7 +72,6 @@
 		4E431FA621FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedRidesSectionHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		4E431FA821FE90810081CA52 /* CreateRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideViewController.swift; sourceTree = "<group>"; };
 		4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetailViewController.swift; sourceTree = "<group>"; };
-		4E431FAC21FEA1F80081CA52 /* RideDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetail.swift; sourceTree = "<group>"; };
 		4E49BFD82208C140002FB09A /* EmailSentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSentViewController.swift; sourceTree = "<group>"; };
 		4E49BFDA2208C9F8002FB09A /* RideRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideRequest.swift; sourceTree = "<group>"; };
 		4E49BFDC2208E363002FB09A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -99,7 +98,6 @@
 		4E9AA4E62209F67E00609E39 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		4EA3D89F21F90027003D7CE7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4EA3D8A121F90609003D7CE7 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
-		4EA3D8A321F9168E003D7CE7 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		4EA3D8A521FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedRidesCollectionViewController.swift; sourceTree = "<group>"; };
 		4EA3D8A821FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedRidesCollectionViewCell.swift; sourceTree = "<group>"; };
 		4EAE28F021FF5455006966E4 /* UIView+UIButtons+UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+UIButtons+UITextField.swift"; sourceTree = "<group>"; };
@@ -109,6 +107,9 @@
 		4EC0B1E2222D859B00EE8A20 /* ChatDateSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDateSectionHeader.swift; sourceTree = "<group>"; };
 		4EC0B1E42230864500EE8A20 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		4EC0B1E82230923300EE8A20 /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
+		4EC0B1EA223314CC00EE8A20 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		4EC0B1EC2233642D00EE8A20 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		4EC0B1EE223368D100EE8A20 /* RideDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetailView.swift; sourceTree = "<group>"; };
 		4EE58FA52204DB0900918778 /* RidePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidePost.swift; sourceTree = "<group>"; };
 		4EE58FA722052F6900918778 /* Encodable+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Decodable.swift"; sourceTree = "<group>"; };
 		4EE58FA9220674DE00918778 /* UPoolUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPoolUser.swift; sourceTree = "<group>"; };
@@ -121,7 +122,6 @@
 		4EEB91ED21F76CA50079209B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4EEB91EF21F772770079209B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4EEB91F321F773630079209B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		4EEB91F721F7A6AA0079209B /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		991ABBFE84A7A90833986D7F /* Pods-Upool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Upool.release.xcconfig"; path = "Pods/Target Support Files/Pods-Upool/Pods-Upool.release.xcconfig"; sourceTree = "<group>"; };
 		DA832B2CAE8C7D81DA9D837A /* Pods-Upool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Upool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Upool/Pods-Upool.debug.xcconfig"; sourceTree = "<group>"; };
 		F908952193F9A94F806566E5 /* Pods_Upool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Upool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,7 +171,7 @@
 		4E5F9E23220C00D90037A10C /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				4EEB91F721F7A6AA0079209B /* Login.swift */,
+				4EC0B1EA223314CC00EE8A20 /* LoginView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -179,7 +179,7 @@
 		4E5F9E24220C00E10037A10C /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				4EA3D8A321F9168E003D7CE7 /* SignUp.swift */,
+				4EC0B1EC2233642D00EE8A20 /* SignUpView.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -190,7 +190,7 @@
 				4E8DD4FE2203FF760077D85C /* OfferedRides.swift */,
 				4EA3D8A821FA0D8E003D7CE7 /* OfferedRidesCollectionViewCell.swift */,
 				4E431FA621FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift */,
-				4E431FAC21FEA1F80081CA52 /* RideDetail.swift */,
+				4EC0B1EE223368D100EE8A20 /* RideDetailView.swift */,
 				4E8B4C7022012183002EC784 /* CreateRide */,
 			);
 			path = OfferedRides;
@@ -587,10 +587,10 @@
 				4EEB91DE21F7679F0079209B /* LoginViewController.swift in Sources */,
 				4E8DD4FF2203FF760077D85C /* OfferedRides.swift in Sources */,
 				4E6E604D221C91D6001CFBD8 /* PendingPassengerHeaderCell.swift in Sources */,
-				4E431FAD21FEA1F80081CA52 /* RideDetail.swift in Sources */,
 				4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */,
 				4E5F9E22220BF8060037A10C /* ChatLogViewController.swift in Sources */,
 				4E8B4C7622023243002EC784 /* CreateRideTimePicker.swift in Sources */,
+				4EC0B1ED2233642D00EE8A20 /* SignUpView.swift in Sources */,
 				4E0CD8D522138D1100256906 /* LaunchViewController.swift in Sources */,
 				4E8B4C7822023A43002EC784 /* SearchLocationViewController.swift in Sources */,
 				4E6E6047221B33C2001CFBD8 /* AcceptedPassengerCollectionViewCell.swift in Sources */,
@@ -599,20 +599,20 @@
 				4E431FA721FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift in Sources */,
 				4EC0B1E3222D859C00EE8A20 /* ChatDateSectionHeader.swift in Sources */,
 				4EE58FA62204DB0900918778 /* RidePost.swift in Sources */,
-				4EEB91F821F7A6AA0079209B /* Login.swift in Sources */,
 				4EA3D8A621FA0959003D7CE7 /* OfferedRidesCollectionViewController.swift in Sources */,
 				4E431FAB21FE94AC0081CA52 /* RideDetailViewController.swift in Sources */,
 				4EAE28F121FF5455006966E4 /* UIView+UIButtons+UITextField.swift in Sources */,
 				4E49BFDB2208C9F8002FB09A /* RideRequest.swift in Sources */,
 				4EEB91F421F773630079209B /* UIColor.swift in Sources */,
-				4EA3D8A421F9168E003D7CE7 /* SignUp.swift in Sources */,
 				4E6E6044221B22D6001CFBD8 /* MyStatusDetailViewController.swift in Sources */,
+				4EC0B1EF223368D100EE8A20 /* RideDetailView.swift in Sources */,
 				4E6E604B221C8759001CFBD8 /* PendingPassengerCollectionViewCell.swift in Sources */,
 				4E8DD4FC2203B1190077D85C /* CreateRideProtocolsForPassingData.swift in Sources */,
 				4EEB91F021F772770079209B /* Constants.swift in Sources */,
 				4E0CD8CE220CA20C00256906 /* ChatUserCell.swift in Sources */,
 				4E0CD8D0220D4CE300256906 /* ChatMessageCell.swift in Sources */,
 				4E8B4C722201219B002EC784 /* CreateRideCalendar.swift in Sources */,
+				4EC0B1EB223314CC00EE8A20 /* LoginView.swift in Sources */,
 				4EC0B1DE221F409800EE8A20 /* SignUpEmailViewController.swift in Sources */,
 				4EEB91DC21F7679F0079209B /* AppDelegate.swift in Sources */,
 				4EC0B1E92230923300EE8A20 /* ChatLogView.swift in Sources */,

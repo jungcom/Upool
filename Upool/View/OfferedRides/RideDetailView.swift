@@ -1,20 +1,161 @@
 //
-//  RideDetail.swift
+//  RideDetailView.swift
 //  Upool
 //
-//  Created by Anthony Lee on 1/27/19.
+//  Created by Anthony Lee on 3/8/19.
 //  Copyright © 2019 anthonyLee. All rights reserved.
 //
 
 import UIKit
-
-extension RideDetailViewController{
+class RideDetailView : UIView{
+    let scrollView = UIScrollView()
+    
+    var topContainer = UIView()
+    
+    // First Top View
+    let firstTopView = UIView()
+    
+    lazy var dateLabel : UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: Fonts.futuraMedium, size: 18)
+        return label
+    }()
+    
+    lazy var departureCityLabel : UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: Fonts.futura, size: 18)
+        label.textColor = Colors.maroon
+        return label
+    }()
+    
+    let rightArrowIconImageView : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: Images.rightArrow)
+        imageView.tintColor = Colors.maroon
+        return imageView
+    }()
+    
+    lazy var destinationCityLabel : UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: Fonts.futura, size: 18)
+        label.textColor = Colors.maroon
+        return label
+    }()
+    
+    var locationStackView : UIStackView!
+    
+    lazy var passengerSeatsLabel : UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.gray
+        label.textAlignment = .right
+        label.font = UIFont.systemFont(ofSize: 13)
+        return label
+    }()
+    
+    //Second Top View
+    let secondTopView = UIView()
+    
+    lazy var profileImageView : UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = 7
+        imageView.backgroundColor = UIColor.gray
+        imageView.tintColor = UIColor.gray
+        imageView.image = UIImage(named: "ProfileImagePlaceholder")
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
+    let nameLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Robinson Crusoe"
+        label.font = UIFont(name: Fonts.futura, size: 14)
+        label.textColor = UIColor.gray
+        return label
+    }()
+    
+    let driverInfoLabel : UILabel = {
+        let label = UILabel()
+        label.text = "\u{2022}Major in Computer Science"
+        label.font = UIFont(name: Fonts.futura, size: 12)
+        label.textColor = UIColor.gray
+        return label
+    }()
+    
+    lazy var priceLabel : UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: Fonts.futura, size: 18)
+        label.textColor = Colors.moneyGreen
+        return label
+    }()
+    
+    //Third Top View
+    let thirdTopView = UIView()
+    
+    let pickUpLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Pickup Details"
+        label.font = UIFont(name: Fonts.futura, size: 17)
+        label.textColor = UIColor.gray
+        return label
+    }()
+    
+    lazy var pickupDetailTextView : UITextView = {
+        let label = UITextView()
+        label.font = UIFont(name: Fonts.futura, size: 14)
+        label.textColor = UIColor.gray
+        label.isEditable = false
+        label.isScrollEnabled = false
+        return label
+    }()
+    
+    //Fourth Top view
+    let buttonView = UIView()
+    
+    var buttonStackView : UIStackView!
+    
+    let messageButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("MESSAGE", for: .normal)
+        button.setTitleColor(Colors.maroon, for: .normal)
+        button.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 18)
+        button.backgroundColor = UIColor.clear
+        button.layer.masksToBounds = true
+        button.layer.borderColor = Colors.maroon.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 5
+        return button
+    }()
+    
+    let joinRideButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("JOIN RIDE", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 17)
+        button.backgroundColor = Colors.maroon
+        button.layer.masksToBounds = true
+        button.layer.cornerRadius = 5
+        return button
+    }()
+    
+    //Bottom Container
+    
+    let bottomContainer = UIView()
+    
+    //Initializer
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     func setupUI() {
-        view.backgroundColor = UIColor.white
-        navigationItem.title = "Ride Details"
+        backgroundColor = UIColor.white
         
-        view.addSubview(scrollView)
+        addSubview(scrollView)
         setupScrollView()
         setupTopContainer()
         setupFirstTopView()
@@ -29,13 +170,13 @@ extension RideDetailViewController{
     func setupScrollView(){
         scrollView.addSubview(topContainer)
         scrollView.addSubview(bottomContainer)
-        scrollView.contentSize = CGSize(width: view.frame.width, height: 1500)
+        scrollView.contentSize = CGSize(width: frame.width, height: 1500)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
     func setupTopContainer(){
@@ -46,9 +187,9 @@ extension RideDetailViewController{
         
         topContainer.translatesAutoresizingMaskIntoConstraints = false
         topContainer.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-        topContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        topContainer.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        topContainer.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
+        topContainer.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        topContainer.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        topContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5).isActive = true
     }
     
     func setupFirstTopView(){
@@ -64,9 +205,9 @@ extension RideDetailViewController{
         //MARK : First Top View Constraints
         firstTopView.translatesAutoresizingMaskIntoConstraints = false
         firstTopView.topAnchor.constraint(equalTo: topContainer.topAnchor).isActive = true
-        firstTopView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        firstTopView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        firstTopView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
+        firstTopView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        firstTopView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        firstTopView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1).isActive = true
         
         //dateLabel Constraints
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -110,9 +251,9 @@ extension RideDetailViewController{
         //MARK : Second Top View Constraints
         secondTopView.translatesAutoresizingMaskIntoConstraints = false
         secondTopView.topAnchor.constraint(equalTo: firstTopView.bottomAnchor).isActive = true
-        secondTopView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        secondTopView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        secondTopView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15).isActive = true
+        secondTopView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        secondTopView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        secondTopView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.15).isActive = true
         
         //ProfileImageView
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -150,16 +291,16 @@ extension RideDetailViewController{
         
     }
     
-    func setupThirdTopView(){        
+    func setupThirdTopView(){
         thirdTopView.addSubview(pickUpLabel)
         thirdTopView.addSubview(pickupDetailTextView)
         
         //MARK : Thrid Top View Constraints
         thirdTopView.translatesAutoresizingMaskIntoConstraints = false
         thirdTopView.topAnchor.constraint(equalTo: secondTopView.bottomAnchor).isActive = true
-        thirdTopView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        thirdTopView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        thirdTopView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15).isActive = true
+        thirdTopView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        thirdTopView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        thirdTopView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.15).isActive = true
         
         //PickUp Label Constraints
         pickUpLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -184,9 +325,9 @@ extension RideDetailViewController{
         //MARK :ButtonView Constraints
         buttonView.translatesAutoresizingMaskIntoConstraints = false
         buttonView.topAnchor.constraint(equalTo: thirdTopView.bottomAnchor).isActive = true
-        buttonView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        buttonView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        buttonView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
+        buttonView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        buttonView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        buttonView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1).isActive = true
         
         //buttonStackView Constraints
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -202,6 +343,6 @@ extension RideDetailViewController{
         bottomContainer.topAnchor.constraint(equalTo: topContainer.bottomAnchor).isActive = true
         bottomContainer.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         bottomContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        bottomContainer.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier:1.0).isActive = true
+        bottomContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier:1.0).isActive = true
     }
 }
