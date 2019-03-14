@@ -18,6 +18,8 @@ class RidePost : NSObject, Encodable,Decodable, NSCopying{
     var price : Int? = nil
     var maxPassengers : Int? = nil
     var pickUpDetails : String? = nil
+    var cashPay : Bool? = nil
+    var venmoPay : Bool? = nil
     
     //TODO: add driver uid when posting a ride
     var driverUid : String? = nil

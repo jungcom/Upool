@@ -24,6 +24,7 @@ extension CreateRideViewController {
         setupDateTimeButtons()
         setupToFromButtons()
         setupPriceLabelAndSlider()
+        setupPaymentType()
         setupPassengerLabelCosmosView()
         setupPickUpDetailsView()
         setupCreateButton()
@@ -98,10 +99,36 @@ extension CreateRideViewController {
         view.addSubview(priceStack)
         
         priceStack.translatesAutoresizingMaskIntoConstraints = false
-        priceStack.topAnchor.constraint(equalTo: fromToStack.bottomAnchor, constant: 10).isActive = true
+        priceStack.topAnchor.constraint(equalTo: fromToStack.bottomAnchor, constant: 30).isActive = true
         priceStack.leadingAnchor.constraint(equalTo: dateTimeStack.leadingAnchor).isActive = true
         priceStack.widthAnchor.constraint(equalTo: dateTimeStack.widthAnchor, multiplier: 1).isActive = true
-        priceStack.heightAnchor.constraint(equalTo: dateTimeStack.heightAnchor, multiplier: 1).isActive = true
+        priceStack.heightAnchor.constraint(equalTo: dateTimeStack.heightAnchor, multiplier: 0.6).isActive = true
+    }
+    
+    func setupPaymentType(){
+        view.addSubview(paymentTypeLabel)
+        paymentTypeLabel.translatesAutoresizingMaskIntoConstraints = false
+        paymentTypeLabel.topAnchor.constraint(equalTo: priceStack.bottomAnchor, constant: 10).isActive = true
+        paymentTypeLabel.leadingAnchor.constraint(equalTo: dateTimeStack.leadingAnchor).isActive = true
+        paymentTypeLabel.widthAnchor.constraint(equalTo: dateTimeStack.widthAnchor, multiplier: 0.5).isActive = true
+        paymentTypeLabel.heightAnchor.constraint(equalTo: dateTimeStack.heightAnchor, multiplier: 0.6).isActive = true
+        
+        view.addSubview(cashButton)
+        view.addSubview(venmoButton)
+        cashButton.translatesAutoresizingMaskIntoConstraints = false
+        cashButton.centerYAnchor.constraint(equalTo: paymentTypeLabel.centerYAnchor).isActive = true
+        cashButton.leadingAnchor.constraint(equalTo: paymentTypeLabel.trailingAnchor).isActive = true
+        cashButton.widthAnchor.constraint(equalTo: dateTimeStack.widthAnchor, multiplier: 0.2).isActive = true
+        cashButton.heightAnchor.constraint(equalTo: dateTimeStack.heightAnchor, multiplier: 0.3).isActive = true
+        
+        venmoButton.translatesAutoresizingMaskIntoConstraints = false
+        venmoButton.centerYAnchor.constraint(equalTo: paymentTypeLabel.centerYAnchor).isActive = true
+        venmoButton.leadingAnchor.constraint(equalTo: cashButton.trailingAnchor, constant: 20).isActive = true
+        venmoButton.widthAnchor.constraint(equalTo: dateTimeStack.widthAnchor, multiplier: 0.2).isActive = true
+        venmoButton.heightAnchor.constraint(equalTo: dateTimeStack.heightAnchor, multiplier: 0.3).isActive = true
+        
+        
+        
     }
     
     func setupPassengerLabelCosmosView(){
@@ -114,7 +141,7 @@ extension CreateRideViewController {
         view.addSubview(passengerStack)
         
         passengerStack.translatesAutoresizingMaskIntoConstraints = false
-        passengerStack.topAnchor.constraint(equalTo: priceStack.bottomAnchor, constant: 10).isActive = true
+        passengerStack.topAnchor.constraint(equalTo: paymentTypeLabel.bottomAnchor, constant: 30).isActive = true
         passengerStack.leadingAnchor.constraint(equalTo: dateTimeStack.leadingAnchor).isActive = true
         passengerStack.widthAnchor.constraint(equalTo: dateTimeStack.widthAnchor, multiplier: 1).isActive = true
         passengerStack.heightAnchor.constraint(equalTo: dateTimeStack.heightAnchor, multiplier: 0.6).isActive = true

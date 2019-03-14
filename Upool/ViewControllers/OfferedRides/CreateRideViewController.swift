@@ -29,6 +29,8 @@ class CreateRideViewController: UIViewController {
         post.price = price
         post.maxPassengers = maxPassengers
         post.pickUpDetails = pickUpDetails
+        post.cashPay = cashPay
+        post.venmoPay = venmoPay
         return post
     }
     
@@ -36,6 +38,12 @@ class CreateRideViewController: UIViewController {
     var departureTime : Date?
     var departureCity : String?
     var arrivalCity : String?
+    var cashPay : Bool{
+        return cashButton.isSelected
+    }
+    var venmoPay : Bool{
+        return venmoButton.isSelected
+    }
     var price : Int {
         return Int(priceSlider.value)
     }
@@ -134,6 +142,46 @@ class CreateRideViewController: UIViewController {
         label.textColor = Colors.moneyGreen
         label.textAlignment = .right
         return label
+    }()
+    
+    //PaymentType View
+    lazy var paymentTypeLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Payment Type"
+        label.textColor = UIColor.gray
+        label.textAlignment = .left
+        return label
+    }()
+    
+    lazy var cashButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("Cash", for: .normal)
+        button.setTitleColor(Colors.maroon, for: .normal)
+        button.setTitleColor(UIColor.white, for: .selected)
+        button.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 12)
+        button.backgroundColor = Colors.maroon
+        button.isSelected = true
+        button.layer.masksToBounds = true
+        button.layer.borderColor = Colors.maroon.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(handleCashTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var venmoButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("Venmo", for: .normal)
+        button.setTitleColor(Colors.maroon, for: .normal)
+        button.setTitleColor(UIColor.white, for: .selected)
+        button.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 12)
+        button.backgroundColor = UIColor.clear
+        button.layer.masksToBounds = true
+        button.layer.borderColor = Colors.maroon.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(handleVenmoTapped), for: .touchUpInside)
+        return button
     }()
     
     //Passengers View
@@ -320,6 +368,24 @@ class CreateRideViewController: UIViewController {
         let roundedValue = round(priceSlider.value / 5) * 5
         priceSlider.value = roundedValue
         dollarLabel.text = "$\(Int(priceSlider.value))"
+    }
+    
+    @objc func handleVenmoTapped(){
+        venmoButton.isSelected = !venmoButton.isSelected
+        if venmoButton.isSelected {
+            venmoButton.backgroundColor = Colors.maroon
+        } else {
+            venmoButton.backgroundColor = UIColor.white
+        }
+    }
+    
+    @objc func handleCashTapped(){
+        cashButton.isSelected = !cashButton.isSelected
+        if cashButton.isSelected {
+            cashButton.backgroundColor = Colors.maroon
+        } else {
+            cashButton.backgroundColor = UIColor.white
+        }
     }
     
     @objc func handleCreateRide(){
