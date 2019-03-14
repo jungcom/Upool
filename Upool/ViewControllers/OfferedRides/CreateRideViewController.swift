@@ -212,7 +212,7 @@ class CreateRideViewController: UIViewController {
     //PickDetails View
     lazy var pickupDetailsLabel : UILabel = {
         let label = UILabel()
-        label.text = "Pickup Details"
+        label.text = "Pickup/Dropoff Details"
         label.textColor = UIColor.gray
         label.textAlignment = .left
         return label
@@ -220,7 +220,7 @@ class CreateRideViewController: UIViewController {
     
     lazy var pickupDetailsTextView : UITextView = {
         let textView = UITextView()
-        textView.text = "Payment in Cash"
+        textView.text = "Pick up : \nDrop off : "
         textView.layer.borderWidth = 1
         textView.layer.borderColor = UIColor.gray.cgColor
         textView.textColor = UIColor.black
@@ -333,11 +333,13 @@ class CreateRideViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupKeyboardNotifications()
+        tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
+        tabBarController?.tabBar.isHidden = false
     }
     
     @objc func handleCalendarView(){

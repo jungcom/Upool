@@ -80,7 +80,7 @@ class RideDetailView : UIView{
     
     let driverInfoLabel : UILabel = {
         let label = UILabel()
-        label.text = "\u{2022}Major in Computer Science"
+        label.text = "Payment in Cash"
         label.font = UIFont(name: Fonts.futura, size: 12)
         label.textColor = UIColor.gray
         return label
@@ -98,7 +98,7 @@ class RideDetailView : UIView{
     
     let pickUpLabel : UILabel = {
         let label = UILabel()
-        label.text = "Pickup Details"
+        label.text = "Pickup/Dropoff Details"
         label.font = UIFont(name: Fonts.futura, size: 17)
         label.textColor = UIColor.gray
         return label
@@ -275,7 +275,7 @@ class RideDetailView : UIView{
         
         //Driver Info Label Constraints
         driverInfoLabel.translatesAutoresizingMaskIntoConstraints = false
-        driverInfoLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant:5).isActive = true
+        driverInfoLabel.centerYAnchor.constraint(equalTo: secondTopView.centerYAnchor, constant:5).isActive = true
         driverInfoLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor, constant: 15).isActive = true
         driverInfoLabel.widthAnchor.constraint(equalTo: secondTopView.widthAnchor, multiplier:  0.5).isActive = true
         

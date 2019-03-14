@@ -154,7 +154,7 @@ extension CreateRideViewController {
         pickupDetailsLabel.translatesAutoresizingMaskIntoConstraints = false
         pickupDetailsLabel.topAnchor.constraint(equalTo: passengerStack.bottomAnchor, constant: 10).isActive = true
         pickupDetailsLabel.leadingAnchor.constraint(equalTo: dateTimeStack.leadingAnchor).isActive = true
-        pickupDetailsLabel.widthAnchor.constraint(equalTo: dateTimeStack.widthAnchor, multiplier: 0.5).isActive = true
+        pickupDetailsLabel.widthAnchor.constraint(equalTo: dateTimeStack.widthAnchor, multiplier: 1).isActive = true
         pickupDetailsLabel.heightAnchor.constraint(equalTo: dateTimeStack.heightAnchor, multiplier: 0.3).isActive = true
         
         pickupDetailsTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -170,7 +170,7 @@ extension CreateRideViewController {
         createRideButton.translatesAutoresizingMaskIntoConstraints = false
         createRideButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
         createRideButton.trailingAnchor.constraint(equalTo: dateTimeStack.trailingAnchor).isActive = true
-        createRideButton.widthAnchor.constraint(equalTo: dateTimeStack.widthAnchor, multiplier: 0.4).isActive = true
+        createRideButton.widthAnchor.constraint(equalTo: dateTimeStack.widthAnchor, multiplier: 0.5).isActive = true
         createRideButton.heightAnchor.constraint(equalTo: dateTimeStack.heightAnchor, multiplier: 0.5).isActive = true
     }
 }
@@ -181,7 +181,7 @@ extension CreateRideViewController {
     @objc func keyboardWillShow(notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0{
-                self.view.frame.origin.y -= keyboardSize.height/2
+                self.view.frame.origin.y -= keyboardSize.height/2 + 50
             }
         }
         

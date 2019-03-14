@@ -43,6 +43,9 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
         rideDetailView.passengerSeatsLabel.text = "Passengers  \(ridePost.currentPassengers!)/\(ridePost.maxPassengers!)"
         rideDetailView.priceLabel.text = "$\(ridePost.price!)"
         rideDetailView.pickupDetailTextView.text = (ridePost.pickUpDetails == "") ? "None" : ridePost.pickUpDetails
+        let cash = ridePost.cashPay ?? true ? "Cash" : ""
+        let venmo = ridePost.venmoPay ?? false ? "/ Venmo" : ""
+        rideDetailView.driverInfoLabel.text = "Payment: \(cash) \(venmo)"
         view = rideDetailView
     }
     
