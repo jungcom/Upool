@@ -104,7 +104,6 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         userInfo["gradYear"] = profileView.userGradYear.subjectTextField.text
         userInfo["major"] = profileView.userMajor.subjectTextField.text
         userInfo["age"] = profileView.userAge.subjectTextField.text
-        userInfo["gender"] = profileView.userGender.subjectTextField.text
         db.collection("users").document(userId).setData(userInfo, merge: true) { (err) in
             if let err = err {
                 print("Error writing document: \(err)")

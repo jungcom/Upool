@@ -25,7 +25,6 @@ class ProfileView: UIView{
             self.userGradYear.subjectTextField.text = "\(thisUser.gradYear ?? "" )"
             self.userMajor.subjectTextField.text = "\(thisUser.major ?? "" )"
             self.userAge.subjectTextField.text = "\(thisUser.age ?? "" )"
-            self.userGender.subjectTextField.text = "\(thisUser.gender ?? "" )"
 
         }
     }
@@ -34,7 +33,7 @@ class ProfileView: UIView{
     lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
-        scrollView.contentSize.height = 1000
+        scrollView.contentSize.height = 800
         return scrollView
     }()
     
@@ -143,14 +142,6 @@ class ProfileView: UIView{
         userInfo.subjectTextField.placeholder = "Age"
         userInfo.isUserInteractionEnabled = false
         userInfo.subjectTextField.keyboardType = .numberPad
-        return userInfo
-    }()
-    
-    let userGender : UserInfoField = {
-        let userInfo = UserInfoField()
-        userInfo.subjectLabel.text = "Gender"
-        userInfo.subjectTextField.placeholder = "Gender"
-        userInfo.isUserInteractionEnabled = false
         return userInfo
     }()
     
@@ -263,7 +254,7 @@ class ProfileView: UIView{
     }
     
     func setupUserInfoStackView(){
-        userInfoStackView = UIStackView(arrangedSubviews: [userFirstName, userLastName, userGradYear, userMajor, userAge, userGender])
+        userInfoStackView = UIStackView(arrangedSubviews: [userFirstName, userLastName, userGradYear, userMajor, userAge])
         userInfoStackView.axis = .vertical
         userInfoStackView.distribution = .equalSpacing
         
