@@ -28,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         settings.areTimestampsInSnapshotsEnabled = true
         db.settings = settings
 
+        UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
+
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         if let user = Auth.auth().currentUser {

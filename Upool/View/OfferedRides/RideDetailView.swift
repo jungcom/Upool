@@ -8,7 +8,12 @@
 
 import UIKit
 class RideDetailView : UIView{
-    let scrollView = UIScrollView()
+    let scrollView : UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.contentSize = CGSize(width: 0, height: 800)
+        scrollView.backgroundColor = UIColor.groupTableViewBackground
+        return scrollView
+    }()
     
     let topContainer : UIView = {
         let view = UIView()
@@ -175,7 +180,7 @@ class RideDetailView : UIView{
         scrollView.addSubview(topContainer)
         UIView.dropShadow(view: topContainer)
         scrollView.addSubview(bottomContainer)
-        scrollView.contentSize = CGSize(width: frame.width, height: 1500)
+        scrollView.contentSize = CGSize(width: frame.width, height: 800)
         scrollView.backgroundColor = UIColor.groupTableViewBackground
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
