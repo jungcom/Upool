@@ -406,18 +406,28 @@ class CreateRideViewController: UIViewController {
             return
         }
         
-        //Create a new ridePost and add it to the server database
-        let ref = db.collection("ridePosts").document()
-        let newRidePost = ridePost.copy() as! RidePost
-        newRidePost.ridePostUid = ref.documentID
-        newRidePost.driverUid = user.uid
-        ref.setData(newRidePost.dictionary) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(ref.documentID)")
-                self.navigationController?.popViewController(animated: true)
+        let alert = UIAlertController(title: "Are you sure you want to create this ride?", message: nil, preferredStyle: .alert)
+        let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let createRideAction = UIAlertAction(title: "OK", style: .default) { (_) in
+            //Create a new ridePost and add it to the server database
+            let ref = self.db.collection("ridePosts").document()
+            let newRidePost = self.ridePost.copy() as! RidePost
+            newRidePost.ridePostUid = ref.documentID
+            newRidePost.driverUid = user.uid
+            ref.setData(newRidePost.dictionary) { err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                } else {
+                    print("Document added with ID: \(ref.documentID)")
+                    self.navigationController?.popViewController(animated: true)
+                    if let offeredRidesVC = self.navigationController?.viewControllers.first as? OfferedRidesCollectionViewController{
+                        offeredRidesVC.retrieveRidePosts()
+                    }
+                }
             }
         }
+        alert.addAction(dismissAction)
+        alert.addAction(createRideAction)
+        present(alert, animated: true, completion: nil)
     }
 }

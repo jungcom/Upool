@@ -56,11 +56,6 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
         addRefresher()
         setupNavBar()
         setupFloatingButton()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("viewwillappear")
         retrieveRidePosts()
     }
     
