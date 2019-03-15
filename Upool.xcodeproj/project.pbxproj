@@ -57,6 +57,7 @@
 		4EC0B21A22381BE500EE8A20 /* ProfileSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B21922381BE500EE8A20 /* ProfileSettingsView.swift */; };
 		4EC0B21F22383AD400EE8A20 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B21E22383AD400EE8A20 /* PrivacyPolicyViewController.swift */; };
 		4EC0B222223963F000EE8A20 /* ProfileSettingsTableViewNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B221223963F000EE8A20 /* ProfileSettingsTableViewNotificationCell.swift */; };
+		4EC0B226223C228300EE8A20 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0B225223C228300EE8A20 /* TermsAndConditionsViewController.swift */; };
 		4EE58FA62204DB0900918778 /* RidePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA52204DB0900918778 /* RidePost.swift */; };
 		4EE58FA822052F6900918778 /* Encodable+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA722052F6900918778 /* Encodable+Decodable.swift */; };
 		4EE58FAA220674DE00918778 /* UPoolUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE58FA9220674DE00918778 /* UPoolUser.swift */; };
@@ -122,6 +123,7 @@
 		4EC0B21922381BE500EE8A20 /* ProfileSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsView.swift; sourceTree = "<group>"; };
 		4EC0B21E22383AD400EE8A20 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		4EC0B221223963F000EE8A20 /* ProfileSettingsTableViewNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsTableViewNotificationCell.swift; sourceTree = "<group>"; };
+		4EC0B225223C228300EE8A20 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
 		4EE58FA52204DB0900918778 /* RidePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidePost.swift; sourceTree = "<group>"; };
 		4EE58FA722052F6900918778 /* Encodable+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Decodable.swift"; sourceTree = "<group>"; };
 		4EE58FA9220674DE00918778 /* UPoolUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPoolUser.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 			children = (
 				4EC0B21722381ACF00EE8A20 /* ProfileSettingsViewController.swift */,
 				4EC0B21E22383AD400EE8A20 /* PrivacyPolicyViewController.swift */,
+				4EC0B225223C228300EE8A20 /* TermsAndConditionsViewController.swift */,
 			);
 			path = ProfileSettings;
 			sourceTree = "<group>";
@@ -657,6 +660,7 @@
 				4EEB91F021F772770079209B /* Constants.swift in Sources */,
 				4E0CD8CE220CA20C00256906 /* ChatUserCell.swift in Sources */,
 				4E0CD8D0220D4CE300256906 /* ChatMessageCell.swift in Sources */,
+				4EC0B226223C228300EE8A20 /* TermsAndConditionsViewController.swift in Sources */,
 				4E8B4C722201219B002EC784 /* CreateRideCalendar.swift in Sources */,
 				4EC0B1EB223314CC00EE8A20 /* LoginView.swift in Sources */,
 				4EC0B1F42235705600EE8A20 /* JoinedRidesDetailViewController.swift in Sources */,

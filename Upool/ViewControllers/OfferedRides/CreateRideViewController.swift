@@ -334,12 +334,14 @@ class CreateRideViewController: UIViewController {
         super.viewWillAppear(animated)
         setupKeyboardNotifications()
         tabBarController?.tabBar.isHidden = true
+        tabBarController?.tabBar.isTranslucent = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
         tabBarController?.tabBar.isHidden = false
+        tabBarController?.tabBar.isTranslucent = false
     }
     
     @objc func handleCalendarView(){

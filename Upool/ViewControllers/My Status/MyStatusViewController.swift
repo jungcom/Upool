@@ -33,7 +33,7 @@ class MyStatusViewController: UICollectionViewController  {
     var declinedRidePosts = [RidePost]()
     
     lazy var segmentControl : UISegmentedControl = {
-        let titles = ["My Rides","Joined Rides"]
+        let titles = ["My Offers","My Requests"]
         let segment = UISegmentedControl(items: titles)
         segment.selectedSegmentIndex = 0
         segment.backgroundColor = UIColor.white

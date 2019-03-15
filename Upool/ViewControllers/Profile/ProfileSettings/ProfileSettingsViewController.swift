@@ -89,7 +89,8 @@ extension ProfileSettingsViewController : UITableViewDelegate, UITableViewDataSo
             case 0:
                 break
             case 1:
-                break
+                let termsAndConditionsVC = TermsAndConditionsViewController()
+                navigationController?.pushViewController(termsAndConditionsVC, animated: true)
             case 2:
                 let privacyPolicyVC = PrivacyPolicyViewController()
                 navigationController?.pushViewController(privacyPolicyVC, animated: true)

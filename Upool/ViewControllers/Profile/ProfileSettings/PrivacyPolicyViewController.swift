@@ -32,11 +32,13 @@ class PrivacyPolicyViewController: UIViewController, WKNavigationDelegate, NVAct
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
+        tabBarController?.tabBar.isTranslucent = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         tabBarController?.tabBar.isHidden = false
+        tabBarController?.tabBar.isTranslucent = false
     }
     /*
     // MARK: - Navigation

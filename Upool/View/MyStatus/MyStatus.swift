@@ -27,7 +27,7 @@ extension MyStatusViewController{
         segmentControl.translatesAutoresizingMaskIntoConstraints = false
         segmentControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         segmentControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        segmentControl.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6).isActive = true
+        segmentControl.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
         segmentControl.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
