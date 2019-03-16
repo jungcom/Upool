@@ -119,7 +119,7 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
     
     fileprivate func handleMessagingAndKicking(_ cell: AcceptedPassengerCollectionViewCell) {
         //When the user taps on the accepted Passenger
-        cell.tapToMessageOrDelete = { ( rideRequest) in
+        cell.tapToMessageOrDelete = { (rideRequest) in
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             alert.view.tintColor = Colors.maroon
             let message = UIAlertAction(title: "Message", style: .default) { (action) in
@@ -146,6 +146,8 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
                 let alertKick = UIAlertController(title: "Are you sure you want to kick \(name ?? "this passenger") from this ride?", message: nil, preferredStyle: .alert)
                 let no = UIAlertAction(title: "No", style: .cancel, handler: nil)
                 let yes = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                    //Call Clound function to send notification to the Kicked user
+                    self.callCloudFunctionToSendNotification(toUserId: rideRequest.fromId, accepted: false)
                     
                     //Update the request status to declined
                     self.db.collection("rideRequests").document(rideRequest.rideRequestId).updateData(["requestStatus":Status.notAccepted.rawValue], completion: { (error) in
@@ -170,6 +172,24 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
             alert.addAction(kick)
             alert.addAction(cancel)
             self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    fileprivate func callCloudFunctionToSendNotification(toUserId : String, accepted : Bool) {
+        //Call Cloud function to send notification to user
+        let data = ["accepted": accepted, "toUserId" : toUserId] as [String : Any]
+        Functions.functions().httpsCallable("rideRequestAcceptedOrDeclined").call(data) { (result, error) in
+            if let error = error as NSError? {
+                if error.domain == FunctionsErrorDomain {
+                    //                    let code = FunctionsErrorCode(rawValue: error.code)
+                    //                    let message = error.localizedDescription
+                    //                    let details = error.userInfo[FunctionsErrorDetailsKey]
+                }
+                // ...
+            }
+            //            if let text = (result?.data as? [String: Any])?["text"] as? String {
+            //                //Do something with the returned value
+            //            }
         }
     }
     

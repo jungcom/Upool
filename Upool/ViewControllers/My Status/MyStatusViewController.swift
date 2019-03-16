@@ -27,7 +27,6 @@ class MyStatusViewController: UICollectionViewController  {
     var myRidePosts = [RidePost]()
     
     var myRequests = [RideRequest]()
-    //var joinedAndPendingRidePosts = [[RidePost]]()
     var joinedRidePosts = [RidePost]()
     var pendingRidePosts = [RidePost]()
     var declinedRidePosts = [RidePost]()
@@ -159,6 +158,9 @@ class MyStatusViewController: UICollectionViewController  {
                 print("Error removing document: \(err)")
             } else {
                 print("Document successfully removed!")
+                let navVC = self.tabBarController?.viewControllers?.first as? UINavigationController
+                let offeredRidesVC = navVC?.viewControllers.first as? OfferedRidesCollectionViewController
+                offeredRidesVC?.retrieveRidePosts()
             }
         }
     }
