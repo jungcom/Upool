@@ -410,7 +410,7 @@ class CreateRideViewController: UIViewController {
         let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
         let createRideAction = UIAlertAction(title: "OK", style: .default) { (_) in
             //Create a new ridePost and add it to the server database
-            let ref = self.db.collection("ridePosts").document()
+            let ref = self.db.collection(FirebaseDatabaseKeys.ridePostsKey).document()
             let newRidePost = self.ridePost.copy() as! RidePost
             newRidePost.ridePostUid = ref.documentID
             newRidePost.driverUid = user.uid

@@ -49,7 +49,7 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
     }
     
     func setupImageProfileViewAndName(_ driverId : String){
-        db.collection("users").document(driverId).getDocument { (snapshot, error) in
+        db.collection(FirebaseDatabaseKeys.usersKey).document(driverId).getDocument { (snapshot, error) in
             guard let snapshot = snapshot, let data = snapshot.data() else {return}
             let user = UPoolUser(dictionary: data)
             self.nameLabel.text = "By \(user?.firstName ?? "" )"

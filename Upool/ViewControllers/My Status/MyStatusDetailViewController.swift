@@ -80,7 +80,7 @@ class MyStatusDetailViewController: UIViewController{
         myPendingPassengerRequests.removeAll()
         
         guard let ridePost = ridePost else {return}
-        db.collection("rideRequests").whereField("ridePostId", isEqualTo: ridePost.ridePostUid!).getDocuments(completion: { (snapshot, error) in
+        db.collection(FirebaseDatabaseKeys.rideRequestsKey).whereField("ridePostId", isEqualTo: ridePost.ridePostUid!).getDocuments(completion: { (snapshot, error) in
             if let error = error {
                 print(error.localizedDescription)
             } else {
@@ -124,7 +124,7 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
             alert.view.tintColor = Colors.maroon
             let message = UIAlertAction(title: "Message", style: .default) { (action) in
                 //When the message button is tapped in the action sheet
-                self.db.collection("users").document(rideRequest.fromId).getDocument { (snapshot, error) in
+                self.db.collection(FirebaseDatabaseKeys.usersKey).document(rideRequest.fromId).getDocument { (snapshot, error) in
                     if let error = error{
                         print(error.localizedDescription)
                     } else {
@@ -150,14 +150,14 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
                     self.callCloudFunctionToSendNotification(toUserId: rideRequest.fromId, accepted: false)
                     
                     //Update the request status to declined
-                    self.db.collection("rideRequests").document(rideRequest.rideRequestId).updateData(["requestStatus":Status.notAccepted.rawValue], completion: { (error) in
+                    self.db.collection(FirebaseDatabaseKeys.rideRequestsKey).document(rideRequest.rideRequestId).updateData(["requestStatus":Status.notAccepted.rawValue], completion: { (error) in
                     })
                     //Update the ridePost's Current passengers to -1
                     guard let ridePost = self.ridePost, let ridePostUid = ridePost.ridePostUid else {return}
-                    self.db.collection("ridePosts").document(ridePostUid).getDocument(completion: { (snapshot, error) in
+                    self.db.collection(FirebaseDatabaseKeys.ridePostsKey).document(ridePostUid).getDocument(completion: { (snapshot, error) in
                         guard let snapshot = snapshot, let data = snapshot.data() else {return}
                         if let retrievedRidePost = RidePost(dictionary: data), let current = retrievedRidePost.currentPassengers{
-                            self.db.collection("ridePosts").document(ridePostUid).updateData(["currentPassengers" : (current-1)])
+                            self.db.collection(FirebaseDatabaseKeys.ridePostsKey).document(ridePostUid).updateData(["currentPassengers" : (current-1)])
                         }
                     })
                     //Update Cell

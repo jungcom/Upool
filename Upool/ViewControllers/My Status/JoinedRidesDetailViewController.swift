@@ -34,7 +34,7 @@ class JoinedRidesDetailViewController: UIViewController{
     
     func setDriverProfileImageAndName(){
         guard let driverId = ridePost.driverUid else { return }
-        db.collection("users").document(driverId).getDocument { (snapshot, error) in
+        db.collection(FirebaseDatabaseKeys.usersKey).document(driverId).getDocument { (snapshot, error) in
             guard let snapshot = snapshot else {return}
             if let data = snapshot.data(), let driver = UPoolUser(dictionary: data){
                 self.joinedRidesDetailView.driverNameLabel.text = "\(driver.firstName!)"
@@ -55,7 +55,7 @@ class JoinedRidesDetailViewController: UIViewController{
     func retrievePassengerRequests(){
         acceptedPassengerRequests.removeAll()
         
-        db.collection("rideRequests").whereField("ridePostId", isEqualTo: ridePost.ridePostUid!).getDocuments(completion: { (snapshot, error) in
+        db.collection(FirebaseDatabaseKeys.rideRequestsKey).whereField("ridePostId", isEqualTo: ridePost.ridePostUid!).getDocuments(completion: { (snapshot, error) in
             if let error = error {
                 print(error.localizedDescription)
             } else {

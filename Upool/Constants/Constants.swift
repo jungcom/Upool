@@ -7,6 +7,14 @@
 //
 import UIKit
 
+struct FirebaseDatabaseKeys{
+    static let usersKey = "users"
+    static let ridePostsKey = "ridePosts"
+    static let rideRequestsKey = "rideRequests"
+    static let userMessagesKey = "user-Messages"
+    static let messagesKey = "messages"
+}
+
 struct Colors{
     static let maroon = UIColor(hex: 0xA23243)
     static let darkMaroon = UIColor(hex: 0x5A0936)

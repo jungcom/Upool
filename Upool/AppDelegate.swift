@@ -93,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     fileprivate func handleChatNotifications(_ db: Firestore, _ toId: String) {
-        db.collection("users").document(toId).getDocument { (snapshot, error) in
+        db.collection(FirebaseDatabaseKeys.usersKey).document(toId).getDocument { (snapshot, error) in
             if let error = error{
                 print(error.localizedDescription)
             } else {
@@ -118,7 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     fileprivate func handleRideRequestSentNotifications(_ db: Firestore, _ ridePostId: String) {
-        db.collection("ridePosts").document(ridePostId).getDocument { (snapshot, error) in
+        db.collection(FirebaseDatabaseKeys.ridePostsKey).document(ridePostId).getDocument { (snapshot, error) in
             if let error = error{
                 print(error.localizedDescription)
             } else {

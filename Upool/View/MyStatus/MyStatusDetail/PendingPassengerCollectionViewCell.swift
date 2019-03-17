@@ -20,7 +20,7 @@ class PendingPassengerCollectionViewCell: UICollectionViewCell {
         didSet{
             //Retrieve the requesting user data and show the name and profile image of that user
             if let request = rideRequest, let requestingUserId = request.fromId{
-                db.collection("users").document(requestingUserId).getDocument { (snapshot, error) in
+                db.collection(FirebaseDatabaseKeys.usersKey).document(requestingUserId).getDocument { (snapshot, error) in
                     guard let snapshot = snapshot else {return}
                     if let data = snapshot.data(), let requestingUser = UPoolUser(dictionary: data){
                         self.nameLabel.text = "\(requestingUser.firstName!) \(requestingUser.lastName!) wants to join your ride"
@@ -129,7 +129,7 @@ class PendingPassengerCollectionViewCell: UICollectionViewCell {
                 self.callCloudFunctionToSendNotification(toUserId: request.fromId, accepted: true)
                 
                 //Update the request status to confirmed
-                self.db.collection("rideRequests").document(request.rideRequestId).updateData(["requestStatus":Status.notAccepted.rawValue])
+                self.db.collection(FirebaseDatabaseKeys.rideRequestsKey).document(request.rideRequestId).updateData(["requestStatus":Status.notAccepted.rawValue])
             }
             //Execute Closure
             self.declineButtonTapped?()
@@ -150,17 +150,17 @@ class PendingPassengerCollectionViewCell: UICollectionViewCell {
                 self.callCloudFunctionToSendNotification(toUserId: request.fromId, accepted: true)
                 
                 //Update the request status to confirmed
-                self.db.collection("rideRequests").document(request.rideRequestId).updateData(["requestStatus":Status.confirmed.rawValue], completion: { (error) in
+                self.db.collection(FirebaseDatabaseKeys.rideRequestsKey).document(request.rideRequestId).updateData(["requestStatus":Status.confirmed.rawValue], completion: { (error) in
                     //Execute Closure
                     self.acceptButtonTapped?()
                 })
                 
                 //Update the ridePost's Current passengers to +1
                 guard let ridePost = self.ridePost, let ridePostUid = ridePost.ridePostUid else {return}
-                self.db.collection("ridePosts").document(ridePostUid).getDocument(completion: { (snapshot, error) in
+                self.db.collection(FirebaseDatabaseKeys.ridePostsKey).document(ridePostUid).getDocument(completion: { (snapshot, error) in
                     guard let snapshot = snapshot, let data = snapshot.data() else {return}
                     if let retrievedRidePost = RidePost(dictionary: data), let current = retrievedRidePost.currentPassengers{
-                        self.db.collection("ridePosts").document(ridePostUid).updateData(["currentPassengers" : (current+1)])
+                        self.db.collection(FirebaseDatabaseKeys.ridePostsKey).document(ridePostUid).updateData(["currentPassengers" : (current+1)])
                     }
                 })
                 

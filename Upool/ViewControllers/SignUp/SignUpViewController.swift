@@ -103,7 +103,7 @@ class SignUpViewController: UIViewController {
             let newUser = UPoolUser(email: email, fn: firstName, ln: lastName, uid: authDataResult.user.uid, fcmToken: fcmToken)
             print(newUser)
             //Add user to the Firebase database
-            self.db.collection("users").document(authDataResult.user.uid).setData(newUser.dictionary, completion: { (err) in
+            self.db.collection(FirebaseDatabaseKeys.usersKey).document(authDataResult.user.uid).setData(newUser.dictionary, completion: { (err) in
                 if let _ = err{
                     print("User was not added successfully to the database")
                 } else {

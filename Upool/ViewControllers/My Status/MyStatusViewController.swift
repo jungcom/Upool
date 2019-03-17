@@ -73,7 +73,7 @@ class MyStatusViewController: UICollectionViewController  {
         self.myRidePosts.removeAll()
         
         //Retrieve Data
-        let docRef = db.collection("ridePosts")
+        let docRef = db.collection(FirebaseDatabaseKeys.ridePostsKey)
         
         docRef.order(by: "departureDate", descending: false).whereField("departureDate", isGreaterThan: Date().timeIntervalSinceReferenceDate).whereField("driverUid", isEqualTo: authUser.uid).getDocuments { (querySnapshot, err) in
             if let err = err {
@@ -93,7 +93,7 @@ class MyStatusViewController: UICollectionViewController  {
     @objc func retrieveMyRequestedRidePosts(){
         
         //Retrieve Request Data
-        let docRef = db.collection("rideRequests")
+        let docRef = db.collection(FirebaseDatabaseKeys.rideRequestsKey)
         
         docRef.order(by: "timeStamp", descending: false).whereField("fromId", isEqualTo: authUser.uid).getDocuments { (querySnapshot, err) in
             //reset my Requests
@@ -124,7 +124,7 @@ class MyStatusViewController: UICollectionViewController  {
         //Retrieve Ride Data for each request
         for request in myRequests{
             group.enter()
-            db.collection("ridePosts").document(request.ridePostId).getDocument(completion: { (snapshot, error) in
+            db.collection(FirebaseDatabaseKeys.ridePostsKey).document(request.ridePostId).getDocument(completion: { (snapshot, error) in
                 if let error = error {
                     print(error.localizedDescription)
                     group.leave()
@@ -153,7 +153,7 @@ class MyStatusViewController: UICollectionViewController  {
     }
     
     func deleteRidePost(ridePostId:String){
-        db.collection("ridePosts").document(ridePostId).delete() { err in
+        db.collection(FirebaseDatabaseKeys.ridePostsKey).document(ridePostId).delete() { err in
             if let err = err {
                 print("Error removing document: \(err)")
             } else {
@@ -166,12 +166,12 @@ class MyStatusViewController: UICollectionViewController  {
     }
     
     func deleteCorrespondingRideRequests(ridePostId:String){
-        db.collection("rideRequests").whereField("ridePostId", isEqualTo: ridePostId).getDocuments { (snapshot, error) in
+        db.collection(FirebaseDatabaseKeys.rideRequestsKey).whereField("ridePostId", isEqualTo: ridePostId).getDocuments { (snapshot, error) in
             guard let snapshot = snapshot else {return}
             //delete each rideRequest Associated with the ridePost
             for document in snapshot.documents{
                 if let rideRequest = RideRequest(dictionary: document.data()){
-                    self.db.collection("rideRequests").document(rideRequest.rideRequestId).delete(completion: { (err) in
+                    self.db.collection(FirebaseDatabaseKeys.rideRequestsKey).document(rideRequest.rideRequestId).delete(completion: { (err) in
                         if let err = err {
                             print("Error removing document: \(err)")
                         } else {

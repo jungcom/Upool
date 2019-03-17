@@ -66,7 +66,7 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
 //        laterRidePosts.removeAll()
         
         //Retrieve Data
-        let docRef = db.collection("ridePosts")
+        let docRef = db.collection(FirebaseDatabaseKeys.ridePostsKey)
         docRef.whereField("departureDate", isGreaterThan: Date().timeIntervalSinceReferenceDate).order(by: "departureDate", descending: false).getDocuments { (querySnapshot, err) in
             if let err = err {
                 self.endRefresher()

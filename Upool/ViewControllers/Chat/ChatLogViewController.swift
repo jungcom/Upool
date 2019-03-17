@@ -108,7 +108,7 @@ class ChatLogViewController : UICollectionViewController{
     
     func retrieveUserMessages(){
         guard let id = fromUser?.uid, let toUser = toUser else {return}
-        listener = db.collection("user-Messages").document(id).collection("toUserId").document(toUser.uid).collection("messageIds").addSnapshotListener{ (snapshot, error) in
+        listener = db.collection(FirebaseDatabaseKeys.userMessagesKey).document(id).collection("toUserId").document(toUser.uid).collection("messageIds").addSnapshotListener{ (snapshot, error) in
             guard let snapshot = snapshot else {return}
             
             //Multi-Threading handled
@@ -122,7 +122,7 @@ class ChatLogViewController : UICollectionViewController{
                 } else {
                     group.enter()
                     //If the data is already there, Don't retrieve it again
-                    self.db.collection("messages").document(diff.document.documentID).getDocument(completion: { (docSnapshot, error) in
+                    self.db.collection(FirebaseDatabaseKeys.messagesKey).document(diff.document.documentID).getDocument(completion: { (docSnapshot, error) in
                         guard let docSnapshot = docSnapshot, let data = docSnapshot.data() else {return}
                         if let message = Message(dictionary: data){
                             self.messages.append(message)
@@ -191,20 +191,20 @@ class ChatLogViewController : UICollectionViewController{
         message.toId = toUser?.uid
         message.timeStamp = Date()
         
-        let sentMessageId = db.collection("messages").addDocument(data: message.dictionary) { (error) in
+        let sentMessageId = db.collection(FirebaseDatabaseKeys.messagesKey).addDocument(data: message.dictionary) { (error) in
             if let error = error{
                 print(error.localizedDescription)
             }
         }
         
-        let userMessageRef = db.collection("user-Messages").document(message.fromId).collection("toUserId").document(message.toId).collection("messageIds").document(sentMessageId.documentID)
+        let userMessageRef = db.collection(FirebaseDatabaseKeys.userMessagesKey).document(message.fromId).collection("toUserId").document(message.toId).collection("messageIds").document(sentMessageId.documentID)
         userMessageRef.setData([sentMessageId.documentID : 1])
-        let userMapRefForSubcollection = db.collection("user-Messages").document(message.fromId).collection("toUserId").document("currentToUserIds")
+        let userMapRefForSubcollection = db.collection(FirebaseDatabaseKeys.userMessagesKey).document(message.fromId).collection("toUserId").document("currentToUserIds")
         userMapRefForSubcollection.setData([message.toId : 1], merge: true)
         
-        let receiverUserMessageRef = db.collection("user-Messages").document(message.toId).collection("toUserId").document(message.fromId).collection("messageIds").document(sentMessageId.documentID)
+        let receiverUserMessageRef = db.collection(FirebaseDatabaseKeys.userMessagesKey).document(message.toId).collection("toUserId").document(message.fromId).collection("messageIds").document(sentMessageId.documentID)
         receiverUserMessageRef.setData([sentMessageId.documentID : 1])
-        let receiverMapRefForSubcollection = db.collection("user-Messages").document(message.toId).collection("toUserId").document("currentToUserIds")
+        let receiverMapRefForSubcollection = db.collection(FirebaseDatabaseKeys.userMessagesKey).document(message.toId).collection("toUserId").document("currentToUserIds")
         receiverMapRefForSubcollection.setData([message.fromId : 1], merge: true)
         
         //Clear Input + Scroll To Bottom

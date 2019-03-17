@@ -54,7 +54,7 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
         guard let id = currentUser?.uid else {return}
         
         //Get user message info from the map document
-        let toUsers = db.collection("user-Messages").document(id).collection("toUserId").document("currentToUserIds")
+        let toUsers = db.collection(FirebaseDatabaseKeys.userMessagesKey).document(id).collection("toUserId").document("currentToUserIds")
         toUsers.getDocument(completion: { (snapshot, error) in
             guard let snapshot = snapshot, let keys = snapshot.data()?.keys else {
                 print("error \(String(describing: error?.localizedDescription))")
@@ -70,7 +70,7 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
             let group = DispatchGroup()
             
             for toUserId in userIds{
-                let listener = self.db.collection("user-Messages").document(id).collection("toUserId").document(toUserId).collection("messageIds").addSnapshotListener { (snapshot, error) in
+                let listener = self.db.collection(FirebaseDatabaseKeys.userMessagesKey).document(id).collection("toUserId").document(toUserId).collection("messageIds").addSnapshotListener { (snapshot, error) in
                     guard let snapshot = snapshot else {
                         print("Error fetching snapshots: \(error!)")
                         return
@@ -90,7 +90,7 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
                             
                             //if there are new messages, add the messages
                             let messageID = diff.document.documentID
-                            self.db.collection("messages").document(messageID).getDocument(completion: { (messageSnapShot, error) in
+                            self.db.collection(FirebaseDatabaseKeys.messagesKey).document(messageID).getDocument(completion: { (messageSnapShot, error) in
                                 guard let messageSnapShot = messageSnapShot, let data = messageSnapShot.data() else {
                                     return
                                 }
@@ -159,7 +159,7 @@ extension ChatViewController{
         let message = messages[indexPath.row]
         guard let chatPartnerId = message.chatPartnerId() else {return}
         
-        db.collection("users").document(chatPartnerId).getDocument { (snapshot, error) in
+        db.collection(FirebaseDatabaseKeys.usersKey).document(chatPartnerId).getDocument { (snapshot, error) in
             if let error = error{
                 print(error.localizedDescription)
             } else {

@@ -21,7 +21,7 @@ class AcceptedPassengerCollectionViewCell: UICollectionViewCell {
             
             //Retrieve the requesting user data and show the name and profile image of that user
             if let request = rideRequest, let requestingUserId = request.fromId{
-                db.collection("users").document(requestingUserId).getDocument { (snapshot, error) in
+                db.collection(FirebaseDatabaseKeys.usersKey).document(requestingUserId).getDocument { (snapshot, error) in
                     guard let snapshot = snapshot else {return}
                     if let data = snapshot.data(), let requestingUser = UPoolUser(dictionary: data){
                         self.nameLabel.text = "\(requestingUser.firstName!)"

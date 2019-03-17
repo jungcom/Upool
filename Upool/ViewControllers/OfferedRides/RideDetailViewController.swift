@@ -58,7 +58,7 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
     }
     
     func retrieveCurrentUser(){
-        db.collection("users").document(authUser!.uid).getDocument { (snapShot, err) in
+        db.collection(FirebaseDatabaseKeys.usersKey).document(authUser!.uid).getDocument { (snapShot, err) in
             if let err = err{
                 print(err.localizedDescription)
             } else {
@@ -105,13 +105,13 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
         rideRequest.requestStatus = 0
         rideRequest.ridePostId = ridePost.ridePostUid
         rideRequest.fromIdFirstName = currentUser.firstName
-        let ref = db.collection("rideRequests").document()
+        let ref = db.collection(FirebaseDatabaseKeys.rideRequestsKey).document()
         rideRequest.rideRequestId = ref.documentID
         ref.setData(rideRequest.dictionary)
     }
     
     func retrieveDriver(){
-        db.collection("users").document(ridePost.driverUid!).getDocument { (snapShot, err) in
+        db.collection(FirebaseDatabaseKeys.usersKey).document(ridePost.driverUid!).getDocument { (snapShot, err) in
             if let err = err{
                 print(err.localizedDescription)
             } else {
@@ -128,7 +128,7 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
     }
     
     func checkIfRequestExists(){
-        let query = db.collection("rideRequests")
+        let query = db.collection(FirebaseDatabaseKeys.rideRequestsKey)
         query.whereField("fromId", isEqualTo: authUser?.uid ?? "")
              .whereField("ridePostId", isEqualTo: ridePost.ridePostUid ?? "")
              .getDocuments { (snapshot, error) in

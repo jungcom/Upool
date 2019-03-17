@@ -85,7 +85,7 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
     
     func retrieveUserData(){
         if let user = authUser{
-            db.collection("users").document(user.uid).getDocument { (snapshot, error) in
+            db.collection(FirebaseDatabaseKeys.usersKey).document(user.uid).getDocument { (snapshot, error) in
                 guard let snapshot = snapshot, let dict = snapshot.data() else {return}
                 print("retrive data")
                 if let user = UPoolUser(dictionary: dict){
@@ -104,7 +104,7 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         userInfo["gradYear"] = profileView.userGradYear.subjectTextField.text
         userInfo["major"] = profileView.userMajor.subjectTextField.text
         userInfo["age"] = profileView.userAge.subjectTextField.text
-        db.collection("users").document(userId).setData(userInfo, merge: true) { (err) in
+        db.collection(FirebaseDatabaseKeys.usersKey).document(userId).setData(userInfo, merge: true) { (err) in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
@@ -148,7 +148,7 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
             if let currentUserId = currentUserId{
                 print(currentUserId)
                 let noFcmToken = ["fcmToken": ""]
-                self.db.collection("users").document(currentUserId).updateData(noFcmToken)
+                self.db.collection(FirebaseDatabaseKeys.usersKey).document(currentUserId).updateData(noFcmToken)
                 self.navigationController?.dismiss(animated: true, completion: nil)
             }
         }
