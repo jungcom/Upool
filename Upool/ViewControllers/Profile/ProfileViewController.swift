@@ -99,10 +99,10 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
     func saveUserInfoToDatabase(){
         guard let userId = profileView.thisUser?.uid else {return}
         var userInfo = [String : Any]()
-        userInfo["firstName"] = profileView.userFirstName.subjectTextField.text
-        userInfo["lastName"] = profileView.userLastName.subjectTextField.text
-        userInfo["gradYear"] = profileView.userGradYear.subjectTextField.text
-        userInfo["major"] = profileView.userMajor.subjectTextField.text
+        userInfo[FirebaseDatabaseKeys.UserFieldKeys.firstName] = profileView.userFirstName.subjectTextField.text
+        userInfo[FirebaseDatabaseKeys.UserFieldKeys.lastName] = profileView.userLastName.subjectTextField.text
+        userInfo[FirebaseDatabaseKeys.UserFieldKeys.gradYear] = profileView.userGradYear.subjectTextField.text
+        userInfo[FirebaseDatabaseKeys.UserFieldKeys.major] = profileView.userMajor.subjectTextField.text
         userInfo["age"] = profileView.userAge.subjectTextField.text
         db.collection(FirebaseDatabaseKeys.usersKey).document(userId).setData(userInfo, merge: true) { (err) in
             if let err = err {
@@ -147,7 +147,7 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
             }
             if let currentUserId = currentUserId{
                 print(currentUserId)
-                let noFcmToken = ["fcmToken": ""]
+                let noFcmToken = [FirebaseDatabaseKeys.UserFieldKeys.fcmToken: ""]
                 self.db.collection(FirebaseDatabaseKeys.usersKey).document(currentUserId).updateData(noFcmToken)
                 self.navigationController?.dismiss(animated: true, completion: nil)
             }

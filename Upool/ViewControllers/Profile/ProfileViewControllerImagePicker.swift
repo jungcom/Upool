@@ -71,7 +71,7 @@ extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationC
     }
     
     func updateUserProfileImageUrl(_ uid : String, _ url : String){
-        let data = ["profileImageUrl" : url]
+        let data = [FirebaseDatabaseKeys.UserFieldKeys.profileImageUrl : url]
         db.collection(FirebaseDatabaseKeys.usersKey).document(uid).updateData(data) { (error) in
             if let error = error{
                 print(error.localizedDescription)

@@ -13,6 +13,17 @@ struct FirebaseDatabaseKeys{
     static let rideRequestsKey = "rideRequests"
     static let userMessagesKey = "user-Messages"
     static let messagesKey = "messages"
+    
+    struct UserFieldKeys{
+        static let fcmToken = "fcmToken"
+        static let firstName = "firstName"
+        static let lastName = "lastName"
+        static let gradYear = "gradYear"
+        static let major = "major"
+        static let profileImageUrl = "profileImageUrl"
+    }
+    
+    
 }
 
 struct Colors{

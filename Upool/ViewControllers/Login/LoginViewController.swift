@@ -107,7 +107,7 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
             }
             
             //Update user's fcmToken to this Device
-            let noFcmToken = ["fcmToken": AppDelegate.DEVICE_FCM_TOKEN]
+            let noFcmToken = [FirebaseDatabaseKeys.UserFieldKeys.fcmToken: AppDelegate.DEVICE_FCM_TOKEN]
             self.db.collection(FirebaseDatabaseKeys.usersKey).document(authResult.user.uid).updateData(noFcmToken)
             
             self.present(LoginViewController.presentMainPage(), animated: true, completion: {
