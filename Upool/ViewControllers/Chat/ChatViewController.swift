@@ -39,7 +39,6 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
         
         setupNavBar()
         observeUserMessages()
-        
     }
     
     func setupNavBar() {

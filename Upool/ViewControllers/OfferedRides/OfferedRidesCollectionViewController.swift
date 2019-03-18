@@ -20,9 +20,8 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
     
     var refresher : UIRefreshControl!
     
-    var todayRidePosts = [RidePost]()
-    var tomorrowRidePosts = [RidePost]()
-    var laterRidePosts = [RidePost]()
+    var allRidePosts = [RidePost]()
+    var sortedRidePosts = [[RidePost]]()
     
     let addRideButton : UIButton = {
         let button = UIButton()
@@ -60,10 +59,6 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
     }
     
     @objc func retrieveRidePosts(){
-//        //Remove all Ride Posts
-//        todayRidePosts.removeAll()
-//        tomorrowRidePosts.removeAll()
-//        laterRidePosts.removeAll()
         
         //Retrieve Data
         let docRef = db.collection(FirebaseDatabaseKeys.ridePostsKey)
@@ -73,31 +68,42 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
                 print("Error getting documents: \(err)")
             } else {
                 //Remove all Ride Posts
-                self.todayRidePosts.removeAll()
-                self.tomorrowRidePosts.removeAll()
-                self.laterRidePosts.removeAll()
+                self.allRidePosts.removeAll()
                 
                 for document in querySnapshot!.documents {
                     //print("\(document.documentID) => \(document.data())")
                     if let post = RidePost(dictionary: document.data()){
-                        self.addToCorrectSection(post)
+                        self.allRidePosts.append(post)
                     }
                 }
+                self.createRidePostDictionary()
                 self.collectionView.reloadData()
                 self.endRefresher()
             }
         }
     }
     
-    func addToCorrectSection(_ post : RidePost){
-        if let date = post.departureDate{
-            if Calendar.current.isDateInToday(date){
-                todayRidePosts.append(post)
-            } else if Calendar.current.isDateInTomorrow(date){
-                tomorrowRidePosts.append(post)
+    func createRidePostDictionary(){
+        let groupDic = Dictionary(grouping: allRidePosts) { (ridePost) -> DateComponents in
+            let date = Calendar.current.dateComponents([.day, .year, .month, .weekday], from: (ridePost.departureDate)!)
+            return date
+        }
+        // Sort the keys
+        let sortedKeys = groupDic.keys.sorted { (date1, date2) -> Bool in
+            if date1.year! != date2.year!{
+                return date1.year! < date2.year!
+            } else if date1.month! != date2.month!{
+                return date1.month! < date2.month!
             } else {
-                laterRidePosts.append(post)
+                return date1.day! < date2.day!
             }
+        }
+        
+        //Remove all groupedChatMessages and create a new one
+        sortedRidePosts.removeAll()
+        sortedKeys.forEach { (key) in
+            let values = groupDic[key]
+            sortedRidePosts.append(values ?? [])
         }
     }
     
@@ -118,37 +124,23 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
 extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLayout{
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if todayRidePosts.count == 0 && tomorrowRidePosts.count == 0 && laterRidePosts.count == 0{
+        if sortedRidePosts.count == 0 {
             collectionView.setEmptyMessage("No available Rides")
             return 0
         } else {
             collectionView.restore()
+            return sortedRidePosts.count
         }
-        return 3
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0{
-            return todayRidePosts.count
-        } else if section == 1{
-            return tomorrowRidePosts.count
-        } else {
-            return laterRidePosts.count
-        }
-
+        return sortedRidePosts[section].count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath) as! OfferedRidesCollectionViewCell
         cell.backgroundColor = UIColor.white
-        if indexPath.section == 0{
-            cell.post = todayRidePosts[indexPath.row]
-        } else if indexPath.section == 1{
-            cell.post = tomorrowRidePosts[indexPath.row]
-        } else {
-            print("indexPath : \(indexPath.row)")
-            cell.post = laterRidePosts[indexPath.row]
-        }
+        cell.post = sortedRidePosts[indexPath.section][indexPath.row]
         
         //Disable the ridePosts that are full
         let post = cell.post
@@ -167,13 +159,7 @@ extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLay
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let rideDetailsVC = RideDetailViewController()
-        if indexPath.section == 0{
-            rideDetailsVC.ridePost = todayRidePosts[indexPath.row]
-        } else if indexPath.section == 1{
-            rideDetailsVC.ridePost = tomorrowRidePosts[indexPath.row]
-        } else {
-            rideDetailsVC.ridePost = laterRidePosts[indexPath.row]
-        }
+        rideDetailsVC.ridePost = sortedRidePosts[indexPath.section][indexPath.row]
         startAnimating(type: NVActivityIndicatorType.ballTrianglePath, color: Colors.maroon, displayTimeThreshold:2, minimumDisplayTime: 1)
         navigationController?.pushViewController(rideDetailsVC, animated: true)
     }
@@ -189,30 +175,15 @@ extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLay
     //Collectionview Header delegates
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerCellId, for: indexPath) as! OfferedRidesSectionHeaderCollectionViewCell
-        if indexPath.section == 0 {
-            header.titleLabel.text = headerType.today
-        } else if indexPath.section == 1{
-            header.titleLabel.text = headerType.tomorrow
-        } else {
-            header.titleLabel.text = headerType.laterRides
+        if let post = sortedRidePosts[indexPath.section].first, let date = post.departureDate {
+            let dateComponent = Calendar.current.dateComponents([.day, .year, .month, .weekday], from: date)
+            header.date = dateComponent
         }
         return header
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if section == 0 {
-            if todayRidePosts.count == 0{
-                return CGSize(width: 0, height: 0)
-            }
-        } else if section == 1{
-            if tomorrowRidePosts.count == 0{
-                return CGSize(width: 0, height: 0)
-            }
-        } else {
-            return CGSize(width: view.frame.width, height: 50)
-        }
         return CGSize(width: view.frame.width, height: 50)
     }
 
