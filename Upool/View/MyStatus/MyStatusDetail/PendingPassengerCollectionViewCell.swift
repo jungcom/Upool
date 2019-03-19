@@ -126,7 +126,7 @@ class PendingPassengerCollectionViewCell: UICollectionViewCell {
         let declineAction = UIAlertAction(title: "Decline", style: .default) { (_) in
             if let request = self.rideRequest{
                 //Call Clound function to send notification to the user
-                self.callCloudFunctionToSendNotification(toUserId: request.fromId, accepted: true)
+                self.callCloudFunctionToSendNotification(toUserId: request.fromId, accepted: false)
                 
                 //Update the request status to confirmed
                 self.db.collection(FirebaseDatabaseKeys.rideRequestsKey).document(request.rideRequestId).updateData(["requestStatus":Status.notAccepted.rawValue])

@@ -19,7 +19,7 @@ class SignUpViewController: UIViewController {
     }
     
     //Setup View
-    let signUpView : SignUpView = {
+    lazy var signUpView : SignUpView = {
         let signUpView = SignUpView()
         signUpView.signUpButton.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapped))
