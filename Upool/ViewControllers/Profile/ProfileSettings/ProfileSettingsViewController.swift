@@ -35,14 +35,16 @@ class ProfileSettingsViewController : UIViewController{
 
 extension ProfileSettingsViewController : UITableViewDelegate, UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0{
             return 1
+        } else if section == 1{
+            return 3
         } else {
-            return 4
+            return 1
         }
     }
     
@@ -51,7 +53,7 @@ extension ProfileSettingsViewController : UITableViewDelegate, UITableViewDataSo
             let cell = tableView.dequeueReusableCell(withIdentifier: profileTableViewNotificationsCellId, for: indexPath) as! ProfileSettingsTableViewNotificationCell
             return cell
             
-        } else {
+        } else if indexPath.section == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: profileTableViewCellId, for: indexPath)
             cell.textLabel?.font = UIFont(name: Fonts.helvetica, size: 18)
             cell.textLabel?.textColor = UIColor.lightGray
@@ -64,10 +66,14 @@ extension ProfileSettingsViewController : UITableViewDelegate, UITableViewDataSo
                 cell.textLabel?.text = "Terms & Conditions"
             case 2:
                 cell.textLabel?.text = "Privacy Policy"
-            case 3:
-                cell.textLabel?.text = "Contact"
             default: break
             }
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: profileTableViewCellId, for: indexPath)
+            cell.textLabel?.font = UIFont(name: Fonts.helvetica, size: 18)
+            cell.textLabel?.textColor = UIColor.lightGray
+            cell.textLabel?.text = "Contact - upool.cs@gmail.com"
             return cell
         }
     }
@@ -104,6 +110,5 @@ extension ProfileSettingsViewController : UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView:UITableView, heightForRowAt indexPath:IndexPath)->CGFloat {
         return 50.0
-
     }
 }

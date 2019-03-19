@@ -110,7 +110,6 @@ class SignUpView : UIView{
     }
     
     func setConstraints(){
-        
         //TextFieldStackView Constraints
         textFieldStackView.translatesAutoresizingMaskIntoConstraints = false
         textFieldStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant:40).isActive = true

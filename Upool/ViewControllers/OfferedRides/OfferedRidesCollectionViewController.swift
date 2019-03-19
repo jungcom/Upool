@@ -88,6 +88,7 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
             let date = Calendar.current.dateComponents([.day, .year, .month, .weekday], from: (ridePost.departureDate)!)
             return date
         }
+        
         // Sort the keys
         let sortedKeys = groupDic.keys.sorted { (date1, date2) -> Bool in
             if date1.year! != date2.year!{

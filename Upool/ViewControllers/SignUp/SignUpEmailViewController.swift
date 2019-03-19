@@ -12,7 +12,7 @@ class SignUpEmailViewController: UIViewController {
     
     lazy var signupLabel : UILabel = {
         let label = UILabel()
-        label.text = "To sign up, please type in your UMass email address."
+        label.text = "To sign up, please type in your student email address."
         label.numberOfLines = 0
         label.textAlignment = .center
         label.textColor = UIColor.gray
@@ -103,18 +103,18 @@ class SignUpEmailViewController: UIViewController {
     
     @objc func handleContinue(){
         guard let email = emailTextField.text, email != "" else {
-            errorLabel.text =  "Please type in your UMass email"
+            errorLabel.text =  "Please type in your student email"
             return
         }
         
-        //Check for umass emails
-//        let umassDotEdu = "umass.edu"
-//        let domainOfEmail = email.suffix(9)
-//
-//        guard emailTextField.text != "", domainOfEmail == umassDotEdu else{
-//            errorLabel.text =  "Email is not a UMass email"
-//            return
-//        }
+        //Check for student emails
+        let dotEdu = ".edu"
+        let domainOfEmail = email.suffix(4)
+
+        guard emailTextField.text != "", domainOfEmail == dotEdu else{
+            errorLabel.text =  "Email is not a student email"
+            return
+        }
         
         let signUpVC = SignUpViewController()
         signUpVC.signUpView.email = email

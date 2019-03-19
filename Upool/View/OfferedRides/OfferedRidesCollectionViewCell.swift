@@ -133,9 +133,9 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
     
     let nameLabel :UILabel = {
         let label = UILabel()
-        label.textColor = UIColor.black
+        label.textColor = UIColor.gray
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.thin)
+        label.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.medium)
         return label
     }()
     

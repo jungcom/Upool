@@ -12,24 +12,25 @@ class LoginView : UIView{
     
     var bottomStackView : UIStackView!
     
+    let upoolImageView : UIImageView = {
+        let view = UIImageView(image: UIImage(named: "UPoolLogo"))
+        view.contentMode = .scaleAspectFit
+        view.tintColor = Colors.maroon
+        return view
+    }()
+    
     let bottomContainer : UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.clear
         view.alpha = 0.9
         return view
     }()
     
-    let loginLabel : UILabel = {
-        let label = UILabel()
-        label.text = Strings.login
-        label.textAlignment = .center
-        label.textColor = Colors.maroon
-        label.font = UIFont(name: Fonts.helvetica, size: 32)
-        label.backgroundColor = UIColor.white
-        return label
+    let emailTextField : UITextField = {
+        let txtField = UITextField.getTextField(Strings.emailPlaceholder)
+        return txtField
     }()
     
-    let emailTextField = UITextField.getTextField(Strings.emailPlaceholder)
     let passwordTextField : UITextField = {
         let txtField = UITextField.getTextField(Strings.passwordPlaceholder)
         txtField.isSecureTextEntry = true
@@ -115,7 +116,7 @@ class LoginView : UIView{
         bottomlabelStackView.alignment = .center
         
         //Bottom stack view
-        bottomStackView = UIStackView(arrangedSubviews: [ emptyUIView,loginLabel, emailTextField, passwordTextField, errorLabel ,loginButton,bottomlabelStackView])
+        bottomStackView = UIStackView(arrangedSubviews: [ emptyUIView, emailTextField, passwordTextField, errorLabel ,loginButton,bottomlabelStackView])
         bottomStackView.axis = .vertical
         bottomStackView.distribution = .fillEqually
         bottomStackView.spacing = 25
@@ -126,20 +127,37 @@ class LoginView : UIView{
     
     func setupUI(){
         backgroundColor = UIColor.white
+        
         bottomContainer.addSubview(bottomStackView)
         addSubview(bottomContainer)
         addSubview(umassBackgroundImageView)
+        
+        //Blur Effect
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(blurEffectView)
+        
+        addSubview(upoolImageView)
         bringSubviewToFront(bottomContainer)
     }
     
     func setupConstraints(){
         
+        //UPoolLabel
+        upoolImageView.translatesAutoresizingMaskIntoConstraints = false
+        upoolImageView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
+        upoolImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant :100).isActive = true
+        upoolImageView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
+        upoolImageView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.15).isActive = true
+        
         //BottomContainer View Constraints
         bottomContainer.translatesAutoresizingMaskIntoConstraints = false
-        bottomContainer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
+        bottomContainer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
         bottomContainer.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
         bottomContainer.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
-        bottomContainer.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.6).isActive = true
+        bottomContainer.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.55).isActive = true
         
         //Bottom Stack View Constraints
         bottomStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -164,7 +182,7 @@ class LoginView : UIView{
         umassBackgroundImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         umassBackgroundImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor)
         umassBackgroundImageView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
-        umassBackgroundImageView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.55).isActive = true
+        umassBackgroundImageView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 1).isActive = true
         
     }
 }

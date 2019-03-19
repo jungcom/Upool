@@ -21,7 +21,6 @@ class RidePost : NSObject, Encodable,Decodable, NSCopying{
     var cashPay : Bool? = nil
     var venmoPay : Bool? = nil
     
-    //TODO: add driver uid when posting a ride
     var driverUid : String? = nil
     
     //Ride
