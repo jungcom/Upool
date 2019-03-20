@@ -28,6 +28,7 @@ class JoinedRidesDetailViewController: UIViewController{
         joinedRidesDetailView.destinationCityLabel.text = ridePost.arrivalCity!
         joinedRidesDetailView.priceLabel.text = "$\(ridePost.price!)"
         joinedRidesDetailView.pickupDetailTextView.text = (ridePost.pickUpDetails == "") ? "None" : ridePost.pickUpDetails
+        joinedRidesDetailView.messageButton.addTarget(self, action: #selector(handleMessage), for: .touchUpInside)
         setDriverProfileImageAndName()
         view = joinedRidesDetailView
     }
@@ -50,6 +51,24 @@ class JoinedRidesDetailViewController: UIViewController{
         joinedRidesDetailView.passengersCollectionView.delegate = self
         joinedRidesDetailView.passengersCollectionView.dataSource = self
         retrievePassengerRequests()
+    }
+    
+    @objc func handleMessage(){
+        guard let driverId = ridePost.driverUid else { return }
+        self.db.collection(FirebaseDatabaseKeys.usersKey).document(driverId).getDocument { (snapshot, error) in
+            if let error = error{
+                print(error.localizedDescription)
+            } else {
+                let chatlogVC = ChatLogViewController(collectionViewLayout: UICollectionViewFlowLayout())
+                let toUser = UPoolUser(dictionary: (snapshot?.data())!)
+                chatlogVC.toUser = toUser
+                
+                if let tabBarVC = self.navigationController?.parent as? UITabBarController, let chatNavVC = tabBarVC.viewControllers?[2] as? UINavigationController{
+                    tabBarVC.selectedIndex = 2
+                    chatNavVC.pushViewController(chatlogVC, animated: true)
+                }
+            }
+        }
     }
     
     func retrievePassengerRequests(){

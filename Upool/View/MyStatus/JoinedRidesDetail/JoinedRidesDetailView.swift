@@ -95,6 +95,19 @@ class JoinedRidesDetailView : UIView {
         return image
     }()
     
+    lazy var messageButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("MESSAGE", for: .normal)
+        button.setTitleColor(Colors.maroon, for: .normal)
+        button.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 10)
+        button.backgroundColor = UIColor.clear
+        button.layer.masksToBounds = true
+        button.layer.borderColor = Colors.maroon.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 5
+        return button
+    }()
+    
     lazy var pickUpLabel : UILabel = {
         let label = UILabel()
         label.text = "Pickup Details:"
@@ -121,9 +134,9 @@ class JoinedRidesDetailView : UIView {
         return view
     }()
     
-    let passengerStatusLabel : UILabel = {
+    lazy var passengerStatusLabel : UILabel = {
         let label = UILabel()
-        label.text = "Passenger Status"
+        label.text = "Joined Passengers"
         label.font = UIFont(name: Fonts.helvetica, size: 20)
         label.textColor = Colors.maroon
         label.textAlignment = .center
@@ -200,6 +213,7 @@ class JoinedRidesDetailView : UIView {
         driverDetailView.addSubview(driverDetailLabel)
         driverDetailView.addSubview(driverNameLabel)
         driverDetailView.addSubview(profileImageView)
+        driverDetailView.addSubview(messageButton)
         driverDetailView.addSubview(pickUpLabel)
         driverDetailView.addSubview(pickupDetailTextView)
         
@@ -207,7 +221,7 @@ class JoinedRidesDetailView : UIView {
         driverDetailView.topAnchor.constraint(equalTo: rideLocationView.bottomAnchor, constant: 30).isActive = true
         driverDetailView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         driverDetailView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9).isActive = true
-        driverDetailView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2).isActive = true
+        driverDetailView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.25).isActive = true
         
         //DriverDetail Label Constraints
         driverDetailLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -217,20 +231,27 @@ class JoinedRidesDetailView : UIView {
         
         //Pickup Label Constraints
         driverNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        driverNameLabel.topAnchor.constraint(equalTo: driverDetailLabel.bottomAnchor, constant:8).isActive = true
+        driverNameLabel.topAnchor.constraint(equalTo: driverDetailLabel.centerYAnchor, constant:0).isActive = true
         driverNameLabel.leadingAnchor.constraint(equalTo: driverDetailView.leadingAnchor, constant:15).isActive = true
         driverNameLabel.widthAnchor.constraint(equalTo: driverDetailView.widthAnchor, multiplier: 0.2).isActive = true
         
         //profileImageView Constraints
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        profileImageView.topAnchor.constraint(equalTo: driverNameLabel.bottomAnchor, constant: 5).isActive = true
+        profileImageView.topAnchor.constraint(equalTo: driverNameLabel.bottomAnchor, constant: 0).isActive = true
         profileImageView.leadingAnchor.constraint(equalTo: driverNameLabel.leadingAnchor).isActive = true
         profileImageView.widthAnchor.constraint(equalTo: driverNameLabel.widthAnchor).isActive = true
         profileImageView.heightAnchor.constraint(equalTo: driverNameLabel.widthAnchor).isActive = true
         
+        //MEssage Button Constraints
+        messageButton.translatesAutoresizingMaskIntoConstraints = false
+        messageButton.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 10).isActive = true
+        messageButton.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor).isActive = true
+        messageButton.widthAnchor.constraint(equalTo: profileImageView.widthAnchor, multiplier : 0.8).isActive = true
+        messageButton.heightAnchor.constraint(equalTo: driverNameLabel.heightAnchor).isActive = true
+        
         //Pickup Detail View Constraints
         pickUpLabel.translatesAutoresizingMaskIntoConstraints = false
-        pickUpLabel.topAnchor.constraint(equalTo: driverNameLabel.topAnchor).isActive = true
+        pickUpLabel.topAnchor.constraint(equalTo: profileImageView.topAnchor).isActive = true
         pickUpLabel.leadingAnchor.constraint(equalTo: driverDetailLabel.leadingAnchor).isActive = true
         
         //Pickup Detail TextView Constraints
@@ -238,7 +259,7 @@ class JoinedRidesDetailView : UIView {
         pickupDetailTextView.topAnchor.constraint(equalTo: pickUpLabel.bottomAnchor).isActive = true
         pickupDetailTextView.leadingAnchor.constraint(equalTo: driverDetailLabel.leadingAnchor).isActive = true
         pickupDetailTextView.trailingAnchor.constraint(equalTo: driverDetailView.trailingAnchor).isActive = true
-        pickupDetailTextView.bottomAnchor.constraint(equalTo: profileImageView.bottomAnchor).isActive = true
+        pickupDetailTextView.bottomAnchor.constraint(equalTo: messageButton.bottomAnchor).isActive = true
     }
     
     func setupPassengerStatusView(){

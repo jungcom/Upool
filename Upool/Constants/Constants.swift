@@ -21,6 +21,7 @@ struct FirebaseDatabaseKeys{
         static let gradYear = "gradYear"
         static let major = "major"
         static let profileImageUrl = "profileImageUrl"
+        static let carImageUrl = "carImageUrl"
     }
     
     

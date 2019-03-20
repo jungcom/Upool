@@ -33,7 +33,7 @@ class ProfileView: UIView{
     lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
-        scrollView.contentSize.height = 800
+        scrollView.contentSize.height = 900
         return scrollView
     }()
     
@@ -144,6 +144,19 @@ class ProfileView: UIView{
         userInfo.subjectTextField.keyboardType = .numberPad
         return userInfo
     }()
+    // My Car
+    let myCarButton : UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "SmallRightArrow"), for: .normal)
+        button.imageView?.tintColor = Colors.maroon
+        button.imageView?.contentMode = .right
+        button.setTitle("My Car", for: .normal)
+        button.setTitleColor(UIColor.lightGray, for: .normal)
+        button.titleLabel?.font = UIFont(name: Fonts.futuraMedium, size: 18)
+        button.backgroundColor = UIColor.white
+        UIView.dropShadow(view: button)
+        return button
+    }()
     
     //Settings Container
     
@@ -167,6 +180,7 @@ class ProfileView: UIView{
         setupProfileImageAndNameContainer()
         setupAboutContainer()
         setupUserInfoStackView()
+        setupMyCarButton()
         setupSettingsView()
     }
     
@@ -189,11 +203,10 @@ class ProfileView: UIView{
         profileImageAndNameContainer.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         profileImageAndNameContainer.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         profileImageAndNameContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        profileImageAndNameContainer.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier:0.3).isActive = true
+        profileImageAndNameContainer.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier:0.35).isActive = true
         
         profileImageAndNameContainer.addSubview(profileImageViewShadow)
         profileImageAndNameContainer.addSubview(profileImageView)
-//        profileImageAndNameContainer.addSubview(profileImageViewShadow)
         profileImageAndNameContainer.addSubview(nameLabel)
         
         //ProfileImageView Constraints
@@ -267,11 +280,29 @@ class ProfileView: UIView{
         userInfoStackView.bottomAnchor.constraint(equalTo: userInfoUIView.bottomAnchor, constant:-5).isActive = true
     }
     
+    func setupMyCarButton(){
+        scrollView.addSubview(myCarButton)
+        
+        myCarButton.translatesAutoresizingMaskIntoConstraints = false
+        myCarButton.topAnchor.constraint(equalTo: userInfoUIView.bottomAnchor, constant:30).isActive = true
+        myCarButton.leadingAnchor.constraint(equalTo: userInfoUIView.leadingAnchor).isActive = true
+        myCarButton.trailingAnchor.constraint(equalTo: userInfoUIView.trailingAnchor).isActive = true
+        myCarButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        myCarButton.imageView?.translatesAutoresizingMaskIntoConstraints = false
+        myCarButton.imageView?.centerYAnchor.constraint(equalTo: myCarButton.centerYAnchor).isActive = true
+        myCarButton.imageView?.trailingAnchor.constraint(equalTo: myCarButton.trailingAnchor, constant: -20).isActive = true
+        
+        myCarButton.titleLabel?.translatesAutoresizingMaskIntoConstraints = false
+        myCarButton.titleLabel?.leadingAnchor.constraint(equalTo: myCarButton.leadingAnchor, constant: 15).isActive = true
+        myCarButton.titleLabel?.centerYAnchor.constraint(equalTo: myCarButton.centerYAnchor).isActive = true
+    }
+    
     func setupSettingsView(){
         scrollView.addSubview(settingsButton)
         
         settingsButton.translatesAutoresizingMaskIntoConstraints = false
-        settingsButton.topAnchor.constraint(equalTo: userInfoUIView.bottomAnchor, constant:30).isActive = true
+        settingsButton.topAnchor.constraint(equalTo: myCarButton.bottomAnchor, constant:30).isActive = true
         settingsButton.leadingAnchor.constraint(equalTo: userInfoUIView.leadingAnchor).isActive = true
         settingsButton.trailingAnchor.constraint(equalTo: userInfoUIView.trailingAnchor).isActive = true
         settingsButton.heightAnchor.constraint(equalToConstant: 50).isActive = true

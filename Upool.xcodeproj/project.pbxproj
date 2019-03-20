@@ -10,6 +10,7 @@
 		4E0CD8CE220CA20C00256906 /* ChatUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0CD8CD220CA20C00256906 /* ChatUserCell.swift */; };
 		4E0CD8D0220D4CE300256906 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0CD8CF220D4CE300256906 /* ChatMessageCell.swift */; };
 		4E399D28221A5FEE00605A50 /* MyStatusTrashCanHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E399D27221A5FEE00605A50 /* MyStatusTrashCanHeaderCell.swift */; };
+		4E3FC32D2242BD3B00C596E0 /* MyCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3FC32C2242BD3B00C596E0 /* MyCarViewController.swift */; };
 		4E431FA721FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FA621FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift */; };
 		4E431FA921FE90810081CA52 /* CreateRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FA821FE90810081CA52 /* CreateRideViewController.swift */; };
 		4E431FAB21FE94AC0081CA52 /* RideDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */; };
@@ -75,6 +76,7 @@
 		4E0CD8CD220CA20C00256906 /* ChatUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUserCell.swift; sourceTree = "<group>"; };
 		4E0CD8CF220D4CE300256906 /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		4E399D27221A5FEE00605A50 /* MyStatusTrashCanHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStatusTrashCanHeaderCell.swift; sourceTree = "<group>"; };
+		4E3FC32C2242BD3B00C596E0 /* MyCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCarViewController.swift; sourceTree = "<group>"; };
 		4E431FA621FBA4350081CA52 /* OfferedRidesSectionHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedRidesSectionHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		4E431FA821FE90810081CA52 /* CreateRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRideViewController.swift; sourceTree = "<group>"; };
 		4E431FAA21FE94AC0081CA52 /* RideDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetailViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +164,14 @@
 			path = "StoryBoard + LaunchScreen";
 			sourceTree = "<group>";
 		};
+		4E3FC32B2242BD2500C596E0 /* MyCar */ = {
+			isa = PBXGroup;
+			children = (
+				4E3FC32C2242BD3B00C596E0 /* MyCarViewController.swift */,
+			);
+			path = MyCar;
+			sourceTree = "<group>";
+		};
 		4E49BFD72208C115002FB09A /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +188,7 @@
 			children = (
 				4E5F9E1B220B85120037A10C /* ProfileViewController.swift */,
 				4EC0B2152236FC1E00EE8A20 /* ProfileViewControllerImagePicker.swift */,
+				4E3FC32B2242BD2500C596E0 /* MyCar */,
 				4EC0B21B2238366F00EE8A20 /* ProfileSettings */,
 			);
 			path = Profile;
@@ -666,6 +677,7 @@
 				4EC0B1F42235705600EE8A20 /* JoinedRidesDetailViewController.swift in Sources */,
 				4EC0B1DE221F409800EE8A20 /* SignUpEmailViewController.swift in Sources */,
 				4EEB91DC21F7679F0079209B /* AppDelegate.swift in Sources */,
+				4E3FC32D2242BD3B00C596E0 /* MyCarViewController.swift in Sources */,
 				4EC0B1E92230923300EE8A20 /* ChatLogView.swift in Sources */,
 				4EC0B21822381ACF00EE8A20 /* ProfileSettingsViewController.swift in Sources */,
 				4EC0B1E52230864500EE8A20 /* ProfileView.swift in Sources */,

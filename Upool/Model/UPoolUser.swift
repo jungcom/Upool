@@ -15,6 +15,7 @@ class UPoolUser:NSObject ,Encodable,Decodable{
     var uid : String!
     var fcmToken : String!
     var profileImageUrl : String?
+    var carImageUrl : String?
     
     //Profile Information
     var gradYear : String?

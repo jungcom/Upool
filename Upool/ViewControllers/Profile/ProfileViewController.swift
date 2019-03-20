@@ -79,6 +79,7 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         
         profileView.profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleImageSelection)))
         profileView.pencilEditButton.addTarget(self, action: #selector(handlePencilEdit), for: .touchUpInside)
+        profileView.myCarButton.addTarget(self, action: #selector(handleMyCar), for: .touchUpInside)
         profileView.settingsButton.addTarget(self, action: #selector(handleSettingsButton), for: .touchUpInside)
         
     }
@@ -128,6 +129,12 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
     
     @objc func handleTapped(){
         view.endEditing(true)
+    }
+    
+    @objc func handleMyCar(){
+        let myCarVC = MyCarViewController()
+        myCarVC.thisUser = self.profileView.thisUser
+        self.navigationController?.pushViewController(myCarVC, animated: true)
     }
     
     @objc func handleSettingsButton(){

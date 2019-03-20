@@ -73,7 +73,8 @@ extension ProfileSettingsViewController : UITableViewDelegate, UITableViewDataSo
             let cell = tableView.dequeueReusableCell(withIdentifier: profileTableViewCellId, for: indexPath)
             cell.textLabel?.font = UIFont(name: Fonts.helvetica, size: 18)
             cell.textLabel?.textColor = UIColor.lightGray
-            cell.textLabel?.text = "Contact - upool.cs@gmail.com"
+            cell.textLabel?.text = "Contact Us - upool.cs@gmail.com"
+            cell.isUserInteractionEnabled = false
             return cell
         }
     }
