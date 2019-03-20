@@ -15,8 +15,8 @@ class ProfileView: UIView{
             guard let thisUser = thisUser else {return}
             if let url = thisUser.profileImageUrl{
                 profileImageView.loadImageUsingCacheWithUrlString(url)
+                profileImageView.clipsToBounds = true
                 profileImageView.layer.cornerRadius = 30
-                profileImageView.layer.masksToBounds = true
                 profileImageViewShadow.layer.cornerRadius = 30
             }
             self.nameLabel.text = "\(thisUser.firstName ?? "") \(thisUser.lastName ?? "" )"

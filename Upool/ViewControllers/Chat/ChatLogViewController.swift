@@ -190,23 +190,34 @@ class ChatLogViewController : UICollectionViewController{
         message.fromId = fromUser?.uid
         message.toId = toUser?.uid
         message.timeStamp = Date()
+
+        let firstMessage = messages.count == 0 ? true : false
         
         let sentMessageId = db.collection(FirebaseDatabaseKeys.messagesKey).addDocument(data: message.dictionary) { (error) in
             if let error = error{
                 print(error.localizedDescription)
             }
         }
-        
+
         let userMessageRef = db.collection(FirebaseDatabaseKeys.userMessagesKey).document(message.fromId).collection("toUserId").document(message.toId).collection("messageIds").document(sentMessageId.documentID)
-        userMessageRef.setData([sentMessageId.documentID : 1])
+        userMessageRef.setData([sentMessageId.documentID : 1]){ (error) in
+            //If this is the first message, Create a new userChat cell in the ChatViewVC
+            if firstMessage{
+                if let arrayVC = self.tabBarController?.viewControllers{
+                    let navVC = arrayVC[2] as? UINavigationController
+                    let chatVC = navVC?.viewControllers.first as? ChatViewController
+                    chatVC?.observeUserMessages()
+                }
+            }
+        }
         let userMapRefForSubcollection = db.collection(FirebaseDatabaseKeys.userMessagesKey).document(message.fromId).collection("toUserId").document("currentToUserIds")
         userMapRefForSubcollection.setData([message.toId : 1], merge: true)
-        
+
         let receiverUserMessageRef = db.collection(FirebaseDatabaseKeys.userMessagesKey).document(message.toId).collection("toUserId").document(message.fromId).collection("messageIds").document(sentMessageId.documentID)
         receiverUserMessageRef.setData([sentMessageId.documentID : 1])
         let receiverMapRefForSubcollection = db.collection(FirebaseDatabaseKeys.userMessagesKey).document(message.toId).collection("toUserId").document("currentToUserIds")
         receiverMapRefForSubcollection.setData([message.fromId : 1], merge: true)
-        
+
         //Clear Input + Scroll To Bottom
         chatLogView.inputTextField.text = nil
     }

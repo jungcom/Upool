@@ -59,7 +59,7 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
     }
     
     @objc func retrieveRidePosts(){
-        
+
         //Retrieve Data
         let docRef = db.collection(FirebaseDatabaseKeys.ridePostsKey)
         docRef.whereField("departureDate", isGreaterThan: Date().timeIntervalSinceReferenceDate).order(by: "departureDate", descending: false).getDocuments { (querySnapshot, err) in
@@ -69,7 +69,6 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
             } else {
                 //Remove all Ride Posts
                 self.allRidePosts.removeAll()
-                
                 for document in querySnapshot!.documents {
                     //print("\(document.documentID) => \(document.data())")
                     if let post = RidePost(dictionary: document.data()){
@@ -141,6 +140,7 @@ extension OfferedRidesCollectionViewController : UICollectionViewDelegateFlowLay
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath) as! OfferedRidesCollectionViewCell
         cell.backgroundColor = UIColor.white
+        cell.profileImageView.image = UIImage(named: "ProfileImagePlaceholder")
         cell.post = sortedRidePosts[indexPath.section][indexPath.row]
         
         //Disable the ridePosts that are full

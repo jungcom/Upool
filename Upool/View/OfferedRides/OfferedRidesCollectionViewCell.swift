@@ -53,6 +53,7 @@ class OfferedRidesCollectionViewCell: UICollectionViewCell {
             guard let snapshot = snapshot, let data = snapshot.data() else {return}
             let user = UPoolUser(dictionary: data)
             self.nameLabel.text = "By \(user?.firstName ?? "" )"
+
             if let url = user?.profileImageUrl {
                 self.profileImageView.loadImageUsingCacheWithUrlString(url)
             }

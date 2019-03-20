@@ -31,6 +31,7 @@ class CreateRideViewController: UIViewController {
         post.pickUpDetails = pickUpDetails
         post.cashPay = cashPay
         post.venmoPay = venmoPay
+        post.driverUid = authUser?.uid
         return post
     }
     

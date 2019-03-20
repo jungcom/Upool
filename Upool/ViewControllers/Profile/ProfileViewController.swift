@@ -57,14 +57,6 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         retrieveUserData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        let userInfoFields = self.profileView.userInfoStackView.subviews as! [UserInfoField]
-        for userInfoField in userInfoFields{
-            userInfoField.resignFirstResponder()
-        }
-    }
-    
     fileprivate func setupNavBar() {
         let image: UIImage = UIImage(named: "UPoolLogo")!
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
