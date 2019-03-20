@@ -24,6 +24,10 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
                 print("Image url is \(url)")
                 rideDetailView.profileImageView.loadImageUsingCacheWithUrlString(url)
             }
+            if let carUrl = driver?.carImageUrl{
+                rideDetailView.carPhotoLabel.text = "Car Photo"
+                rideDetailView.carImageView.loadImageUsingCacheWithUrlString(carUrl)
+            }
         }
     }
     var currentUser : UPoolUser!

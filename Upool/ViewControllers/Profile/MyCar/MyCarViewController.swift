@@ -22,18 +22,20 @@ class MyCarViewController : UIViewController, NVActivityIndicatorViewable{
         didSet{
             guard let thisUser = thisUser else {return}
             if let url = thisUser.carImageUrl{
-                carImageView.loadImageUsingCacheWithUrlString(url)
-                carImageView.layer.cornerRadius = 30
+                //carImageView.loadImageUsingCacheWithUrlString(url)
             }
         }
     }
     
     lazy var carImageView : UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "AddProfileImage")
+        image.image = UIImage(named: "CarPlaceHolder")
         image.backgroundColor = UIColor.clear
         image.contentMode = UIView.ContentMode.scaleAspectFill
         image.clipsToBounds = true
+        image.layer.cornerRadius = 30
+        image.layer.borderColor = Colors.maroon.cgColor
+        image.layer.borderWidth = 0.5
         image.isUserInteractionEnabled = true
         image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleImageSelection)))
         return image
@@ -51,7 +53,7 @@ class MyCarViewController : UIViewController, NVActivityIndicatorViewable{
         carImageView.translatesAutoresizingMaskIntoConstraints = false
         carImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
         carImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        carImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
+        carImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
         carImageView.heightAnchor.constraint(equalTo: carImageView.widthAnchor).isActive = true
     }
 }

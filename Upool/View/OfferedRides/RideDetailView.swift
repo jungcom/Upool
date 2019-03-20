@@ -151,6 +151,20 @@ class RideDetailView : UIView{
     
     let bottomContainer = UIView()
     
+    let carPhotoLabel : UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: Fonts.futura, size: 18)
+        label.textColor = UIColor.gray
+        label.textAlignment = .left
+        return label
+    }()
+    
+    let carImageView : UIImageView = {
+        let view = UIImageView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
     //Initializer
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -349,11 +363,23 @@ class RideDetailView : UIView{
     }
     
     func setupBottomContainer(){
+        bottomContainer.addSubview(carImageView)
+        bottomContainer.addSubview(carPhotoLabel)
         bottomContainer.backgroundColor = UIColor.groupTableViewBackground
         bottomContainer.translatesAutoresizingMaskIntoConstraints = false
         bottomContainer.topAnchor.constraint(equalTo: topContainer.bottomAnchor, constant: 10).isActive = true
         bottomContainer.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         bottomContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         bottomContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier:1.0).isActive = true
+        
+        carPhotoLabel.translatesAutoresizingMaskIntoConstraints = false
+        carPhotoLabel.topAnchor.constraint(equalTo: bottomContainer.topAnchor, constant: 20).isActive = true
+        carPhotoLabel.leadingAnchor.constraint(equalTo: bottomContainer.leadingAnchor, constant: 30).isActive = true
+        
+        carImageView.translatesAutoresizingMaskIntoConstraints = false
+        carImageView.topAnchor.constraint(equalTo: carPhotoLabel.bottomAnchor, constant: 20).isActive = true
+        carImageView.leadingAnchor.constraint(equalTo: bottomContainer.leadingAnchor, constant: 30).isActive = true
+        carImageView.widthAnchor.constraint(equalTo: bottomContainer.widthAnchor, multiplier:0.6).isActive = true
+        carImageView.heightAnchor.constraint(equalTo: carImageView.widthAnchor, multiplier:1.0).isActive = true
     }
 }
