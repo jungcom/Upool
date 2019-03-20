@@ -50,6 +50,9 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
     }
     
     func observeUserMessages(){
+        for listener in listeners{
+            listener.remove()
+        }
         guard let id = currentUser?.uid else {return}
         
         //Get user message info from the map document
@@ -142,7 +145,13 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
 extension ChatViewController{
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages.count
+        if messages.count == 0{
+            tableView.setEmptyMessage("You currently have no messages")
+            return 0
+        } else {
+            tableView.restore()
+            return messages.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

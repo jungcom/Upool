@@ -77,6 +77,11 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
         }
         let chatlogVC = ChatLogViewController(collectionViewLayout: UICollectionViewFlowLayout())
         chatlogVC.toUser = driver
+        if let arrayVC = self.tabBarController?.viewControllers{
+            let navVC = arrayVC[2] as? UINavigationController
+            let chatVC = navVC?.viewControllers.first as? ChatViewController
+            chatVC?.observeUserMessages()
+        }
         navigationController?.pushViewController(chatlogVC, animated: true)
     }
     
