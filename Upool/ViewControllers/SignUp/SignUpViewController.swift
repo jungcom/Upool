@@ -9,8 +9,9 @@
 import UIKit
 import Firebase
 import FirebaseMessaging
+import NVActivityIndicatorView
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController , NVActivityIndicatorViewable{
 
     let db = Firestore.firestore()
     
@@ -29,6 +30,7 @@ class SignUpViewController: UIViewController {
     }()
     
     override func loadView() {
+        signUpView.termsAndConditionsButton.addTarget(self, action: #selector(handleTermsAndConditions), for: .touchUpInside)
         view = signUpView
     }
     
@@ -58,6 +60,11 @@ class SignUpViewController: UIViewController {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
+    @objc func handleTermsAndConditions(){
+        let termsAndConditionsVC = TermsAndConditionsViewController()
+        navigationController?.pushViewController(termsAndConditionsVC, animated: true)
+    }
+    
     @objc func handleSignUp(){
         print("signUp")
         //for Testing
@@ -73,6 +80,8 @@ class SignUpViewController: UIViewController {
             return
         }
 
+        startAnimating(type: NVActivityIndicatorType.ballTrianglePath, color: Colors.maroon, displayTimeThreshold:2, minimumDisplayTime: 1)
+        
         Auth.auth().createUser(withEmail: email, password: password, completion: { (authDataResult, error) in
             guard let authDataResult = authDataResult else {
                 if let error = error {
@@ -92,6 +101,7 @@ class SignUpViewController: UIViewController {
                     }
                     print("Error: \(error.localizedDescription)")
                 }
+                self.stopAnimating()
                 return
             }
 
@@ -132,6 +142,7 @@ class SignUpViewController: UIViewController {
     
     private func pushEmailSentVC(){
         let emailVC = EmailSentViewController()
+        stopAnimating()
         self.navigationController?.pushViewController(emailVC, animated: true)
     }
     

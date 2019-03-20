@@ -34,12 +34,14 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (_) in
                     //Set alert view to make sure to save user info
+                    self.view.endEditing(true)
                     self.profileView.pencilEditButton.setImage(UIImage(named: "PencilEdit"), for: .normal)
                     self.profileView.pencilEditButton.setTitle("", for: .normal)
                     let userInfoFields = self.profileView.userInfoStackView.subviews as! [UserInfoField]
                     for userInfoField in userInfoFields{
                         userInfoField.isUserInteractionEnabled = false
                     }
+                    self.profileView.nameLabel.text = "\(self.profileView.userFirstName.subjectTextField.text ?? "") \(self.profileView.userLastName.subjectTextField.text ?? "" )"
                     self.saveUserInfoToDatabase()
                 }))
                 present(alert, animated: true, completion: nil)
@@ -53,6 +55,14 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         setupNavBar()
         setupProfileView()
         retrieveUserData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let userInfoFields = self.profileView.userInfoStackView.subviews as! [UserInfoField]
+        for userInfoField in userInfoFields{
+            userInfoField.resignFirstResponder()
+        }
     }
     
     fileprivate func setupNavBar() {

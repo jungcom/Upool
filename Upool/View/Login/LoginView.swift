@@ -52,14 +52,14 @@ class LoginView : UIView{
         let button = UIButton()
         button.setTitle(Strings.forgotPwd, for: .normal)
         button.setTitleColor(Colors.maroon, for: .normal)
-        button.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 12)
+        button.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 14)
         button.backgroundColor = UIColor.clear
         return button
     }()
     
     let dontHaveAccLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: Fonts.helvetica, size: 12)
+        label.font = UIFont(name: Fonts.helvetica, size: 14)
         label.text = Strings.noAccount
         return label
     }()
@@ -68,7 +68,7 @@ class LoginView : UIView{
         let button = UIButton()
         button.setTitle(Strings.signUp, for: .normal)
         button.setTitleColor(Colors.maroon, for: .normal)
-        button.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 12)
+        button.titleLabel?.font = UIFont(name: Fonts.helvetica, size: 14)
         button.backgroundColor = UIColor.clear
         return button
     }()

@@ -19,7 +19,7 @@ class SignUpEmailViewController: UIViewController {
         return label
     }()
     
-    lazy var emailTextField = UITextField.getTextField(Strings.emailPlaceholder)
+    lazy var emailTextField = UITextField.getTextField("\(Strings.emailPlaceholder) (.edu)")
     
     lazy var continueButton : UIButton = {
         let button = UIButton()
@@ -112,7 +112,7 @@ class SignUpEmailViewController: UIViewController {
         let domainOfEmail = email.suffix(4)
 
         guard emailTextField.text != "", domainOfEmail == dotEdu else{
-            errorLabel.text =  "Email is not a student email"
+            errorLabel.text =  "This is not a student email"
             return
         }
         

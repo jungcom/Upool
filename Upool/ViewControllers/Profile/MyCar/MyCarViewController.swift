@@ -22,7 +22,7 @@ class MyCarViewController : UIViewController, NVActivityIndicatorViewable{
         didSet{
             guard let thisUser = thisUser else {return}
             if let url = thisUser.carImageUrl{
-                //carImageView.loadImageUsingCacheWithUrlString(url)
+                carImageView.loadImageUsingCacheWithUrlString(url)
             }
         }
     }
@@ -30,7 +30,7 @@ class MyCarViewController : UIViewController, NVActivityIndicatorViewable{
     lazy var carImageView : UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "CarPlaceHolder")
-        image.backgroundColor = UIColor.clear
+        image.backgroundColor = UIColor.white
         image.contentMode = UIView.ContentMode.scaleAspectFill
         image.clipsToBounds = true
         image.layer.cornerRadius = 30
@@ -41,12 +41,17 @@ class MyCarViewController : UIViewController, NVActivityIndicatorViewable{
         return image
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        view.backgroundColor = UIColor.groupTableViewBackground
-        navigationItem.title = "Edit My Car"
-        
+    lazy var plusImageView : UIImageView = {
+        let plusImageView = UIImageView(image: UIImage(named: "PlusSign"))
+        plusImageView.tintColor = Colors.maroon
+        plusImageView.backgroundColor = UIColor.white
+        plusImageView.alpha = 0.6
+        plusImageView.clipsToBounds = true
+        plusImageView.layer.cornerRadius = 10
+        return plusImageView
+    }()
+    
+    fileprivate func setupUI() {
         view.addSubview(carImageView)
         
         //ProfileImageView Constraints
@@ -55,6 +60,24 @@ class MyCarViewController : UIViewController, NVActivityIndicatorViewable{
         carImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         carImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
         carImageView.heightAnchor.constraint(equalTo: carImageView.widthAnchor).isActive = true
+        
+        carImageView.addSubview(plusImageView)
+        
+        plusImageView.translatesAutoresizingMaskIntoConstraints = false
+        plusImageView.bottomAnchor.constraint(equalTo: carImageView.bottomAnchor, constant: -20).isActive = true
+        plusImageView.trailingAnchor.constraint(equalTo: carImageView.trailingAnchor, constant:-20).isActive = true
+        plusImageView.widthAnchor.constraint(equalTo: carImageView.widthAnchor, multiplier: 0.12).isActive = true
+        plusImageView.heightAnchor.constraint(equalTo: plusImageView.widthAnchor).isActive = true
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        view.backgroundColor = UIColor.groupTableViewBackground
+        navigationItem.title = "Edit My Car"
+        
+        setupUI()
+        
     }
 }
 

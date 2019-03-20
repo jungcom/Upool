@@ -29,13 +29,24 @@ class SignUpView : UIView{
         txtField.isSecureTextEntry = true
         return txtField
     }()
+    
     let reEnterPasswordTextField : UITextField = {
         let txtField = UITextField.getTextField(Strings.reEnterPasswordPlaceholder)
         txtField.isSecureTextEntry = true
         return txtField
     }()
-    let firstNameTextField = UITextField.getTextField(Strings.firstNamePlaceholder)
-    let lastNameTextField = UITextField.getTextField(Strings.lastNamePlaceholder)
+    
+    let firstNameTextField : UITextField = {
+        let txtField = UITextField.getTextField(Strings.firstNamePlaceholder)
+        txtField.autocapitalizationType = .sentences
+        return txtField
+    }()
+    
+    let lastNameTextField : UITextField = {
+        let txtField = UITextField.getTextField(Strings.lastNamePlaceholder)
+        txtField.autocapitalizationType = .sentences
+        return txtField
+    }()
     
     let signUpButton : UIButton = {
         let button = UIButton()
