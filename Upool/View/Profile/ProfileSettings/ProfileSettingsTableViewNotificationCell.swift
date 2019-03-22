@@ -13,7 +13,6 @@ class ProfileSettingsTableViewNotificationCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: UITableViewCell.CellStyle.value1, reuseIdentifier: reuseIdentifier)
-        print("cell initialized")
         self.selectionStyle = .none
         setupLabel()
         

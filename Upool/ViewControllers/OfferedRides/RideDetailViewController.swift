@@ -21,7 +21,6 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
     var driver : UPoolUser?{
         didSet{
             if let url = driver?.profileImageUrl{
-                print("Image url is \(url)")
                 rideDetailView.profileImageView.loadImageUsingCacheWithUrlString(url)
             }
             if let carUrl = driver?.carImageUrl{
@@ -76,7 +75,6 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
     @objc func handleMessage(){
         //Don't allow messaging to myself
         guard let fromId = authUser?.uid, let toId = driver?.uid, fromId != toId else {
-            print("Cannot message myself")
             return
         }
         let chatlogVC = ChatLogViewController(collectionViewLayout: UICollectionViewFlowLayout())
@@ -125,7 +123,6 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
                     //Check to see if a request exist for this ridePost and user
                     self.checkIfRequestExists()
                 } else {
-                    print("driver not found")
                     self.stopAnimating()
                 }
             }
@@ -142,7 +139,6 @@ class RideDetailViewController: UIViewController , NVActivityIndicatorViewable{
                 self.stopAnimating()
             } else {
                 if let document = snapshot?.documents.first{
-                    print("\(document.documentID) => \(document.data())")
                     if let request = RideRequest(dictionary: document.data()){
                         //Set the request button depending on the status
                         if request.requestStatus == 0{

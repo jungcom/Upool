@@ -107,7 +107,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         mainTabBarVC.selectedIndex = 2
                         //Dont push another chat log VC when it is currently open
                         if let _ = chatVC.viewControllers.last as? ChatLogViewController{
-                            print("This is the Same ViewController")
                         } else {
                             chatVC.pushViewController(chatlogVC, animated: true)
                         }

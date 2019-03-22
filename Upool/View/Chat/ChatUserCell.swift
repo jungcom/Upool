@@ -18,7 +18,6 @@ class ChatUserCell: UITableViewCell {
         if let chatPartnerId = message?.chatPartnerId(){
             db.collection(FirebaseDatabaseKeys.usersKey).document(chatPartnerId).getDocument { (snapshot, error) in
                 guard let snapshot = snapshot else {
-                    print("Error fetching document in Chat User Cell: \(error!)")
                     return
                 }
                 if let toUser = UPoolUser(dictionary: snapshot.data()!){

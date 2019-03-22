@@ -90,7 +90,6 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         if let user = authUser{
             db.collection(FirebaseDatabaseKeys.usersKey).document(user.uid).getDocument { (snapshot, error) in
                 guard let snapshot = snapshot, let dict = snapshot.data() else {return}
-                print("retrive data")
                 if let user = UPoolUser(dictionary: dict){
                     self.profileView.thisUser = user
                 }
@@ -108,11 +107,7 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
         userInfo[FirebaseDatabaseKeys.UserFieldKeys.major] = profileView.userMajor.subjectTextField.text
         userInfo["age"] = profileView.userAge.subjectTextField.text
         db.collection(FirebaseDatabaseKeys.usersKey).document(userId).setData(userInfo, merge: true) { (err) in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("UserInfo successfully written and saved!")
-            }
+
         }
     }
     
@@ -121,7 +116,6 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
     }
     
     @objc func handlePencilEdit(){
-        print("Handle Edit")
         if isEditingInfo{
             isEditingInfo = false
         } else {
@@ -152,10 +146,8 @@ class ProfileViewController: UIViewController, NVActivityIndicatorViewable {
             do {
                 try Auth.auth().signOut()
             } catch {
-                print("Sign Out Failed")
             }
             if let currentUserId = currentUserId{
-                print(currentUserId)
                 let noFcmToken = [FirebaseDatabaseKeys.UserFieldKeys.fcmToken: ""]
                 self.db.collection(FirebaseDatabaseKeys.usersKey).document(currentUserId).updateData(noFcmToken)
                 self.navigationController?.dismiss(animated: true, completion: nil)

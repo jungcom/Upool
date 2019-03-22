@@ -115,7 +115,6 @@ extension SearchLocationViewController: GMSAutocompleteResultsViewControllerDele
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print("Clicked")
         navigationController?.dismiss(animated: true, completion: nil)
     }
     

@@ -108,14 +108,9 @@ class SignUpViewController: UIViewController , NVActivityIndicatorViewable{
             guard let fcmToken = Messaging.messaging().fcmToken else {return}
             
             let newUser = UPoolUser(email: email, fn: firstName, ln: lastName, uid: authDataResult.user.uid, fcmToken: fcmToken)
-            print(newUser)
             //Add user to the Firebase database
             self.db.collection(FirebaseDatabaseKeys.usersKey).document(authDataResult.user.uid).setData(newUser.dictionary, completion: { (err) in
-                if let _ = err{
-                    print("User was not added successfully to the database")
-                } else {
-                    print("User was added successfully to the database!")
-                }
+
             })
             self.sendVerificationMail()
             self.pushEmailSentVC()
@@ -128,8 +123,6 @@ class SignUpViewController: UIViewController , NVActivityIndicatorViewable{
                 // Notify the user that the mail has sent or couldn't because of an error.
                 if let error = error{
                     print("\(error.localizedDescription)")
-                } else {
-                    print("sendEmailVerification Successful!")
                 }
             })
         } else {

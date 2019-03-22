@@ -60,7 +60,6 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
         toUsers.getDocument(completion: { (snapshot, error) in
             guard let snapshot = snapshot, let keys = snapshot.data()?.keys else {
                 print("error \(String(describing: error?.localizedDescription))")
-                print("Nothing Found")
                 self.stopAnimating()
                 return
             }
@@ -77,15 +76,12 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
                         print("Error fetching snapshots: \(error!)")
                         return
                     }
-                    print("Snapshot : \(snapshot)")
                     
                     //listen for changes
                     snapshot.documentChanges.forEach { diff in
                         //If the data is already there, Don't retrieve it again
                         if (diff.type == .modified) {
-                            print("Modified message: \(diff.document.data())")
                         } else if (diff.type == .removed) {
-                            print("Removed message: \(diff.document.data())")
                         } else {
                             //start semaphore flag
                             group.enter()
@@ -96,7 +92,6 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
                                 guard let messageSnapShot = messageSnapShot, let data = messageSnapShot.data() else {
                                     return
                                 }
-                                print("These are the observed messages :\(data)")
                                 if let message = Message(dictionary: data), let id = message.chatPartnerId(){
                                     self.messages.append(message)
                                     if let mostRecentMsgTimestamp = self.messagesDictionary[id]?.timeStamp{
@@ -119,7 +114,6 @@ class ChatViewController: UITableViewController, NVActivityIndicatorViewable {
                         self.messages.sort(by: { (m1, m2) -> Bool in
                             return m1.timeStamp > m2.timeStamp
                         })
-                        print("all requests completed \(Array(self.messagesDictionary.values))")
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                         }

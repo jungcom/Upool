@@ -64,7 +64,6 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
         docRef.whereField("departureDate", isGreaterThan: Date().timeIntervalSinceReferenceDate).order(by: "departureDate", descending: false).getDocuments { (querySnapshot, err) in
             if let err = err {
                 self.endRefresher()
-                print("Error getting documents: \(err)")
             } else {
                 //Remove all Ride Posts
                 self.allRidePosts.removeAll()

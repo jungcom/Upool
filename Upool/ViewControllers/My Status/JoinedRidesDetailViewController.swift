@@ -81,7 +81,6 @@ class JoinedRidesDetailViewController: UIViewController{
                 for document in snapshot!.documents {
                     if let request = RideRequest(dictionary: document.data()){
                         if request.requestStatus == Status.confirmed.rawValue{
-                            print("Confirmed Passenger Requests : \(document.documentID) => \(document.data())")
                             self.acceptedPassengerRequests.append(request)
                         }
                     }

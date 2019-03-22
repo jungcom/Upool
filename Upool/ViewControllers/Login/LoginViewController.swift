@@ -16,7 +16,6 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     var signedIn : Bool = false {
         didSet{
             if signedIn{
-                print("present")
                 startAnimating(type: NVActivityIndicatorType.ballTrianglePath, color: Colors.maroon, displayTimeThreshold:2, minimumDisplayTime: 1)
                 self.present(LoginViewController.presentMainPage(), animated: true, completion: {
                     self.stopAnimating()
@@ -115,14 +114,12 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     }
 
     @objc func handleForgottenPwd(){
-        print("no password")
         let passwordResetVC = ResetPasswordViewController()
         let navVC = UINavigationController(rootViewController: passwordResetVC)
         present(navVC, animated: true, completion: nil)
     }
     
     @objc func handleSignUp(){
-        print("SignUp")
         let signUpVC = SignUpEmailViewController()
         let navVC = UINavigationController(rootViewController: signUpVC)
         present(navVC, animated: true, completion: nil)

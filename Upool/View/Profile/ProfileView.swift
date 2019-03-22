@@ -11,7 +11,6 @@ import UIKit
 class ProfileView: UIView{
     var thisUser : UPoolUser? {
         didSet{
-            print("didSet")
             guard let thisUser = thisUser else {return}
             if let url = thisUser.profileImageUrl{
                 profileImageView.loadImageUsingCacheWithUrlString(url)

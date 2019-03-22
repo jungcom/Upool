@@ -91,9 +91,7 @@ class AcceptedPassengerCollectionViewCell: UICollectionViewCell {
         self.addGestureRecognizer(tap)
     }
     
-    @objc func handleTapped(_ sender : UITapGestureRecognizer){
-        print("Tapped")
-        
+    @objc func handleTapped(_ sender : UITapGestureRecognizer){        
         guard let rideRequest = self.rideRequest else {return}
         tapToMessageOrDelete?(rideRequest)
     }

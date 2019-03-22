@@ -120,7 +120,6 @@ class PendingPassengerCollectionViewCell: UICollectionViewCell {
     
     //Button handlers
     @objc func handleDecline(){
-        print("Decline")
         let alert = UIAlertController(title: "Decline Request", message: "Are you sure you want to decline this passenger?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let declineAction = UIAlertAction(title: "Decline", style: .default) { (_) in
@@ -141,7 +140,6 @@ class PendingPassengerCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func handleAccept(){
-        print("Accept")
         let alert = UIAlertController(title: "Accept Request", message: "Are you sure you want to accept this passenger?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let acceptAction = UIAlertAction(title: "Accept", style: .default) { (_) in

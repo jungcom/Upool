@@ -80,7 +80,6 @@ extension ProfileSettingsViewController : UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Settings Selected in : \(indexPath.row)")
         if indexPath.section == 0{
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                 return
@@ -88,7 +87,6 @@ extension ProfileSettingsViewController : UITableViewDelegate, UITableViewDataSo
             
             if UIApplication.shared.canOpenURL(settingsUrl) {
                 UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                    print("Settings opened: \(success)") // Prints true
                 })
             }
         } else {

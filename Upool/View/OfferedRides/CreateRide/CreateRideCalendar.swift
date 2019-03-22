@@ -148,9 +148,7 @@ extension CreateRideViewController : CalendarViewDataSource, CalendarViewDelegat
         
     }
     
-    func calendar(_ calendar: CalendarView, didSelectDate date: Date, withEvents events: [CalendarEvent]) {
-        print("Did Select: \(date) with \(events.count) events")
-        
+    func calendar(_ calendar: CalendarView, didSelectDate date: Date, withEvents events: [CalendarEvent]) {        
         departureDate = date.toGlobalTime()
     }
     

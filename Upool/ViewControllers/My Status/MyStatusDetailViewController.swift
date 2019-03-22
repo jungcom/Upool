@@ -85,7 +85,6 @@ class MyStatusDetailViewController: UIViewController{
                 print(error.localizedDescription)
             } else {
                 for document in snapshot!.documents {
-                    print("My Passenger Requests : \(document.documentID) => \(document.data())")
                     if let request = RideRequest(dictionary: document.data()){
                         if request.requestStatus == Status.confirmed.rawValue{
                             self.myAcceptedPassengerRequests.append(request)
@@ -132,7 +131,6 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
                         let toUser = UPoolUser(dictionary: (snapshot?.data())!)
                         chatlogVC.toUser = toUser
                         
-                        print(self.navigationController?.popViewController(animated: true))
                         if let tabBarVC = self.navigationController?.parent as? UITabBarController, let chatNavVC = tabBarVC.viewControllers?[2] as? UINavigationController{
                             tabBarVC.selectedIndex = 2
                             chatNavVC.pushViewController(chatlogVC, animated: true)

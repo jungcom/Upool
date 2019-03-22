@@ -27,8 +27,7 @@ extension UIImageView {
         URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
             
             //download hit an error so lets return out
-            if let error = error {
-                print(error)
+            if let _ = error {
                 return
             }
             

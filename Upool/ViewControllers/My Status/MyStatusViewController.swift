@@ -77,10 +77,8 @@ class MyStatusViewController: UICollectionViewController  {
         
         docRef.order(by: "departureDate", descending: false).whereField("departureDate", isGreaterThan: Date().timeIntervalSinceReferenceDate).whereField("driverUid", isEqualTo: authUser.uid).getDocuments { (querySnapshot, err) in
             if let err = err {
-                print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    print("My Ride Posts : \(document.documentID) => \(document.data())")
                     if let post = RidePost(dictionary: document.data()){
                         self.myRidePosts.append(post)
                     }
@@ -99,10 +97,8 @@ class MyStatusViewController: UICollectionViewController  {
             //reset my Requests
             self.myRequests.removeAll()
             if let err = err {
-                print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
                     if let request = RideRequest(dictionary: document.data()){
                         self.myRequests.append(request)
                     }
@@ -155,9 +151,7 @@ class MyStatusViewController: UICollectionViewController  {
     func deleteRidePost(ridePostId:String){
         db.collection(FirebaseDatabaseKeys.ridePostsKey).document(ridePostId).delete() { err in
             if let err = err {
-                print("Error removing document: \(err)")
             } else {
-                print("Document successfully removed!")
                 let navVC = self.tabBarController?.viewControllers?.first as? UINavigationController
                 let offeredRidesVC = navVC?.viewControllers.first as? OfferedRidesCollectionViewController
                 offeredRidesVC?.retrieveRidePosts()
@@ -172,11 +166,6 @@ class MyStatusViewController: UICollectionViewController  {
             for document in snapshot.documents{
                 if let rideRequest = RideRequest(dictionary: document.data()){
                     self.db.collection(FirebaseDatabaseKeys.rideRequestsKey).document(rideRequest.rideRequestId).delete(completion: { (err) in
-                        if let err = err {
-                            print("Error removing document: \(err)")
-                        } else {
-                            print("Document successfully removed!")
-                        }
                     })
                 }
             }
@@ -239,7 +228,6 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
             detailVC.ridePost = myRidePosts[indexPath.section]
             navigationController?.pushViewController(detailVC, animated: true)
         } else {
-            print("Section : \(indexPath.section)")
             let detailVC = JoinedRidesDetailViewController()
             if indexPath.section == 0{
                 detailVC.ridePost = joinedRidePosts[indexPath.row]
@@ -266,7 +254,6 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
         if isMyRides{
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerDeleteCellId, for: indexPath) as! MyStatusTrashCanHeaderCell
             header.deleteButtonTapped = { () in
-                print("Delete Button Tapped in section \(indexPath.section)")
                 let ridePost = self.myRidePosts.remove(at: indexPath.section)
                 guard let ridePostId = ridePost.ridePostUid else {return}
                 self.deleteRidePost(ridePostId: ridePostId)

@@ -395,7 +395,6 @@ class CreateRideViewController: UIViewController {
     
     @objc func handleCreateRide(){
         guard let user = authUser else {
-            print("No Current User Found")
             return
         }
         
@@ -417,9 +416,7 @@ class CreateRideViewController: UIViewController {
             newRidePost.driverUid = user.uid
             ref.setData(newRidePost.dictionary) { err in
                 if let err = err {
-                    print("Error adding document: \(err)")
                 } else {
-                    print("Document added with ID: \(ref.documentID)")
                     self.navigationController?.popViewController(animated: true)
                     if let offeredRidesVC = self.navigationController?.viewControllers.first as? OfferedRidesCollectionViewController{
                         offeredRidesVC.retrieveRidePosts()

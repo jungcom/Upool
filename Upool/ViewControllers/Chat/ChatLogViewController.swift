@@ -117,9 +117,7 @@ class ChatLogViewController : UICollectionViewController{
             
             snapshot.documentChanges.forEach { diff in
                 if (diff.type == .modified) {
-                    print("Modified message: \(diff.document.data())")
                 } else if (diff.type == .removed) {
-                    print("Removed message: \(diff.document.data())")
                 } else {
                     group.enter()
                     //If the data is already there, Don't retrieve it again
