@@ -8,12 +8,6 @@
 
 import UIKit
 
-struct headerType {
-    static let today = "Today"
-    static let tomorrow = "Tomorrow"
-    static let laterRides = "Later Rides"
-}
-
 class OfferedRidesSectionHeaderCollectionViewCell: UICollectionViewCell {
     
     var date : DateComponents? = nil {
@@ -82,7 +76,6 @@ class OfferedRidesSectionHeaderCollectionViewCell: UICollectionViewCell {
     
     let titleLabel : UILabel = {
         let label = UILabel()
-        label.text = headerType.today
         label.font = UIFont(name: Fonts.futura, size: 18)
         label.textColor = UIColor.gray
         label.textAlignment = .left

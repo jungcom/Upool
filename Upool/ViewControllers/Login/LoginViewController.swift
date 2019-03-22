@@ -73,9 +73,6 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
 
         startAnimating(type: NVActivityIndicatorType.ballTrianglePath, color: Colors.maroon, displayTimeThreshold:2, minimumDisplayTime: 1)
         
-//        let email : String? = "anthonylee3737@gmail.com"
-//        let password : String? = "123123"
-        
         Auth.auth().signIn(withEmail: email!, password: password!, completion: { (authResult, error) in
 
             guard let authResult = authResult else {

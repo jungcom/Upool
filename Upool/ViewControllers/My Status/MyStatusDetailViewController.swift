@@ -179,17 +179,6 @@ extension MyStatusDetailViewController: UICollectionViewDelegate, UICollectionVi
         //Call Cloud function to send notification to user
         let data = ["accepted": accepted, "toUserId" : toUserId] as [String : Any]
         Functions.functions().httpsCallable("rideRequestAcceptedOrDeclined").call(data) { (result, error) in
-            if let error = error as NSError? {
-                if error.domain == FunctionsErrorDomain {
-                    //                    let code = FunctionsErrorCode(rawValue: error.code)
-                    //                    let message = error.localizedDescription
-                    //                    let details = error.userInfo[FunctionsErrorDetailsKey]
-                }
-                // ...
-            }
-            //            if let text = (result?.data as? [String: Any])?["text"] as? String {
-            //                //Do something with the returned value
-            //            }
         }
     }
     

@@ -52,6 +52,7 @@ class ChatLogViewController : UICollectionViewController{
         bottomSafeArea.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         bottomSafeArea.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         bottomSafeArea.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
         //variable for bottom anchor of bottomSafeAreaView
         inputBottomAnchor = bottomSafeArea.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         inputBottomAnchor!.isActive = true
@@ -126,7 +127,6 @@ class ChatLogViewController : UICollectionViewController{
                         guard let docSnapshot = docSnapshot, let data = docSnapshot.data() else {return}
                         if let message = Message(dictionary: data){
                             self.messages.append(message)
-                            //print("My Message : \(String(describing: message.text))")
                         }
                         group.leave()
                     })
@@ -142,7 +142,6 @@ class ChatLogViewController : UICollectionViewController{
                 self.createMessageDictionary()
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
-                    //  MARK: TODO: The Section should be dynamic
                     //  Scroll to Bottom of the chat
                     if let last = self.groupedChatMessages.last{
                         let lastItemIndex = NSIndexPath(item: last.count - 1, section: self.groupedChatMessages.count - 1)

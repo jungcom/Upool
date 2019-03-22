@@ -41,7 +41,6 @@ extension CreateRideViewController {
         timePicker.backgroundColor = UIColor.white
         timePicker.datePickerMode = .time
         timePicker.minuteInterval = 15
-        //timePicker.setValue(UIColor.white, forKey: "textColor")
         
         //TimePicker Constraints
         timePicker.translatesAutoresizingMaskIntoConstraints = false

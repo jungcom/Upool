@@ -216,6 +216,7 @@ extension MyStatusViewController : UICollectionViewDelegateFlowLayout{
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: offeredRidesCellId, for: indexPath) as! OfferedRidesCollectionViewCell
+        cell.profileImageView.image = UIImage(named: "ProfileImagePlaceholder")
         cell.backgroundColor = UIColor.white
         if isMyRides{
             cell.post = myRidePosts[indexPath.section]

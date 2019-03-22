@@ -162,6 +162,8 @@ class RideDetailView : UIView{
     let carImageView : UIImageView = {
         let view = UIImageView()
         view.backgroundColor = .clear
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 20
         return view
     }()
     
@@ -374,11 +376,11 @@ class RideDetailView : UIView{
         
         carPhotoLabel.translatesAutoresizingMaskIntoConstraints = false
         carPhotoLabel.topAnchor.constraint(equalTo: bottomContainer.topAnchor, constant: 20).isActive = true
-        carPhotoLabel.leadingAnchor.constraint(equalTo: bottomContainer.leadingAnchor, constant: 30).isActive = true
+        carPhotoLabel.centerXAnchor.constraint(equalTo: bottomContainer.centerXAnchor, constant: 0).isActive = true
         
         carImageView.translatesAutoresizingMaskIntoConstraints = false
         carImageView.topAnchor.constraint(equalTo: carPhotoLabel.bottomAnchor, constant: 20).isActive = true
-        carImageView.leadingAnchor.constraint(equalTo: bottomContainer.leadingAnchor, constant: 30).isActive = true
+        carImageView.centerXAnchor.constraint(equalTo: bottomContainer.centerXAnchor).isActive = true
         carImageView.widthAnchor.constraint(equalTo: bottomContainer.widthAnchor, multiplier:0.6).isActive = true
         carImageView.heightAnchor.constraint(equalTo: carImageView.widthAnchor, multiplier:1.0).isActive = true
     }

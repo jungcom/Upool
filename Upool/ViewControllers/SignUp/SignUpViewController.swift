@@ -66,9 +66,6 @@ class SignUpViewController: UIViewController , NVActivityIndicatorViewable{
     }
     
     @objc func handleSignUp(){
-        print("signUp")
-        //for Testing
-        //pushEmailSentVC()
         
         guard let email = signUpView.email ,let password = signUpView.passwordTextField.text ,let rePassword = signUpView.reEnterPasswordTextField.text,let firstName = signUpView.firstNameTextField.text,let lastName = signUpView.lastNameTextField.text, allFieldsFull() else {
             self.signUpView.errorLabel.text = "All fields must be full"

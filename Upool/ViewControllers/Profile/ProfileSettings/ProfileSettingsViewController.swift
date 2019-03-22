@@ -94,7 +94,8 @@ extension ProfileSettingsViewController : UITableViewDelegate, UITableViewDataSo
         } else {
             switch indexPath.row {
             case 0:
-                break
+                let aboutPageVC = AboutPageViewController()
+                navigationController?.pushViewController(aboutPageVC, animated: true)
             case 1:
                 let termsAndConditionsVC = TermsAndConditionsViewController()
                 navigationController?.pushViewController(termsAndConditionsVC, animated: true)

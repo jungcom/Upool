@@ -40,15 +40,7 @@ class TermsAndConditionsViewController: UIViewController, WKNavigationDelegate, 
         tabBarController?.tabBar.isHidden = false
         tabBarController?.tabBar.isTranslucent = false
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         stopAnimating()
     }

@@ -33,7 +33,7 @@ class ProfileView: UIView{
     lazy var scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
-        scrollView.contentSize.height = 900
+        scrollView.contentSize.height = 800
         return scrollView
     }()
     

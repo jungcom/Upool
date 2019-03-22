@@ -43,7 +43,6 @@ class OfferedRidesCollectionViewController: UICollectionViewController, NVActivi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewdidload")
         // Register cell classes
         self.collectionView!.register(OfferedRidesCollectionViewCell.self, forCellWithReuseIdentifier: offeredRidesCellId)
         self.collectionView.register(OfferedRidesSectionHeaderCollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerCellId)

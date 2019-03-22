@@ -102,16 +102,16 @@ class ResetPasswordViewController: UIViewController {
         resetEmailSentVC.emailSentlabel.text = "We have sent you information to reset your password to your email. Please follow the instructions in the email. "
         self.navigationController?.pushViewController(resetEmailSentVC, animated: true)
         
-//        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
-//            if let error = error{
-//                print(error.localizedDescription)
-//            } else {
-//                print("Password Change Email Sent")
-//                let resetEmailSentVC = EmailSentViewController()
-//                resetEmailSentVC.emailSentlabel.text = "We have sent you information to reset your password to your email. Please follow the instructions in the email. "
-//                self.navigationController?.pushViewController(resetEmailSentVC, animated: true)
-//            }
-//        }
+        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+            if let error = error{
+                print(error.localizedDescription)
+            } else {
+                print("Password Change Email Sent")
+                let resetEmailSentVC = EmailSentViewController()
+                resetEmailSentVC.emailSentlabel.text = "We have sent you information to reset your password to your email. Please follow the instructions in the email. "
+                self.navigationController?.pushViewController(resetEmailSentVC, animated: true)
+            }
+        }
     }
 
     func tapToDismissKeyboard(){
