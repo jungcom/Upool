@@ -148,7 +148,7 @@ class LoginView : UIView{
         //UPoolLabel
         upoolImageView.translatesAutoresizingMaskIntoConstraints = false
         upoolImageView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor).isActive = true
-        upoolImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant :100).isActive = true
+        upoolImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant :150).isActive = true
         upoolImageView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
         upoolImageView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.15).isActive = true
         
@@ -157,7 +157,7 @@ class LoginView : UIView{
         bottomContainer.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
         bottomContainer.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
         bottomContainer.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
-        bottomContainer.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.55).isActive = true
+        bottomContainer.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.58).isActive = true
         
         //Bottom Stack View Constraints
         bottomStackView.translatesAutoresizingMaskIntoConstraints = false
