@@ -31,7 +31,7 @@ extension CalendarView: UICollectionViewDelegateFlowLayout {
         
         guard let date = self.dateFromIndexPath(indexPath) else { return }
         
-        if let index = selectedIndexPaths.index(of: indexPath) {
+        if let index = selectedIndexPaths.firstIndex(of: indexPath) {
             
             delegate?.calendar(self, didDeselectDate: date)
             
