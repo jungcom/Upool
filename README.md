@@ -1,4 +1,5 @@
-# *UPool*
+# *UPool* 
+Available on the App Store : https://itunes.apple.com/us/app/upool-university-carpool/id1456292374?ls=1&mt=8
 
 <img src='https://i.imgur.com/KPEDnOK.jpg' title='UPool' width='' />
 
@@ -21,7 +22,7 @@ The following functionalities should be implemented:
 
 - [ ] Users can receive and give ratings to others
 - [ ] The chat shows the information about the driver's ride
-- [ ] Users can kick or message the passenger in the My Rides View Controller
+- [O] Users can kick or message the passenger in the My Rides View Controller
 - [ ] Users receive push notifications when they are kicked from a ride or when the driver deletes their ride
 
 ## Video Walkthrough/ScreenShots
