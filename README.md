@@ -17,12 +17,12 @@ The following functionalities are implemented:
 - [O] Users can receive push notifications when they are accepted or declined on a ride
 - [O] User has a profile page which can edit their information, indluding their profile picture
 - [O] Users can delete their posted rides
+- [O] Users can kick or message the passenger in the My Rides View Controller
 
 The following functionalities should be implemented:
 
 - [ ] Users can receive and give ratings to others
 - [ ] The chat shows the information about the driver's ride
-- [O] Users can kick or message the passenger in the My Rides View Controller
 - [ ] Users receive push notifications when they are kicked from a ride or when the driver deletes their ride
 
 ## Video Walkthrough/ScreenShots
